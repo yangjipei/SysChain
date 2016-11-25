@@ -22,6 +22,10 @@ namespace SysChain.Model
 		/// 模块样式
 		/// </summary>
 		public string MoudleStyle { set; get; }
+		/// <summary>
+		/// 模块状态 0:禁用,1:启用
+		/// </summary>
+		public bool MoudleStatus { set; get; }
 
 	}
 }
