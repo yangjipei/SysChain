@@ -13,19 +13,19 @@ namespace SysChain.Model
 		/// <summary>
 		/// 模块名称
 		/// </summary>
-		public string MoudleName { set; get; }
+		public string Name { set; get; }
 		/// <summary>
 		/// 模块链接
 		/// </summary>
-		public string MoudleUrl { set; get; }
+		public string LinkUrl { set; get; }
 		/// <summary>
 		/// 模块样式
 		/// </summary>
-		public string MoudleStyle { set; get; }
+		public string Style { set; get; }
 		/// <summary>
 		/// 模块状态 0:禁用,1:启用
 		/// </summary>
-		public bool MoudleStatus { set; get; }
+		public bool State { set; get; }
 
 	}
 }
