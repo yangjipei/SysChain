@@ -11,6 +11,10 @@ namespace SysChain.Model
 		/// </summary>
 		public int MoudleID { set; get; }
 		/// <summary>
+		/// 父级编号
+		/// </summary>
+		public int ParentID { set; get; }
+		/// <summary>
 		/// 模块名称
 		/// </summary>
 		public string Name { set; get; }

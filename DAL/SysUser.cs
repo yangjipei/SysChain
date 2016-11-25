@@ -112,7 +112,10 @@ namespace SysChain.DAL
 					model.UserID = int.Parse(dt.Rows[0]["UserID"].ToString());
 				}
 				model.LoginName = dt.Rows[0]["LoginName"].ToString();
-				model.ParentID =int.Parse( dt.Rows[0]["ParentID"].ToString());
+				if (dt.Rows[0]["ParentID"].ToString() != "")
+				{
+					model.ParentID = int.Parse(dt.Rows[0]["ParentID"].ToString());
+				}
 				if (dt.Rows[0]["State"].ToString() != "")
 				{
 					if ((dt.Rows[0]["State"].ToString() == "1") || (dt.Rows[0]["State"].ToString().ToLower() == "true"))
