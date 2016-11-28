@@ -3,10 +3,10 @@ using System.Collections.Generic;
 
 namespace SysChain.BLL
 {
-	public class SysMoudle
+	public class SysRole
 	{
-		private readonly DAL.SysMoudle dal = new DAL.SysMoudle();
-		public SysMoudle()
+		private readonly DAL.SysRole dal = new DAL.SysRole();
+		public SysRole()
 		{
 		}
 		/// <summary>
@@ -14,7 +14,7 @@ namespace SysChain.BLL
 		/// </summary>
 		/// <returns>返回新增模块ID</returns>
 		/// <param name="Model">模块实体</param>
-		public int Insert(Model.SysMoudle Model)
+		public int Insert(Model.SysRole Model)
 		{
 			return dal.Insert(Model);
 		}
@@ -23,7 +23,7 @@ namespace SysChain.BLL
 		/// </summary>
 		/// <returns>返回影响行数</returns>
 		/// <param name="Model">模块实体</param>
-		public int ModifyModel(Model.SysMoudle Model)
+		public int ModifyModel(Model.SysRole Model)
 		{
 			return dal.ModifyModel(Model);
 		}
@@ -31,19 +31,19 @@ namespace SysChain.BLL
 		/// 更新模块状态
 		/// </summary>
 		/// <returns>大于0表示更新成功</returns>
-		/// <param name="MoudleID">用户编号</param>
-		public int UpdateState(int MoudleID)
+		/// <param name="RoleID">用户编号</param>
+		public int UpdateState(int RoleID)
 		{
-			return dal.UpdateState(MoudleID);
+			return dal.UpdateState(RoleID);
 		}
 		/// <summary>
 		/// 获得模块实体
 		/// </summary>
 		/// <returns>返回模块实体</returns>
-		/// <param name="MoudleID">模块编号</param>
-		public Model.SysMoudle GetEntity(int MoudleID)
+		/// <param name="RoleID">模块编号</param>
+		public Model.SysRole GetEntity(int RoleID)
 		{
-			return dal.GetEntity(MoudleID);
+			return dal.GetEntity(RoleID);
 		}
 		/// <summary>
 		/// 分页获取数据列表
@@ -53,9 +53,9 @@ namespace SysChain.BLL
 		/// <param name="orderby">排序字段</param>
 		/// <param name="startIndex">开始数目</param>
 		/// <param name="endIndex">结束数目</param>
-		public IEnumerable<Model.SysMoudle> GetListByPage(string strWhere,string OnTable, string orderby, int startIndex, int endIndex)
+		public IEnumerable<Model.SysRole> GetListByPage(string strWhere, string orderby, int startIndex, int endIndex)
 		{
-			return dal.GetListByPage(strWhere,OnTable, orderby, startIndex, endIndex);
+			return dal.GetListByPage(strWhere, orderby, startIndex, endIndex);
 		}
 	}
 }

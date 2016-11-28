@@ -33,6 +33,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SysUser.cs" />
     <Compile Include="SysMoudle.cs" />
+    <Compile Include="SysRole.cs" />
+    <Compile Include="SysRoleAndMoudle.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Model\Model.csproj">

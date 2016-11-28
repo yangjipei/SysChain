@@ -13,10 +13,14 @@ namespace SysChain.Model
 		/// <summary>
 		/// 角色名称
 		/// </summary>
-		public string RoleName { set; get; }
+		public string Name { set; get; }
 		/// <summary>
 		/// 角色描述
 		/// </summary>
-		public string RoleDesc { set; get; }
+		public string Desc { set; get; }
+		/// <summary>
+		/// 状态
+		/// </summary>
+		public bool State { set; get; }
 	}
 }

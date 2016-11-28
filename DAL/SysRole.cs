@@ -4,39 +4,35 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Text;
 using SysChain.DBUtility;
-
 namespace SysChain.DAL
 {
-	public class SysMoudle
+	public class SysRole
 	{
-		public SysMoudle()
-		{}
+		public SysRole()
+		{
+		}
 		/// <summary>
 		/// 新增模块
 		/// </summary>
 		/// <returns>返回新增模块ID</returns>
 		/// <param name="Model">模块实体</param>
-		public int Insert(Model.SysMoudle Model)
+		public int Insert(Model.SysRole Model)
 		{
 			StringBuilder strSql = new StringBuilder();
-			strSql.Append(" if not exists(select Name from SysMoudle where Name =@Name ) begin ");
-			strSql.Append(" insert into SysMoudle(");
-			strSql.Append(" ParentID,Name,LinkUrl,Style,State)");
+			strSql.Append(" if not exists(select Name from SysRole where Name =@Name ) begin ");
+			strSql.Append(" insert into SysRole(");
+			strSql.Append(" Name,Desc,State)");
 			strSql.Append(" values (");
-			strSql.Append(" @ParentID,@Name,@LinkUrl,@Style,@State)");
+			strSql.Append(" @Name,@Desc,@State)");
 			strSql.Append(" ; select @@IDENTITY; ");
 			strSql.Append(" end ELSE begin SELECT -1 END");
 			SqlParameter[] parameters = {
-					new SqlParameter("@ParentID", SqlDbType.Int,4),
 					new SqlParameter("@Name", SqlDbType.NVarChar,50),
-					new SqlParameter("@LinkUrl", SqlDbType.NVarChar,50),
-					new SqlParameter("@Style", SqlDbType.NVarChar,50),
+					new SqlParameter("@Desc", SqlDbType.NVarChar,50),
 					new SqlParameter("@State", SqlDbType.Bit,1)};
-			parameters[0].Value = Model.ParentID;
-			parameters[1].Value = Model.Name;
-			parameters[2].Value = Model.LinkUrl;
-			parameters[3].Value = Model.Style;
-			parameters[4].Value = Model.State;
+			parameters[0].Value = Model.Name;
+			parameters[1].Value = Model.Desc;
+			parameters[2].Value = Model.State;
 			object obj = DbHelperSQL.GetSingle(strSql.ToString(), parameters);
 			if (obj == null)
 			{
@@ -52,58 +48,54 @@ namespace SysChain.DAL
 		/// </summary>
 		/// <returns>返回影响行数</returns>
 		/// <param name="Model">模块实体</param>
-		public int ModifyModel(Model.SysMoudle Model)
+		public int ModifyModel(Model.SysRole Model)
 		{
 			StringBuilder strSql = new StringBuilder();
-			strSql.Append("Update SysMoudle ");
-			strSql.Append("Set ParentID=@ParentID,Name=@Name,LinkUrl=@LinkUrl,Style=@Style ");
-			strSql.Append("Where MoudleID=@MoudleID ");
+			strSql.Append("Update SysRole ");
+			strSql.Append("Set Name=@Name,Desc=@Desc ");
+			strSql.Append("Where RoleID=@RoleID ");
 			SqlParameter[] parameters = {
-					new SqlParameter("@MoudleID", SqlDbType.Int,4),
-					new SqlParameter("@ParentID", SqlDbType.Int,4),
+					new SqlParameter("@RoleID", SqlDbType.Int,4),
 					new SqlParameter("@Name", SqlDbType.NVarChar,50),
-					new SqlParameter("@LinkUrl", SqlDbType.NVarChar,50),
-					new SqlParameter("@Style", SqlDbType.NVarChar,50)};
-			parameters[0].Value = Model.MoudleID;
-			parameters[1].Value = Model.ParentID;
-			parameters[2].Value = Model.Name;
-			parameters[3].Value = Model.LinkUrl;
-			parameters[4].Value = Model.Style;
+					new SqlParameter("@Desc", SqlDbType.NVarChar,50)};
+			parameters[0].Value = Model.RoleID;
+			parameters[1].Value = Model.Name;
+			parameters[2].Value = Model.Desc;
 			return DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
 		}
 		/// <summary>
 		/// 更新模块状态
 		/// </summary>
 		/// <returns>大于0表示更新成功</returns>
-		/// <param name="MoudleID">用户编号</param>
-		public int UpdateState(int MoudleID)
+		/// <param name="RoleID">用户编号</param>
+		public int UpdateState(int RoleID)
 		{
 			StringBuilder strSql = new StringBuilder();
 			strSql.Append("Declare  @State int; ");
-			strSql.Append("SELECT @State=State From SysMoudle where  MoudleID=@MoudleID ;");
+			strSql.Append("SELECT @State=State From SysRole where  RoleID=@RoleID ;");
 			strSql.Append("IF @State = 0 begin  ");
-			strSql.Append("Update SysMoudle Set State =1 Where MoudleID=@MoudleID  end;");
+			strSql.Append("Update SysRole Set State =1 Where RoleID=@RoleID  end;");
 			strSql.Append("else  begin  ");
-			strSql.Append("Update SysMoudle Set State =0 Where MoudleID=@MoudleID  end ;");
+			strSql.Append("Update SysRole Set State =0 Where RoleID=@RoleID  end ;");
 			SqlParameter[] parameters = {
-					new SqlParameter("@MoudleID", SqlDbType.Int,4)};
-			parameters[0].Value = MoudleID;
+					new SqlParameter("@RoleID", SqlDbType.Int,4)};
+			parameters[0].Value = RoleID;
 			return DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
 		}
 		/// <summary>
 		/// 获得模块实体
 		/// </summary>
 		/// <returns>返回模块实体</returns>
-		/// <param name="MoudleID">模块编号</param>
-		public Model.SysMoudle GetEntity(int MoudleID)
+		/// <param name="RoleID">模块编号</param>
+		public Model.SysRole GetEntity(int RoleID)
 		{
 			StringBuilder strSql = new StringBuilder();
-			strSql.Append("select  top 1 MoudleID,ParentID,Name,LinkUrl,Style,State from SysMoudle ");
+			strSql.Append("select  top 1 RoleID,Name,Desc,State from SysRole ");
 			strSql.Append(" where MoudleID=@MoudleID");
 			SqlParameter[] parameters = {
-					new SqlParameter("@MoudleID", SqlDbType.Int,4)
+					new SqlParameter("@RoleID", SqlDbType.Int,4)
 			};
-			parameters[0].Value = MoudleID;
+			parameters[0].Value = RoleID;
 			DataTable dt = DbHelperSQL.Query(strSql.ToString(), parameters).Tables[0];
 			return SetEntity(dt.Rows[0]);
 
@@ -113,22 +105,17 @@ namespace SysChain.DAL
 		/// </summary>
 		/// <returns>返回对象实体</returns>
 		/// <param name="dr">行</param>
-		private Model.SysMoudle SetEntity(DataRow dr)
+		private Model.SysRole SetEntity(DataRow dr)
 		{
-			Model.SysMoudle model = new Model.SysMoudle();
-			if (dr!=null)
+			Model.SysRole  model = new Model.SysRole();
+			if (dr != null)
 			{
-				if (dr["MoudleID"].ToString() != "")
+				if (dr["RoleID"].ToString() != "")
 				{
-					model.MoudleID = int.Parse(dr["MoudleID"].ToString());
-				}
-				if (dr["ParentID"].ToString() != "")
-				{
-					model.ParentID = int.Parse(dr["ParentID"].ToString());
+					model.RoleID = int.Parse(dr["RoleID"].ToString());
 				}
 				model.Name = dr["Name"].ToString();
-				model.LinkUrl = dr["LinkUrl"].ToString();
-				model.Style = dr["Style"].ToString();
+				model.Desc = dr["Desc"].ToString();
 				if (dr["State"].ToString() != "")
 				{
 					if ((dr["State"].ToString() == "1") || (dr["State"].ToString().ToLower() == "true"))
@@ -151,10 +138,10 @@ namespace SysChain.DAL
 		/// <summary>
 		/// 分页获取数据列表
 		/// </summary>
-		public IEnumerable<Model.SysMoudle> GetListByPage(string strWhere,string OnTable, string orderby, int startIndex, int endIndex)
+		public IEnumerable<Model.SysRole> GetListByPage(string strWhere, string orderby, int startIndex, int endIndex)
 		{
 			StringBuilder strSql = new StringBuilder();
-			strSql.Append("SELECT MoudleID,ParentID,Name,LinkUrl,Style,State FROM ( ");
+			strSql.Append("SELECT RoleID,Name,Desc,State FROM ( ");
 			strSql.Append(" SELECT ROW_NUMBER() OVER (");
 			if (!string.IsNullOrEmpty(orderby.Trim()))
 			{
@@ -164,31 +151,28 @@ namespace SysChain.DAL
 			{
 				strSql.Append("order by T.MoudleID desc");
 			}
-			strSql.Append(")AS Row, T.*  from SysMoudle T ");
-			if (!string.IsNullOrEmpty(OnTable.Trim()))
-			{
-				strSql.Append(OnTable);
-			}
+			strSql.Append(")AS Row, T.*  from SysRole T ");
 			if (!string.IsNullOrEmpty(strWhere.Trim()))
 			{
 				strSql.Append(" WHERE " + strWhere);
 			}
 			strSql.Append(" ) TT");
 			strSql.AppendFormat(" WHERE TT.Row between {0} and {1}", startIndex, endIndex);
-			DataTable dt= DbHelperSQL.Query(strSql.ToString()).Tables[0];
-			List<Model.SysMoudle> ModelList = new List<Model.SysMoudle>();
+			DataTable dt = DbHelperSQL.Query(strSql.ToString()).Tables[0];
+			List<Model.SysRole> RoleList = new List<Model.SysRole>();
 			if (dt.Rows.Count > 0)
 			{
 				foreach (DataRow dr in dt.Rows)
 				{
-					ModelList.Add(SetEntity(dr));
+					RoleList.Add(SetEntity(dr));
 				}
-				return ModelList;
+				return RoleList;
 			}
 			else
 			{
 				return null;
 			}
+
 		}
 	}
 }
