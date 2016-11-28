@@ -28,6 +28,15 @@ namespace SysChain.BLL
 			return dal.ModifyModel(Model);
 		}
 		/// <summary>
+		/// 生成新的排序Code
+		/// </summary>
+		/// <returns>The new order code.</returns>
+		/// <param name="ParentID">Parent identifier.</param>
+		public string GetNewOrderCode(int ParentID)
+		{
+			return dal.GetNewOrderCode(ParentID);
+		}
+		/// <summary>
 		/// 更新模块状态
 		/// </summary>
 		/// <returns>大于0表示更新成功</returns>

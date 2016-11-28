@@ -15,9 +15,9 @@ namespace SysChain.Controllers
 		{
 			try
 			{
-				BLL.SysUser Operation = new BLL.SysUser();
-				Model.SysUser model= Operation.GetEntity(1);
-				return View(model);
+				BLL.SysMoudle Operation = new BLL.SysMoudle();
+				ViewBag.Code = Operation.GetNewOrderCode(2);
+				return View();
 			}
 			catch (Exception ex)
 			{

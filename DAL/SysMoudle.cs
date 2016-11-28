@@ -21,9 +21,9 @@ namespace SysChain.DAL
 			StringBuilder strSql = new StringBuilder();
 			strSql.Append(" if not exists(select Name from SysMoudle where Name =@Name ) begin ");
 			strSql.Append(" insert into SysMoudle(");
-			strSql.Append(" ParentID,Name,LinkUrl,Style,State)");
+			strSql.Append(" ParentID,Name,LinkUrl,Style,OrderCode,State)");
 			strSql.Append(" values (");
-			strSql.Append(" @ParentID,@Name,@LinkUrl,@Style,@State)");
+			strSql.Append(" @ParentID,@Name,@LinkUrl,@Style,@OrderCode,@State)");
 			strSql.Append(" ; select @@IDENTITY; ");
 			strSql.Append(" end ELSE begin SELECT -1 END");
 			SqlParameter[] parameters = {
@@ -31,12 +31,14 @@ namespace SysChain.DAL
 					new SqlParameter("@Name", SqlDbType.NVarChar,50),
 					new SqlParameter("@LinkUrl", SqlDbType.NVarChar,50),
 					new SqlParameter("@Style", SqlDbType.NVarChar,50),
+				    new SqlParameter("@OrderCode", SqlDbType.NVarChar,50),
 					new SqlParameter("@State", SqlDbType.Bit,1)};
 			parameters[0].Value = Model.ParentID;
 			parameters[1].Value = Model.Name;
 			parameters[2].Value = Model.LinkUrl;
 			parameters[3].Value = Model.Style;
-			parameters[4].Value = Model.State;
+			parameters[4].Value = Model.OrderCode;
+			parameters[5].Value = Model.State;
 			object obj = DbHelperSQL.GetSingle(strSql.ToString(), parameters);
 			if (obj == null)
 			{
@@ -98,7 +100,7 @@ namespace SysChain.DAL
 		public Model.SysMoudle GetEntity(int MoudleID)
 		{
 			StringBuilder strSql = new StringBuilder();
-			strSql.Append("select  top 1 MoudleID,ParentID,Name,LinkUrl,Style,State from SysMoudle ");
+			strSql.Append("select  top 1 MoudleID,ParentID,Name,LinkUrl,Style,OrderCode,State from SysMoudle ");
 			strSql.Append(" where MoudleID=@MoudleID");
 			SqlParameter[] parameters = {
 					new SqlParameter("@MoudleID", SqlDbType.Int,4)
@@ -107,6 +109,45 @@ namespace SysChain.DAL
 			DataTable dt = DbHelperSQL.Query(strSql.ToString(), parameters).Tables[0];
 			return SetEntity(dt.Rows[0]);
 
+		}
+		/// <summary>
+		/// 生成新的排序Code
+		/// </summary>
+		/// <returns>The new order code.</returns>
+		/// <param name="ParentID">Parent identifier.</param>
+		public string GetNewOrderCode(int ParentID)
+		{
+			StringBuilder strSql = new StringBuilder();
+			strSql.Append(" declare @Code nvarchar(50); ");
+			strSql.Append(" select Top 1 @Code=OrderCode From SysMoudle ");
+			strSql.Append(" Where ParentID="+ParentID +" ;");
+			strSql.Append(" if @Code is null ");
+			strSql.Append(" select  @Code=OrderCode From SysMoudle ");
+			strSql.Append(" Where MoudleID=" + ParentID + " ;");
+			strSql.Append(" select @Code ; ");      
+			object obj = DbHelperSQL.GetSingle(strSql.ToString());
+			if (obj == null)
+			{
+				return "";
+			}
+			else
+			{
+				string Code=obj.ToString();
+				string TempCode = "";
+				if (Code.Length == 2)
+				{
+					Code = Code + "01";
+				}
+				else
+				{
+					TempCode = Code.Substring(Code.Length - 2, 2);
+					int TempNum = 0;
+					int.TryParse(TempCode, out TempNum);
+					TempNum = TempNum + 1;
+					Code = Code.Substring(Code.Length - 2) + TempNum.ToString("00");
+				}
+				return Code;
+			}
 		}
 		/// <summary>
 		/// 设置实体
@@ -129,6 +170,7 @@ namespace SysChain.DAL
 				model.Name = dr["Name"].ToString();
 				model.LinkUrl = dr["LinkUrl"].ToString();
 				model.Style = dr["Style"].ToString();
+				model.OrderCode = dr["OrderCode"].ToString();
 				if (dr["State"].ToString() != "")
 				{
 					if ((dr["State"].ToString() == "1") || (dr["State"].ToString().ToLower() == "true"))
@@ -154,7 +196,7 @@ namespace SysChain.DAL
 		public IEnumerable<Model.SysMoudle> GetListByPage(string strWhere,string OnTable, string orderby, int startIndex, int endIndex)
 		{
 			StringBuilder strSql = new StringBuilder();
-			strSql.Append("SELECT MoudleID,ParentID,Name,LinkUrl,Style,State FROM ( ");
+			strSql.Append("SELECT MoudleID,ParentID,Name,LinkUrl,Style,OrderCode,State FROM ( ");
 			strSql.Append(" SELECT ROW_NUMBER() OVER (");
 			if (!string.IsNullOrEmpty(orderby.Trim()))
 			{

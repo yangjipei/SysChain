@@ -27,6 +27,10 @@ namespace SysChain.Model
 		/// </summary>
 		public string Style { set; get; }
 		/// <summary>
+		/// 排序编码
+		/// </summary>
+		public string OrderCode { set; get; }
+		/// <summary>
 		/// 模块状态 0:禁用,1:启用
 		/// </summary>
 		public bool State { set; get; }
