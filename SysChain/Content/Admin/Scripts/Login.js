@@ -42,7 +42,6 @@
 			      }  
 			    },   
 			    error: function (XMLHttpRequest, textStatus, errorThrown) {  
-					popup.info.init().show('系统错误.请稍后再重试!', false); 
 					$btn.removeClass('btn-disabled');
 			    }  
 			}); 

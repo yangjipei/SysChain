@@ -504,7 +504,7 @@ f7.popup.loading = (function() {
 			}//if
 		}).ajaxSend(function(evt, request, settings) {
 			//console.log('ajaxSend');
-			//setContent('正在发送数据！');
+			setContent('正在发送数据！');
 		}).ajaxStop(function() {
 			//console.log('ajaxStop');
 			hide();
@@ -515,8 +515,7 @@ f7.popup.loading = (function() {
 			//console.log('ajaxComplete');
 		}).ajaxError(function(evt, request, settings) {
 			// console.log('ajaxError');
-			popup.alert.init();
-			popup.alert.show('请求不可达！请稍后再试！');
+			popup.info.init().show('系统错误.请稍后再重试!', false); 
 		});
 	}//initialize()
 	

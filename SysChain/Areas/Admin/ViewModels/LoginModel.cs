@@ -1,5 +1,5 @@
 ﻿using System;
-namespace SysChain
+namespace SysChain.Admin
 {
 	public class LoginModel
 	{

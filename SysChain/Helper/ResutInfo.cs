@@ -1,4 +1,4 @@
-﻿namespace SysChain.Model
+﻿namespace SysChain.Helper
 {
 	/// <summary>  
 	/// 调用结果信息类  

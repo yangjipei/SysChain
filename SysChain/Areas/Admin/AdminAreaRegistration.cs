@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace Yangjp.Areas.Admin
+namespace SysChain.Areas.Admin
 {
     public class AdminAreaRegistration : AreaRegistration
     {
@@ -17,7 +17,8 @@ namespace Yangjp.Areas.Admin
             context.MapRoute(
                 "Admin_default",
                 "Admin/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
+                new { controller = "Home",action = "Index", id = UrlParameter.Optional },
+				new string[] { "SysChain.Areas.Admin.Controllers" }
             );
         }
     }

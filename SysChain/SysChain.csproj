@@ -73,11 +73,49 @@
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Serialization" />
+    <Reference Include="Antlr3.Runtime">
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\" />
-    <Folder Include="Scripts\" />
     <Folder Include="Views\Home\" />
+    <Folder Include="Areas\Admin\Controllers\" />
+    <Folder Include="Areas\Admin\ViewModels\" />
+    <Folder Include="Areas\Admin\Views\Member\" />
+    <Folder Include="Helper\" />
+    <Folder Include="Content\Admin\" />
+    <Folder Include="Areas\Admin\Views\Home\" />
+    <Folder Include="Content\Public\" />
+    <Folder Include="Content\Public\" />
+    <Folder Include="Content\Public\" />
+    <Folder Include="Content\Public\" />
+    <Folder Include="Content\Public\" />
+    <Folder Include="Content\Admin\Scripts\" />
+    <Folder Include="Content\Public\Scripts\" />
+    <Folder Include="Content\Home\" />
+    <Folder Include="Content\Home\Css\" />
+    <Folder Include="Content\Admin\Css\" />
+    <Folder Include="Content\Home\Scripts\" />
+    <Folder Include="Content\Public\Plugin\" />
+    <Folder Include="Content\Public\Plugin\font\" />
+    <Folder Include="Content\Public\Plugin\font-awesome-4.6.3\" />
+    <Folder Include="Content\Public\Plugin\css\" />
+    <Folder Include="Content\Public\Images\" />
+    <Folder Include="Content\Public\Images\img\" />
+    <Folder Include="Content\Public\Images\product\" />
+    <Folder Include="Content\Public\Hack\" />
+    <Folder Include="Content\Public\Hack\css\" />
+    <Folder Include="Content\Public\Hack\js\" />
+    <Folder Include="Content\Public\Images\ico\" />
+    <Folder Include="Content\Home\Images\" />
+    <Folder Include="Content\Admin\Images\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\HomeController.cs" />
@@ -86,6 +124,15 @@
     </Compile>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\MemberController.cs" />
+    <Compile Include="Areas\Admin\ViewModels\LoginModel.cs" />
+    <Compile Include="Helper\ResutInfo.cs" />
+    <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Helper\LoginCheckFilterAttribute.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="Helper\CompressAttribute.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />
@@ -96,6 +143,50 @@
     <Content Include="Global.asax" />
     <Content Include="packages.config" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Web.config" />
+    <Content Include="Areas\Admin\Views\Member\Login.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
+    <Content Include="Content\Admin\Scripts\Login.js" />
+    <Content Include="Content\Public\Scripts\jquery-1.8.3.min.js" />
+    <Content Include="Content\Public\Scripts\Drag.js" />
+    <Content Include="Content\Public\Scripts\Popup.js" />
+    <Content Include="Content\Public\Scripts\Validate.js" />
+    <Content Include="Content\Public\Plugin\font\ALGER.TTF" />
+    <Content Include="Content\Public\Plugin\font\comic.TTF" />
+    <Content Include="Content\Public\Plugin\font\icons\icon.eot" />
+    <Content Include="Content\Public\Plugin\font\icons\icon.svg" />
+    <Content Include="Content\Public\Plugin\font\icons\icon.ttf" />
+    <Content Include="Content\Public\Plugin\font\icons\icon.woff" />
+    <Content Include="Content\Public\Plugin\font-awesome-4.6.3\css\font-awesome.css" />
+    <Content Include="Content\Public\Plugin\font-awesome-4.6.3\css\font-awesome.min.css" />
+    <Content Include="Content\Public\Plugin\font-awesome-4.6.3\fonts\FontAwesome.otf" />
+    <Content Include="Content\Public\Plugin\font-awesome-4.6.3\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\Public\Plugin\font-awesome-4.6.3\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\Public\Plugin\font-awesome-4.6.3\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\Public\Plugin\font-awesome-4.6.3\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\Home\Css\main.css" />
+    <Content Include="Content\Admin\Css\main.css" />
+    <Content Include="Content\Public\Plugin\css\icon.min.css" />
+    <Content Include="Content\Public\Images\img\close-black.png" />
+    <Content Include="Content\Public\Images\img\close-black%402x.png" />
+    <Content Include="Content\Public\Images\img\close-white.png" />
+    <Content Include="Content\Public\Images\img\close-white%402x.png" />
+    <Content Include="Content\Public\Images\img\close-white-hover.png" />
+    <Content Include="Content\Public\Images\img\close-white-hover%402x.png" />
+    <Content Include="Content\Public\Images\img\logo.png" />
+    <Content Include="Content\Public\Images\img\logo%402x.png" />
+    <Content Include="Content\Public\Images\img\selected.png" />
+    <Content Include="Content\Public\Images\img\selected%402x.png" />
+    <Content Include="Content\Public\Images\product\bick.png" />
+    <Content Include="Content\Public\Images\product\bick%402x.png" />
+    <Content Include="Content\Public\Images\product\qun.png" />
+    <Content Include="Content\Public\Images\product\qun%402x.png" />
+    <Content Include="Content\Public\Hack\css\ie8.css" />
+    <Content Include="Content\Public\Hack\js\html5shiv.js" />
+    <Content Include="Content\Public\Hack\js\html5shiv.min.js" />
+    <Content Include="Content\Public\Hack\js\html5shiv-printshiv.js" />
+    <Content Include="Content\Public\Hack\js\html5shiv-printshiv.min.js" />
+    <Content Include="Content\Public\Hack\js\IE9.js" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
@@ -107,11 +198,19 @@
       <Name>Model</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Content\Public\Plugin\font-awesome-4.6.3\fonts\fontawesome-webfont.woff2" />
+    <None Include="Content\Public\Hack\css\PIE.htc" />
+    <None Include="Content\Public\Images\ico\favicon.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <MonoDevelop>
       <Properties>
         <XspParameters Port="8080" Address="127.0.0.1" SslMode="None" SslProtocol="Default" KeyType="None" CertFile="" KeyFile="" PasswordOptions="None" Password="" Verbose="True" />
+        <Policies>
+          <TextStylePolicy TabWidth="4" IndentWidth="4" RemoveTrailingWhitespace="True" NoTabsAfterNonTabs="False" EolMarker="Native" FileWidth="120" TabsToSpaces="False" inheritsSet="VisualStudio" inheritsScope="text/plain" scope="application/javascript" />
+        </Policies>
       </Properties>
     </MonoDevelop>
   </ProjectExtensions>
