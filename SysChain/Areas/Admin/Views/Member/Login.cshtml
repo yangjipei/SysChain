@@ -62,11 +62,11 @@
                     <form id="common" action="@Url.Action("Login","Member")" method="post">
                         <p>
                             <span><i class="i i-user3"></i></span>
-                            @Html.TextBoxFor(model => model.LoginName,new {placeholder="请输入登录账号",autocomplete="off"})
+                            @Html.TextBoxFor(m => m.LoginName,new {placeholder="请输入登录账号",autocomplete="off"})
                         </p>
                         <p>
                             <span><i class="fa fa-lock"></i></span>
-                            @Html.PasswordFor(model=>model.LoginPassword,new {placeholder="请输入登录密码"})
+                            @Html.PasswordFor(m=>m.LoginPassword,new {placeholder="请输入登录密码"})
                         </p>
                         <div id="drag"></div>
                         <p>

@@ -9,10 +9,7 @@
 	
 	var $username = $('input[name="LoginName"]', $form);
 	var $password = $('input[name="LoginPassword"]', $form);
-	var data={
-		LoginName:$username.val(),
-		LoginPassword:$password.val(),
-	};
+
 	$btn=$("#btnSubmit");
 	$form.on('submit', function(evt){
 			evt.preventDefault();
@@ -21,6 +18,7 @@
 				return false;
 			} 
 			formError.init();
+			var data={LoginName:$username.val(),LoginPassword:$password.val()};
 			if (!formError.show($username, validate.username($username))) return false;//if
 			if (!formError.show($password, validate.password($password))) return false;//if
 			if ($('.handler').data('done') != 1) { popup.info.init().show('请滑动验证', false);return false; }
