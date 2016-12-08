@@ -45,7 +45,7 @@ namespace SysChain.DAL
 			{
 				return Convert.ToInt32(obj);
 			}
-		}
+		} 
 		/// <summary>
 		/// 修改密码
 		/// </summary>
@@ -104,21 +104,51 @@ namespace SysChain.DAL
 			};
 			parameters[0].Value = UserID;
 			DataTable dt = DbHelperSQL.Query(strSql.ToString(), parameters).Tables[0];
-			Model.SysUser model = new Model.SysUser();
+			return SetEntity(dt.Rows[0]);
+		}
+		public Model.SysUser GetEntity(string LoginName,string LoginPassword)
+		{
+			StringBuilder strSql = new StringBuilder();
+			strSql.Append("select  top 1 UserID,LoginName,ParentID,RoleID,State from SysUser ");
+			strSql.Append(" where LoginName=@LoginName and LoginPassword=@LoginPassword");
+			SqlParameter[] parameters = {
+					new SqlParameter("@LoginName", SqlDbType.NVarChar,50),
+					new SqlParameter("@LoginPassword", SqlDbType.NVarChar,50)
+			};
+			parameters[0].Value = LoginName;
+			parameters[1].Value = DBUtility.DESEncrypt.Encrypt(LoginPassword);
+			DataTable dt = DbHelperSQL.Query(strSql.ToString(), parameters).Tables[0];
 			if (dt.Rows.Count > 0)
 			{
-				if (dt.Rows[0]["UserID"].ToString() != "")
+				return SetEntity(dt.Rows[0]);
+			}
+			else
+			{
+				return null;
+			}
+		}
+		/// <summary>
+		/// 设置实体
+		/// </summary>
+		/// <returns>返回对象实体</returns>
+		/// <param name="dr">行</param>
+		private Model.SysUser SetEntity(DataRow dr)
+		{
+			Model.SysUser model = new Model.SysUser();
+			if (dr != null)
+			{
+				if (dr["UserID"].ToString() != "")
 				{
-					model.UserID = int.Parse(dt.Rows[0]["UserID"].ToString());
+					model.UserID = int.Parse(dr["UserID"].ToString());
 				}
-				model.LoginName = dt.Rows[0]["LoginName"].ToString();
-				if (dt.Rows[0]["ParentID"].ToString() != "")
+				model.LoginName = dr["LoginName"].ToString();
+				if (dr["ParentID"].ToString() != "")
 				{
-					model.ParentID = int.Parse(dt.Rows[0]["ParentID"].ToString());
+					model.ParentID = int.Parse(dr["ParentID"].ToString());
 				}
-				if (dt.Rows[0]["State"].ToString() != "")
+				if (dr["State"].ToString() != "")
 				{
-					if ((dt.Rows[0]["State"].ToString() == "1") || (dt.Rows[0]["State"].ToString().ToLower() == "true"))
+					if ((dr["State"].ToString() == "1") || (dr["State"].ToString().ToLower() == "true"))
 					{
 						model.State = true;
 					}
@@ -127,7 +157,7 @@ namespace SysChain.DAL
 						model.State = false;
 					}
 				}
-				model.RoleID = int.Parse(dt.Rows[0]["RoleID"].ToString());
+				model.RoleID = int.Parse(dr["RoleID"].ToString());
 				return model;
 			}
 			else

@@ -14,7 +14,7 @@ namespace System.Web.Mvc
 			if (IsCheck)
 			{
 				//校验用户是否已经登录
-				if (filterContext.HttpContext.Session["loginUser"] == null)
+				if (filterContext.HttpContext.Session["UserInfo"] == null)
 				{
 					string Name = string.Empty;
 					var areaName = filterContext.RouteData.DataTokens["area"];
@@ -27,15 +27,10 @@ namespace System.Web.Mvc
 						//跳转到登陆页
 						//filterContext.HttpContext.Response.Redirect("/Admin/Member/Login");
 						var Url = new UrlHelper(filterContext.RequestContext);
-						var url = Url.Action("Login", "Member", new { area = "Admin" });
+						var url = Url.Action("Login", "Member");
 						filterContext.Result = new RedirectResult(url);
 					}
 				}
-				//else
-				//{
-				//	//跳转到首页
-				//	filterContext.HttpContext.Response.Redirect("/Home/Index");
-				//}
 			}
 		}
 

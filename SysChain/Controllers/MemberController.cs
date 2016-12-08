@@ -5,32 +5,46 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
 
-namespace SysChain.Areas.Admin.Controllers
+namespace SysChain.Controllers
 {
+	[LoginCheckFilterAttribute(IsCheck = false)]
 	public class MemberController : Controller
 	{
 		[HttpGet]
-		[LoginCheckFilterAttribute(IsCheck = false)]
 		public ActionResult Login()
 		{
 			return View();
 		}
 		[HttpPost]
-		[LoginCheckFilterAttribute(IsCheck = false)]
-		public JsonResult Login(SysChain.Admin.LoginModel model)
+		public JsonResult Login(SysChain.LoginModel model)
 		{
 			Helper.ResultInfo<bool> rs = new Helper.ResultInfo<bool>();
 			if (ModelState.IsValid)
 			{
-				rs.Data = true;
-				rs.Msg = "登录成功.";
-				rs.Result = true;
-				rs.Url = Url.Action("Index", "Home");
+				BLL.SysUser Operation = new BLL.SysUser();
+				SysChain.Model.SysUser user = Operation.GetEntity(model.LoginName, model.LoginPassword);
+				if (user != null)
+				{
+					Session["UserInfo"] = user;
+					rs.Data = true;
+					rs.Msg = "登录成功.";
+					rs.Result = true;
+					rs.Url = Url.Action("Index", "Home", new {area="Admin" });
+
+				}
+				else
+				{
+					rs.Data = false;
+					rs.Msg = "账号或密码错误.";
+					rs.Result = false;
+					rs.Url = "";
+				}
 				JsonResult jr = new JsonResult();
 				jr.Data = rs;
 				return jr;
 			}
-			else {
+			else
+			{
 				System.Text.StringBuilder sbErrors = new System.Text.StringBuilder();
 				foreach (var item in ModelState.Values)
 				{
@@ -52,6 +66,5 @@ namespace SysChain.Areas.Admin.Controllers
 				return jr;
 			}
 		}
-
 	}
 }

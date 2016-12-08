@@ -45,5 +45,15 @@ namespace SysChain.BLL
 		{
 			return dal.GetEntity(UserID);
 		}
+		/// <summary>
+		/// 获得指定系统用户实体
+		/// </summary>
+		/// <returns>SysUser实体</returns>
+		/// <param name="LoginName">账号.</param>
+		/// /// <param name="LoginPassword">密码.</param>
+		public Model.SysUser GetEntity(string LoginName,string LoginPassword)
+		{
+			return dal.GetEntity(LoginName,LoginPassword);
+		}
 	}
 }

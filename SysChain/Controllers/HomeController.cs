@@ -7,16 +7,13 @@ using System.Web.Mvc.Ajax;
 
 namespace SysChain.Controllers
 {
+	[LoginCheckFilterAttribute(IsCheck = false)]
 	public class HomeController : Controller
 	{
-		
-
 		public ActionResult Index()
 		{
 			try
 			{
-				BLL.SysMoudle Operation = new BLL.SysMoudle();
-				ViewBag.Code = Operation.GetNewOrderCode(2);
 				return View();
 			}
 			catch (Exception ex)
@@ -24,7 +21,7 @@ namespace SysChain.Controllers
 				ViewBag.Message = ex.Message;
 				return View();
 			}
-
 		}
+
 	}
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace SysChain.Admin
+namespace SysChain
 {
 	public class LoginModel
 	{

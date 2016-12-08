@@ -12,7 +12,7 @@ namespace SysChain
 				"~/Content/Public/Scripts/*.js"
 			));
 			bundles.Add(new ScriptBundle("~/js/login").Include(
-				"~/Content/Admin/Scripts/Login.js"
+				"~/Content/Home/Scripts/Login.js"
 			));
 			bundles.Add(new StyleBundle("~/css/home/base").Include(
 				"~/Content/Home/Css/main.css"
