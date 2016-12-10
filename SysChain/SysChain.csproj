@@ -119,6 +119,7 @@
     <Folder Include="Areas\Admin\ViewModels\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Areas\Admin\Views\SysConfig\" />
+    <Folder Include="Areas\Admin\Views\Moudle\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\HomeController.cs" />
@@ -137,6 +138,8 @@
     <Compile Include="ViewModels\LoginModel.cs" />
     <Compile Include="Controllers\MemberController.cs" />
     <Compile Include="Areas\Admin\Controllers\SysConfigController.cs" />
+    <Compile Include="Areas\Admin\Controllers\MoudleController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SysRoleController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />
@@ -211,10 +214,12 @@
     <Content Include="Areas\Admin\Views\Shared\_Footer.cshtml" />
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
     <Content Include="Areas\Admin\Views\SysConfig\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\SysConfig\Moudle.cshtml" />
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Member\Login.cshtml" />
+    <Content Include="Areas\Admin\Views\Moudle\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\SysRole\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\SysRole\RoleAccess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

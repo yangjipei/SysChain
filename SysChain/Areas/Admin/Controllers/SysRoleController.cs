@@ -7,11 +7,16 @@ using System.Web.Mvc.Ajax;
 
 namespace SysChain.Areas.Admin.Controllers
 {
-	public class SysConfigController : Controller
+	public class SysRoleController : Controller
 	{
 		public ActionResult  Index()
 		{
-			ViewBag.Title = "后端管理系统-系统管理";
+			ViewBag.Title = "后端管理系统-角色管理";
+			return View();
+		}
+		public ActionResult RoleAccess()
+		{
+			ViewBag.Title = "后端管理系统-角色权限配置";
 			return View();
 		}
 	}

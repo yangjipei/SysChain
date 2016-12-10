@@ -7,11 +7,11 @@ using System.Web.Mvc.Ajax;
 
 namespace SysChain.Areas.Admin.Controllers
 {
-	public class SysConfigController : Controller
+	public class SysMoudleController : Controller
 	{
-		public ActionResult  Index()
+		public ActionResult Index()
 		{
-			ViewBag.Title = "后端管理系统-系统管理";
+			ViewBag.Title = "后端管理系统-模块管理";
 			return View();
 		}
 	}
