@@ -1,8 +1,8 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="zh-CN" dir="ltr">
 <head>
+    <title>@ViewBag.Title</title>
     <meta charset="utf-8"/>
-	<title>@ViewBag.Title</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta name="renderer" content="webkit"/>
     <link rel="icon" type="image/x-icon" href="~/Content/Public/Images/ico/favicon.ico"/>
@@ -14,12 +14,12 @@
     <![endif]-->
 	<link type="text/css" rel="stylesheet" href="~/Content/Public/Plugin/font-awesome-4.7.0/css/font-awesome.min.css"/>
 	<link type="text/css" rel="stylesheet" href="~/Content/Public/Plugin/css/icon.min.css"/>
-	@Styles.Render("~/css/home/base")
+	@Styles.Render("~/css/admin/base")	
 </head>
-<body>
-	@Html.Partial("_Header")
+<body id="Index-index">
+	@Html.Action("Header","Home")	
 	@RenderBody()
-	@Html.Partial("_Footer")
+	@Html.Partial("~/Areas/Admin/Views/Shared/_Footer.cshtml")
 	@RenderSection("Scripts",false)
 </body>
 </html>

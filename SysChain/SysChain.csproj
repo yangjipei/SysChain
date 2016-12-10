@@ -103,7 +103,6 @@
     <Folder Include="Content\Home\Scripts\" />
     <Folder Include="Content\Public\Plugin\" />
     <Folder Include="Content\Public\Plugin\font\" />
-    <Folder Include="Content\Public\Plugin\font-awesome-4.6.3\" />
     <Folder Include="Content\Public\Plugin\css\" />
     <Folder Include="Content\Public\Images\" />
     <Folder Include="Content\Public\Images\img\" />
@@ -116,6 +115,10 @@
     <Folder Include="Content\Admin\Images\" />
     <Folder Include="ViewModels\" />
     <Folder Include="Views\Member\" />
+    <Folder Include="Content\Public\Plugin\echarts\" />
+    <Folder Include="Areas\Admin\ViewModels\" />
+    <Folder Include="Areas\Admin\Views\Shared\" />
+    <Folder Include="Areas\Admin\Views\SysConfig\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\HomeController.cs" />
@@ -133,6 +136,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="ViewModels\LoginModel.cs" />
     <Compile Include="Controllers\MemberController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SysConfigController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />
@@ -144,7 +148,6 @@
     <Content Include="packages.config" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Web.config" />
-    <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
     <Content Include="Content\Public\Scripts\jquery-1.8.3.min.js" />
     <Content Include="Content\Public\Scripts\Drag.js" />
     <Content Include="Content\Public\Scripts\Popup.js" />
@@ -155,13 +158,6 @@
     <Content Include="Content\Public\Plugin\font\icons\icon.svg" />
     <Content Include="Content\Public\Plugin\font\icons\icon.ttf" />
     <Content Include="Content\Public\Plugin\font\icons\icon.woff" />
-    <Content Include="Content\Public\Plugin\font-awesome-4.6.3\css\font-awesome.css" />
-    <Content Include="Content\Public\Plugin\font-awesome-4.6.3\css\font-awesome.min.css" />
-    <Content Include="Content\Public\Plugin\font-awesome-4.6.3\fonts\FontAwesome.otf" />
-    <Content Include="Content\Public\Plugin\font-awesome-4.6.3\fonts\fontawesome-webfont.eot" />
-    <Content Include="Content\Public\Plugin\font-awesome-4.6.3\fonts\fontawesome-webfont.svg" />
-    <Content Include="Content\Public\Plugin\font-awesome-4.6.3\fonts\fontawesome-webfont.ttf" />
-    <Content Include="Content\Public\Plugin\font-awesome-4.6.3\fonts\fontawesome-webfont.woff" />
     <Content Include="Content\Home\Css\main.css" />
     <Content Include="Content\Admin\Css\main.css" />
     <Content Include="Content\Public\Plugin\css\icon.min.css" />
@@ -185,8 +181,40 @@
     <Content Include="Content\Public\Hack\js\html5shiv-printshiv.js" />
     <Content Include="Content\Public\Hack\js\html5shiv-printshiv.min.js" />
     <Content Include="Content\Public\Hack\js\IE9.js" />
-    <Content Include="Views\Member\Login.cshtml" />
     <Content Include="Content\Home\Scripts\Login.js" />
+    <Content Include="Content\Public\Plugin\font-awesome-4.7.0\css\font-awesome.css" />
+    <Content Include="Content\Public\Plugin\font-awesome-4.7.0\css\font-awesome.min.css" />
+    <Content Include="Content\Public\Plugin\font-awesome-4.7.0\fonts\FontAwesome.otf" />
+    <Content Include="Content\Public\Plugin\font-awesome-4.7.0\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\Public\Plugin\font-awesome-4.7.0\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\Public\Plugin\font-awesome-4.7.0\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\Public\Plugin\font-awesome-4.7.0\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\Admin\Images\img\bick.jpg" />
+    <Content Include="Content\Admin\Images\img\close-black.png" />
+    <Content Include="Content\Admin\Images\img\close-black%402x.png" />
+    <Content Include="Content\Admin\Images\img\close-white-hover.png" />
+    <Content Include="Content\Admin\Images\img\close-white-hover%402x.png" />
+    <Content Include="Content\Admin\Images\img\close-white.png" />
+    <Content Include="Content\Admin\Images\img\close-white%402x.png" />
+    <Content Include="Content\Admin\Images\img\default_shop.png" />
+    <Content Include="Content\Admin\Images\img\logo.png" />
+    <Content Include="Content\Admin\Images\img\logo%402x.png" />
+    <Content Include="Content\Admin\Images\img\map.jpg" />
+    <Content Include="Content\Admin\Images\img\selected.png" />
+    <Content Include="Content\Admin\Images\img\selected%402x.png" />
+    <Content Include="Content\Admin\Images\avatar\avatar.png" />
+    <Content Include="Content\Admin\Images\avatar\avatar%402x.png" />
+    <Content Include="Content\Public\Plugin\echarts\echarts.js" />
+    <Content Include="Content\Admin\Scripts\main.js" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Header.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Footer.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\SysConfig\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\SysConfig\Moudle.cshtml" />
+    <Content Include="Views\Shared\_Header.cshtml" />
+    <Content Include="Views\Shared\_Footer.cshtml" />
+    <Content Include="Views\Member\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
@@ -199,9 +227,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Content\Public\Plugin\font-awesome-4.6.3\fonts\fontawesome-webfont.woff2" />
     <None Include="Content\Public\Hack\css\PIE.htc" />
     <None Include="Content\Public\Images\ico\favicon.ico" />
+    <None Include="Content\Public\Plugin\font-awesome-4.7.0\fonts\fontawesome-webfont.woff2" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

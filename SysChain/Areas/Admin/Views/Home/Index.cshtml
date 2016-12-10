@@ -1,15 +1,187 @@
 ﻿@{
-    Layout = null;
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
+@section Scripts
+{
+	@Scripts.Render("~/js/tools")
+	<script type="text/javascript" src="~/Content/Public/Plugin/echarts/echarts.js"></script>
+	<script type="text/javascript" src="~/Content/Public/Plugin/echarts/macarons.js"></script>
+	@Scripts.Render("~/js/admin")
+}
+<main id="index">
+    <ul class="summary">
+        <li>
+            <a href="#" title="昨日访客人数">
+                <span class="icon-1"><i class="i i-users3"></i></span>
+                <div>
+                    <p>
+                        <strong>560</strong>
+                        <em>人</em>
+                        <i class="i i-arrow-down"></i>
+                    </p>
+                    <h2>昨日访客人数</h2>
+                </div>
+            </a>
+        </li>
+        <li>
+            <a href="#" title="昨日成交量">
+                <span class="icon-2"><i class="fa fa-gavel fa-flip-horizontal"></i></span>
+                <div>
+                    <p>
+                        <strong>5605</strong>
+                        <em>单</em>
+                        <i class="i i-arrow-up"></i>
+                    </p>
+                    <h2>昨日成交量</h2>
+                </div>
+            </a>
+        </li>
+        <li>
+            <a href="#" title="昨日交易额">
+                <span class="icon-3"><i class="fa fa-money"></i></span>
+                <div>
+                    <p>
+                        <strong>56654.60</strong>
+                        <em>元</em>
+                        <i class="i i-arrow-up"></i>
+                    </p>
+                    <h2>昨日交易额</h2>
+                </div>
+            </a>
+        </li>
+        <li>
+            <a href="#" title="累计交易金额">
+                <span class="icon-4"><i class="fa fa-rmb"></i></span>
+                <div>
+                    <p>
+                        <strong>5665460</strong>
+                        <em>元</em>
+                        <i class="i i-arrow-up"></i>
+                    </p>
+                    <h2>累计交易金额</h2>
+                </div>
+            </a>
+        </li>
+    </ul>
+    
+    <div class="box-wrap">
+        <div class="box">
+            <header>
+                <h1>访客统计</h1>
+                <a href="#" title="更多"><i class="i i-ellipsis"></i></a>
+            </header>
+            <aside>
+                <p></p>
+                <ol>
+                    <li><a href="#" title="昨天">昨天</a></li>
+                    <li><a class="current" href="#" title="最近7天">最近7天</a></li>
+                    <li><a href="#" title="最近一月">最近一月</a></li>
+                </ol>
+                <p>
+                    <span><i class="i i-circle-sm"></i>实时数据</span>
+                    <span><i class="i i-circle-sm"></i>平均数据</span>
+                </p>
+            </aside>
+            <div id="chart-1" class="chart"></div>
+        </div>
 
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8"/>		
-    <title>首页</title>
-</head>
-<body>
-			<h3>我是后台首页</h3>
-</body>
-</html>
+        <div class="box">
+            <header>
+                <h1>成交金额</h1>
+                <a href="#" title="更多"><i class="i i-ellipsis"></i></a>
+            </header>
+            <aside>
+                <p></p>
+                <ol>
+                    <li><a href="#" title="昨天">昨天</a></li>
+                    <li><a class="current" href="#" title="最近7天">最近7天</a></li>
+                    <li><a href="#" title="最近一月">最近一月</a></li>
+                </ol>
+                <p>
+                    <span><i class="i i-circle-sm"></i>实时数据</span>
+                    <span><i class="i i-circle-sm"></i>平均数据</span>
+                </p>
+            </aside>
+            <div id="chart-2" class="chart"></div>
+        </div>
+        
+        <div class="box">
+            <header>
+                <h1>待办事项</h1>
+                <a href="#" title="更多"><i class="i i-ellipsis"></i></a>
+            </header>
+            <table>
+                <tbody>
+                    <tr>
+                        <th>代发货商品</th>
+                        <td><strong>0</strong></td>
+                    </tr>
+                    <tr>
+                        <th>审核中的产品</th>
+                        <td><strong>0</strong></td>
+                    </tr>
+                    <tr>
+                        <th>审核中的店铺</th>
+                        <td><strong>0</strong></td>
+                    </tr>
+                    <tr>
+                        <th>退款申请</th>
+                        <td><strong>0</strong></td>
+                    </tr>
+                    <tr>
+                        <th>新评论</th>
+                        <td><strong>0</strong></td>
+                    </tr>
+                    <tr>
+                        <th>新订单</th>
+                        <td><strong>0</strong></td>
+                    </tr>
+                    <tr>
+                        <th>待发货</th>
+                        <td><strong>0</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="box">
+            <header>
+                <h1>操作日志</h1>
+                <a href="#" title="更多"><i class="i i-ellipsis"></i></a>
+            </header>
+            <table>
+                <tbody>
+                    <tr>
+                        <th>16/09/23 15:38:18</th>
+                        <td>封一闻登录系统</td>
+                    </tr>
+                    <tr>
+                        <th>16/09/23 15:38:18</th>
+                        <td>封一闻新增了模块“首页”</td>
+                    </tr>
+                    <tr>
+                        <th>16/09/23 15:38:18</th>
+                        <td>封一闻登录系统</td>
+                    </tr>
+                    <tr>
+                        <th>16/09/23 15:38:18</th>
+                        <td>封一闻创建了角色“管理员”</td>
+                    </tr>
+                    <tr>
+                        <th>16/09/23 15:38:18</th>
+                        <td>封一闻登录系统</td>
+                    </tr>
+                    <tr>
+                        <th>16/09/23 15:38:18</th>
+                        <td>封一闻删除了模块“资讯”</td>
+                    </tr>
+                    <tr>
+                        <th>16/09/23 15:38:18</th>
+                        <td>封一闻登录系统</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
 

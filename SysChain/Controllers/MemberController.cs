@@ -13,6 +13,7 @@ namespace SysChain.Controllers
 		[HttpGet]
 		public ActionResult Login()
 		{
+			ViewBag.Title = "欢迎登录后台管理系统";
 			return View();
 		}
 		[HttpPost]

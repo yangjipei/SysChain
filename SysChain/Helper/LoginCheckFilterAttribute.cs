@@ -27,7 +27,7 @@ namespace System.Web.Mvc
 						//跳转到登陆页
 						//filterContext.HttpContext.Response.Redirect("/Admin/Member/Login");
 						var Url = new UrlHelper(filterContext.RequestContext);
-						var url = Url.Action("Login", "Member");
+						var url = Url.Action("Login", "Member", new { area=""});
 						filterContext.Result = new RedirectResult(url);
 					}
 				}

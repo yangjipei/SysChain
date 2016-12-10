@@ -14,6 +14,9 @@ namespace SysChain
 			bundles.Add(new ScriptBundle("~/js/login").Include(
 				"~/Content/Home/Scripts/Login.js"
 			));
+			bundles.Add(new ScriptBundle("~/js/admin").Include(
+				"~/Content/Admin/Scripts/main.js"
+			));
 			bundles.Add(new StyleBundle("~/css/home/base").Include(
 				"~/Content/Home/Css/main.css"
 			));

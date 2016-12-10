@@ -12,7 +12,13 @@ namespace SysChain.Areas.Admin.Controllers
 		
 		public ActionResult Index()
 		{
+			ViewBag.Title = "后台管理系统";
 			return View();
+		}
+		public ActionResult Header()
+		{
+			List<Model.SysMoudle> ListModel = new List<Model.SysMoudle>();
+			return PartialView("~/Areas/Admin/Views/Shared/_Header.cshtml",ListModel);
 		}
 	}
 }
