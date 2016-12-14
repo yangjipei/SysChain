@@ -119,7 +119,7 @@
     <Folder Include="Areas\Admin\ViewModels\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Areas\Admin\Views\SysConfig\" />
-    <Folder Include="Areas\Admin\Views\Moudle\" />
+    <Folder Include="Areas\Admin\Views\SysMoudle\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\HomeController.cs" />
@@ -138,8 +138,9 @@
     <Compile Include="ViewModels\LoginModel.cs" />
     <Compile Include="Controllers\MemberController.cs" />
     <Compile Include="Areas\Admin\Controllers\SysConfigController.cs" />
-    <Compile Include="Areas\Admin\Controllers\MoudleController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SysMoudleController.cs" />
     <Compile Include="Areas\Admin\Controllers\SysRoleController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SysUserController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />
@@ -217,9 +218,13 @@
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Member\Login.cshtml" />
-    <Content Include="Areas\Admin\Views\Moudle\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\SysMoudle\Index.cshtml" />
     <Content Include="Areas\Admin\Views\SysRole\Index.cshtml" />
     <Content Include="Areas\Admin\Views\SysRole\RoleAccess.cshtml" />
+    <Content Include="Areas\Admin\Views\SysUser\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\SysMoudle\New.cshtml" />
+    <Content Include="Content\Public\Plugin\popwin\js\init.js" />
+    <Content Include="Content\Public\Plugin\popwin\js\popwin.js" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

@@ -2,7 +2,7 @@
 var f7 = {};
 
 f7.popup = {};
-
+f7.plugin = {}; //插件
 var popup = {
 	config:{
 		isInitLoading:false,
@@ -809,6 +809,47 @@ f7.popup.toolTip = (function() {
 		hide: hide
 	};
 });//f7.popup.toolTip()
+f7.plugin.footer = (function() {
+	// console.log('plugin.footer');
+
+	// 满屏显示
+	(function() {
+		var screenHeight = $(window).height(),
+			height = $('body').height();
+
+		// console.log(screenHeight, height);
+		if (height < screenHeight) {
+			var $main = $('main');
+			$main.css({
+				height: $main.height() + (screenHeight - height) + 'px',
+			});
+		} //if
+	}());
+
+		// iframe 中的 页面隐藏部分结构
+	(function() {
+		if (window.frames.length != parent.frames.length) {
+
+			var $panel = $('#panel');
+
+			$('div[id^="header"]').hide();
+			$('#footer').hide();
+
+			$panel.wrap('<div id="popup-panel"></div>').find('header').hide().end().parent().css({
+				display: 'block',
+			});
+		} //if
+	}());
+
+	// popup.info.init().show('看一下效果');
+	// popup.info.init().show('看一下效果', false);
+	// popup.alert.init().show('看一下Alert 警告框');
+	// setTimeout(function () {
+	// 	// popup.toolTip.init().show($('input[name="keyword"]'), '这是测试内容');
+	// 	// popup.formError.init().show($('input[name="keyword"]'), {status: false, info: '搜索内容不能为空！'});
+	// }, 1000);
+
+})(); //f7.plugin.footer()
 
 
 

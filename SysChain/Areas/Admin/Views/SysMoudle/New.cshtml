@@ -1,0 +1,47 @@
+﻿@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div id="header-crumb">
+    <p>
+        <i class="fa fa-lg fa-home"></i>
+        <a href="#" title="系统管理">系统管理</a>
+        <i class="fa fa-angle-right"></i>
+        <a href="#" title="模块管理">模块管理</a>
+        <i class="fa fa-angle-right"></i>
+        <span>新增模块</span>
+    </p>
+</div>
+<main id="panel">
+    <section class="form">
+        <header>
+            <h1>添加模块</h1>
+        </header>
+        <form action="#" method="post">
+            <p>
+                <span>上级模块：</span>
+                <select name="">
+                    <option value="">请选择上级模块名</option>
+                </select>
+            </p>
+            <p>
+                <span>模块名称：</span>
+                <input type="text" name="" maxlength="32" placeholder="请输入模块名称"/>
+            </p>
+            <p>
+                <span>模块样式：</span>
+                <select name="">
+                    <option value="">标签</option>
+                </select>
+            </p>
+            <p>
+                <span>模块链接：</span>
+                <input type="text" name="" maxlength="32" placeholder="date/index/shop"/>
+            </p>
+            <footer>
+                <button class="btn btn-primary" type="submit">确定</button>
+                <a class="btn btn-cancel btn-close" href="#" title="取消">取消</a>
+            </footer>
+        </form>
+    </section>
+</main>
+

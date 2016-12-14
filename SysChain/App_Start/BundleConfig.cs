@@ -23,6 +23,10 @@ namespace SysChain
 			bundles.Add(new StyleBundle("~/css/admin/base").Include(
 				"~/Content/Admin/Css/main.css"
 			));
+			bundles.Add(new ScriptBundle("~/js/plugin/popwin").Include(
+				"~/Content/Public/Plugin/popwin/js/popwin.js",
+				"~/Content/Public/Plugin/popwin/js/init.js"
+			));
 		    BundleTable.EnableOptimizations = true; 
 		}
 	}

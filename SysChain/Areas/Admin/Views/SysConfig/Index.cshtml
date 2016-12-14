@@ -1,6 +1,71 @@
 ﻿@{
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
+<div id="header-crumb">
+    <p>
+        <i class="fa fa-lg fa-home"></i>
+        <a href="#" title="系统管理">系统管理</a>
+        <i class="fa fa-angle-right"></i>
+        <span>模块管理</span>
+    </p>
+</div>
+<main id="system">
 
-<h2>Index</h2>
+<ul class="module-intro">
+    <li>
+        <a href='@Url.Action("Index","SysMoudle",new {area="Admin"})' title="模块管理">
+            <span class="icon-1"><i class="i i-users3"></i></span>
+            <div>
+                <h2>模块管理</h2>
+                <p>模块管理</p>
+            </div>
+        </a>
+    </li>
+    <li>
+        <a href="./system-role.html" title="角色管理">
+            <span class="icon-2"><i class="fa fa-gavel fa-flip-horizontal"></i></span>
+            <div>
+                <h2>角色管理</h2>
+                <p>角色管理</p>
+            </div>
+        </a>
+    </li>
+    <li>
+        <a href="./system-user.html" title="用户管理">
+            <span class="icon-3"><i class="fa fa-money"></i></span>
+            <div>
+                <h2>用户管理</h2>
+                <p>角色管理</p>
+            </div>
+        </a>
+    </li>
+    <li>
+        <a href="#" title="">
+            <span class="icon-13"><i class="i i-users3"></i></span>
+            <div>
+                <h2>Lorem ipsum.</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni praesentium impedit atque.</p>
+            </div>
+        </a>
+    </li>
+    <li>
+        <a href="#" title="">
+            <span class="icon-14"><i class="fa fa-gavel fa-flip-horizontal"></i></span>
+            <div>
+                <h2>Lorem ipsum.</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae mollitia ullam, a ea pariatur inventore ratione quam amet labore quaerat.</p>
+            </div>
+        </a>
+    </li>
+    <li>
+        <a href="#" title="">
+            <span class="icon-15"><i class="fa fa-money"></i></span>
+            <div>
+                <h2>Lorem ipsum.</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse, perspiciatis illo, quidem numquam vitae commodi.</p>
+            </div>
+        </a>
+    </li>
+</ul>
 
+</main>

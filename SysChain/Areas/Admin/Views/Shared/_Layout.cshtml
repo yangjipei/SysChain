@@ -15,11 +15,13 @@
 	<link type="text/css" rel="stylesheet" href="~/Content/Public/Plugin/font-awesome-4.7.0/css/font-awesome.min.css"/>
 	<link type="text/css" rel="stylesheet" href="~/Content/Public/Plugin/css/icon.min.css"/>
 	@Styles.Render("~/css/admin/base")	
+	@RenderSection("Styles",false)
 </head>
 <body id="Index-index">
 	@Html.Action("Header","Home")	
 	@RenderBody()
 	@Html.Partial("~/Areas/Admin/Views/Shared/_Footer.cshtml")
+	@Scripts.Render("~/js/tools")
 	@RenderSection("Scripts",false)
 </body>
 </html>

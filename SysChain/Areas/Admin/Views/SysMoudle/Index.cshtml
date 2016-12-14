@@ -1,6 +1,10 @@
 ﻿@{
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
+@section Scripts
+{
+	@Scripts.Render("~/js/plugin/popwin")
+}
 <div id="header-crumb">
     <p>
         <i class="fa fa-lg fa-home"></i>
@@ -53,7 +57,7 @@
                         <a class="btn-sort" href="#" title="排后"><i class="i i-arrow-down"></i></a>
                     </td>
                     <td>
-                        <a class="btn-icon" href="./system-add.html" data-module-init="on" title="新增"><i class="fa fa-fw fa-plus-circle"></i>新增</a>
+                        <a class="btn-icon" href='@Url.Action("New","SysMoudle",new {area="Admin"})' data-panel-init="on" title="新增"><i class="fa fa-fw fa-plus-circle"></i>新增</a>
                         <a class="btn-icon" href="#" title="编辑"><i class="fa fa-fw fa-edit"></i>编辑</a>
                         <a class="btn-icon" href="delete" title="删除"><i class="fa fa-fw fa-trash-o"></i>删除</a>
                     </td>
@@ -101,7 +105,8 @@
                 <a href="#">3</a>
                 <a href="#">4</a>
                 <a href="#">5</a>
-                <a href="#">下5页</a>
+                <a href="#">...</a>
+				<a href="#">20</a>
                 <a href="#">最后一页</a>
             </div>
         </footer>
