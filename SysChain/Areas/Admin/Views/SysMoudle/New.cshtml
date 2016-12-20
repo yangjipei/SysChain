@@ -1,6 +1,12 @@
 ﻿@{
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
+@model SysChain.Model.SysMoudle
+
+@section Scripts
+{
+	@Scripts.Render("~/js/mnew")
+}
 <div id="header-crumb">
     <p>
         <i class="fa fa-lg fa-home"></i>
@@ -14,33 +20,33 @@
 <main id="panel">
     <section class="form">
         <header>
-            <h1>添加模块</h1>
+            <h1>新增模块</h1>
         </header>
-        <form action="#" method="post">
-            <p>
-                <span>上级模块：</span>
-                <select name="">
-                    <option value="">请选择上级模块名</option>
-                </select>
-            </p>
+        <form id="frmNew" action="@Url.Action("New","SysMoudle")" method="post">
             <p>
                 <span>模块名称：</span>
-                <input type="text" name="" maxlength="32" placeholder="请输入模块名称"/>
+				@Html.TextBoxFor(m => m.Name,new {placeholder="请输入模块名称",autocomplete="off"})
             </p>
             <p>
                 <span>模块样式：</span>
-                <select name="">
-                    <option value="">标签</option>
-                </select>
+				@Html.TextBoxFor(m => m.Style,new {placeholder="请输入模块样式",autocomplete="off"})
             </p>
             <p>
                 <span>模块链接：</span>
-                <input type="text" name="" maxlength="32" placeholder="date/index/shop"/>
+				@Html.TextBoxFor(m => m.LinkUrl,new {placeholder="请输入模块链接",autocomplete="off"})
+            </p>
+            <p>
+                <span>模块描述：</span>
+				@Html.TextAreaFor(m => m.MoudleDes,new {placeholder="请输入模块链接,限500字符以内",autocomplete="off",style="font-size:12px;"})
             </p>
             <footer>
                 <button class="btn btn-primary" type="submit">确定</button>
                 <a class="btn btn-cancel btn-close" href="#" title="取消">取消</a>
             </footer>
+			@Html.HiddenFor(m => m.MoudleID)
+			@Html.HiddenFor(m => m.ParentID)
+			@Html.HiddenFor(m => m.OrderCode)
+			@Html.HiddenFor(m => m.State)
         </form>
     </section>
 </main>

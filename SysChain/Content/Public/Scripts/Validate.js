@@ -7,6 +7,73 @@ f7.validate.output = (function(info, status) {
 	};
 });//f7.validate.output()
 
+
+// 用户名
+f7.validate.username = (function($input) {
+	var value = $.trim($input.val()),
+		len = value.length;
+
+	if (value === '') {
+		return this.output('用户名 不能为空！');
+	} else if (len < 5) {
+	 	return this.output('用户名 不能小于5个字符！');
+	} else if (len > 16) {
+		return this.output('用户名 不能大于16个字符！');
+	}//if
+
+	return this.output('', true);
+});//f7.validate.username()
+
+// 密码
+f7.validate.password = (function($input) {
+	var value = $.trim($input.val()),
+		len = value.length;
+
+	if (len === 0) {
+		return this.output('密码 不能为空！');
+	} else if (len < 6) {
+		return this.output('密码 不能小于6个字符！');
+	} else if (!(/\d+/).test(value) || !(/[a-z]+/i).test(value)) {
+		return this.output('密码 必须含有字母与数字字符！');
+	}//if
+
+	return this.output('', true);
+});//f7.validate.password()
+
+//必须选择
+f7.validate.selectNull=(function($input,$errmsg){
+	var value = $.trim($input.val()),
+		len = value.length;
+
+	if (len === 0) {
+		return this.output($errmsg);
+	} 
+	if(value<=0)
+	{
+		return this.output($errmsg);
+	}
+
+	return this.output('', true);
+
+});//f7.validate.selectNull()
+
+//必须天蝎
+f7.validate.textNull=(function($input,$errmsg){
+	var value = $.trim($input.val()),
+		len = value.length;
+
+	if (len === 0) {
+		return this.output($errmsg);
+	} 
+	if(value<=0)
+	{
+		return this.output($errmsg);
+	}
+
+	return this.output('', true);
+
+});//f7.validate.textNull()
+
 // 验证 手机号 与 邮箱地址
 f7.validate.telAndEmail = (function($input) {
 	var value = $.trim($input.val());
@@ -268,21 +335,7 @@ f7.validate.commentContent = (function($input) {
 	return this.output('', true);
 });//f7.validate.commentContent()
 
-// 用户名
-f7.validate.username = (function($input) {
-	var value = $.trim($input.val()),
-		len = value.length;
 
-	if (value === '') {
-		return this.output('用户名 不能为空！');
-	} else if (len < 5) {
-	 	return this.output('用户名 不能小于5个字符！');
-	} else if (len > 16) {
-		return this.output('用户名 不能大于16个字符！');
-	}//if
-
-	return this.output('', true);
-});//f7.validate.username()
 
 // 真实姓名
 f7.validate.realUsername = (function($input) {
@@ -501,21 +554,7 @@ f7.validate.oldPassword = (function($input) {
 	return this.output('', true);
 });//f7.validate.oldPassword()
 
-// 密码
-f7.validate.password = (function($input) {
-	var value = $.trim($input.val()),
-		len = value.length;
 
-	if (len === 0) {
-		return this.output('密码 不能为空！');
-	} else if (len < 6) {
-		return this.output('密码 不能小于6个字符！');
-	} else if (!(/\d+/).test(value) || !(/[a-z]+/i).test(value)) {
-		return this.output('密码 必须含有字母与数字字符！');
-	}//if
-
-	return this.output('', true);
-});//f7.validate.password()
 
 // 确认密码
 f7.validate.confirmPassword = (function($input1, $input2) {

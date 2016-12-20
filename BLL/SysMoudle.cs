@@ -28,6 +28,15 @@ namespace SysChain.BLL
 			return dal.ModifyModel(Model);
 		}
 		/// <summary>
+		/// 根据条件获得模块数量
+		/// </summary>
+		/// <returns>The count.</returns>
+		/// <param name="strWhere">String where.</param>
+		public int GetCount(string strWhere)
+		{
+			return dal.GetCount(strWhere);
+		}
+		/// <summary>
 		/// 生成新的排序Code
 		/// </summary>
 		/// <returns>The new order code.</returns>
@@ -55,6 +64,16 @@ namespace SysChain.BLL
 			return dal.GetEntity(MoudleID);
 		}
 		/// <summary>
+		/// 获得列表
+		/// </summary>
+		/// <returns>The list.</returns>
+		/// <param name="strWhere">String where.</param>
+		/// <param name="orderBy">Order by.</param>
+		public IEnumerable<Model.SysMoudle> GetList(string strWhere, string orderBy)
+		{
+			return dal.GetList(strWhere, orderBy);
+		}
+		/// <summary>
 		/// 分页获取数据列表
 		/// </summary>
 		/// <returns>返回实体集合</returns>
@@ -62,9 +81,19 @@ namespace SysChain.BLL
 		/// <param name="orderby">排序字段</param>
 		/// <param name="startIndex">开始数目</param>
 		/// <param name="endIndex">结束数目</param>
-		public IEnumerable<Model.SysMoudle> GetListByPage(string strWhere,string OnTable, string orderby, int startIndex, int endIndex)
+		public List<Model.SysMoudle> GetListByPage(string strWhere,string OnTable, string orderby, int startIndex, int endIndex)
 		{
 			return dal.GetListByPage(strWhere,OnTable, orderby, startIndex, endIndex);
+		}
+		/// <summary>
+		/// 模块排序
+		/// </summary>
+		/// <returns><c>true</c>, if moudle was ranked, <c>false</c> otherwise.</returns>
+		/// <param name="sourceid">Sourceid.</param>
+		/// <param name="targetid">Targetid.</param>
+		public bool RankMoudle(int sourceid, int targetid)
+		{
+			return dal.RankMoudle(sourceid, targetid);
 		}
 	}
 }

@@ -21,9 +21,9 @@ namespace SysChain.DAL
 			StringBuilder strSql = new StringBuilder();
 			strSql.Append(" if not exists(select Name from SysMoudle where Name =@Name ) begin ");
 			strSql.Append(" insert into SysMoudle(");
-			strSql.Append(" ParentID,Name,LinkUrl,Style,OrderCode,State)");
+			strSql.Append(" ParentID,Name,LinkUrl,Style,OrderCode,State,MoudleDes)");
 			strSql.Append(" values (");
-			strSql.Append(" @ParentID,@Name,@LinkUrl,@Style,@OrderCode,@State)");
+			strSql.Append(" @ParentID,@Name,@LinkUrl,@Style,@OrderCode,@State,@MoudleDes)");
 			strSql.Append(" ; select @@IDENTITY; ");
 			strSql.Append(" end ELSE begin SELECT -1 END");
 			SqlParameter[] parameters = {
@@ -32,13 +32,15 @@ namespace SysChain.DAL
 					new SqlParameter("@LinkUrl", SqlDbType.NVarChar,50),
 					new SqlParameter("@Style", SqlDbType.NVarChar,50),
 				    new SqlParameter("@OrderCode", SqlDbType.NVarChar,50),
-					new SqlParameter("@State", SqlDbType.Bit,1)};
+					new SqlParameter("@State", SqlDbType.Bit,1),
+					new SqlParameter("@MoudleDes", SqlDbType.NVarChar,500)};
 			parameters[0].Value = Model.ParentID;
 			parameters[1].Value = Model.Name;
 			parameters[2].Value = Model.LinkUrl;
 			parameters[3].Value = Model.Style;
 			parameters[4].Value = Model.OrderCode;
 			parameters[5].Value = Model.State;
+			parameters[6].Value = Model.MoudleDes;
 			object obj = DbHelperSQL.GetSingle(strSql.ToString(), parameters);
 			if (obj == null)
 			{
@@ -58,19 +60,21 @@ namespace SysChain.DAL
 		{
 			StringBuilder strSql = new StringBuilder();
 			strSql.Append("Update SysMoudle ");
-			strSql.Append("Set ParentID=@ParentID,Name=@Name,LinkUrl=@LinkUrl,Style=@Style ");
+			strSql.Append("Set ParentID=@ParentID,Name=@Name,LinkUrl=@LinkUrl,Style=@Style,MoudleDes=@MoudleDes ");
 			strSql.Append("Where MoudleID=@MoudleID ");
 			SqlParameter[] parameters = {
 					new SqlParameter("@MoudleID", SqlDbType.Int,4),
 					new SqlParameter("@ParentID", SqlDbType.Int,4),
 					new SqlParameter("@Name", SqlDbType.NVarChar,50),
 					new SqlParameter("@LinkUrl", SqlDbType.NVarChar,50),
-					new SqlParameter("@Style", SqlDbType.NVarChar,50)};
+					new SqlParameter("@Style", SqlDbType.NVarChar,50),
+					new SqlParameter("@MoudleDes", SqlDbType.NVarChar,500)};
 			parameters[0].Value = Model.MoudleID;
 			parameters[1].Value = Model.ParentID;
 			parameters[2].Value = Model.Name;
 			parameters[3].Value = Model.LinkUrl;
 			parameters[4].Value = Model.Style;
+			parameters[5].Value = Model.MoudleDes;
 			return DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
 		}
 		/// <summary>
@@ -100,7 +104,7 @@ namespace SysChain.DAL
 		public Model.SysMoudle GetEntity(int MoudleID)
 		{
 			StringBuilder strSql = new StringBuilder();
-			strSql.Append("select  top 1 MoudleID,ParentID,Name,LinkUrl,Style,OrderCode,State from SysMoudle ");
+			strSql.Append("select  top 1 MoudleID,ParentID,Name,LinkUrl,Style,OrderCode,State,MoudleDes from SysMoudle ");
 			strSql.Append(" where MoudleID=@MoudleID");
 			SqlParameter[] parameters = {
 					new SqlParameter("@MoudleID", SqlDbType.Int,4)
@@ -109,6 +113,28 @@ namespace SysChain.DAL
 			DataTable dt = DbHelperSQL.Query(strSql.ToString(), parameters).Tables[0];
 			return SetEntity(dt.Rows[0]);
 
+		}
+		/// <summary>
+		/// 根据条件获得模块数量
+		/// </summary>
+		/// <returns>The count.</returns>
+		/// <param name="strWhere">String where.</param>
+		public int GetCount(string strWhere)
+		{
+			StringBuilder strSql = new StringBuilder();
+			strSql.Append(" Select count(1) From SysMoudle");
+			if (!string.IsNullOrEmpty(strWhere.Trim()))
+			{
+				strSql.Append(" WHERE " + strWhere);
+			}
+			object rel= DbHelperSQL.GetSingle(strSql.ToString());
+			if (rel != null)
+			{
+				return (int)rel;
+			}
+			else {
+				return 0;
+			}
 		}
 		/// <summary>
 		/// 生成新的排序Code
@@ -128,25 +154,36 @@ namespace SysChain.DAL
 			object obj = DbHelperSQL.GetSingle(strSql.ToString());
 			if (obj == null)
 			{
-				return "";
+				return "01";
 			}
 			else
 			{
-				string Code=obj.ToString();
+				string Code = obj.ToString();
 				string TempCode = "";
-				if (Code.Length == 2)
+				if (ParentID > 0)
 				{
-					Code = Code + "01";
+					if (Code.Length == 2)
+					{
+						return Code + "01";
+					}
+					else
+					{
+						TempCode = Code.Substring(Code.Length - 2, 2);
+						int TempNum = 0;
+						int.TryParse(TempCode, out TempNum);
+						TempNum = TempNum + 1;
+						Code = Code.Substring(0,2) + TempNum.ToString("00");
+						return Code;
+					}
 				}
 				else
 				{
-					TempCode = Code.Substring(Code.Length - 2, 2);
 					int TempNum = 0;
-					int.TryParse(TempCode, out TempNum);
+					int.TryParse(Code, out TempNum);
 					TempNum = TempNum + 1;
-					Code = Code.Substring(Code.Length - 2) + TempNum.ToString("00");
+					Code = TempNum.ToString("00");
+					return Code;
 				}
-				return Code;
 			}
 		}
 		/// <summary>
@@ -171,6 +208,7 @@ namespace SysChain.DAL
 				model.LinkUrl = dr["LinkUrl"].ToString();
 				model.Style = dr["Style"].ToString();
 				model.OrderCode = dr["OrderCode"].ToString();
+				model.MoudleDes = dr["MoudleDes"].ToString();
 				if (dr["State"].ToString() != "")
 				{
 					if ((dr["State"].ToString() == "1") || (dr["State"].ToString().ToLower() == "true"))
@@ -191,16 +229,45 @@ namespace SysChain.DAL
 			}
 		}
 		/// <summary>
-		/// 分页获取数据列表
+		/// 获得列表
 		/// </summary>
-		public IEnumerable<Model.SysMoudle> GetListByPage(string strWhere,string OnTable, string orderby, int startIndex, int endIndex)
+		/// <returns>The list.</returns>
+		/// <param name="strWhere">String where.</param>
+		/// <param name="orderBy">Order by.</param>
+		public IEnumerable<Model.SysMoudle> GetList(string strWhere, string orderBy)
 		{
 			StringBuilder strSql = new StringBuilder();
-			strSql.Append("SELECT MoudleID,ParentID,Name,LinkUrl,Style,OrderCode,State FROM ( ");
-			strSql.Append(" SELECT ROW_NUMBER() OVER (");
-			if (!string.IsNullOrEmpty(orderby.Trim()))
+			strSql.Append("SELECT MoudleID,ParentID,Name,LinkUrl,Style,OrderCode,State,MoudleDes FROM SysMoudle ");
+			if (!string.IsNullOrEmpty(strWhere.Trim()))
 			{
-				strSql.Append("order by T." + orderby);
+				strSql.Append(" WHERE " + strWhere);
+			}
+			DataTable dt = DbHelperSQL.Query(strSql.ToString()).Tables[0];
+			List<Model.SysMoudle> ModelList = new List<Model.SysMoudle>();
+			if (dt.Rows.Count > 0)
+			{
+				foreach (DataRow dr in dt.Rows)
+				{
+					ModelList.Add(SetEntity(dr));
+				}
+				return ModelList;
+			}
+			else
+			{
+				return null;
+			}
+		}
+		/// <summary>
+		/// 分页获取数据列表
+		/// </summary>
+		public List<Model.SysMoudle> GetListByPage(string strWhere,string OnTable, string orderBy, int startIndex, int endIndex)
+		{
+			StringBuilder strSql = new StringBuilder();
+			strSql.Append("SELECT MoudleID,ParentID,Name,LinkUrl,Style,OrderCode,State,MoudleDes FROM ( ");
+			strSql.Append(" SELECT ROW_NUMBER() OVER (");
+			if (!string.IsNullOrEmpty(orderBy.Trim()))
+			{
+				strSql.Append("order by T." + orderBy);
 			}
 			else
 			{
@@ -230,6 +297,35 @@ namespace SysChain.DAL
 			else
 			{
 				return null;
+			}
+		}
+		/// <summary>
+		/// 模块排序
+		/// </summary>
+		/// <returns><c>true</c>, if moudle was ranked, <c>false</c> otherwise.</returns>
+		/// <param name="sourceid">Sourceid.</param>
+		/// <param name="targetid">Targetid.</param>
+		public bool RankMoudle(int sourceid, int targetid)
+		{
+			StringBuilder strSql = new StringBuilder();
+			strSql.Append("Declare  @sCode nvarchar(50); ");
+			strSql.Append("Declare  @tCode nvarchar(50); ");
+			strSql.Append("SELECT @sCode=OrderCode From SysMoudle where  MoudleID=@sMoudleID ;");
+			strSql.Append("SELECT @tCode=OrderCode From SysMoudle where  MoudleID=@tMoudleID ;");
+			strSql.Append("Update SysMoudle Set OrderCode =@tCode Where MoudleID=@sMoudleID  ;");
+			strSql.Append("Update SysMoudle Set OrderCode =@sCode Where MoudleID=@tMoudleID  ;");
+			SqlParameter[] parameters = {
+					new SqlParameter("@sMoudleID", SqlDbType.Int,4),
+					new SqlParameter("@tMoudleID", SqlDbType.Int,4)};
+			parameters[0].Value = sourceid;
+			int rel= DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
+			if (rel > 0)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
 			}
 		}
 	}

@@ -809,6 +809,43 @@ f7.popup.toolTip = (function() {
 		hide: hide
 	};
 });//f7.popup.toolTip()
+
+// header 部分
+f7.plugin.header = (function() {
+
+	//顶部点击菜单下拉
+	(function() {
+		var $header = $('#header'),
+			$menuList = $('#menu-list', $header);
+
+		$header.on('click', '.menu', function(evt) {
+			evt.preventDefault();
+			evt.stopPropagation();
+
+			var $menu = $(evt.target).closest('li'),
+				$a = $menu.find('a');
+
+			if ($menuList.is(':hidden')) {
+				$a.addClass('current');
+				$menuList.slideDown();
+			} else {
+				$a.removeClass('current');
+				$menuList.slideUp();
+			} //if
+		});
+
+		$(document).on('click', function(evt) {
+			// console.log(evt.type);
+			if ($menuList.is(':visible')) {
+				$header.find('li.menu a').removeClass('current');
+				$menuList.slideUp();
+			} //if
+		});
+
+	}());
+
+}); //f7.plugin.header()
+
 f7.plugin.footer = (function() {
 	// console.log('plugin.footer');
 

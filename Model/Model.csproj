@@ -28,6 +28,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="SysUser.cs" />
@@ -37,6 +38,7 @@
     <Compile Include="SysMoudle.cs" />
     <Compile Include="SysRoleAndMoudle.cs" />
     <Compile Include="SysCategory.cs" />
+    <Compile Include="MoudleForSelect.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

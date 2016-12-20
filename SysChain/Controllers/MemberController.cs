@@ -16,8 +16,7 @@ namespace SysChain.Controllers
 			ViewBag.Title = "欢迎登录后台管理系统";
 			SysChain.LoginModel model = new LoginModel();
 			model.LoginName = "admin";
-			model.LoginPassword = "maggie1212";
-			return View();
+			return View(model);
 		}
 		[HttpPost]
 		public JsonResult Login(SysChain.LoginModel model)

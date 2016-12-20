@@ -1,9 +1,11 @@
 ﻿@{
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
+@model List<SysChain.Model.SysMoudle>
 @section Scripts
 {
 	@Scripts.Render("~/js/plugin/popwin")
+	@Scripts.Render("~/js/mindex")
 }
 <div id="header-crumb">
     <p>
@@ -21,16 +23,15 @@
         </header>
 
         <aside>
-            <form action="#" method="post">
+            <form id="frmSearch" action="@Url.Action("Index","SysMoudle")" method="post">
                 <p class="select-button-group">
-                    <select name="module">
-                        <option value="">请选择...</option>
-                    </select>
-                    <button disabled type="submit"><i class="fa fa-search"></i></button>
+                    <select name="pid" id="pid" >                                             </select>
+                    <button  type="submit"><i class="fa fa-search"></i></button>
                 </p>
+				<input type="hidden" name="index" id="index"/>
             </form>
             <div class="operate">
-                <a class="btn btn-primary" href="#" title="创建模块"><i class="i i-plus2"></i>创建模块</a>
+                <a id="btnNew"  class="btn btn-primary" href='@Url.Action("New","SysMoudle",new {area="Admin",pid=0})' data-panel-init="on" title="新增模块"><i class="fa fa-plus-circle"></i>新增模块</a>
             </div>
         </aside>
 
@@ -47,69 +48,55 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>首页</td>
-                    <td><i class="fa fa-lg fa-home"></i></td>
-                    <td class="left">/home/index</td>
-                    <td>显示</td>
-                    <td>
-                        <a class="btn-sort" href="#" title="排后"><i class="i i-arrow-down"></i></a>
-                    </td>
-                    <td>
-                        <a class="btn-icon" href='@Url.Action("New","SysMoudle",new {area="Admin"})' data-panel-init="on" title="新增"><i class="fa fa-fw fa-plus-circle"></i>新增</a>
-                        <a class="btn-icon" href="#" title="编辑"><i class="fa fa-fw fa-edit"></i>编辑</a>
-                        <a class="btn-icon" href="delete" title="删除"><i class="fa fa-fw fa-trash-o"></i>删除</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>首页</td>
-                    <td><i class="fa fa-lg fa-home"></i></td>
-                    <td class="left">/home/index</td>
-                    <td>显示</td>
-                    <td>
-                        <a class="btn-sort" href="#" title="排前"><i class="i i-arrow-up"></i></a>
-                        <a class="btn-sort" href="#" title="排后"><i class="i i-arrow-down"></i></a>
-                    </td>
-                    <td>
-                        <a class="btn-icon" href="./system-add.html" data-module-init="on" title="新增"><i class="fa fa-fw fa-plus-circle"></i>新增</a>
-                        <a class="btn-icon" href="#" title="编辑"><i class="fa fa-fw fa-edit"></i>编辑</a>
-                        <a class="btn-icon" href="delete" title="删除"><i class="fa fa-fw fa-trash-o"></i>删除</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>首页</td>
-                    <td><i class="fa fa-lg fa-home"></i></td>
-                    <td class="left">/home/index</td>
-                    <td>显示</td>
-                    <td>
-                        <a class="btn-sort" href="#" title="排前"><i class="i i-arrow-up"></i></a>
-                    </td>
-                    <td>
-                        <a class="btn-icon" href="./system-add.html" data-module-init="on" title="新增"><i class="fa fa-fw fa-plus-circle"></i>新增</a>
-                        <a class="btn-icon" href="#" title="编辑"><i class="fa fa-fw fa-edit"></i>编辑</a>
-                        <a class="btn-icon" href="delete" title="删除"><i class="fa fa-fw fa-trash-o"></i>删除</a>
-                    </td>
-                </tr>
+
+				@if(Model.Count>0)
+				{
+					for(int i=0;i<Model.Count;i++)
+					{
+	                <tr>
+	                    <td>@Model[i].MoudleID</td>
+	                    <td>@Model[i].Name</td>
+	                    <td><i class="fa fa-lg @Model[i].Style"></i></td>
+	                    <td class="left">@Model[i].LinkUrl</td>
+	                    <td>@Model.Count()|@i</td>
+	                    <td>
+						@if(1==Model.Count())
+						{
+							<i>&nbsp;</i>
+						}
+						else if(i+1==Model.Count())
+						{
+							<a class="btn-sort" href='@Url.Action("Rank","SysMoudle",new {area="Admin",id=Model[i].MoudleID})' data-type="1" data-tid="@Model[i-1].MoudleID" title="上升"><i class="i i-arrow-up"></i></a>
+						}
+						else if(i==0)
+						{
+							<a class="btn-sort" href='@Url.Action("Rank","SysMoudle",new {area="Admin",id=Model[i].MoudleID})' data-type="2" data-tid="@Model[i+1].MoudleID" title="下降"><i class="i i-arrow-down"></i></a>
+						}
+						else
+						{
+							<a class="btn-sort" href='@Url.Action("Rank","SysMoudle",new {area="Admin",id=Model[i].MoudleID})' data-type="1" data-tid="@Model[i-1].MoudleID" title="上升"><i class="i i-arrow-up"></i></a>
+							<a class="btn-sort" href='@Url.Action("Rank","SysMoudle",new {area="Admin",id=Model[i].MoudleID})' data-type="2" data-tid="@Model[i+1].MoudleID" title="下降"><i class="i i-arrow-down"></i></a>
+						}
+	                    </td>
+	                    <td>
+							@if(Model[i].OrderCode.Length<4)
+							{
+	                        <a class="btn-icon" href='@Url.Action("New","SysMoudle",new {area="Admin",pid=Model[i].MoudleID})' data-panel-init="on" title="新增"><i class="fa fa-fw fa-plus-circle"></i>新增</a>
+							}
+	                        <a class="btn-icon" href="#" title="编辑"><i class="fa fa-fw fa-edit"></i>编辑</a>
+	                        <a class="btn-icon" href="#" title="删除"><i class="fa fa-fw fa-trash-o"></i>删除</a>
+	                    </td>
+	                </tr>
+					}
+				}else{
+					 <tr>
+						<td colspan="7">暂无数据....</td>
+					</tr>
+				}
             </tbody>
         </table>
-
-        <footer class="page">
-            <div class="page-info">每页 20 条/共 1051 条记录 1/53 页</div>
-            <div class="page-code">
-                <a href="#">下一页</a>
-                <span class="current">1</span>
-                <a href="#">2</a>
-                <a href="#">3</a>
-                <a href="#">4</a>
-                <a href="#">5</a>
-                <a href="#">...</a>
-				<a href="#">20</a>
-                <a href="#">最后一页</a>
-            </div>
-        </footer>
+        <input type="hidden" value="@ViewBag.ParentID" id="parentid"/>
+		@Html.Action("PageInfo","Public",new{Totalcount=ViewBag.Totalcount,Url=Url.Action("Index","SysMoudle"),pageindex=ViewBag.PageIndex})
     </section>
     
 </main>

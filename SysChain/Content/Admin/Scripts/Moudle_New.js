@@ -1,16 +1,11 @@
 ﻿$(function () {
-	var $form = $('#common'),
+	var $form = $('#frmNew'),
 	validate = f7.validate,
 	formError = popup.formError;
-	
 	$form.on('focus', 'input:focus', function(evt) {
 		formError.init().hide();
 	});
-	
-	var $username = $('input[name="LoginName"]', $form);
-	var $password = $('input[name="LoginPassword"]', $form);
-
-	$btn=$("#btnSubmit");
+	$btn=$("btn-primary");
 	$form.on('submit', function(evt){
 			evt.preventDefault();
 			evt.stopPropagation();
@@ -18,10 +13,9 @@
 				return false;
 			} 
 			formError.init();
-			//var data={LoginName:$username.val(),LoginPassword:$password.val()};
-			if (!formError.show($username, validate.username($username))) return false;//if
-			if (!formError.show($password, validate.password($password))) return false;//if
-			if ($('.handler').data('done') != 1) { popup.info.init().show('请滑动验证', false);return false; }
+			if (!formError.show($("#Style"), validate.textNull($("#Style"),'请输入模块样式'))) return false;
+			if (!formError.show($("#Name"), validate.textNull($("#Name"),'请输入模块名称'))) return false;
+			if (!formError.show($("#LinkUrl"), validate.textNull($("#LinkUrl"),'请输入模块链接'))) return false;
 			$btn.addClass('btn-disabled');
 			popup.loading.init();
 			$.ajax({  
@@ -31,8 +25,17 @@
 			    dataType: "json",   
 			    success: function (data) {  
 			      if (data.Result) {  
-			       popup.info.init().show(data.Msg, true); 
-			       setTimeout(function() {top.location.replace(data.Url)}, 1500);
+			      	 
+			      	 if(window.parent.frames.length>0)
+			      	 {
+			      	 	window.parent.showMessage(data.Msg);
+			      	 }else{
+			      	 	popup.info.init().show(data.Msg, true); 
+			      	 	$form[0].reset();
+			      	 }
+			      	  console.log('333333');
+				    $('#popWinClose',parent.document).click();	
+				     console.log('4444');
 			      }  
 			      else {  
 			       popup.info.init().show(data.Msg, false); 
