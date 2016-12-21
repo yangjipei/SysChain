@@ -49,16 +49,24 @@
             </thead>
             <tbody>
 
-				@if(Model.Count>0)
+				@if(Model!=null&&Model.Count>0)
 				{
 					for(int i=0;i<Model.Count;i++)
 					{
 	                <tr>
-	                    <td>@Model[i].MoudleID</td>
+	                    <td>@(i+1)</td>
 	                    <td>@Model[i].Name</td>
 	                    <td><i class="fa fa-lg @Model[i].Style"></i></td>
 	                    <td class="left">@Model[i].LinkUrl</td>
-	                    <td>@Model.Count()|@i</td>
+						<td>
+						@if(!Model[i].State)
+						{
+	                    	<i class="red">禁用</i>
+						}else
+						{
+							<i class="green">启用</i>
+						}
+						</td>
 	                    <td>
 						@if(1==Model.Count())
 						{
@@ -66,25 +74,32 @@
 						}
 						else if(i+1==Model.Count())
 						{
-							<a class="btn-sort" href='@Url.Action("Rank","SysMoudle",new {area="Admin",id=Model[i].MoudleID})' data-type="1" data-tid="@Model[i-1].MoudleID" title="上升"><i class="i i-arrow-up"></i></a>
+							<a class="btn-sort" href='@Url.Action("Rank","SysMoudle",new {area="Admin",id=Model[i].MoudleID})' data-tid="@Model[i-1].MoudleID" title="上升"><i class="i i-arrow-up"></i></a>
 						}
 						else if(i==0)
 						{
-							<a class="btn-sort" href='@Url.Action("Rank","SysMoudle",new {area="Admin",id=Model[i].MoudleID})' data-type="2" data-tid="@Model[i+1].MoudleID" title="下降"><i class="i i-arrow-down"></i></a>
+							<a class="btn-sort" href='@Url.Action("Rank","SysMoudle",new {area="Admin",id=Model[i].MoudleID})' data-tid="@Model[i+1].MoudleID" title="下降"><i class="i i-arrow-down"></i></a>
 						}
 						else
 						{
-							<a class="btn-sort" href='@Url.Action("Rank","SysMoudle",new {area="Admin",id=Model[i].MoudleID})' data-type="1" data-tid="@Model[i-1].MoudleID" title="上升"><i class="i i-arrow-up"></i></a>
-							<a class="btn-sort" href='@Url.Action("Rank","SysMoudle",new {area="Admin",id=Model[i].MoudleID})' data-type="2" data-tid="@Model[i+1].MoudleID" title="下降"><i class="i i-arrow-down"></i></a>
+							<a class="btn-sort" href='@Url.Action("Rank","SysMoudle",new {area="Admin",id=Model[i].MoudleID})'  data-tid="@Model[i-1].MoudleID" title="上升"><i class="i i-arrow-up"></i></a>
+							<a class="btn-sort" href='@Url.Action("Rank","SysMoudle",new {area="Admin",id=Model[i].MoudleID})'  data-tid="@Model[i+1].MoudleID" title="下降"><i class="i i-arrow-down"></i></a>
 						}
 	                    </td>
 	                    <td>
 							@if(Model[i].OrderCode.Length<4)
 							{
-	                        <a class="btn-icon" href='@Url.Action("New","SysMoudle",new {area="Admin",pid=Model[i].MoudleID})' data-panel-init="on" title="新增"><i class="fa fa-fw fa-plus-circle"></i>新增</a>
+	                        <a class="btn-icon" href='@Url.Action("New","SysMoudle",new {area="Admin",pid=Model[i].MoudleID})' data-panel-init="on" title="新增模块"><i class="fa fa-fw fa-plus-circle"></i>新增</a>
 							}
-	                        <a class="btn-icon" href="#" title="编辑"><i class="fa fa-fw fa-edit"></i>编辑</a>
-	                        <a class="btn-icon" href="#" title="删除"><i class="fa fa-fw fa-trash-o"></i>删除</a>
+	                        <a class="btn-icon" href='@Url.Action("New","SysMoudle",new {area="Admin",id=Model[i].MoudleID,pid=Model[i].ParentID})' data-panel-init="on" title="编辑模块"><i class="fa fa-fw fa-edit"></i>编辑</a>
+	                        <a class="btn-icon" data-delete-moudle="on" href='@Url.Action("Delete","SysMoudle",new {area="Admin",id=Model[i].MoudleID})' title="删除模块"><i class="fa fa-fw fa-trash-o"></i>删除</a>
+						@if(!Model[i].State)
+						{
+	                    	 <a class="btn-icon" data-update-status="on" href='@Url.Action("UpdateStatus","SysMoudle",new {area="Admin",id=Model[i].MoudleID})'   title="启用模块"><i class="fa fa-fw fa-bolt"></i>启用</a>
+						}else
+						{
+							 <a class="btn-icon" data-update-status="on" href='@Url.Action("UpdateStatus","SysMoudle",new {area="Admin",id=Model[i].MoudleID})' title="禁用模块"><i class="fa fa-fw fa-bolt"></i>禁用</a>
+						}
 	                    </td>
 	                </tr>
 					}

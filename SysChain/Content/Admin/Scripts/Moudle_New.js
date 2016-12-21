@@ -33,9 +33,7 @@
 			      	 	popup.info.init().show(data.Msg, true); 
 			      	 	$form[0].reset();
 			      	 }
-			      	  console.log('333333');
 				    $('#popWinClose',parent.document).click();	
-				     console.log('4444');
 			      }  
 			      else {  
 			       popup.info.init().show(data.Msg, false); 

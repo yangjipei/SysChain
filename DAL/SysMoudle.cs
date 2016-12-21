@@ -318,8 +318,31 @@ namespace SysChain.DAL
 					new SqlParameter("@sMoudleID", SqlDbType.Int,4),
 					new SqlParameter("@tMoudleID", SqlDbType.Int,4)};
 			parameters[0].Value = sourceid;
+			parameters[1].Value = targetid;
 			int rel= DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
 			if (rel > 0)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		/// <summary>
+		/// 删除指定模块
+		/// </summary>
+		/// <returns><c>true</c>, if moudle was deled, <c>false</c> otherwise.</returns>
+		/// <param name="MoudleID">Moudle identifier.</param>
+		public bool DeleMoudle(int MoudleID)
+		{
+			StringBuilder strSql = new StringBuilder();
+			strSql.Append("Delete SysMoudle  Where MoudleID=@MoudleID or ParentID=@MoudleID ;");
+			SqlParameter[] parameters = {
+					new SqlParameter("@MoudleID", SqlDbType.Int,4)};
+			parameters[0].Value = MoudleID;
+			int Rel= DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
+			if (Rel > 0)
 			{
 				return true;
 			}

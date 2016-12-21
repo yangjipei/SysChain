@@ -7,8 +7,9 @@
 		$("#frmSearch").submit();
 	});
 	var $html = $('html'),
-		$pageInit = $('a[data-page-init="on"]', $html);
-
+		$pageInit = $('a[data-page-init="on"]', $html),
+		$delInit=$('a[data-delete-moudle="on"]', $html),
+		$updateInit=$('a[data-update-status="on"]', $html);
 	if ($pageInit.length) {
 		$html.on('click', 'a[data-page-init="on"]', function(evt) {
 			evt.stopPropagation();
@@ -19,18 +20,86 @@
 			$("#frmSearch").submit();
 		});
 	};
+	if ($delInit.length) {
+		$html.on('click', 'a[data-delete-moudle="on"]', function(evt) {
+			evt.stopPropagation();
+			evt.preventDefault();
+			var url=$(this).attr("href");
+			popup.loading.init();
+			popup.alert.init().show('该模块及其子模块都会被删除且无法恢复，是否继续操作？',{confirm:function(evt){
+				$.ajax({  
+				    type: "Post",  
+				    url: url,
+				    dataType: "json",   
+				    success: function (data) {  
+				      if (data.Result) { 
+				      popup.info.init().show(data.Msg, true);
+				      $("#frmSearch").submit();
+				      }  
+				      else {  
+				       popup.info.init().show(data.Msg, false); 
+				      }  
+				    },   
+				    error: function (XMLHttpRequest, textStatus, errorThrown) {  
+						 popup.info.init().show("系统错误.", false); 
+				    }  
+				}); 
+			},cancel:function(evt){
+				return;
+			}},true,"删除提示");
+
+		});
+	};
+	if ($delInit.length) {
+		$html.on('click', 'a[data-update-status="on"]', function(evt) {
+			evt.stopPropagation();
+			evt.preventDefault();
+			var url=$(this).attr("href");
+			popup.loading.init();
+			$.ajax({  
+			    type: "Post",  
+			    url: url,
+			    dataType: "json",   
+			    success: function (data) {  
+			      if (data.Result) { 
+			      popup.info.init().show(data.Msg, true);
+			      $("#frmSearch").submit();
+			      }  
+			      else {  
+			       popup.info.init().show(data.Msg, false); 
+			      }  
+			    },   
+			    error: function (XMLHttpRequest, textStatus, errorThrown) {  
+					 popup.info.init().show("系统错误.", false); 
+			    }  
+			}); 
+		});
+	};
 	$(".btn-sort").on('click',function(evt){
 			evt.stopPropagation();
 			evt.preventDefault();
 			var type=$(this).data("type"),
 				 target=$(this).data("tid"),
 				 url=$(this).attr('href');
-			if(type==1)
-			{
-				 popup.info.init().show("上升，目标ID："+target, true); 
-			}else{
-				 popup.info.init().show("下降，目标ID："+target, true); 
-			}
+			popup.loading.init();
+			$.ajax({  
+			    type: "Post",  
+			    url: url,
+			    data: {targetid:target},  
+			    dataType: "json",   
+			    success: function (data) {  
+			      if (data.Result) { 
+			      popup.info.init().show(data.Msg, true);
+			      $("#frmSearch").submit();
+			      }  
+			      else {  
+			       popup.info.init().show(data.Msg, false); 
+			      }  
+			    },   
+			    error: function (XMLHttpRequest, textStatus, errorThrown) {  
+					 popup.info.init().show("系统错误.", false); 
+			    }  
+			}); 
 	});
 
 
@@ -65,4 +134,4 @@ getData=function(){
 showMessage=function(msg){
 	 popup.info.init().show(msg, true); 
 	 $("#frmSearch").submit();
-}
+};

@@ -12,6 +12,6 @@
 		evt.preventDefault();
 		var $a = $(this),
 		url = $a.attr('href');
-		popWin.showWin('800','600','新建模块',url);
+		popWin.showWin('800','600',$a.attr('title'),url);
 	});
 });

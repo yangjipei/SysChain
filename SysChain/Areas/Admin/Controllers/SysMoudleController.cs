@@ -4,11 +4,19 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
+using System.Web.Routing;
 
 namespace SysChain.Areas.Admin.Controllers
 {
 	public class SysMoudleController : Controller
 	{
+		private SysChain.BLL.SysMoudle Opr { get; set; }
+
+		protected override void Initialize(RequestContext requestContext)
+		{
+			if (Opr == null) { Opr = new BLL.SysMoudle();; }
+			base.Initialize(requestContext);
+		}
 		/// <summary>
 		/// 模块首页展示，支持分页
 		/// </summary>
@@ -24,7 +32,6 @@ namespace SysChain.Areas.Admin.Controllers
 
 			ViewBag.PageIndex = PageIndex;
 			int PageSize = 5;
-			SysChain.BLL.SysMoudle Opr = new BLL.SysMoudle();
 			string strWhere = "ParentID="+ParentID;
 			ViewBag.Totalcount = Opr.GetCount(strWhere);
 			List<Model.SysMoudle> list=Opr.GetListByPage(strWhere,"","OrderCode",(PageIndex-1)*PageSize,PageIndex*PageSize);
@@ -44,7 +51,6 @@ namespace SysChain.Areas.Admin.Controllers
 			model.ParentID = pid;
 			if (MoudleID > 0)
 			{
-				SysChain.BLL.SysMoudle Opr = new BLL.SysMoudle();
 				model=Opr.GetEntity(MoudleID);
 				ViewBag.Title = "模块管理-正在编辑模块编号： "+model.MoudleID;
 			}
@@ -67,21 +73,42 @@ namespace SysChain.Areas.Admin.Controllers
 			Helper.ResultInfo<int> rs = new Helper.ResultInfo<int>();
 			if (ModelState.IsValid)
 			{
-				SysChain.BLL.SysMoudle Opr = new BLL.SysMoudle();
-				model.OrderCode = Opr.GetNewOrderCode(model.ParentID);
-				rs.Data = Opr.Insert(model);
-				if (rs.Data > 0)
+				if (model.MoudleID > 0)
 				{
-					rs.Msg = "新增成功.";
-					rs.Result = true;
+					rs.Data = Opr.ModifyModel(model);
+					if (rs.Data > 0)
+					{
+						rs.Msg = "修改成功.";
+						rs.Result = true;
+					}
+					else
+					{
+						rs.Msg = "修改失败.";
+						rs.Result = false;
+					}
+					JsonResult jr = new JsonResult();
+					jr.Data = rs;
+					return jr;
 				}
-				else { 
-					rs.Msg = "新增失败.";
-					rs.Result = false;
+				else
+				{
+					
+					model.OrderCode = Opr.GetNewOrderCode(model.ParentID);
+					rs.Data = Opr.Insert(model);
+					if (rs.Data > 0)
+					{
+						rs.Msg = "新增成功.";
+						rs.Result = true;
+					}
+					else
+					{
+						rs.Msg = "新增失败.";
+						rs.Result = false;
+					}
+					JsonResult jr = new JsonResult();
+					jr.Data = rs;
+					return jr;
 				}
-				JsonResult jr = new JsonResult();
-				jr.Data = rs;
-				return jr;
 			}
 			else
 			{
@@ -114,22 +141,20 @@ namespace SysChain.Areas.Admin.Controllers
 		public ActionResult List(int? id)
 		{
 			int ParentID = id == null ? 0 : (int)id;
-			SysChain.BLL.SysMoudle Opr = new BLL.SysMoudle();
 			return Json(Opr.GetList("ParentID="+ParentID,"OrderCode"), JsonRequestBehavior.AllowGet);
 		}
 		/// <summary>
 		/// 模块排序操作
 		/// </summary>
 		/// <returns>The rank.</returns>
-		/// <param name="sourceid">源模块编号</param>
+		/// <param name="id">源模块编号</param>
 		/// <param name="targetid">目标模块编号</param>
-		public ActionResult Rank(int sourceid,int targetid)
+		public ActionResult Rank(int id,int targetid)
 		{
 			Helper.ResultInfo<bool> rs = new Helper.ResultInfo<bool>();
-			if (sourceid > 0 && targetid > 0)
+			if (id > 0 && targetid > 0)
 			{
-				SysChain.BLL.SysMoudle Opr = new BLL.SysMoudle();
-				if (Opr.RankMoudle(sourceid, targetid))
+				if (Opr.RankMoudle(id, targetid))
 				{
 					rs.Data = true;
 					rs.Msg = "操作已成功.";
@@ -149,6 +174,56 @@ namespace SysChain.Areas.Admin.Controllers
 				rs.Data = false;
 				rs.Msg = "参数错误.";
 				rs.Result = true;
+				rs.Url = "";
+			}
+			JsonResult jr = new JsonResult();
+			jr.Data = rs;
+			return jr;
+		}
+		/// <summary>
+		/// 更新模块状态
+		/// </summary>
+		/// <returns>The status.</returns>
+		/// <param name="id">Identifier.</param>
+		public ActionResult UpdateStatus(int id)
+		{
+			Helper.ResultInfo<int> rs = new Helper.ResultInfo<int>();
+			rs.Data = Opr.UpdateState(id);
+			if (rs.Data > 0)
+			{
+				rs.Msg = "操作成功.";
+				rs.Result = true;
+				rs.Url = "";
+			}
+			else
+			{
+				rs.Msg = "操作失败.";
+				rs.Result = false;
+				rs.Url = "";
+			}
+			JsonResult jr = new JsonResult();
+			jr.Data = rs;
+			return jr;
+		}
+		/// <summary>
+		/// 删除模块
+		/// </summary>
+		/// <returns>The delete.</returns>
+		/// <param name="id">Identifier.</param>
+		public ActionResult Delete(int id)
+		{
+			Helper.ResultInfo<bool> rs = new Helper.ResultInfo<bool>();
+			rs.Data = Opr.DeleMoudle(id);
+			if (rs.Data)
+			{
+				rs.Msg = "删除成功.";
+				rs.Result = true;
+				rs.Url = "";
+			}
+			else
+			{
+				rs.Msg = "删除失败.";
+				rs.Result = false;
 				rs.Url = "";
 			}
 			JsonResult jr = new JsonResult();

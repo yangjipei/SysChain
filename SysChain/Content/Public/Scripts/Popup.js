@@ -812,7 +812,6 @@ f7.popup.toolTip = (function() {
 
 // header 部分
 f7.plugin.header = (function() {
-
 	//顶部点击菜单下拉
 	(function() {
 		var $header = $('#header'),

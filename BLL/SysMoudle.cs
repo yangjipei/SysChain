@@ -95,5 +95,14 @@ namespace SysChain.BLL
 		{
 			return dal.RankMoudle(sourceid, targetid);
 		}
+		/// <summary>
+		/// 删除指定模块
+		/// </summary>
+		/// <returns><c>true</c>, if moudle was deled, <c>false</c> otherwise.</returns>
+		/// <param name="MoudleID">Moudle identifier.</param>
+		public bool DeleMoudle(int MoudleID)
+		{
+			return dal.DeleMoudle(MoudleID);
+		}
 	}
 }
