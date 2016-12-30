@@ -112,7 +112,6 @@
     <Folder Include="Content\Public\Hack\js\" />
     <Folder Include="Content\Public\Images\ico\" />
     <Folder Include="Content\Home\Images\" />
-    <Folder Include="Content\Admin\Images\" />
     <Folder Include="ViewModels\" />
     <Folder Include="Views\Member\" />
     <Folder Include="Content\Public\Plugin\echarts\" />
@@ -120,6 +119,9 @@
     <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Areas\Admin\Views\SysConfig\" />
     <Folder Include="Areas\Admin\Views\SysMoudle\" />
+    <Folder Include="Content\Admin\Images\" />
+    <Folder Include="Content\Admin\Images\avatar\" />
+    <Folder Include="Content\Admin\Images\img\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\HomeController.cs" />
@@ -194,21 +196,6 @@
     <Content Include="Content\Public\Plugin\font-awesome-4.7.0\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\Public\Plugin\font-awesome-4.7.0\fonts\fontawesome-webfont.ttf" />
     <Content Include="Content\Public\Plugin\font-awesome-4.7.0\fonts\fontawesome-webfont.woff" />
-    <Content Include="Content\Admin\Images\img\bick.jpg" />
-    <Content Include="Content\Admin\Images\img\close-black.png" />
-    <Content Include="Content\Admin\Images\img\close-black%402x.png" />
-    <Content Include="Content\Admin\Images\img\close-white-hover.png" />
-    <Content Include="Content\Admin\Images\img\close-white-hover%402x.png" />
-    <Content Include="Content\Admin\Images\img\close-white.png" />
-    <Content Include="Content\Admin\Images\img\close-white%402x.png" />
-    <Content Include="Content\Admin\Images\img\default_shop.png" />
-    <Content Include="Content\Admin\Images\img\logo.png" />
-    <Content Include="Content\Admin\Images\img\logo%402x.png" />
-    <Content Include="Content\Admin\Images\img\map.jpg" />
-    <Content Include="Content\Admin\Images\img\selected.png" />
-    <Content Include="Content\Admin\Images\img\selected%402x.png" />
-    <Content Include="Content\Admin\Images\avatar\avatar.png" />
-    <Content Include="Content\Admin\Images\avatar\avatar%402x.png" />
     <Content Include="Content\Public\Plugin\echarts\echarts.js" />
     <Content Include="Content\Admin\Scripts\main.js" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
@@ -226,9 +213,6 @@
     <Content Include="Areas\Admin\Views\SysMoudle\New.cshtml" />
     <Content Include="Content\Public\Plugin\popwin\js\init.js" />
     <Content Include="Content\Public\Plugin\popwin\js\popwin.js" />
-    <Content Include="Content\Admin\Images\img\zheng.jpg" />
-    <Content Include="Content\Admin\Images\img\card1.jpg" />
-    <Content Include="Content\Admin\Images\img\card2.jpg" />
     <Content Include="Content\Home\Images\2.jpg" />
     <Content Include="Content\Home\Images\carousel_tag.png" />
     <Content Include="Content\Home\Images\index\banner.jpg" />
@@ -322,6 +306,27 @@
     <Content Include="Content\Public\Plugin\chosen\chosen-sprite%402x.png" />
     <Content Include="Content\Admin\Scripts\Moudle_New.js" />
     <Content Include="Content\Admin\Scripts\Moudle_Index.js" />
+    <Content Include="Content\Admin\Scripts\Role_Index.js" />
+    <Content Include="Areas\Admin\Views\SysRole\New.cshtml" />
+    <Content Include="Content\Admin\Scripts\Role_New.js" />
+    <Content Include="Content\Admin\Images\avatar\avatar.png" />
+    <Content Include="Content\Admin\Images\avatar\avatar%402x.png" />
+    <Content Include="Content\Admin\Images\img\bick.jpg" />
+    <Content Include="Content\Admin\Images\img\card1.jpg" />
+    <Content Include="Content\Admin\Images\img\card2.jpg" />
+    <Content Include="Content\Admin\Images\img\close-black.png" />
+    <Content Include="Content\Admin\Images\img\close-black%402x.png" />
+    <Content Include="Content\Admin\Images\img\close-white.png" />
+    <Content Include="Content\Admin\Images\img\close-white%402x.png" />
+    <Content Include="Content\Admin\Images\img\close-white-hover.png" />
+    <Content Include="Content\Admin\Images\img\close-white-hover%402x.png" />
+    <Content Include="Content\Admin\Images\img\default_shop.png" />
+    <Content Include="Content\Admin\Images\img\logo.png" />
+    <Content Include="Content\Admin\Images\img\logo%402x.png" />
+    <Content Include="Content\Admin\Images\img\map.jpg" />
+    <Content Include="Content\Admin\Images\img\selected.png" />
+    <Content Include="Content\Admin\Images\img\selected%402x.png" />
+    <Content Include="Content\Admin\Images\img\zheng.jpg" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

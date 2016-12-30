@@ -28,6 +28,15 @@ namespace SysChain.BLL
 			return dal.ModifyModel(Model);
 		}
 		/// <summary>
+		/// 根据条件获得角色数量
+		/// </summary>
+		/// <returns>The count.</returns>
+		/// <param name="strWhere">String where.</param>
+		public int GetCount(string strWhere)
+		{
+			return dal.GetCount(strWhere);
+		}
+		/// <summary>
 		/// 更新模块状态
 		/// </summary>
 		/// <returns>大于0表示更新成功</returns>
@@ -53,9 +62,27 @@ namespace SysChain.BLL
 		/// <param name="orderby">排序字段</param>
 		/// <param name="startIndex">开始数目</param>
 		/// <param name="endIndex">结束数目</param>
-		public IEnumerable<Model.SysRole> GetListByPage(string strWhere, string orderby, int startIndex, int endIndex)
+		public List<Model.SysRole> GetListByPage(string strWhere, string orderby, int startIndex, int endIndex)
 		{
 			return dal.GetListByPage(strWhere, orderby, startIndex, endIndex);
+		}//
+		 /// <summary>
+		 /// 删除指定角色
+		 /// </summary>
+		 /// <returns><c>true</c>, if moudle was deled, <c>false</c> otherwise.</returns>
+		 /// <param name="RoleID">Moudle identifier.</param>
+		public bool DeleRole(int RoleID)
+		{
+			return dal.DeleRole(RoleID);
+		}
+		/// <summary>
+		/// 根据角色ID 获得包含的模块
+		/// </summary>
+		/// <returns>The moudle IDB y role identifier.</returns>
+		/// <param name="RoleID">Role identifier.</param>
+		public List<int> GetMoudleIDByRoleID(int RoleID)
+		{
+			return dal.GetMoudleIDByRoleID(RoleID);
 		}
 	}
 }

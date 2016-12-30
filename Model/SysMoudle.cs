@@ -41,7 +41,7 @@ namespace SysChain.Model
 		/// <summary>
 		/// 模块描述
 		/// </summary>
-		[MaxLength(500,ErrorMessage ="最大{0}个字.")]
+		[MaxLength(200,ErrorMessage ="最大{0}个字.")]
 		public string MoudleDes { set; get; }
 
 	}

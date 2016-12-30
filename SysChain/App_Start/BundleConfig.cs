@@ -20,6 +20,12 @@ namespace SysChain
 			bundles.Add(new ScriptBundle("~/js/mindex").Include(
 				"~/Content/Admin/Scripts/Moudle_Index.js"
 			));
+			bundles.Add(new ScriptBundle("~/js/rindex").Include(
+				"~/Content/Admin/Scripts/Role_Index.js"
+			));
+			bundles.Add(new ScriptBundle("~/js/rnew").Include(
+				"~/Content/Admin/Scripts/Role_New.js"
+			));
 			bundles.Add(new ScriptBundle("~/js/admin").Include(
 				"~/Content/Admin/Scripts/main.js"
 			));

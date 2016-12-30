@@ -3,6 +3,7 @@ var f7 = {};
 
 f7.popup = {};
 f7.plugin = {}; //插件
+f7.module={};
 var popup = {
 	config:{
 		isInitLoading:false,
@@ -14,6 +15,32 @@ var popup = {
 	}//config{}
 };//popup{}
 
+f7.plugin._register = (function() {
+	return {
+		header: f7.plugin.header, //页头
+		footer: f7.plugin.footer,//页尾
+	};
+}); 
+// 公共模块 初始化
+f7.module.initialize = (function() {
+	var _plugin = f7.plugin._register();
+
+	//自动初始化 插件
+	for (var pluginName in _plugin) {
+		if (_plugin.hasOwnProperty(pluginName) && typeof _plugin[pluginName] === 'function') {
+			_plugin[pluginName]();
+		} //if
+	} //for in
+
+}); //f7.module.initialize()
+
+(function($) {
+
+	$(function() {
+		f7.module.initialize();
+	});
+
+})(jQuery);
 popup.loading = {
 	init:function() {
 		var config = popup.config;
@@ -102,19 +129,22 @@ popup.toolTip = {
 f7.popup.alert = (function() {
 	//初始化基本结构
 	function initialize() {
-		$('<div id="popup-alert-mask"></div>').appendTo('html').css({opacity: 0.4});
-		
+		$('<div id="popup-alert-mask"></div>').appendTo('html').css({
+			opacity: 0.4
+		});
+
 		$(['<div id="popup-alert">',
-		       '<div class="popup-alert-title">',
-			       '<span>提示：</span>',
-				   '<a class="popup-alert-btn-close" href="#" title="关闭"><i class="fa fa-times fa-2x"></i></a>',
-			   '</div>',
-			   '<div class="popup-alert-content"></div>',
-			   '<div class="popup-alert-operate">',
-				   '<a class="popup-alert-btn-confirm" href="#" title="确定">确　定</a>',
-			   '</div>',
-		   '</div>'].join('')).appendTo('html');
-	}//initialize()
+			'<div class="popup-alert-title">',
+			'<span>提示：</span>',
+			'<a class="popup-alert-btn-close" href="#" title="关闭"><i class="i i-plus2"></i></a>',
+			'</div>',
+			'<div class="popup-alert-content"></div>',
+			'<div class="popup-alert-operate">',
+			'<a class="popup-alert-btn-confirm" href="#" title="确定">确　定</a>',
+			'</div>',
+			'</div>'
+		].join('')).appendTo('html');
+	} //initialize()
 	
 	//定位 水平垂直居中
 	function locator() {
@@ -599,6 +629,81 @@ f7.popup.loading = (function() {
 		hide: hide,
 	};
 });//f7.popup.loading()
+//drag
+f7.popup.drag = (function(box, bar) {
+	var pageHeight = $(document).height(),
+		formError = popup.formError,
+		isDrag = false,
+	    startX = 0,
+		startY = 0;
+		 
+	function mouseDown(evt) {
+		evt.stopPropagation();
+		evt.preventDefault();
+		
+		isDrag = true;
+
+		var offset = $(box).offset();
+
+		startX = evt.clientX - offset.left;
+		startY = evt.clientY - offset.top;
+
+		//return false;
+	}//mouseDown()
+	
+	function mouseMove(evt) {
+		if (isDrag) {
+			evt.stopPropagation();
+			evt.preventDefault();
+			
+		  	var $box = $(box),
+				boxWidth = $box.width(),
+				boxHeight = $box.height(),
+				
+				$screen = $(window),
+				screenWidth = $screen.width(),
+				screenHeight = $screen.height(),
+				
+			    leftX = evt.clientX - startX,
+			    topY = evt.clientY - startY;
+
+			
+			leftX = leftX < 0 ? 0 : leftX;//if
+			topY = topY < 0 ? 0 : topY;//if
+
+			if (screenHeight < pageHeight) {
+				screenHeight = pageHeight;
+			}//if
+
+			leftX = leftX + boxWidth > screenWidth ? screenWidth - boxWidth : leftX;//if
+			topY = topY + boxHeight > screenHeight ? screenHeight - boxHeight : topY;//if
+			
+		  	$(box).css({left:leftX, top:topY});
+			
+			formError.init().hide(true);
+			//return false;
+		}//if
+	}//mouseMove()
+	
+	function mouseUp(evt) {
+		isDrag = false;
+	}//mouseUp()
+	
+	function register() {
+		$(bar).on({'mousedown.popup_move':mouseDown});
+		$(document).on({'mousemove.popup_move':mouseMove,
+						'mouseup.popup_move':mouseUp});
+	}//register()
+	 
+	function unregister() {
+		$(bar).off('.popup_move');
+		$(document).off('.popup_move');
+	}
+	
+	register();
+	
+	return {register:register, unregister:unregister};
+});//f7.popup.drag()
 //panel
 f7.popup.panel = (function() {
 	//初始化基本结构
@@ -823,7 +928,7 @@ f7.plugin.header = (function() {
 
 			var $menu = $(evt.target).closest('li'),
 				$a = $menu.find('a');
-
+				console.log($menuList.is(':hidden'));
 			if ($menuList.is(':hidden')) {
 				$a.addClass('current');
 				$menuList.slideDown();
@@ -888,7 +993,79 @@ f7.plugin.footer = (function() {
 })(); //f7.plugin.footer()
 
 
+//删除通用操作
+moudle_delete_init=function($html,$flag,tips){
+	$delInit=$('a[data-delete-moudle="on"]', $html)
+		if ($delInit.length) {
+		$html.on('click', 'a[data-delete-moudle="on"]', function(evt) {
+			evt.stopPropagation();
+			evt.preventDefault();
+			var url=$(this).attr("href");
+			if($flag)
+			{
+				var temp=$(this).data("flag");
+				var msg=$(this).data("msg");
+				if(temp>0)
+				{
+					popup.alert.init().show(msg,"",true,"提示");
+					return;
+				}
+			}
+			popup.loading.init();
+			popup.alert.init().show(tips,{confirm:function(evt){
+				$.ajax({  
+				    type: "Post",  
+				    url: url,
+				    dataType: "json",   
+				    success: function (data) {  
+				      if (data.Result) { 
+				      popup.info.init().show(data.Msg, true);
+				      $("#frmSearch").submit();
+				      }  
+				      else {  
+				       popup.info.init().show(data.Msg, false); 
+				      }  
+				    },   
+				    error: function (XMLHttpRequest, textStatus, errorThrown) {  
+						 popup.info.init().show("系统错误.", false); 
+				    }  
+				}); 
+			},cancel:function(evt){
+				return;
+			}},true,"删除提示");
 
+		});
+	};
+};
+//通过更新状态
+moudle_update_init=function($html){
+	var	$updateInit=$('a[data-update-status="on"]', $html);
+		if ($updateInit.length) {
+		$html.on('click', 'a[data-update-status="on"]', function(evt) {
+			evt.stopPropagation();
+			evt.preventDefault();
+			var url=$(this).attr("href");
+			popup.loading.init();
+			$.ajax({  
+			    type: "Post",  
+			    url: url,
+			    dataType: "json",   
+			    success: function (data) {  
+			      if (data.Result) { 
+			      popup.info.init().show(data.Msg, true);
+			      $("#frmSearch").submit();
+			      }  
+			      else {  
+			       popup.info.init().show(data.Msg, false); 
+			      }  
+			    },   
+			    error: function (XMLHttpRequest, textStatus, errorThrown) {  
+					 popup.info.init().show("系统错误.", false); 
+			    }  
+			}); 
+		});
+	};
+};
 
 
 

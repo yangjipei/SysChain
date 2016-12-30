@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 namespace SysChain.Model
 {
 	/// <summary>
@@ -13,11 +14,17 @@ namespace SysChain.Model
 		/// <summary>
 		/// 角色名称
 		/// </summary>
+		[Required(ErrorMessage = "模块名称必填.")]
 		public string Name { set; get; }
+		/// <summary>
+		/// 使用角色的人数
+		/// </summary>
+		public int RoleNum { set; get; }
 		/// <summary>
 		/// 角色描述
 		/// </summary>
-		public string Desc { set; get; }
+		[MaxLength(200, ErrorMessage = "最大{0}个字.")]
+		public string Description { set; get; }
 		/// <summary>
 		/// 状态
 		/// </summary>

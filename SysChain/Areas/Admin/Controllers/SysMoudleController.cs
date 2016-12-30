@@ -14,7 +14,7 @@ namespace SysChain.Areas.Admin.Controllers
 
 		protected override void Initialize(RequestContext requestContext)
 		{
-			if (Opr == null) { Opr = new BLL.SysMoudle();; }
+			if (Opr == null) { Opr = new BLL.SysMoudle();}
 			base.Initialize(requestContext);
 		}
 		/// <summary>
@@ -25,7 +25,7 @@ namespace SysChain.Areas.Admin.Controllers
 		/// <param name="index">Index.</param>
 		public ActionResult Index(int? pid,int? index)
 		{
-			ViewBag.Title = "后端管理系统-模块管理";
+			ViewBag.Title = "模块管理";
 			int ParentID = pid == null ? 0 : (int)pid;
 			int PageIndex = index == null ? 1 : (int)index;
 			ViewBag.ParentID = ParentID;
@@ -149,6 +149,7 @@ namespace SysChain.Areas.Admin.Controllers
 		/// <returns>The rank.</returns>
 		/// <param name="id">源模块编号</param>
 		/// <param name="targetid">目标模块编号</param>
+		[HttpPost]
 		public ActionResult Rank(int id,int targetid)
 		{
 			Helper.ResultInfo<bool> rs = new Helper.ResultInfo<bool>();
@@ -185,6 +186,7 @@ namespace SysChain.Areas.Admin.Controllers
 		/// </summary>
 		/// <returns>The status.</returns>
 		/// <param name="id">Identifier.</param>
+		[HttpPost]
 		public ActionResult UpdateStatus(int id)
 		{
 			Helper.ResultInfo<int> rs = new Helper.ResultInfo<int>();
@@ -210,6 +212,7 @@ namespace SysChain.Areas.Admin.Controllers
 		/// </summary>
 		/// <returns>The delete.</returns>
 		/// <param name="id">Identifier.</param>
+		[HttpPost]
 		public ActionResult Delete(int id)
 		{
 			Helper.ResultInfo<bool> rs = new Helper.ResultInfo<bool>();

@@ -234,7 +234,7 @@ namespace SysChain.DAL
 		/// <returns>The list.</returns>
 		/// <param name="strWhere">String where.</param>
 		/// <param name="orderBy">Order by.</param>
-		public IEnumerable<Model.SysMoudle> GetList(string strWhere, string orderBy)
+		public List<Model.SysMoudle> GetList(string strWhere, string orderBy)
 		{
 			StringBuilder strSql = new StringBuilder();
 			strSql.Append("SELECT MoudleID,ParentID,Name,LinkUrl,Style,OrderCode,State,MoudleDes FROM SysMoudle ");

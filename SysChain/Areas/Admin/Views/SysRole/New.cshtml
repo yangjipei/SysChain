@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = "New";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@model SysChain.Model.SysRole
+
+@section Scripts
+{
+	@Scripts.Render("~/js/rnew")
+}
+<div id="header-crumb">
+    <p>
+        <i class="fa fa-lg fa-home"></i>
+        <a href="#" title="系统管理">系统管理</a>
+        <i class="fa fa-angle-right"></i>
+        <a href="#" title="角色管理">模块管理</a>
+        <i class="fa fa-angle-right"></i>
+        <span>新增角色</span>
+    </p>
+</div>
+<main id="panel">
+    <section class="form">
+        <header>
+            <h1>新增角色</h1>
+        </header>
+        <form id="frmNew" action="@Url.Action("New","SysRole")" method="post">
+            <p>
+                <span>角色名称：</span>
+				@Html.TextBoxFor(m => m.Name,new {placeholder="请输入角色名称",autocomplete="off"})
+            </p>
+            <p>
+                <span>角色描述：</span>
+				@Html.TextAreaFor(m => m.Description,new {placeholder="请输入角色描述,限200字符以内",autocomplete="off",style="font-size:12px;"})
+            </p>
+            <footer>
+                <button class="btn btn-primary" type="submit">确定</button>
+                <a class="btn btn-cancel btn-close" href="#" title="取消">取消</a>
+            </footer>
+			@Html.HiddenFor(m => m.RoleID)
+			@Html.HiddenFor(m => m.State)
+        </form>
+    </section>
+</main>
+

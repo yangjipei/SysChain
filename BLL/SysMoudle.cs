@@ -69,7 +69,7 @@ namespace SysChain.BLL
 		/// <returns>The list.</returns>
 		/// <param name="strWhere">String where.</param>
 		/// <param name="orderBy">Order by.</param>
-		public IEnumerable<Model.SysMoudle> GetList(string strWhere, string orderBy)
+		public List<Model.SysMoudle> GetList(string strWhere, string orderBy)
 		{
 			return dal.GetList(strWhere, orderBy);
 		}

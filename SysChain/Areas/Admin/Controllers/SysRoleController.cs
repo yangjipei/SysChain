@@ -4,20 +4,199 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
+using System.Web.Routing;
 
 namespace SysChain.Areas.Admin.Controllers
 {
+
 	public class SysRoleController : Controller
 	{
-		public ActionResult  Index()
+		private SysChain.BLL.SysRole Opr { get; set; }
+
+		protected override void Initialize(RequestContext requestContext)
 		{
-			ViewBag.Title = "后端管理系统-角色管理";
-			return View();
+			if (Opr == null) { Opr = new BLL.SysRole();}
+			base.Initialize(requestContext);
 		}
-		public ActionResult RoleAccess()
+		/// <summary>
+		/// 角色首页列表
+		/// </summary>
+		/// <returns>The index.</returns>
+		/// <param name="index">Index.</param>
+		/// <param name="keywords">Keywords.</param>
+		public ActionResult  Index(int? index,string keywords)
 		{
-			ViewBag.Title = "后端管理系统-角色权限配置";
-			return View();
+			ViewBag.Title = "角色管理";
+			int PageIndex = index == null ? 1 : (int)index;
+			ViewBag.PageIndex = PageIndex;
+			int PageSize = 5;
+			string strWhere =string.Empty;
+			if (!string.IsNullOrEmpty(keywords))
+			{
+				strWhere += "  Name like '%" + keywords + "%'";
+			}
+			ViewBag.KeyWords = keywords;
+			ViewBag.Totalcount = Opr.GetCount(strWhere);
+			List<Model.SysRole> list = Opr.GetListByPage(strWhere, "", (PageIndex - 1) * PageSize, PageIndex * PageSize);
+			return View(list);
+		}
+		/// <summary>
+		/// 角色赋权
+		/// </summary>
+		/// <returns>The access.</returns>
+		/// <param name="id">Identifier.</param>
+		public ActionResult RoleAccess(int id)
+		{
+			ViewBag.Title = "角色权限配置";
+			BLL.SysMoudle moudle = new BLL.SysMoudle();
+			List<Model.SysMoudle> list = moudle.GetList(" MoudleID=1","OrderCode");
+			ViewBag.RoleID = id;
+			ViewBag.existMoudle=Opr.GetMoudleIDByRoleID(id);
+			return View(list);
+		}
+		/// <summary>
+		/// 新增角色
+		/// </summary>
+		/// <returns>The new.</returns>
+		/// <param name="id">Identifier.</param>
+		[HttpGet]
+		public ActionResult New(int? id)
+		{
+			int RoleID = id == null ? 0 : (int)id;
+			Model.SysRole model = new Model.SysRole();
+			if (RoleID > 0)
+			{
+				model = Opr.GetEntity(RoleID);
+				ViewBag.Title = "正在编辑角色编号： " + model.RoleID;
+			}
+			else
+			{
+				model.RoleID = 0;
+				model.State = true;
+				ViewBag.Title = "后端管理系统-新增角色";
+			}
+			return View(model);
+		}
+		/// <summary>
+		/// 角色提交
+		/// </summary>
+		/// <returns>The new.</returns>
+		/// <param name="model">Model.</param>
+		[HttpPost]
+		public ActionResult New(Model.SysRole model)
+		{
+			Helper.ResultInfo<int> rs = new Helper.ResultInfo<int>();
+			if (ModelState.IsValid)
+			{
+				if (model.RoleID > 0)
+				{
+					rs.Data = Opr.ModifyModel(model);
+					if (rs.Data > 0)
+					{
+						rs.Msg = "修改成功.";
+						rs.Result = true;
+					}
+					else
+					{
+						rs.Msg = "修改失败.";
+						rs.Result = false;
+					}
+					JsonResult jr = new JsonResult();
+					jr.Data = rs;
+					return jr;
+				}
+				else
+				{
+					rs.Data = Opr.Insert(model);
+					if (rs.Data > 0)
+					{
+						rs.Msg = "新增成功.";
+						rs.Result = true;
+					}
+					else
+					{
+						rs.Msg = "新增失败.";
+						rs.Result = false;
+					}
+					JsonResult jr = new JsonResult();
+					jr.Data = rs;
+					return jr;
+				}
+			}
+			else
+			{
+				System.Text.StringBuilder sbErrors = new System.Text.StringBuilder();
+				foreach (var item in ModelState.Values)
+				{
+					if (item.Errors.Count > 0)
+					{
+						for (int i = item.Errors.Count - 1; i >= 0; i--)
+						{
+							sbErrors.Append(item.Errors[i].ErrorMessage);
+							sbErrors.Append("<br/>");
+						}
+					}
+				}
+				rs.Data = 0;
+				rs.Msg = sbErrors.ToString();
+				rs.Result = false;
+				rs.Url = "";
+				JsonResult jr = new JsonResult();
+				jr.Data = rs;
+				return jr;
+			}
+		}
+		/// <summary>
+		/// 角色状态更改
+		/// </summary>
+		/// <returns>The status.</returns>
+		/// <param name="id">Identifier.</param>
+		[HttpPost]
+		public ActionResult UpdateStatus(int id)
+		{
+			Helper.ResultInfo<int> rs = new Helper.ResultInfo<int>();
+			rs.Data = Opr.UpdateState(id);
+			if (rs.Data > 0)
+			{
+				rs.Msg = "操作成功.";
+				rs.Result = true;
+				rs.Url = "";
+			}
+			else
+			{
+				rs.Msg = "操作失败.";
+				rs.Result = false;
+				rs.Url = "";
+			}
+			JsonResult jr = new JsonResult();
+			jr.Data = rs;
+			return jr;
+		}
+		/// <summary>
+		/// 角色删除
+		/// </summary>
+		/// <returns>The delete.</returns>
+		/// <param name="id">Identifier.</param>
+		[HttpPost]
+		public ActionResult Delete(int id)
+		{
+			Helper.ResultInfo<bool> rs = new Helper.ResultInfo<bool>();
+			rs.Data = Opr.DeleRole(id);
+			if (rs.Data)
+			{
+				rs.Msg = "删除成功.";
+				rs.Result = true;
+				rs.Url = "";
+			}
+			else
+			{
+				rs.Msg = "删除失败.";
+				rs.Result = false;
+				rs.Url = "";
+			}
+			JsonResult jr = new JsonResult();
+			jr.Data = rs;
+			return jr;
 		}
 	}
 }

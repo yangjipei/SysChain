@@ -1,6 +1,7 @@
 ﻿@{
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
+@model List<SysChain.Model.SysMoudle>
 <div id="header-crumb">
     <p>
         <i class="fa fa-lg fa-home"></i>
@@ -18,334 +19,75 @@
                 <h1>权限配置</h1>
             </header>
 
-            <div class="node-list">
-                <input type="hidden" name="_referer" value="/admin/rbac_role/index">
-                <input type="hidden" name="role_id" value="3">
-                
-                <div class="layer-list">
-                    <div class="app">
-                        <p>
-                            <label for="level1_1"><i class="fa fa-fw fa-minus"></i> 后台应用</label>
-                            <input id="level1_1" type="checkbox" name="access[]" value="1_1" level="1" checked="checked"/>
-                        </p>
-                        <div class="app-group">
-                            <h6><i class="fa fa-fw fa-minus"></i> 会员中心</h6>
-
-                            <dl>
-                                <dt>
-                                    <label for="level2_123">账号设置</label>
-                                    <input id="level2_123" type="checkbox" name="access[]" value="123_2" level="2" checked="checked">
-                                </dt>
-                                
-                                <dd>
-                                        <label for="level3_124">显示</label>
-                                        <input id="level3_124" type="checkbox" name="access[]" value="124_3" level="3" checked="checked">
-                                    </dd><dd>
-                                        <label for="level3_125">信息</label>
-                                        <input id="level3_125" type="checkbox" name="access[]" value="125_3" level="3" checked="checked">
-                                    </dd><dd>
-                                        <label for="level3_126">信息/保存执行</label>
-                                        <input id="level3_126" type="checkbox" name="access[]" value="126_3" level="3" checked="checked">
-                                    </dd><dd>
-                                        <label for="level3_127">密码</label>
-                                        <input id="level3_127" type="checkbox" name="access[]" value="127_3" level="3" checked="checked">
-                                    </dd><dd>
-                                        <label for="level3_128">密码/保存执行</label>
-                                        <input id="level3_128" type="checkbox" name="access[]" value="128_3" level="3" checked="checked">
-                                    </dd>                    
-                            </dl><dl>
-                                <dt>
-                                    <label for="level2_408">我的消息</label>
-                                    <input id="level2_408" type="checkbox" name="access[]" value="408_2" level="2" checked="checked">
-                                </dt>
-                                
-                                <dd>
-                                        <label for="level3_410">显示</label>
-                                        <input id="level3_410" type="checkbox" name="access[]" value="410_3" level="3" checked="checked">
-                                    </dd>                    
-                            </dl><dl>
-                                <dt>
-                                    <label for="level2_409">帮助中心</label>
-                                    <input id="level2_409" type="checkbox" name="access[]" value="409_2" level="2" checked="checked">
-                                </dt>
-                                
-                                <dd>
-                                        <label for="level3_411">显示</label>
-                                        <input id="level3_411" type="checkbox" name="access[]" value="411_3" level="3" checked="checked">
-                                    </dd>                    
-                            </dl>
-                        </div>
-                        <div class="app-group">
-                            <h6><i class="fa fa-fw fa-plus"></i> 欢迎主页 ※</h6>
-                            <dl>
-                                <dt>
-                                    <label for="level2_28">后台首页</label>
-                                    <input id="level2_28" type="checkbox" name="access[]" value="28_2" level="2" checked="checked">
-                                </dt>
-                                
-                                <dd>
-                                        <label for="level3_29">显示</label>
-                                        <input id="level3_29" type="checkbox" name="access[]" value="29_3" level="3" checked="checked">
-                                    </dd><dd>
-                                        <label for="level3_30">欢迎主页</label>
-                                        <input id="level3_30" type="checkbox" name="access[]" value="30_3" level="3" checked="checked">
-                                    </dd><dd>
-                                        <label for="level3_444">提交反馈</label>
-                                        <input id="level3_444" type="checkbox" name="access[]" value="444_3" level="3" checked="checked">
-                                    </dd><dd>
-                                        <label for="level3_628">搜索（主）</label>
-                                        <input id="level3_628" type="checkbox" name="access[]" value="628_3" level="3" checked="checked">
-                                    </dd>                    
-                            </dl>
-                        </div>
-                        <div class="app-group">
-                            <h6><i class="fa fa-fw fa-minus"></i> 游戏行为分析</h6>
-                            <dl>
-                                <dt>
-                                    <label for="level2_204">DT（新用户）※</label>
-                                    <input id="level2_204" type="checkbox" name="access[]" value="204_2" level="2" checked="checked">
-                                </dt>
-                                
-                                <dd>
-                                        <label for="level3_231">显示</label>
-                                        <input id="level3_231" type="checkbox" name="access[]" value="231_3" level="3" checked="checked">
-                                    </dd><dd>
-                                        <label for="level3_232">清空</label>
-                                        <input id="level3_232" type="checkbox" name="access[]" value="232_3" level="3">
-                                    </dd><dd>
-                                        <label for="level3_233">清空执行</label>
-                                        <input id="level3_233" type="checkbox" name="access[]" value="233_3" level="3">
-                                    </dd><dd>
-                                        <label for="level3_400">图表</label>
-                                        <input id="level3_400" type="checkbox" name="access[]" value="400_3" level="3" checked="checked">
-                                    </dd><dd>
-                                        <label for="level3_401">导出</label>
-                                        <input id="level3_401" type="checkbox" name="access[]" value="401_3" level="3" checked="checked">
-                                    </dd>                    
-                            </dl><dl>
-                                <dt>
-                                    <label for="level2_463">DT（老用户）</label>
-                                    <input id="level2_463" type="checkbox" name="access[]" value="463_2" level="2" checked="checked">
-                                </dt>
-                                
-                                <dd>
-                                        <label for="level3_464">显示</label>
-                                        <input id="level3_464" type="checkbox" name="access[]" value="464_3" level="3" checked="checked">
-                                    </dd><dd>
-                                        <label for="level3_465">清空</label>
-                                        <input id="level3_465" type="checkbox" name="access[]" value="465_3" level="3">
-                                    </dd><dd>
-                                        <label for="level3_466">清空执行</label>
-                                        <input id="level3_466" type="checkbox" name="access[]" value="466_3" level="3">
-                                    </dd><dd>
-                                        <label for="level3_467">图表</label>
-                                        <input id="level3_467" type="checkbox" name="access[]" value="467_3" level="3" checked="checked">
-                                    </dd><dd>
-                                        <label for="level3_468">导出</label>
-                                        <input id="level3_468" type="checkbox" name="access[]" value="468_3" level="3" checked="checked">
-                                    </dd>                    
-                            </dl><dl>
-                                <dt>
-                                    <label for="level2_707">DT 5分钟分析（新用户）※</label>
-                                    <input id="level2_707" type="checkbox" name="access[]" value="707_2" level="2" checked="checked">
-                                </dt>
-                                
-                                <dd>
-                                        <label for="level3_708">显示</label>
-                                        <input id="level3_708" type="checkbox" name="access[]" value="708_3" level="3" checked="checked">
-                                    </dd><dd>
-                                        <label for="level3_709">清空</label>
-                                        <input id="level3_709" type="checkbox" name="access[]" value="709_3" level="3">
-                                    </dd><dd>
-                                        <label for="level3_710">清空执行</label>
-                                        <input id="level3_710" type="checkbox" name="access[]" value="710_3" level="3">
-                                    </dd><dd>
-                                        <label for="level3_711">图表</label>
-                                        <input id="level3_711" type="checkbox" name="access[]" value="711_3" level="3" checked="checked">
-                                    </dd><dd>
-                                        <label for="level3_712">导出</label>
-                                        <input id="level3_712" type="checkbox" name="access[]" value="712_3" level="3" checked="checked">
-                                    </dd>                    
-                            </dl><dl>
-                                <dt>
-                                    <label for="level2_214">任务分析</label>
-                                    <input id="level2_214" type="checkbox" name="access[]" value="214_2" level="2" checked="checked">
-                                </dt>
-                                
-                                <dd>
-                                        <label for="level3_261">显示</label>
-                                        <input id="level3_261" type="checkbox" name="access[]" value="261_3" level="3" checked="checked">
-                                    </dd><dd>
-                                        <label for="level3_262">清空</label>
-                                        <input id="level3_262" type="checkbox" name="access[]" value="262_3" level="3">
-                                    </dd><dd>
-                                        <label for="level3_263">清空执行</label>
-                                        <input id="level3_263" type="checkbox" name="access[]" value="263_3" level="3">
-                                    </dd><dd>
-                                        <label for="level3_402">图表</label>
-                                        <input id="level3_402" type="checkbox" name="access[]" value="402_3" level="3" checked="checked">
-                                    </dd><dd>
-                                        <label for="level3_403">导出</label>
-                                        <input id="level3_403" type="checkbox" name="access[]" value="403_3" level="3" checked="checked">
-                                    </dd>                    
-                            </dl><dl>
-                                <dt>
-                                    <label for="level2_215">首次通关分析（排重）</label>
-                                    <input id="level2_215" type="checkbox" name="access[]" value="215_2" level="2" checked="checked">
-                                </dt>
-                                
-                                <dd>
-                                        <label for="level3_264">显示</label>
-                                        <input id="level3_264" type="checkbox" name="access[]" value="264_3" level="3" checked="checked">
-                                    </dd><dd>
-                                        <label for="level3_265">清空</label>
-                                        <input id="level3_265" type="checkbox" name="access[]" value="265_3" level="3">
-                                    </dd><dd>
-                                        <label for="level3_266">清空执行</label>
-                                        <input id="level3_266" type="checkbox" name="access[]" value="266_3" level="3">
-                                    </dd><dd>
-                                        <label for="level3_404">图表</label>
-                                        <input id="level3_404" type="checkbox" name="access[]" value="404_3" level="3" checked="checked">
-                                    </dd><dd>
-                                        <label for="level3_405">导出</label>
-                                        <input id="level3_405" type="checkbox" name="access[]" value="405_3" level="3" checked="checked">
-                                    </dd>                    
-                            </dl><dl>
-                                <dt>
-                                    <label for="level2_772">首次通关分析</label>
-                                    <input id="level2_772" type="checkbox" name="access[]" value="772_2" level="2">
-                                </dt>
-                                
-                                <dd>
-                                        <label for="level3_773">显示</label>
-                                        <input id="level3_773" type="checkbox" name="access[]" value="773_3" level="3">
-                                    </dd><dd>
-                                        <label for="level3_774">清空</label>
-                                        <input id="level3_774" type="checkbox" name="access[]" value="774_3" level="3">
-                                    </dd><dd>
-                                        <label for="level3_775">清空执行</label>
-                                        <input id="level3_775" type="checkbox" name="access[]" value="775_3" level="3">
-                                    </dd><dd>
-                                        <label for="level3_776">图表</label>
-                                        <input id="level3_776" type="checkbox" name="access[]" value="776_3" level="3">
-                                    </dd><dd>
-                                        <label for="level3_777">导出</label>
-                                        <input id="level3_777" type="checkbox" name="access[]" value="777_3" level="3">
-                                    </dd>                    
-                            </dl><dl>
-                                <dt>
-                                    <label for="level2_412">每日通关分析  ※</label>
-                                    <input id="level2_412" type="checkbox" name="access[]" value="412_2" level="2" checked="checked">
-                                </dt>
-                                
-                                <dd>
-                                        <label for="level3_413">显示</label>
-                                        <input id="level3_413" type="checkbox" name="access[]" value="413_3" level="3" checked="checked">
-                                    </dd><dd>
-                                        <label for="level3_414">清空</label>
-                                        <input id="level3_414" type="checkbox" name="access[]" value="414_3" level="3">
-                                    </dd><dd>
-                                        <label for="level3_415">清空执行</label>
-                                        <input id="level3_415" type="checkbox" name="access[]" value="415_3" level="3">
-                                    </dd><dd>
-                                        <label for="level3_416">图表</label>
-                                        <input id="level3_416" type="checkbox" name="access[]" value="416_3" level="3" checked="checked">
-                                    </dd><dd>
-                                        <label for="level3_417">导出</label>
-                                        <input id="level3_417" type="checkbox" name="access[]" value="417_3" level="3" checked="checked">
-                                    </dd>                    
-                            </dl><dl>
-                                <dt>
-                                    <label for="level2_218">等级分析</label>
-                                    <input id="level2_218" type="checkbox" name="access[]" value="218_2" level="2" checked="checked">
-                                </dt>
-                                
-                                <dd>
-                                        <label for="level3_273">显示</label>
-                                        <input id="level3_273" type="checkbox" name="access[]" value="273_3" level="3" checked="checked">
-                                    </dd><dd>
-                                        <label for="level3_274">清空</label>
-                                        <input id="level3_274" type="checkbox" name="access[]" value="274_3" level="3">
-                                    </dd><dd>
-                                        <label for="level3_275">清空执行</label>
-                                        <input id="level3_275" type="checkbox" name="access[]" value="275_3" level="3">
-                                    </dd><dd>
-                                        <label for="level3_406">图表</label>
-                                        <input id="level3_406" type="checkbox" name="access[]" value="406_3" level="3" checked="checked">
-                                    </dd><dd>
-                                        <label for="level3_407">导出</label>
-                                        <input id="level3_407" type="checkbox" name="access[]" value="407_3" level="3" checked="checked">
-                                    </dd>                    
-                            </dl><dl>
-                                <dt>
-                                    <label for="level2_880">等级分析（VIP）※</label>
-                                    <input id="level2_880" type="checkbox" name="access[]" value="880_2" level="2">
-                                </dt>
-                                
-                                <dd>
-                                        <label for="level3_881">显示</label>
-                                        <input id="level3_881" type="checkbox" name="access[]" value="881_3" level="3">
-                                    </dd><dd>
-                                        <label for="level3_882">清空</label>
-                                        <input id="level3_882" type="checkbox" name="access[]" value="882_3" level="3">
-                                    </dd><dd>
-                                        <label for="level3_883">清空执行</label>
-                                        <input id="level3_883" type="checkbox" name="access[]" value="883_3" level="3">
-                                    </dd><dd>
-                                        <label for="level3_884">图表</label>
-                                        <input id="level3_884" type="checkbox" name="access[]" value="884_3" level="3">
-                                    </dd><dd>
-                                        <label for="level3_885">导出</label>
-                                        <input id="level3_885" type="checkbox" name="access[]" value="885_3" level="3">
-                                    </dd>                    
-                            </dl><dl>
-                                <dt>
-                                    <label for="level2_732">首次付费</label>
-                                    <input id="level2_732" type="checkbox" name="access[]" value="732_2" level="2">
-                                </dt>
-                                
-                                <dd>
-                                        <label for="level3_745">显示</label>
-                                        <input id="level3_745" type="checkbox" name="access[]" value="745_3" level="3">
-                                    </dd><dd>
-                                        <label for="level3_746">清空</label>
-                                        <input id="level3_746" type="checkbox" name="access[]" value="746_3" level="3">
-                                    </dd><dd>
-                                        <label for="level3_747">清空执行</label>
-                                        <input id="level3_747" type="checkbox" name="access[]" value="747_3" level="3">
-                                    </dd><dd>
-                                        <label for="level3_748">图表</label>
-                                        <input id="level3_748" type="checkbox" name="access[]" value="748_3" level="3">
-                                    </dd><dd>
-                                        <label for="level3_749">导出</label>
-                                        <input id="level3_749" type="checkbox" name="access[]" value="749_3" level="3">
-                                    </dd>                    
-                            </dl><dl>
-                                <dt>
-                                    <label for="level2_654">版本更新</label>
-                                    <input id="level2_654" type="checkbox" name="access[]" value="654_2" level="2" checked="checked">
-                                </dt>
-                                
-                                <dd>
-                                        <label for="level3_655">显示</label>
-                                        <input id="level3_655" type="checkbox" name="access[]" value="655_3" level="3" checked="checked">
-                                    </dd><dd>
-                                        <label for="level3_656">清空</label>
-                                        <input id="level3_656" type="checkbox" name="access[]" value="656_3" level="3">
-                                    </dd><dd>
-                                        <label for="level3_657">清空执行</label>
-                                        <input id="level3_657" type="checkbox" name="access[]" value="657_3" level="3">
-                                    </dd><dd>
-                                        <label for="level3_658">图表</label>
-                                        <input id="level3_658" type="checkbox" name="access[]" value="658_3" level="3" checked="checked">
-                                    </dd><dd>
-                                        <label for="level3_659">导出</label>
-                                        <input id="level3_659" type="checkbox" name="access[]" value="659_3" level="3" checked="checked">
-                                    </dd>                    
-                            </dl>
-                        </div>
-                    </div>
-                </div>
+            <div class="column-list">
+                <dl>
+                    <dt>
+                        <label for="level2_123">账号设置</label>
+                        <input id="level2_123" type="checkbox" name="access[]" value="123_2" level="2" checked="checked">
+                    </dt>
+                    <dd>
+                        <label for="level3_124">显示</label>
+                        <input id="level3_124" type="checkbox" name="access[]" value="124_3" level="3" checked="checked">
+                    </dd>
+                    <dd>
+                        <label for="level3_125">信息</label>
+                        <input id="level3_125" type="checkbox" name="access[]" value="125_3" level="3" checked="checked">
+                    </dd>
+                    <dd>
+                        <label for="level3_126">信息/保存执行</label>
+                        <input id="level3_126" type="checkbox" name="access[]" value="126_3" level="3" checked="checked">
+                    </dd>
+                    <dd>
+                        <label for="level3_127">密码</label>
+                        <input id="level3_127" type="checkbox" name="access[]" value="127_3" level="3" checked="checked">
+                    </dd>
+                    <dd>
+                        <label for="level3_128">密码/保存执行</label>
+                        <input id="level3_128" type="checkbox" name="access[]" value="128_3" level="3" checked="checked">
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>
+                        <label for="level2_408">我的消息</label>
+                        <input id="level2_408" type="checkbox" name="access[]" value="408_2" level="2" checked="checked">
+                    </dt>
+                    <dd>
+                        <label for="level3_410">显示</label>
+                        <input id="level3_410" type="checkbox" name="access[]" value="410_3" level="3" checked="checked">
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>
+                        <label for="level2_409">帮助中心</label>
+                        <input id="level2_409" type="checkbox" name="access[]" value="409_2" level="2" checked="checked">
+                    </dt>
+                    <dd>
+                        <label for="level3_411">显示</label>
+                        <input id="level3_411" type="checkbox" name="access[]" value="411_3" level="3" checked="checked">
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>
+                        <label for="level2_28">后台首页</label>
+                        <input id="level2_28" type="checkbox" name="access[]" value="28_2" level="2" checked="checked">
+                    </dt>
+                    <dd>
+                        <label for="level3_29">显示</label>
+                        <input id="level3_29" type="checkbox" name="access[]" value="29_3" level="3" checked="checked">
+                    </dd>
+                    <dd>
+                        <label for="level3_30">欢迎主页</label>
+                        <input id="level3_30" type="checkbox" name="access[]" value="30_3" level="3" checked="checked">
+                    </dd>
+                    <dd>
+                        <label for="level3_444">提交反馈</label>
+                        <input id="level3_444" type="checkbox" name="access[]" value="444_3" level="3" checked="checked">
+                    </dd>
+                    <dd>
+                        <label for="level3_628">搜索（主）</label>
+                        <input id="level3_628" type="checkbox" name="access[]" value="628_3" level="3" checked="checked">
+                    </dd>
+                </dl>
             </div>
 
             <footer>
