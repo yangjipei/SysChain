@@ -327,6 +327,7 @@
     <Content Include="Content\Admin\Images\img\selected.png" />
     <Content Include="Content\Admin\Images\img\selected%402x.png" />
     <Content Include="Content\Admin\Images\img\zheng.jpg" />
+    <Content Include="Content\Admin\Scripts\Role_Access.js" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

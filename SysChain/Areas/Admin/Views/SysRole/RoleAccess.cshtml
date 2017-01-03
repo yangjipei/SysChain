@@ -1,7 +1,14 @@
 ﻿@{
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-@model List<SysChain.Model.SysMoudle>
+@model List<SysChain.Model.MoudleForTree>
+@{
+	List<int> ext=(List<int>)ViewBag.existMoudle;
+}
+@section Scripts
+{
+	@Scripts.Render("~/js/raccess")
+}
 <div id="header-crumb">
     <p>
         <i class="fa fa-lg fa-home"></i>
@@ -14,86 +21,65 @@
 </div>
 <main id="system-role-access">
     <section class="form">
-        <form action="#" method="post">
+        <form id="frm-role-access" action="@Url.Action("RoleAccess","SysRole",new{id=ViewBag.RoleID})" method="post">
             <header>
                 <h1>权限配置</h1>
             </header>
 
             <div class="column-list">
+			@foreach(SysChain.Model.MoudleForTree m in Model)
+			{
                 <dl>
                     <dt>
-                        <label for="level2_123">账号设置</label>
-                        <input id="level2_123" type="checkbox" name="access[]" value="123_2" level="2" checked="checked">
-                    </dt>
-                    <dd>
-                        <label for="level3_124">显示</label>
-                        <input id="level3_124" type="checkbox" name="access[]" value="124_3" level="3" checked="checked">
-                    </dd>
-                    <dd>
-                        <label for="level3_125">信息</label>
-                        <input id="level3_125" type="checkbox" name="access[]" value="125_3" level="3" checked="checked">
-                    </dd>
-                    <dd>
-                        <label for="level3_126">信息/保存执行</label>
-                        <input id="level3_126" type="checkbox" name="access[]" value="126_3" level="3" checked="checked">
-                    </dd>
-                    <dd>
-                        <label for="level3_127">密码</label>
-                        <input id="level3_127" type="checkbox" name="access[]" value="127_3" level="3" checked="checked">
-                    </dd>
-                    <dd>
-                        <label for="level3_128">密码/保存执行</label>
-                        <input id="level3_128" type="checkbox" name="access[]" value="128_3" level="3" checked="checked">
-                    </dd>
-                </dl>
-                <dl>
-                    <dt>
-                        <label for="level2_408">我的消息</label>
-                        <input id="level2_408" type="checkbox" name="access[]" value="408_2" level="2" checked="checked">
-                    </dt>
-                    <dd>
-                        <label for="level3_410">显示</label>
-                        <input id="level3_410" type="checkbox" name="access[]" value="410_3" level="3" checked="checked">
-                    </dd>
-                </dl>
-                <dl>
-                    <dt>
-                        <label for="level2_409">帮助中心</label>
-                        <input id="level2_409" type="checkbox" name="access[]" value="409_2" level="2" checked="checked">
-                    </dt>
-                    <dd>
-                        <label for="level3_411">显示</label>
-                        <input id="level3_411" type="checkbox" name="access[]" value="411_3" level="3" checked="checked">
-                    </dd>
-                </dl>
-                <dl>
-                    <dt>
-                        <label for="level2_28">后台首页</label>
-                        <input id="level2_28" type="checkbox" name="access[]" value="28_2" level="2" checked="checked">
-                    </dt>
-                    <dd>
-                        <label for="level3_29">显示</label>
-                        <input id="level3_29" type="checkbox" name="access[]" value="29_3" level="3" checked="checked">
-                    </dd>
-                    <dd>
-                        <label for="level3_30">欢迎主页</label>
-                        <input id="level3_30" type="checkbox" name="access[]" value="30_3" level="3" checked="checked">
-                    </dd>
-                    <dd>
-                        <label for="level3_444">提交反馈</label>
-                        <input id="level3_444" type="checkbox" name="access[]" value="444_3" level="3" checked="checked">
-                    </dd>
-                    <dd>
-                        <label for="level3_628">搜索（主）</label>
-                        <input id="level3_628" type="checkbox" name="access[]" value="628_3" level="3" checked="checked">
-                    </dd>
-                </dl>
-            </div>
+						@if(ext.Contains(m.Node.MoudleID))
+						{
+                        <label for="m_@m.Node.MoudleID">@m.Node.Name</label>
+                        <input id="m_@m.Node.MoudleID" type="checkbox" name="access" value="@m.Node.MoudleID" checked="checked">
+						}else
+						{
+                        <label for="m_@m.Node.MoudleID">@m.Node.Name</label>
+                        <input id="m_@m.Node.MoudleID" type="checkbox" name="access" value="@m.Node.MoudleID" >
+						}
 
+                    </dt>
+					@if(m.Childers.Count()>0)
+					{
+						foreach(SysChain.Model.SysMoudle sm in m.Childers)
+						{
+                    <dd>
+						@if(ext.Contains(sm.MoudleID))
+						{
+                        <label for="m_@sm.MoudleID">@sm.Name</label>
+                        <input id="m_@sm.MoudleID" type="checkbox" name="access" value="@sm.MoudleID"  checked="checked">
+						}else
+						{
+                        <label for="m_@sm.MoudleID">@sm.Name</label>
+                        <input id="m_@sm.MoudleID" type="checkbox" name="access" value="@sm.MoudleID">
+						}
+                    </dd>
+						}
+					}else{
+						<dd>
+							<span>暂无子模块.</span>
+						</dd>
+					}
+                </dl>
+				
+			}
+            </div>
+        @if(Model.Count()>0)
+		{
             <footer>
-                <button class="btn btn-primary" type="submit" name="publish">保存</button>
-                <a class="btn btn-none" href="#" title="返回">返回</a>
+                <button class="btn btn-primary" type="submit">保存</button>
+                <a class="btn btn-none" href='@Url.Action("Index","SysRole",new { area="Admin"})' title="返回">返回</a>
             </footer>
+		}else
+		{
+			 <footer>
+					<p>暂无模块数据.</p>
+			 </footer>
+		}
+
         </form>
     </section>
     

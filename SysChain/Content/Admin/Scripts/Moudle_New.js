@@ -5,7 +5,7 @@
 	$form.on('focus', 'input:focus', function(evt) {
 		formError.init().hide();
 	});
-	$btn=$("btn-primary");
+	$btn=$(".btn-primary");
 	$form.on('submit', function(evt){
 			evt.preventDefault();
 			evt.stopPropagation();

@@ -26,6 +26,9 @@ namespace SysChain
 			bundles.Add(new ScriptBundle("~/js/rnew").Include(
 				"~/Content/Admin/Scripts/Role_New.js"
 			));
+			bundles.Add(new ScriptBundle("~/js/raccess").Include(
+				"~/Content/Admin/Scripts/Role_Access.js"
+			));
 			bundles.Add(new ScriptBundle("~/js/admin").Include(
 				"~/Content/Admin/Scripts/main.js"
 			));

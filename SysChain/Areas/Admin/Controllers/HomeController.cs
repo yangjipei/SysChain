@@ -4,12 +4,12 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
+using System.Web.Caching;
 
 namespace SysChain.Areas.Admin.Controllers
 {
 	public class HomeController : Controller
 	{
-		
 		public ActionResult Index()
 		{
 			ViewBag.Title = "后台管理系统";

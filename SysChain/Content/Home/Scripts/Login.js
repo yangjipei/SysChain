@@ -31,8 +31,8 @@
 			    dataType: "json",   
 			    success: function (data) {  
 			      if (data.Result) {  
-			       popup.info.init().show(data.Msg, true); 
-			       setTimeout(function() {top.location.replace(data.Url)}, 1500);
+			       popup.info.init().show(data.Msg, true,data.Url); 
+			       //setTimeout(function() {top.location.replace(data.Url)}, 1500);
 			      }  
 			      else {  
 			       popup.info.init().show(data.Msg, false); 

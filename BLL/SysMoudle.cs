@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Remoting.Proxies;
 
 namespace SysChain.BLL
 {
@@ -103,6 +104,40 @@ namespace SysChain.BLL
 		public bool DeleMoudle(int MoudleID)
 		{
 			return dal.DeleMoudle(MoudleID);
+		}
+		/// <summary>
+		/// 生成模块树
+		/// </summary>
+		/// <returns>The tree.</returns>
+		/// <param name="strWhere">String where.</param>
+		/// <param name="orderBy">Order by.</param>
+		public List<Model.MoudleForTree> GetTree(string strWhere,string orderBy)
+		{
+			List<Model.SysMoudle> li = this.GetList(strWhere, orderBy);
+			List<Model.MoudleForTree> model = new List<Model.MoudleForTree>();
+			foreach (Model.SysMoudle m in li)
+			{
+				if (m.ParentID == 0)
+				{
+					Model.MoudleForTree tp = new Model.MoudleForTree();
+					tp.Node = m;
+					tp.Childers = GetSubTree(li, m.MoudleID);
+					model.Add(tp);
+				}
+			}
+			return model;
+		}
+		private List<Model.SysMoudle> GetSubTree(List<Model.SysMoudle> ml,int ParentID)
+		{
+			List<Model.SysMoudle> li = new List<Model.SysMoudle>();
+			foreach (Model.SysMoudle m in ml)
+			{
+				if (m.ParentID == ParentID)
+				{
+					li.Add(m);
+				}
+			}
+			return li;
 		}
 	}
 }

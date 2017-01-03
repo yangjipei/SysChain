@@ -22,9 +22,12 @@ namespace SysChain.DAL
 		{
 			List<string> li = new List<string>();
 			li.Add(" delete from  SysRoleAndMoudle where RoleID="+RoleID+" ;");
-			foreach (Model.SysRoleAndMoudle m in ModelList)
+			if (ModelList != null)
 			{
-				li.Add(String.Format(" insert into SysRoleAndMoudle(RoleID,MoudleID) values ({0},{1}) ;",m.RoleID,m.MoudleID));
+				foreach (Model.SysRoleAndMoudle m in ModelList)
+				{
+					li.Add(String.Format(" insert into SysRoleAndMoudle(RoleID,MoudleID) values ({0},{1}) ;", m.RoleID, m.MoudleID));
+				}
 			}
 			return DbHelperSQL.ExecuteSqlTran(li);
 		}

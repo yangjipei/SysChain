@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 namespace SysChain.Model
 {
 	/// <summary>
@@ -44,5 +45,10 @@ namespace SysChain.Model
 		[MaxLength(200,ErrorMessage ="最大{0}个字.")]
 		public string MoudleDes { set; get; }
 
+	}
+	public partial class MoudleForTree
+	{
+		public SysMoudle Node { set; get; }
+		public List<SysMoudle> Childers { set; get; }
 	}
 }

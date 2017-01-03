@@ -443,13 +443,14 @@ f7.popup.info = (function() {
 	//初始化基本结构
 	function initialize() {
 		$(['<div id="popup-info">',
-			   '<div class="popup-info-content"></div>',
-		   '</div>'].join('')).appendTo('html');
-	}//initialize()
+			'<div class="popup-info-content"></div>',
+			'</div>'
+		].join('')).appendTo('html');
+	} //initialize()
 
 	//定位 水平垂直居中
 	function locator() {
-		var screenWidth	 = $(window).width(),
+		var screenWidth = $(window).width(),
 			screenHeight = $(window).height(),
 			_screenHeight = screenHeight,
 			width = $('#popup-info').width(),
@@ -457,46 +458,68 @@ f7.popup.info = (function() {
 
 		if (screenHeight < $(document).height()) {
 			screenHeight = $(document).height();
-		}//if
+		} //if
 
-		$('#popup-info').css({left:(screenWidth - width) / 2,
-						      top:(_screenHeight - height) / 2 + $(window).scrollTop()});
-	}//locator()
+		$('#popup-info').css({
+			left: (screenWidth - width) / 2,
+			top: (_screenHeight - height) / 2 + $(window).scrollTop()
+		});
+	} //locator()
 
-	var _tagHide;
+	var _tagHide, _redirectUrl, _intervalTag, _times = f7.popup.info.config.hideTime / 1000;
 	//显示
-	function show(content, isSuccess) {
-		if (typeof isSuccess != 'boolean') isSuccess = true;//if
+	function show(content, isSuccess, redirectUrl) {
+		if (typeof isSuccess != 'boolean') isSuccess = true; //if
+		_redirectUrl = redirectUrl;
 		locator();
+
+		content += '<em>（<i>' + _times + '</i>s）</em>';
 
 		var $popupInfo = $('#popup-info'),
 			errorClass = 'popup-info-error';
 
 		if (!isSuccess) {
-			if (!$popupInfo.hasClass(errorClass)) $popupInfo.addClass(errorClass);//if
+			if (!$popupInfo.hasClass(errorClass)) $popupInfo.addClass(errorClass); //if
 		} else {
-			if ($popupInfo.hasClass(errorClass)) $popupInfo.removeClass(errorClass);//if
-		}//if
+			if ($popupInfo.hasClass(errorClass)) $popupInfo.removeClass(errorClass); //if
+		} //if
 
 		$popupInfo.find('.popup-info-content').html(content).end().fadeIn('fast');
 
-		setTimeout(locator,10);
-		var _tagHide = setTimeout(hide, f7.popup.info.config.hideTime);
+		setTimeout(locator, 10);
+		_tagHide = setTimeout(hide, f7.popup.info.config.hideTime);
+		_intervalTag = setInterval(intervalHandle, 1000);
 
-		$(window).on({'resize.popup_info': locator,
-					  'scroll.popup_info': locator});
-	}//show()
+		$(window).on({
+			'resize.popup_info': locator,
+			'scroll.popup_info': locator
+		});
+	} //show()
+
+	function intervalHandle() {
+		var $popupInfo = $('#popup-info');
+		if (_times > 1) {
+			--_times;
+			$popupInfo.find('.popup-info-content em > i').html(_times);
+		} else {
+			clearInterval(_intervalTag);
+		} //if
+	} //intervalHandle()
 
 	//隐藏
 	function hide(evt) {
-		if(_tagHide) {
+		if (_tagHide) {
 			clearTimeout(_tagHide);
-		}//if
+		} //if
 
-		$('#popup-info').fadeOut('fast');
+		$('#popup-info').fadeOut('fast', function() {
+			if (_redirectUrl) {
+				location.replace(_redirectUrl);
+			} //if
+		});
 
 		$(window).off('.popup_info');
-	}//hide()
+	} //hide()
 
 	initialize();
 
@@ -504,12 +527,13 @@ f7.popup.info = (function() {
 		show: show,
 		hide: hide
 	};
-});//f7.popup.info()
+}); //f7.popup.info()
+
 //info.config
 f7.popup.info.config = {
 	//显示5秒后隐藏
 	hideTime: 3 * 1000
-};//f7.popup.info.config{}
+}; //f7.popup.info.config{}
 // loading
 f7.popup.loading = (function() {
 	var _isLoadingTrack = true; // 默认显示 进度条

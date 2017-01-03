@@ -45,14 +45,48 @@ namespace SysChain.Areas.Admin.Controllers
 		/// </summary>
 		/// <returns>The access.</returns>
 		/// <param name="id">Identifier.</param>
+		[HttpGet]
 		public ActionResult RoleAccess(int id)
 		{
 			ViewBag.Title = "角色权限配置";
 			BLL.SysMoudle moudle = new BLL.SysMoudle();
-			List<Model.SysMoudle> list = moudle.GetList(" MoudleID=1","OrderCode");
+			List<Model.MoudleForTree> list = moudle.GetTree(" State=1","OrderCode");
 			ViewBag.RoleID = id;
 			ViewBag.existMoudle=Opr.GetMoudleIDByRoleID(id);
 			return View(list);
+		}
+		[HttpPost]
+		public ActionResult RoleAccess(int id,List<int>access)
+		{
+			Helper.ResultInfo<int> rs = new Helper.ResultInfo<int>();
+			List<Model.SysRoleAndMoudle> li = new List<Model.SysRoleAndMoudle>();
+			if (access != null)
+			{
+				foreach (int mid in access)
+				{
+					Model.SysRoleAndMoudle sam = new Model.SysRoleAndMoudle();
+					sam.RoleID = id;
+					sam.MoudleID = mid;
+					li.Add(sam);
+				}
+			}
+			BLL.SysRoleAndMoudle Opration = new BLL.SysRoleAndMoudle();
+			rs.Data = Opration.Insert(li, id);
+			if (rs.Data > 0)
+			{
+				rs.Msg = "操作成功";
+				rs.Result = true;
+				rs.Url = Url.Action("Index", "SysRole", new { area = "Admin", Index = 1, keywords = "" });
+			}
+			else
+			{
+				rs.Msg = "操作失败";
+				rs.Result = false;
+				rs.Url = "";
+			}
+			JsonResult jr = new JsonResult();
+			jr.Data = rs;
+			return jr;
 		}
 		/// <summary>
 		/// 新增角色

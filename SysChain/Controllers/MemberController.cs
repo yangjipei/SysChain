@@ -30,7 +30,7 @@ namespace SysChain.Controllers
 				{
 					Session["UserInfo"] = user;
 					rs.Data = true;
-					rs.Msg = "登录成功.";
+					rs.Msg = "登录成功,正在进入系统";
 					rs.Result = true;
 					rs.Url = Url.Action("Index", "Home", new {area="Admin" });
 
