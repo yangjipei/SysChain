@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Text;
@@ -46,6 +47,31 @@ namespace SysChain.DAL
 				return Convert.ToInt32(obj);
 			}
 		} 
+		/// <summary>
+		/// 根据条件获得用户数量
+		/// </summary>
+		/// <returns>The count.</returns>
+		/// <param name="strWhere">String where.</param>
+		public int GetCount(string strWhere)
+		{
+			StringBuilder strSql = new StringBuilder();
+			strSql.Append(" Select count(1) From SysUser T");
+			strSql.Append(" inner join SysRole R on T.RoleID=R.RoleID ");
+			strSql.Append(" inner join SysUserInfo I on T.UserID=I.UserID ");
+			if (!string.IsNullOrEmpty(strWhere.Trim()))
+			{
+				strSql.Append(" WHERE " + strWhere);
+			}
+			object rel = DbHelperSQL.GetSingle(strSql.ToString());
+			if (rel != null)
+			{
+				return (int)rel;
+			}
+			else
+			{
+				return 0;
+			}
+		}
 		/// <summary>
 		/// 修改密码
 		/// </summary>
@@ -159,6 +185,102 @@ namespace SysChain.DAL
 				}
 				model.RoleID = int.Parse(dr["RoleID"].ToString());
 				return model;
+			}
+			else
+			{
+				return null;
+			}
+		}
+		/// <summary>
+		/// 设置实体
+		/// </summary>
+		/// <returns>返回对象实体</returns>
+		/// <param name="dr">行</param>
+		private Model.VM_SysUser SetEntityForVM(DataRow dr)
+		{
+			Model.VM_SysUser model = new Model.VM_SysUser();
+			if (dr != null)
+			{
+				if (dr["Row"].ToString() != "")
+				{
+					model.Row = int.Parse(dr["Row"].ToString());
+				}
+				if (dr["UserID"].ToString() != "")
+				{
+					model.UserID = int.Parse(dr["UserID"].ToString());
+				}
+				model.LoginName = dr["LoginName"].ToString();
+				model.RoleName = dr["RoleName"].ToString();
+				model.Name= dr["Name"].ToString();
+				if (dr["Gender"].ToString() != "")
+				{
+					if ((dr["Gender"].ToString() == "1") || (dr["Gender"].ToString().ToLower() == "true"))
+					{
+						model.Gender = true;
+					}
+					else
+					{
+						model.Gender = false;
+					}
+				}
+				model.Telephone = dr["Telephone"].ToString();
+				model.Department = dr["Department"].ToString();
+				model.RegisterDate = DateTime.Parse(dr["RegisterDate"].ToString());
+				if (dr["State"].ToString() != "")
+				{
+					if ((dr["State"].ToString() == "1") || (dr["State"].ToString().ToLower() == "true"))
+					{
+						model.State = true;
+					}
+					else
+					{
+						model.State = false;
+					}
+				}
+
+				return model;
+			}
+			else
+			{
+				return null;
+			}
+		}
+		/// <summary>
+		/// 分页获取数据列表
+		/// </summary>
+		public List<Model.VM_SysUser> GetListByPage(string strWhere, string orderby, int startIndex, int endIndex)
+		{
+			StringBuilder strSql = new StringBuilder();
+			strSql.Append("SELECT * FROM ( ");
+			strSql.Append(" SELECT ROW_NUMBER() OVER (");
+			if (!string.IsNullOrEmpty(orderby.Trim()))
+			{
+				strSql.Append("order by T." + orderby);
+			}
+			else
+			{
+				strSql.Append("order by T.UserID ");
+			}
+			strSql.Append(")AS Row,T.UserID,T.LoginName,R.Name as RoleName,I.Name,I.Gender\r\n,I.Telephone,I.Department,I.RegisterDate,T.State");
+			strSql.Append("  ");
+			strSql.Append(" from SysUser T ");
+			strSql.Append(" inner join SysRole R on T.RoleID=R.RoleID ");
+			strSql.Append(" inner join SysUserInfo I on T.UserID=I.UserID ");
+			if (!string.IsNullOrEmpty(strWhere.Trim()))
+			{
+				strSql.Append(" WHERE " + strWhere);
+			}
+			strSql.Append(" ) TT");
+			strSql.AppendFormat(" WHERE TT.Row between {0} and {1}", startIndex, endIndex);
+			DataTable dt = DbHelperSQL.Query(strSql.ToString()).Tables[0];
+			List<Model.VM_SysUser> UserList = new List<Model.VM_SysUser>();
+			if (dt.Rows.Count > 0)
+			{
+				foreach (DataRow dr in dt.Rows)
+				{
+					UserList.Add(SetEntityForVM(dr));
+				}
+				return UserList;
 			}
 			else
 			{

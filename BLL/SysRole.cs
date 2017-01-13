@@ -65,7 +65,7 @@ namespace SysChain.BLL
 		public List<Model.SysRole> GetListByPage(string strWhere, string orderby, int startIndex, int endIndex)
 		{
 			return dal.GetListByPage(strWhere, orderby, startIndex, endIndex);
-		}//
+		}
 		 /// <summary>
 		 /// 删除指定角色
 		 /// </summary>

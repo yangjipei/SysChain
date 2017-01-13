@@ -134,7 +134,7 @@ namespace SysChain.Areas.Admin.Controllers
 			}
 		}
 		/// <summary>
-		/// 获得下来接口
+		/// 获得下拉接口
 		/// </summary>
 		/// <returns>The list.</returns>
 		/// <param name="id">父级ID，默认为0.</param>

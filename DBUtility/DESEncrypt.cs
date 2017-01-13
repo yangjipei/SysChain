@@ -60,7 +60,7 @@ namespace SysChain.DBUtility
         /// <returns></returns>
 		public static string Decrypt(string Text) 
 		{
-			return Decrypt(Text,"litianping");
+			return Decrypt(Text,"yangjipei");
 		}
 		/// <summary> 
 		/// 解密数据 

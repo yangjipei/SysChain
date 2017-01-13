@@ -1,6 +1,7 @@
 ﻿@{
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
+@model List<SysChain.Model.VM_SysUser>
 <div id="header-crumb">
     <p>
         <i class="fa fa-lg fa-home"></i>
@@ -17,10 +18,10 @@
         </header>
 
         <aside>
-            <form action="#" method="post">
+            <form id="frmSearch" action="@Url.Action("Index","SysUser")" method="post">
                 <p class="input-button-group">
-                    <input name="search" type="text" maxlength="32" placeholder="快来搜我〜" />
-                    <button disabled type="submit"><i class="fa fa-search"></i></button>
+                    <input id="keywords" name="keywords"  type="text" maxlength="32" placeholder="请输入姓名搜索〜" value="@ViewBag.KeyWords"/>
+                    <button  type="submit"><i class="fa fa-search"></i></button>
                 </p>
             </form>
             <div class="operate">
@@ -35,72 +36,61 @@
                     <th>用户账号</th>
                     <th>所属角色</th>
                     <th>姓名</th>
+					<th>性别</th>
                     <th>手机号</th>
-
+                    <th>所在部门</th>
                     <th>状态</th>
                     <th>创建时间</th>
                     <th>操作</th>
                 </tr>
             </thead>
             <tbody>
+				@if(Model!=null&&Model.Count>0)
+				{
+				foreach(SysChain.Model.VM_SysUser m in Model)
+				{
                 <tr>
-                    <td>1</td>
-                    <td>admin</td>
-                    <td>超级管理员</td>
-                    <td>李恒恒</td>
-                    <td>13456924816</td>
-
-                    <td>显示</td>
-                    <td>16/09/19 19:23:23</td>
+                    <td>@m.Row</td>
+                    <td>@m.LoginName</td>
+                    <td>@m.RoleName</td>
+                    <td>@m.Name</td>
+					<td>
+						@if(!m.Gender)
+						{
+	                    	<i class="red">女</i>
+						}else
+						{
+							<i class="green">男</i>
+						}	
+					</td>
+                    <td>@m.Telephone</td>
+                    <td>@m.Department</td>
+                    <td>
+						@if(!m.State)
+						{
+	                    	<i class="red">禁用</i>
+						}else
+						{
+							<i class="green">启用</i>
+						}
+					</td>
+                    <td>@m.RegisterDate</td>
                     <td>
                         <a class="btn-icon" href="#" title="编辑"><i class="fa fa-fw fa-edit"></i>编辑</a>
                         <a class="btn-icon" href="delete" title="删除"><i class="fa fa-fw fa-trash-o"></i>删除</a>
                     </td>
                 </tr>
-                <tr>
-                    <td>2</td>
-                    <td>user</td>
-                    <td>超级管理员</td>
-                    <td>王银华</td>
-                    <td>13003620712</td>
+				}
+				}else{
+				 <tr>
+					<td colspan="10">暂无数据....</td>
+				</tr>
+				}
 
-                    <td>显示</td>
-                    <td>16/09/19 19:23:23</td>
-                    <td>
-                        <a class="btn-icon" href="#" title="编辑"><i class="fa fa-fw fa-edit"></i>编辑</a>
-                        <a class="btn-icon" href="delete" title="删除"><i class="fa fa-fw fa-trash-o"></i>删除</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>hl123</td>
-                    <td>超级管理员</td>
-                    <td>洪流</td>
-                    <td>13003620712</td>
-
-                    <td>显示</td>
-                    <td>16/09/19 19:23:23</td>
-                    <td>
-                        <a class="btn-icon" href="#" title="编辑"><i class="fa fa-fw fa-edit"></i>编辑</a>
-                        <a class="btn-icon" href="delete" title="删除"><i class="fa fa-fw fa-trash-o"></i>删除</a>
-                    </td>
-                </tr>
             </tbody>
         </table>
 
-        <footer class="page">
-            <div class="page-info">每页 20 条/共 1051 条记录 1/53 页</div>
-            <div class="page-code">
-                <a href="#">下一页</a>
-                <span class="current">1</span>
-                <a href="#">2</a>
-                <a href="#">3</a>
-                <a href="#">4</a>
-                <a href="#">5</a>
-                <a href="#">下5页</a>
-                <a href="#">最后一页</a>
-            </div>
-        </footer>
+		@Html.Action("PageInfo","Public",new{Totalcount=ViewBag.Totalcount,Url=Url.Action("Index","SysUser"),pageindex=ViewBag.PageIndex})
     </section>
 
 </main>

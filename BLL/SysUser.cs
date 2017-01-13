@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+
 namespace SysChain.BLL
 {
 	public class SysUser
@@ -15,6 +17,15 @@ namespace SysChain.BLL
 		public int Insert(Model.SysUser Model)
 		{
 			return dal.Insert(Model);
+		}
+		/// <summary>
+		/// 根据条件获得角色数量
+		/// </summary>
+		/// <returns>The count.</returns>
+		/// <param name="strWhere">String where.</param>
+		public int GetCount(string strWhere)
+		{
+			return dal.GetCount(strWhere);
 		}
 		/// <summary>
 		/// 修改密码
@@ -54,6 +65,18 @@ namespace SysChain.BLL
 		public Model.SysUser GetEntity(string LoginName,string LoginPassword)
 		{
 			return dal.GetEntity(LoginName,LoginPassword);
+		}
+		/// <summary>
+		/// 分页获取数据列表
+		/// </summary>
+		/// <returns>返回实体集合</returns>
+		/// <param name="strWhere">查询条件</param>
+		/// <param name="orderby">排序字段</param>
+		/// <param name="startIndex">开始数目</param>
+		/// <param name="endIndex">结束数目</param>
+		public List<Model.VM_SysUser> GetListByPage(string strWhere, string orderby, int startIndex, int endIndex)
+		{
+			return dal.GetListByPage(strWhere, orderby, startIndex, endIndex);
 		}
 	}
 }

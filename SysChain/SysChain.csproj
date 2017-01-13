@@ -112,10 +112,8 @@
     <Folder Include="Content\Public\Hack\js\" />
     <Folder Include="Content\Public\Images\ico\" />
     <Folder Include="Content\Home\Images\" />
-    <Folder Include="ViewModels\" />
     <Folder Include="Views\Member\" />
     <Folder Include="Content\Public\Plugin\echarts\" />
-    <Folder Include="Areas\Admin\ViewModels\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Areas\Admin\Views\SysConfig\" />
     <Folder Include="Areas\Admin\Views\SysMoudle\" />
@@ -137,7 +135,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="Helper\CompressAttribute.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="ViewModels\LoginModel.cs" />
     <Compile Include="Controllers\MemberController.cs" />
     <Compile Include="Areas\Admin\Controllers\SysConfigController.cs" />
     <Compile Include="Areas\Admin\Controllers\SysMoudleController.cs" />

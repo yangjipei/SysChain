@@ -31,14 +31,19 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SysUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SysUserInfo.cs" />
-    <Compile Include="SysRole.cs" />
-    <Compile Include="SysMoudle.cs" />
-    <Compile Include="SysRoleAndMoudle.cs" />
-    <Compile Include="SysCategory.cs" />
-    <Compile Include="MoudleForSelect.cs" />
+    <Compile Include="Mapping\SysCategory.cs" />
+    <Compile Include="Mapping\SysMoudle.cs" />
+    <Compile Include="Mapping\SysRole.cs" />
+    <Compile Include="Mapping\SysRoleAndMoudle.cs" />
+    <Compile Include="Mapping\SysUser.cs" />
+    <Compile Include="Mapping\SysUserInfo.cs" />
+    <Compile Include="ViewModel\VM_SysUser.cs" />
+    <Compile Include="ViewModel\LoginModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewModel\" />
+    <Folder Include="Mapping\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
