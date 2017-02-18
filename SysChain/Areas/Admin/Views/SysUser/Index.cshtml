@@ -2,6 +2,11 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 @model List<SysChain.Model.VM_SysUser>
+@section Scripts
+{
+	@Scripts.Render("~/js/plugin/popwin")
+	@Scripts.Render("~/js/uindex")
+}
 <div id="header-crumb">
     <p>
         <i class="fa fa-lg fa-home"></i>
@@ -23,9 +28,10 @@
                     <input id="keywords" name="keywords"  type="text" maxlength="32" placeholder="请输入姓名搜索〜" value="@ViewBag.KeyWords"/>
                     <button  type="submit"><i class="fa fa-search"></i></button>
                 </p>
+				<input type="hidden" name="index" id="index"/>
             </form>
             <div class="operate">
-                <a class="btn btn-primary" href="#" title="创建用户"><i class="i i-plus2"></i>创建用户</a>
+                <a class="btn btn-primary" href="@Url.Action("New","SysUser",new{area="Admin"})" data-panel-init="on" title="创建用户"><i class="i i-plus2"></i>创建用户</a>
             </div>
         </aside>
 

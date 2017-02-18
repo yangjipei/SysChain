@@ -298,7 +298,7 @@
     <Content Include="Content\Home\Images\store\icon4.png" />
     <Content Include="Content\Home\Images\login\logo.jpg" />
     <Content Include="Content\Public\Plugin\chosen\chosen.jquery.min.js" />
-    <Content Include="Content\Public\Plugin\chosen\chosen.min.css" />
+    <Content Include="Content\Public\Plugin\chosen\chosen.css" />
     <Content Include="Content\Public\Plugin\chosen\chosen-sprite.png" />
     <Content Include="Content\Public\Plugin\chosen\chosen-sprite%402x.png" />
     <Content Include="Content\Admin\Scripts\Moudle_New.js" />
@@ -325,6 +325,9 @@
     <Content Include="Content\Admin\Images\img\selected%402x.png" />
     <Content Include="Content\Admin\Images\img\zheng.jpg" />
     <Content Include="Content\Admin\Scripts\Role_Access.js" />
+    <Content Include="Areas\Admin\Views\SysUser\New.cshtml" />
+    <Content Include="Content\Admin\Scripts\User_New.js" />
+    <Content Include="Content\Admin\Scripts\User_Index.js" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

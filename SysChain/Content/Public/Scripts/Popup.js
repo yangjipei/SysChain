@@ -1016,6 +1016,21 @@ f7.plugin.footer = (function() {
 
 })(); //f7.plugin.footer()
 
+//通用分页
+pagePlugin=function($html)
+{
+	var $pageInit = $('a[data-page-init="on"]', $html);
+	if ($pageInit.length) {
+	$html.on('click', 'a[data-page-init="on"]', function(evt) {
+		evt.stopPropagation();
+		evt.preventDefault();
+		var $a = $(this),
+		page = $a.data('size');
+		$("#index").val(page);
+		$("#frmSearch").submit();
+	});
+	};
+}
 
 //删除通用操作
 moudle_delete_init=function($html,$flag,tips){

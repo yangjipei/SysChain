@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Text;
 using SysChain.DBUtility;
 using System.Linq;
+using SysChain.Model;
 namespace SysChain.DAL
 {
 	public class SysRole
@@ -250,6 +251,40 @@ namespace SysChain.DAL
 				}
 			}
 			return li;
+		}
+		/// <summary>
+		/// 返回角色SelectList
+		/// </summary>
+		/// <returns>The role for select.</returns>
+		/// <param name="strWhere">String where.</param>
+		public List<VM_SysRole> GetRoleForSelect(string strWhere)
+		{
+			StringBuilder strSql = new StringBuilder();
+			strSql.Append(" Select RoleID,Name From SysRole");
+			if (!string.IsNullOrEmpty(strWhere.Trim()))
+			{
+				strSql.Append(" WHERE " + strWhere);
+			}
+			DataTable dt = DbHelperSQL.Query(strSql.ToString()).Tables[0];
+			List<Model.VM_SysRole> ModelList = new List<Model.VM_SysRole>();
+			if (dt.Rows.Count > 0)
+			{
+				foreach (DataRow dr in dt.Rows)
+				{
+					VM_SysRole model = new VM_SysRole();
+					if (dr["RoleID"].ToString() != "")
+					{
+						model.RoleID = int.Parse(dr["RoleID"].ToString());
+					}
+					model.RoleName = dr["Name"].ToString();
+					ModelList.Add(model);
+				}
+				return ModelList;
+			}
+			else
+			{
+				return null;
+			}
 		}
 	}
 }

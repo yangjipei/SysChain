@@ -16,36 +16,27 @@ namespace SysChain.DAL
 		/// </summary>
 		/// <returns>The add.</returns>
 		/// <param name="Model">Model.</param>
-		public int Insert(Model.SysUser Model)
+		public int Insert(Model.SysUser Model, Model.SysUserInfo Info)
 		{
+			List<string> li = new List<string>();
 			StringBuilder strSql = new StringBuilder();
-			strSql.Append(" if not exists(select LoginName from SysUser where LoginName =@LoginName ) begin ");
+
+			strSql.Append(" Declare  @ID int;  ");
+			strSql.Append(" set  @ID=0;  ");
+			strSql.Append(" if not exists(select LoginName from SysUser where LoginName ='"+Model.LoginName+"' ) begin ");
 			strSql.Append(" insert into SysUser(");
 			strSql.Append(" LoginName,LoginPassword,ParentID,RoleID,State)");
 			strSql.Append(" values (");
-			strSql.Append(" @LoginName,@LoginPassword,@ParentID,@RoleID,@State)");
-			strSql.Append(" ; select @@IDENTITY; ");
-			strSql.Append(" end ELSE begin SELECT -1 END");
-			SqlParameter[] parameters = {
-					new SqlParameter("@LoginName", SqlDbType.NVarChar,50),
-					new SqlParameter("@LoginPassword", SqlDbType.NVarChar,50),
-					new SqlParameter("@ParentID", SqlDbType.Int,4),
-					new SqlParameter("@RoleID", SqlDbType.Int,4),
-					new SqlParameter("@State", SqlDbType.Bit,1)};
-			parameters[0].Value = Model.LoginName;
-			parameters[1].Value =DBUtility.DESEncrypt.Encrypt(Model.LoginPassword);
-			parameters[2].Value = Model.ParentID;
-			parameters[3].Value = Model.RoleID;
-			parameters[4].Value = Model.State;
-			object obj = DbHelperSQL.GetSingle(strSql.ToString(), parameters);
-			if (obj == null)
-			{
-				return 0;
-			}
-			else
-			{
-				return Convert.ToInt32(obj);
-			}
+			strSql.Append(" '"+Model.LoginName+"','"+DBUtility.DESEncrypt.Encrypt(Model.LoginPassword)+"',"+ Model.ParentID+","+Model.RoleID+","+(Model.State==true?"1":"0")+")");
+			strSql.Append(" ; set @ID=@@IDENTITY; ");
+			strSql.Append(" END;");
+			strSql.Append(" if @ID>0 begin ");
+			strSql.Append(" insert into SysUserInfo(");
+			strSql.Append("  UserID,Gender,Name,Telephone,Department,RegisterDate)");
+			strSql.Append(" values( @ID," + (Info.Gender == true ? "1" : "0") + ",'"+Info.Name+"','"+Info.Telephone+"','"+Info.Department+"','"+Info.RegisterDate+"');");
+			strSql.Append(" END;");
+			li.Add(strSql.ToString());
+			return DbHelperSQL.ExecuteSqlTran(li);
 		} 
 		/// <summary>
 		/// 根据条件获得用户数量
@@ -120,19 +111,22 @@ namespace SysChain.DAL
 		/// </summary>
 		/// <returns>SysUser实体</returns>
 		/// <param name="UserID">用户编号.</param>
-		public Model.SysUser GetEntity(int UserID)
+		public Model.VM_SysUser GetEntity(int UserID)
 		{
 			StringBuilder strSql = new StringBuilder();
-			strSql.Append("select  top 1 UserID,LoginName,ParentID,RoleID,State from SysUser ");
-			strSql.Append(" where UserID=@UserID");
+			strSql.Append("select  top 1 T.UserID,T.LoginName,R.RoleID,R.Name as RoleName,I.Name,I.Gender,I.Telephone,I.Department,I.RegisterDate,T.State ");
+			strSql.Append(" from SysUser T ");
+			strSql.Append(" inner join SysRole R on T.RoleID=R.RoleID ");
+			strSql.Append(" inner join SysUserInfo I on T.UserID=I.UserID ");
+			strSql.Append(" where T.UserID=@UserID");
 			SqlParameter[] parameters = {
 					new SqlParameter("@UserID", SqlDbType.Int,4)
 			};
 			parameters[0].Value = UserID;
 			DataTable dt = DbHelperSQL.Query(strSql.ToString(), parameters).Tables[0];
-			return SetEntity(dt.Rows[0]);
+			return SetEntityForVM(dt.Rows[0]);
 		}
-		public Model.SysUser GetEntity(string LoginName,string LoginPassword)
+		public Model.SysUser GetEntity(Model.VM_SysLogin model)
 		{
 			StringBuilder strSql = new StringBuilder();
 			strSql.Append("select  top 1 UserID,LoginName,ParentID,RoleID,State from SysUser ");
@@ -141,8 +135,8 @@ namespace SysChain.DAL
 					new SqlParameter("@LoginName", SqlDbType.NVarChar,50),
 					new SqlParameter("@LoginPassword", SqlDbType.NVarChar,50)
 			};
-			parameters[0].Value = LoginName;
-			parameters[1].Value = DBUtility.DESEncrypt.Encrypt(LoginPassword);
+			parameters[0].Value = model.LoginName;
+			parameters[1].Value = DBUtility.DESEncrypt.Encrypt(model.LoginPassword);
 			DataTable dt = DbHelperSQL.Query(strSql.ToString(), parameters).Tables[0];
 			if (dt.Rows.Count > 0)
 			{
@@ -201,15 +195,22 @@ namespace SysChain.DAL
 			Model.VM_SysUser model = new Model.VM_SysUser();
 			if (dr != null)
 			{
-				if (dr["Row"].ToString() != "")
+				if (dr.Table.Columns.Contains("Row"))
 				{
-					model.Row = int.Parse(dr["Row"].ToString());
+					if (dr["Row"].ToString() != "")
+					{
+						model.Row = int.Parse(dr["Row"].ToString());
+					}
 				}
 				if (dr["UserID"].ToString() != "")
 				{
 					model.UserID = int.Parse(dr["UserID"].ToString());
 				}
 				model.LoginName = dr["LoginName"].ToString();
+				if (dr["RoleID"].ToString() != "")
+				{
+					model.RoleID = int.Parse(dr["RoleID"].ToString());
+				}
 				model.RoleName = dr["RoleName"].ToString();
 				model.Name= dr["Name"].ToString();
 				if (dr["Gender"].ToString() != "")
@@ -261,7 +262,7 @@ namespace SysChain.DAL
 			{
 				strSql.Append("order by T.UserID ");
 			}
-			strSql.Append(")AS Row,T.UserID,T.LoginName,R.Name as RoleName,I.Name,I.Gender\r\n,I.Telephone,I.Department,I.RegisterDate,T.State");
+			strSql.Append(")AS Row,T.UserID,T.LoginName,R.RoleID,R.Name as RoleName,I.Name,I.Gender,I.Telephone,I.Department,I.RegisterDate,T.State");
 			strSql.Append("  ");
 			strSql.Append(" from SysUser T ");
 			strSql.Append(" inner join SysRole R on T.RoleID=R.RoleID ");

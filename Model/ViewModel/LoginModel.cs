@@ -1,9 +1,9 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace SysChain
+namespace SysChain.Model
 {
-	public class LoginModel
+	public class VM_SysLogin
 	{
 		[Required(ErrorMessage ="登录账号不能为空")]
 		public string LoginName { set; get; }

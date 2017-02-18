@@ -14,18 +14,18 @@ namespace SysChain.Controllers
 		public ActionResult Login()
 		{
 			ViewBag.Title = "欢迎登录后台管理系统";
-			SysChain.LoginModel model = new LoginModel();
+			SysChain.Model.VM_SysLogin model = new Model.VM_SysLogin();
 			model.LoginName = "admin";
 			return View(model);
 		}
 		[HttpPost]
-		public JsonResult Login(SysChain.LoginModel model)
+		public JsonResult Login(SysChain.Model.VM_SysLogin model)
 		{
 			Helper.ResultInfo<bool> rs = new Helper.ResultInfo<bool>();
 			if (ModelState.IsValid)
 			{
 				BLL.SysUser Operation = new BLL.SysUser();
-				SysChain.Model.SysUser user = Operation.GetEntity(model.LoginName, model.LoginPassword);
+				SysChain.Model.SysUser user = Operation.GetEntity(model);
 				if (user != null)
 				{
 					Session["UserInfo"] = user;

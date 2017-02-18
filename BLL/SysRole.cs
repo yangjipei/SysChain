@@ -84,5 +84,14 @@ namespace SysChain.BLL
 		{
 			return dal.GetMoudleIDByRoleID(RoleID);
 		}
+		/// <summary>
+		/// 返回角色SelectList
+		/// </summary>
+		/// <returns>The role for select.</returns>
+		/// <param name="strWhere">String where.</param>
+		public List<Model.VM_SysRole> GetRoleForSelect(string strWhere)
+		{
+			return dal.GetRoleForSelect(strWhere);
+		}
 	}
 }

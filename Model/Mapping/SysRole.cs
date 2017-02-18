@@ -14,7 +14,7 @@ namespace SysChain.Model
 		/// <summary>
 		/// 角色名称
 		/// </summary>
-		[Required(ErrorMessage = "模块名称必填.")]
+		[Required(ErrorMessage = "角色名称必填.")]
 		public string Name { set; get; }
 		/// <summary>
 		/// 使用角色的人数

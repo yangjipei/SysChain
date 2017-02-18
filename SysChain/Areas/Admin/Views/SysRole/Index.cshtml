@@ -28,6 +28,7 @@
                     <input id="keywords" name="keywords" type="text" maxlength="32" placeholder="输入角色名称,快来搜我〜" value="@ViewBag.KeyWords" />
                     <button  type="submit"><i class="fa fa-search"></i></button>
                 </p>
+				<input type="hidden" name="index" id="index"/>
             </form>
             <div class="operate">
                 <a id="btnNew" class="btn btn-primary" href="@Url.Action("New","SysRole",new{area="Admin"})" data-panel-init="on" title="创建角色"><i class="fa fa-plus-circle"></i>创建角色</a>

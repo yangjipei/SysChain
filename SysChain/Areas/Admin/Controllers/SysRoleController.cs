@@ -120,6 +120,7 @@ namespace SysChain.Areas.Admin.Controllers
 		public ActionResult New(Model.SysRole model)
 		{
 			Helper.ResultInfo<int> rs = new Helper.ResultInfo<int>();
+			JsonResult jr = new JsonResult();
 			if (ModelState.IsValid)
 			{
 				if (model.RoleID > 0)
@@ -135,7 +136,6 @@ namespace SysChain.Areas.Admin.Controllers
 						rs.Msg = "修改失败.";
 						rs.Result = false;
 					}
-					JsonResult jr = new JsonResult();
 					jr.Data = rs;
 					return jr;
 				}
@@ -152,7 +152,6 @@ namespace SysChain.Areas.Admin.Controllers
 						rs.Msg = "新增失败.";
 						rs.Result = false;
 					}
-					JsonResult jr = new JsonResult();
 					jr.Data = rs;
 					return jr;
 				}
@@ -175,7 +174,7 @@ namespace SysChain.Areas.Admin.Controllers
 				rs.Msg = sbErrors.ToString();
 				rs.Result = false;
 				rs.Url = "";
-				JsonResult jr = new JsonResult();
+
 				jr.Data = rs;
 				return jr;
 			}
@@ -231,6 +230,14 @@ namespace SysChain.Areas.Admin.Controllers
 			JsonResult jr = new JsonResult();
 			jr.Data = rs;
 			return jr;
+		}
+		/// <summary>
+		/// 角色下来列表
+		/// </summary>
+		/// <returns>The select.</returns>
+		public ActionResult Select()
+		{
+			return	Json(Opr.GetRoleForSelect(" State=1"));
 		}
 	}
 }

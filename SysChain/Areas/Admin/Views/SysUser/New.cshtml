@@ -1,0 +1,70 @@
+﻿@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@model SysChain.Model.VM_SysUser
+@section Scripts
+{
+	@Scripts.Render("~/js/unew")
+	<script type="text/javascript" src="~/Content/Public/Plugin/chosen/chosen.jquery.min.js"></script>
+}
+@section Styles
+{
+	<link type="text/css" rel="stylesheet" href="~/Content/Public/Plugin/chosen/chosen.css"/>
+	<style type="text/css">
+		.chosen-search input {width:100% !important;}
+	</style>
+}
+<div id="header-crumb">
+    <p>
+        <i class="fa fa-lg fa-home"></i>
+        <a href="#" title="系统管理">系统管理</a>
+        <i class="fa fa-angle-right"></i>
+        <a href="#" title="角色管理">用户管理</a>
+        <i class="fa fa-angle-right"></i>
+        <span>新增用户</span>
+    </p>
+</div>
+<main id="panel">
+    <section class="form">
+        <header>
+            <h1>新增用户</h1>
+        </header>
+        <form id="frmNew" action="@Url.Action("New","SysUser")" method="post">
+            <p>
+                <i class="red">*</i><span>账号：</span>
+				@Html.TextBoxFor(m => m.LoginName,new {placeholder="请输入登录账号",autocomplete="off"})
+            </p>
+            <p>
+                <i class="red">*</i><span>角色：</span>
+                <select name="RoleID" id="RoleID" style="padding:0px;">
+                </select>
+            </p>
+            <p>
+               <i class="red">*</i> <span>姓名：</span>
+				@Html.TextBoxFor(m => m.Name,new {placeholder="请输入使用者姓名",autocomplete="off"})
+            </p>
+            <p>
+               <i class="red">*</i> <span>性别：</span>
+				<input type="radio" value="True" checked="checked" name="Gender"> <label>男</label>
+				<input type="radio" value="False" name="Gender">  <label>女</label>
+            </p>
+            <p>
+               <i class="red">*</i> <span>手机：</span>
+				@Html.TextBoxFor(m => m.Telephone,new {placeholder="请输入手机号码",autocomplete="off"})
+            </p>
+            <p>
+               <i class="red">*</i> <span>部门：</span>
+				@Html.TextBoxFor(m => m.Department,new {placeholder="请输入所在部门",autocomplete="off"})
+            </p>
+            <footer>
+                <button class="btn btn-primary" type="submit">确定</button>
+                <a class="btn btn-cancel btn-close" href="#" title="取消">取消</a>
+            </footer>
+			@Html.HiddenFor(m => m.UserID)
+			@Html.HiddenFor(m => m.State)
+			@Html.HiddenFor(m => m.ParentID)
+			<input type="hidden" value="" id="currentid" name="currentid" />
+        </form>
+    </section>
+</main>
+

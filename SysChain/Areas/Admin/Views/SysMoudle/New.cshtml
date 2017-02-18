@@ -24,11 +24,11 @@
         </header>
         <form id="frmNew" action="@Url.Action("New","SysMoudle")" method="post">
             <p>
-                <span>模块名称：</span>
+                <i class="red">*</i><span>模块名称：</span>
 				@Html.TextBoxFor(m => m.Name,new {placeholder="请输入模块名称",autocomplete="off"})
             </p>
             <p>
-                <span>模块样式：</span>
+                <i class="red">*</i><span>模块样式：</span>
 				@Html.TextBoxFor(m => m.Style,new {placeholder="样式请参考：http://fontawesome.dashgame.com",autocomplete="off"})
             </p>
             <p>

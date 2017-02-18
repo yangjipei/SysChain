@@ -40,6 +40,7 @@
     <Compile Include="Mapping\SysUserInfo.cs" />
     <Compile Include="ViewModel\VM_SysUser.cs" />
     <Compile Include="ViewModel\LoginModel.cs" />
+    <Compile Include="ViewModel\VM_SysRole.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModel\" />

@@ -14,9 +14,21 @@ namespace SysChain.BLL
 		/// </summary>
 		/// <returns>新增的用户编号,返回值<0:表示是吧</returns>
 		/// <param name="Model">用户实体</param>
-		public int Insert(Model.SysUser Model)
+		public int Insert(Model.VM_SysUser model)
 		{
-			return dal.Insert(Model);
+			Model.SysUser m = new Model.SysUser();
+			m.LoginName = model.LoginName;
+			m.LoginPassword = "8888888";
+			m.ParentID = model.ParentID;
+			m.RoleID = model.RoleID;
+			m.State = true;
+			Model.SysUserInfo ui = new Model.SysUserInfo();
+			ui.Gender = model.Gender;
+			ui.Department = model.Department;
+			ui.Name = model.Name;
+			ui.RegisterDate = DateTime.Now;
+			ui.Telephone = model.Telephone;
+			return dal.Insert(m, ui);
 		}
 		/// <summary>
 		/// 根据条件获得角色数量
@@ -52,7 +64,7 @@ namespace SysChain.BLL
 		/// </summary>
 		/// <returns>SysUser实体</returns>
 		/// <param name="UserID">用户编号.</param>
-		public Model.SysUser GetEntity(int UserID)
+		public Model.VM_SysUser GetEntity(int UserID)
 		{
 			return dal.GetEntity(UserID);
 		}
@@ -60,11 +72,9 @@ namespace SysChain.BLL
 		/// 获得指定系统用户实体
 		/// </summary>
 		/// <returns>SysUser实体</returns>
-		/// <param name="LoginName">账号.</param>
-		/// /// <param name="LoginPassword">密码.</param>
-		public Model.SysUser GetEntity(string LoginName,string LoginPassword)
+		public Model.SysUser GetEntity(Model.VM_SysLogin model)
 		{
-			return dal.GetEntity(LoginName,LoginPassword);
+			return dal.GetEntity(model);
 		}
 		/// <summary>
 		/// 分页获取数据列表
