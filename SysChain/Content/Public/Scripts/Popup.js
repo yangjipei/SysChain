@@ -1050,6 +1050,10 @@ moudle_delete_init=function($html,$flag,tips){
 					return;
 				}
 			}
+			if(tips==null|| tips=="")
+			{
+				tips=$(this).data("msg");
+			}
 			popup.loading.init();
 			popup.alert.init().show(tips,{confirm:function(evt){
 				$.ajax({  

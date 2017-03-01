@@ -82,8 +82,8 @@
 					</td>
                     <td>@m.RegisterDate</td>
                     <td>
-                        <a class="btn-icon" href="#" title="编辑"><i class="fa fa-fw fa-edit"></i>编辑</a>
-                        <a class="btn-icon" href="delete" title="删除"><i class="fa fa-fw fa-trash-o"></i>删除</a>
+                        <a class="btn-icon" href="@Url.Action("New","SysUser",new{area="Admin",id=@m.UserID})" data-panel-init="on" title="编辑用户"><i class="fa fa-fw fa-edit"></i>编辑</a>
+                        <a class="btn-icon" href="@Url.Action("Delete","SysUser",new{area="Admin",id=@m.UserID})" data-delete-moudle="on"  data-msg="该用户所有资料都会被删除且无法恢复，<br />是否继续操作？" title="删除用户"><i class="fa fa-fw fa-trash-o"></i>删除</a>
                     </td>
                 </tr>
 				}
