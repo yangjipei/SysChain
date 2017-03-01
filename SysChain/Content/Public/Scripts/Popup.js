@@ -1075,7 +1075,7 @@ moudle_delete_init=function($html,$flag,tips){
 				}); 
 			},cancel:function(evt){
 				return;
-			}},true,"删除提示");
+			}},true,$(this).attr("title"));
 
 		});
 	};
@@ -1109,6 +1109,52 @@ moudle_update_init=function($html){
 		});
 	};
 };
+//删除通用操作
+moudle_common_init=function($html,$flag,tips){
+	$delInit=$('a[data-common-moudle="on"]', $html)
+		if ($delInit.length) {
+		$html.on('click', 'a[data-common-moudle="on"]', function(evt) {
+			evt.stopPropagation();
+			evt.preventDefault();
+			var url=$(this).attr("href");
+			if($flag)
+			{
+				var temp=$(this).data("flag");
+				var msg=$(this).data("msg");
+				if(temp>0)
+				{
+					popup.alert.init().show(msg,"",true,"提示");
+					return;
+				}
+			}
+			if(tips==null|| tips=="")
+			{
+				tips=$(this).data("msg");
+			}
+			popup.loading.init();
+			popup.alert.init().show(tips,{confirm:function(evt){
+				$.ajax({  
+				    type: "Post",  
+				    url: url,
+				    dataType: "json",   
+				    success: function (data) {  
+				      if (data.Result) { 
+				      popup.info.init().show(data.Msg, true);
+				      }  
+				      else {  
+				       popup.info.init().show(data.Msg, false); 
+				      }  
+				    },   
+				    error: function (XMLHttpRequest, textStatus, errorThrown) {  
+						 popup.info.init().show("系统错误.", false); 
+				    }  
+				}); 
+			},cancel:function(evt){
+				return;
+			}},true,$(this).attr("title"));
 
+		});
+	};
+};
 
 

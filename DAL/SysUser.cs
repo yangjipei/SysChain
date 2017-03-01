@@ -37,7 +37,22 @@ namespace SysChain.DAL
 			strSql.Append(" END;");
 			li.Add(strSql.ToString());
 			return DbHelperSQL.ExecuteSqlTran(li);
-		} 
+		}
+		/// <summary>
+		/// 更新用户登陆及基本信息
+		/// </summary>
+		/// <returns>The update.</returns>
+		/// <param name="model">Model.</param>
+		/// <param name="info">Info.</param>
+		public int Update(Model.SysUser model, Model.SysUserInfo info)
+		{
+			List<string> li = new List<string>();
+			StringBuilder strSql = new StringBuilder();
+			strSql.Append(" Update SysUser set LoginName='"+model.LoginName+"',RoleID="+model.RoleID+" where UserID= "+ model.UserID+"");
+			strSql.Append(" Update SysUserInfo set Gender=" + (info.Gender == true ? "1" : "0") + ",Name='"+info.Name+"',Telephone='"+info.Telephone+"',Department='"+info.Department+"' where UserID= "+info.UserID);
+			li.Add(strSql.ToString());
+			return DbHelperSQL.ExecuteSqlTran(li);
+		}
 		/// <summary>
 		/// 根据条件获得用户数量
 		/// </summary>
@@ -85,6 +100,18 @@ namespace SysChain.DAL
 			parameters[0].Value = LoginName;
 			parameters[1].Value = DBUtility.DESEncrypt.Encrypt(LoginPassword);
 			parameters[2].Value = DBUtility.DESEncrypt.Encrypt(NewPassword);
+			return DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
+		}
+
+		public int ModifyPassword(int UserID)
+		{
+			StringBuilder strSql = new StringBuilder();
+			strSql.Append("Update SysUser Set LoginPassword =@NewPassword Where UserID=@UserID ");
+			SqlParameter[] parameters = {
+					new SqlParameter("@UserID", SqlDbType.Int,50),
+					new SqlParameter("@NewPassword", SqlDbType.NVarChar,50)};
+			parameters[0].Value = UserID;
+			parameters[1].Value = DBUtility.DESEncrypt.Encrypt("mm888888");
 			return DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
 		}
 		/// <summary>

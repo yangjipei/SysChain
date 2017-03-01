@@ -17,6 +17,12 @@ namespace SysChain.Areas.Admin.Controllers
 			if (Opr == null) { Opr = new BLL.SysUser(); }
 			base.Initialize(requestContext);
 		}
+		/// <summary>
+		/// 首页列表
+		/// </summary>
+		/// <returns>The index.</returns>
+		/// <param name="index">Index.</param>
+		/// <param name="keywords">Keywords.</param>
 		public ActionResult  Index(int? index, string keywords)
 		{
 			ViewBag.Title = "后端管理系统-用户管理";
@@ -33,6 +39,11 @@ namespace SysChain.Areas.Admin.Controllers
 			List<Model.VM_SysUser> list = Opr.GetListByPage(strWhere, "", (PageIndex - 1) * PageSize, PageIndex * PageSize);
 			return View(list);
 		}
+		/// <summary>
+		/// 新增／修改 展示页面
+		/// </summary>
+		/// <returns>The new.</returns>
+		/// <param name="id">Identifier.</param>
 		public ActionResult New(int? id)
 		{
 			int UserID = id == null ? 0 : (int)id;
@@ -42,6 +53,7 @@ namespace SysChain.Areas.Admin.Controllers
 			{
 				model = Opr.GetEntity(UserID);
 				ViewBag.Title = "正在编辑用户： " + model.Name;
+				ViewBag.RoleID = model.RoleID;
 			}
 			else
 			{
@@ -53,6 +65,11 @@ namespace SysChain.Areas.Admin.Controllers
 			}
 			return View(model);
 		}
+		/// <summary>
+		/// 新增／修改操作
+		/// </summary>
+		/// <returns>The new.</returns>
+		/// <param name="model">Model.</param>
 		[HttpPost]
 		public ActionResult New(Model.VM_SysUser model)
 		{
@@ -63,7 +80,17 @@ namespace SysChain.Areas.Admin.Controllers
 				if (model.UserID > 0)
 				{
 					//修改
-
+					rs.Data = Opr.Update(model);
+					if (rs.Data > 0)
+					{
+						rs.Msg = "更新成功.";
+						rs.Result = true;
+					}
+					else
+					{
+						rs.Msg = "更新失败.";
+						rs.Result = false;
+					}
 					jr.Data = rs;
 					return jr;
 				}
@@ -106,5 +133,47 @@ namespace SysChain.Areas.Admin.Controllers
 				return jr;
 			}
 		}
+		[HttpPost]
+		public ActionResult Freeze(int id)
+		{
+			Helper.ResultInfo<int> rs = new Helper.ResultInfo<int>();
+			rs.Data = Opr.UpdateState(id);
+			if (rs.Data > 0)
+			{
+				rs.Msg = "操作成功.";
+				rs.Result = true;
+				rs.Url = "";
+			}
+			else
+			{
+				rs.Msg = "操作失败.";
+				rs.Result = false;
+				rs.Url = "";
+			}
+			JsonResult jr = new JsonResult();
+			jr.Data = rs;
+			return jr;
+		}
+		public ActionResult Reset(int id)
+		{
+			Helper.ResultInfo<int> rs = new Helper.ResultInfo<int>();
+			rs.Data = Opr.ModifyPassword(id);
+			if (rs.Data > 0)
+			{
+				rs.Msg = "重置密码成功.";
+				rs.Result = true;
+				rs.Url = "";
+			}
+			else
+			{
+				rs.Msg = "重置密码失败.";
+				rs.Result = false;
+				rs.Url = "";
+			}
+			JsonResult jr = new JsonResult();
+			jr.Data = rs;
+			return jr;
+		}
+
 	}
 }

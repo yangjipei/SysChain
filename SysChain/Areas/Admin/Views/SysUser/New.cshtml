@@ -63,7 +63,7 @@
 			@Html.HiddenFor(m => m.UserID)
 			@Html.HiddenFor(m => m.State)
 			@Html.HiddenFor(m => m.ParentID)
-			<input type="hidden" value="" id="currentid" name="currentid" />
+			<input type="hidden" value="@ViewBag.RoleID" id="currentid" name="currentid" />
         </form>
     </section>
 </main>

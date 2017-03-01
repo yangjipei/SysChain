@@ -64,7 +64,7 @@ getData=function(){
 			if(data!=null)
 			{
 				$.each(data,function(i){
-					if(data[i].MoudleID==currentid)
+					if(data[i].RoleID==currentid)
 					{	
 						strHtml.push('<option value="'+data[i].RoleID+'" selected="selected">'+data[i].RoleName+'</option>');
 					}else{

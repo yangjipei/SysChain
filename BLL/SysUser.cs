@@ -18,7 +18,7 @@ namespace SysChain.BLL
 		{
 			Model.SysUser m = new Model.SysUser();
 			m.LoginName = model.LoginName;
-			m.LoginPassword = "8888888";
+			m.LoginPassword = "mm888888";
 			m.ParentID = model.ParentID;
 			m.RoleID = model.RoleID;
 			m.State = true;
@@ -29,6 +29,24 @@ namespace SysChain.BLL
 			ui.RegisterDate = DateTime.Now;
 			ui.Telephone = model.Telephone;
 			return dal.Insert(m, ui);
+		}
+		/// <summary>
+		/// 更新用户登陆及基本信息
+		/// </summary>
+		/// <returns>The update.</returns>
+		public int Update(Model.VM_SysUser model)
+		{
+			Model.SysUser m = new Model.SysUser();
+			m.UserID = model.UserID;
+			m.LoginName = model.LoginName;
+			m.RoleID = model.RoleID;
+			Model.SysUserInfo ui = new Model.SysUserInfo();
+			ui.Gender = model.Gender;
+			ui.Department = model.Department;
+			ui.Name = model.Name;
+			ui.Telephone = model.Telephone;
+			ui.UserID = model.UserID;
+			return dal.Update(m, ui);
 		}
 		/// <summary>
 		/// 根据条件获得角色数量
@@ -49,6 +67,10 @@ namespace SysChain.BLL
 		public int ModifyPassword(string LoginName, string LoginPassword, string NewPassword)
 		{
 			return dal.ModifyPassword(LoginName,LoginPassword,NewPassword);
+		}
+		public int ModifyPassword(int UserID)
+		{
+			return dal.ModifyPassword(UserID);
 		}
 		/// <summary>
 		/// 更新账号状态

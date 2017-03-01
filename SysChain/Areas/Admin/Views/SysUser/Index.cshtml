@@ -63,10 +63,10 @@
 					<td>
 						@if(!m.Gender)
 						{
-	                    	<i class="red">女</i>
+	                    	<i>女</i>
 						}else
 						{
-							<i class="green">男</i>
+							<i>男</i>
 						}	
 					</td>
                     <td>@m.Telephone</td>
@@ -74,16 +74,23 @@
                     <td>
 						@if(!m.State)
 						{
-	                    	<i class="red">禁用</i>
+	                    	<i class="red">冻结</i>
 						}else
 						{
-							<i class="green">启用</i>
+							<i class="green">正常</i>
 						}
 					</td>
                     <td>@m.RegisterDate</td>
                     <td>
                         <a class="btn-icon" href="@Url.Action("New","SysUser",new{area="Admin",id=@m.UserID})" data-panel-init="on" title="编辑用户"><i class="fa fa-fw fa-edit"></i>编辑</a>
-                        <a class="btn-icon" href="@Url.Action("Delete","SysUser",new{area="Admin",id=@m.UserID})" data-delete-moudle="on"  data-msg="该用户所有资料都会被删除且无法恢复，<br />是否继续操作？" title="删除用户"><i class="fa fa-fw fa-trash-o"></i>删除</a>
+						@if(!m.State)
+						{
+						<a class="btn-icon" href="@Url.Action("Freeze","SysUser",new{area="Admin",id=@m.UserID})" data-delete-moudle="on"  data-msg="解冻该用户,是否继续操作？" title="解冻用户"><i class="fa fa-fw fa-user"></i>解冻</a>
+						}else
+						{
+ 						<a class="btn-icon" href="@Url.Action("Freeze","SysUser",new{area="Admin",id=@m.UserID})" data-delete-moudle="on"  data-msg="冻结该用户,是否继续操作？" title="冻结用户"><i class="fa fa-fw fa-ban "></i>冻结</a>
+						}
+                       <a class="btn-icon" href="@Url.Action("Reset","SysUser",new{area="Admin",id=@m.UserID})" data-common-moudle="on"  data-msg="重置该用户登陆为:mm888888,是否继续操作？" title="重置密码"><i class="fa fa-fw fa-refresh"></i>重置密码</a>
                     </td>
                 </tr>
 				}
@@ -95,7 +102,6 @@
 
             </tbody>
         </table>
-
 		@Html.Action("PageInfo","Public",new{Totalcount=ViewBag.Totalcount,Url=Url.Action("Index","SysUser"),pageindex=ViewBag.PageIndex})
     </section>
 
