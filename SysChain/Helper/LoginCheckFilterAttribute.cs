@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Security.Policy;
 using System.Web.Http.Filters;
 
@@ -13,24 +14,27 @@ namespace System.Web.Mvc
 
 			if (IsCheck)
 			{
+				string Name = string.Empty;
+				var areaName = filterContext.RouteData.DataTokens["area"];
+				if (areaName != null)
+				{
+					Name = areaName.ToString().ToLower();
+				}
 				//校验用户是否已经登录
 				if (filterContext.HttpContext.Session["UserInfo"] == null)
 				{
-					string Name = string.Empty;
-					var areaName = filterContext.RouteData.DataTokens["area"];
-					if (areaName != null)
-					{
-						 Name = areaName.ToString().ToLower();
-					}
 					if (Name == "admin")
 					{
 						//跳转到登陆页
 						//filterContext.HttpContext.Response.Redirect("/Admin/Member/Login");
 						var Url = new UrlHelper(filterContext.RequestContext);
-						var url = Url.Action("Login", "Member", new { area=""});
+						var url = Url.Action("Login", "Member", new { area = "" });
 						filterContext.Result = new RedirectResult(url);
 					}
 				}
+				//else { 
+				//	//权限控制
+				//}
 			}
 		}
 

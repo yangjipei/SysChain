@@ -27,8 +27,15 @@ namespace SysChain.Areas.Admin.Controllers
 		{
 			List<Model.SysMoudle> ListModel = new List<Model.SysMoudle>();
 			Model.SysUser cm = (Model.SysUser)Session["UserInfo"];
-			ListModel = Opr.GetListByRole(cm.RoleID);
-			Session["MoudleInfo"] = ListModel;
+			if (Session["MoudleInfo"] == null)
+			{
+				ListModel = Opr.GetListByRole(cm.RoleID);
+				Session["MoudleInfo"] = ListModel;
+			}
+			else
+			{
+				ListModel = (List<SysChain.Model.SysMoudle>)Session["MoudleInfo"];
+			}
 			List<Model.SysMoudle> Li = new List<Model.SysMoudle>();
 			foreach (Model.SysMoudle m in ListModel)
 			{

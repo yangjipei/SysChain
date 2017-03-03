@@ -328,6 +328,7 @@
     <Content Include="Areas\Admin\Views\SysUser\New.cshtml" />
     <Content Include="Content\Admin\Scripts\User_New.js" />
     <Content Include="Content\Admin\Scripts\User_Index.js" />
+    <Content Include="Areas\Admin\Views\Public\Err404.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
