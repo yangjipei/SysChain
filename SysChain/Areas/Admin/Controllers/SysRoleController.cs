@@ -26,7 +26,7 @@ namespace SysChain.Areas.Admin.Controllers
 		/// <param name="keywords">Keywords.</param>
 		public ActionResult  Index(int? index,string keywords)
 		{
-			ViewBag.Title = "角色管理";
+			ViewBag.Title = "电商后台管理系统";
 			int PageIndex = index == null ? 1 : (int)index;
 			ViewBag.PageIndex = PageIndex;
 			int PageSize = 5;

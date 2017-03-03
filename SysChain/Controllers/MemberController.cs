@@ -13,7 +13,7 @@ namespace SysChain.Controllers
 		[HttpGet]
 		public ActionResult Login()
 		{
-			ViewBag.Title = "欢迎登录后台管理系统";
+			ViewBag.Title = "欢迎登录电商后台管理系统";
 			SysChain.Model.VM_SysLogin model = new Model.VM_SysLogin();
 			model.LoginName = "admin";
 			return View(model);
@@ -28,11 +28,21 @@ namespace SysChain.Controllers
 				SysChain.Model.SysUser user = Operation.GetEntity(model);
 				if (user != null)
 				{
-					Session["UserInfo"] = user;
-					rs.Data = true;
-					rs.Msg = "登录成功,正在进入系统";
-					rs.Result = true;
-					rs.Url = Url.Action("Index", "Home", new {area="Admin" });
+					if (user.State != true)
+					{
+						rs.Data = false;
+						rs.Msg = "账号已冻结,请联系管理员.";
+						rs.Result = false;
+						rs.Url = "";
+					}
+					else
+					{
+						Session["UserInfo"] = user;
+						rs.Data = true;
+						rs.Msg = "登录成功,正在进入系统";
+						rs.Result = true;
+						rs.Url = Url.Action("Index", "Home", new { area = "Admin" });
+					}
 
 				}
 				else

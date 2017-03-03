@@ -75,6 +75,15 @@ namespace SysChain.BLL
 			return dal.GetList(strWhere, orderBy);
 		}
 		/// <summary>
+		/// 根据角色获得模块
+		/// </summary>
+		/// <returns>The list by role.</returns>
+		/// <param name="RoleID">Role identifier.</param>
+		public List<Model.SysMoudle> GetListByRole(int RoleID)
+		{
+			return dal.GetListByRole(RoleID);	
+		}
+		/// <summary>
 		/// 分页获取数据列表
 		/// </summary>
 		/// <returns>返回实体集合</returns>

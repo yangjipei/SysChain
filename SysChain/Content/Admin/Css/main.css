@@ -1052,7 +1052,7 @@ form .ti-blank {
   position: absolute;
   z-index: 30;
   display: none;
-  width: 260px;
+  width: 300px;
   min-height: 64px;
   background: #3a8eff;
   border-radius: 3px;

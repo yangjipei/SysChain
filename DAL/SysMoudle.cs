@@ -257,6 +257,37 @@ namespace SysChain.DAL
 				return null;
 			}
 		}
+
+		/// <summary>
+		/// 根据角色获得模块
+		/// </summary>
+		/// <returns>The list by role.</returns>
+		/// <param name="RoleID">Role identifier.</param>
+		public List<Model.SysMoudle> GetListByRole(int RoleID)
+		{
+			StringBuilder strSql = new StringBuilder();
+			strSql.Append("SELECT sm.MoudleID,sm.ParentID,sm.Name,sm.LinkUrl,sm.Style,sm.OrderCode,sm.State,sm.MoudleDes FROM SysMoudle as sm");
+			strSql.Append(" INNER JOIN SysRoleAndMoudle srm on sm.MoudleID=srm.MoudleID ");
+			strSql.Append(" where srm.RoleID=@RoleID");
+			SqlParameter[] parameters = {
+					new SqlParameter("@RoleID", SqlDbType.Int,4)};
+			parameters[0].Value = RoleID;
+			DataTable dt = DbHelperSQL.Query(strSql.ToString(),parameters).Tables[0];
+			List<Model.SysMoudle> ModelList = new List<Model.SysMoudle>();
+			if (dt.Rows.Count > 0)
+			{
+				foreach (DataRow dr in dt.Rows)
+				{
+					ModelList.Add(SetEntity(dr));
+				}
+				return ModelList;
+			}
+			else
+			{
+				return null;
+			}
+		}
+
 		/// <summary>
 		/// 分页获取数据列表
 		/// </summary>

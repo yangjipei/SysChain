@@ -49,7 +49,7 @@ getData=function(){
 			var strHtml=[],
 				currentid=$("#parentid").val();
 
-			strHtml.push('<option value="0">请选择...</option>');
+			strHtml.push('<option value="0">一级导航</option>');
 			if(data!=null)
 			{
 				$.each(data,function(i){

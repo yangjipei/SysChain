@@ -2,20 +2,15 @@
 <div id="header">
     <header>
         <h1 id="logo">
-            <a href="./index.html" title="宇通管理系统 V1.0">宇通管理系统<small>V1.0</small></a>
+            <a href="/Admin/Home" title="电商后端管理系统 v1.0">电商后端管理系统<small>v1.0</small></a>
         </h1>
 
         <ul id="nav">
-            <li><a class="current" href='@Url.Action("Index","Home",new {area="Admin"})' title="总览"><i class="i i-bars"></i>总览</a></li>
-            <li><a href='@Url.Action("Index","SysConfig",new {area="Admin"})' title="系统管理"><i class="i i-cog2"></i>系统管理</a></li>
-            <li><a href="./mall.html" title="商超管理"><i class="i i-cart"></i>商超管理</a></li>
-            <!--<li><a href="./order.html" title="订单管理"><i class="fa fa-file-text-o"></i>订单管理</a></li>
-            <li><a href="./store.html" title="零售店管理"><i class="fa fa-shopping-basket"></i>零售店管理</a></li>
-            <li><a href="./shop.html" title="店铺管理"><i class="i i-home"></i>店铺管理</a></li>-->
-            <li><a href="./user.html" title="用户管理"><i class="i i-user3"></i>用户管理</a></li>
-            <li><a href="./statistics.html" title="统计报表"><i class="i i-chart"></i>统计报表</a></li>
+			@foreach(SysChain.Model.SysMoudle m in Model)
+			{
+ 				<li><a  href='@m.LinkUrl' title="@m.Name"><i class="fa @m.Style"></i>@m.Name</a></li>
+			}
         </ul>
-
         <ul id="aside">
             <li class="message">
                 <a href="#" title="未读消息">

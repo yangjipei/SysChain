@@ -1,71 +1,32 @@
 ﻿@{
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
+@model List<SysChain.Model.SysMoudle>
 <div id="header-crumb">
     <p>
         <i class="fa fa-lg fa-home"></i>
-        <a href="#" title="系统管理">系统管理</a>
+        <a href="/Admin/Home/Index" title="首页">首页</a>
         <i class="fa fa-angle-right"></i>
-        <span>模块管理</span>
+        <span>系统管理</span>
     </p>
 </div>
 <main id="system">
 
 <ul class="module-intro">
+	@{Random ran=new Random();	}
+	@foreach(SysChain.Model.SysMoudle m in Model)
+	{
+		int RandKey=ran.Next(1,15);
     <li>
-        <a href='@Url.Action("Index","SysMoudle",new {area="Admin"})' title="模块管理">
-            <span class="icon-1"><i class="i i-users3"></i></span>
+        <a href='@m.LinkUrl' title="@m.Name">
+            <span class="icon-@RandKey"><i class="fa @m.Style"></i></span>
             <div>
-                <h2>模块管理</h2>
-                <p>模块管理模块管理模块管理模块管理模块管理模块管理模块管理模块管理模块管理模块管理</p>
+                <h2>@m.Name</h2>
+                <p>@m.MoudleDes</p>
             </div>
         </a>
     </li>
-    <li>
-        <a href="@Url.Action("Index","SysRole",new {area="Admin"})" title="角色管理">
-            <span class="icon-2"><i class="fa fa-gavel fa-flip-horizontal"></i></span>
-            <div>
-                <h2>角色管理</h2>
-                <p>角色管理角色管理角色管理角色管理角色管理角色管理角色管理角色管理角色管理角色管理</p>
-            </div>
-        </a>
-    </li>
-    <li>
-        <a href="@Url.Action("Index","SysUser",new {area="Admin"})" title="用户管理">
-            <span class="icon-3"><i class="fa fa-money"></i></span>
-            <div>
-                <h2>用户管理</h2>
-                <p>系统用户管理系统用户管理系统用户管理系统用户管理</p>
-            </div>
-        </a>
-    </li>
-    <li>
-        <a href="#" title="">
-            <span class="icon-13"><i class="i i-users3"></i></span>
-            <div>
-                <h2>Lorem ipsum.</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni praesentium impedit atque.</p>
-            </div>
-        </a>
-    </li>
-    <li>
-        <a href="#" title="">
-            <span class="icon-14"><i class="fa fa-gavel fa-flip-horizontal"></i></span>
-            <div>
-                <h2>Lorem ipsum.</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae mollitia ullam, a ea pariatur inventore ratione quam amet labore quaerat.</p>
-            </div>
-        </a>
-    </li>
-    <li>
-        <a href="#" title="">
-            <span class="icon-15"><i class="fa fa-money"></i></span>
-            <div>
-                <h2>Lorem ipsum.</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse, perspiciatis illo, quidem numquam vitae commodi.</p>
-            </div>
-        </a>
-    </li>
+	}
 </ul>
 
 </main>
