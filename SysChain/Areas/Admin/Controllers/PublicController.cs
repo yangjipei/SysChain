@@ -167,7 +167,10 @@ namespace SysChain.Areas.Admin.Controllers
 		}
 		public ActionResult Err404()
 		{
-			ViewBag.Title = "电商后台管理系统";
+			return View();
+		}
+		public ActionResult Err500()
+		{
 			return View();
 		}
 	}

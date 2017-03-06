@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Mvc.Ajax;
 using System.Web.Caching;
 using System.Web.Routing;
 
@@ -20,7 +19,6 @@ namespace SysChain.Areas.Admin.Controllers
 		}
 		public ActionResult Index()
 		{
-			ViewBag.Title = "电商后台管理系统";
 			return View();
 		}
 		public ActionResult Header()

@@ -141,6 +141,7 @@
     <Compile Include="Areas\Admin\Controllers\SysRoleController.cs" />
     <Compile Include="Areas\Admin\Controllers\SysUserController.cs" />
     <Compile Include="Areas\Admin\Controllers\PublicController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SysCategoryController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />
@@ -329,6 +330,9 @@
     <Content Include="Content\Admin\Scripts\User_New.js" />
     <Content Include="Content\Admin\Scripts\User_Index.js" />
     <Content Include="Areas\Admin\Views\Public\Err404.cshtml" />
+    <Content Include="Content\Admin\Images\img\404.png" />
+    <Content Include="Content\Admin\Images\img\500.png" />
+    <Content Include="Areas\Admin\Views\Public\Err500.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

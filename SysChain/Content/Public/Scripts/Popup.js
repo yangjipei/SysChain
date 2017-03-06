@@ -19,6 +19,7 @@ f7.plugin._register = (function() {
 	return {
 		header: f7.plugin.header, //页头
 		footer: f7.plugin.footer,//页尾
+		systemError: f7.plugin.systemError,//页尾
 	};
 }); 
 // 公共模块 初始化
@@ -940,7 +941,7 @@ f7.popup.toolTip = (function() {
 });//f7.popup.toolTip()
 
 // header 部分
-f7.plugin.header = (function() {
+f7.plugin.header = function() {
 	//顶部点击菜单下拉
 	(function() {
 		var $header = $('#header'),
@@ -972,9 +973,9 @@ f7.plugin.header = (function() {
 
 	}());
 
-}); //f7.plugin.header()
+}; //f7.plugin.header()
 
-f7.plugin.footer = (function() {
+f7.plugin.footer = function() {
 	// console.log('plugin.footer');
 
 	// 满屏显示
@@ -1014,8 +1015,38 @@ f7.plugin.footer = (function() {
 	// 	// popup.formError.init().show($('input[name="keyword"]'), {status: false, info: '搜索内容不能为空！'});
 	// }, 1000);
 
-})(); //f7.plugin.footer()
+}; //f7.plugin.footer()
+// operate-jump.js
+// 出错 界面 倒计时 5秒 回退
+f7.plugin.systemError = function() {
 
+	var $systemError = $('.system-error'),
+		$strong = $systemError.find('p strong'),
+		$a = $systemError.find('p a'),
+		href = $a.attr('href'),
+		_tagInterval = null;
+
+	if (!$systemError.length) {
+		return;
+	} //if
+
+	_tagInterval = setInterval(function() {
+		var times = parseInt($strong.text());
+
+		$strong.text(--times + '秒');
+
+		if (times <= 0) {
+			clearInterval(_tagInterval);
+			if (href === '#') {
+				window.history.back();
+			} else {
+				window.location.href = href;
+			} //if
+		} //if
+
+	}, 1000);
+
+};
 //通用分页
 pagePlugin=function($html)
 {

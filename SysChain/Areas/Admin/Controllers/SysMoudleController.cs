@@ -25,7 +25,6 @@ namespace SysChain.Areas.Admin.Controllers
 		/// <param name="index">Index.</param>
 		public ActionResult Index(int? pid,int? index)
 		{
-			ViewBag.Title = "电商后台管理系统";
 			int ParentID = pid == null ? 0 : (int)pid;
 			int PageIndex = index == null ? 1 : (int)index;
 			ViewBag.ParentID = ParentID;

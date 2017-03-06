@@ -79,5 +79,11 @@ namespace SysChain.Controllers
 				return jr;
 			}
 		}
+		public ActionResult Logout()
+		{
+			Session["UserInfo"] = null;
+			Session["MoudleInfo"] = null;
+			return RedirectToAction("Login");
+		}
 	}
 }

@@ -31,29 +31,29 @@
         </header>
         <form id="frmNew" action="@Url.Action("New","SysUser")" method="post">
             <p>
-                <i class="red">*</i><span>账号：</span>
+                <i class="red">*</i><span>系统账号：</span>
 				@Html.TextBoxFor(m => m.LoginName,new {placeholder="请输入登录账号",autocomplete="off"})
             </p>
             <p>
-                <i class="red">*</i><span>角色：</span>
+                <i class="red">*</i><span>系统角色：</span>
                 <select name="RoleID" id="RoleID" style="padding:0px;">
                 </select>
             </p>
             <p>
-               <i class="red">*</i> <span>姓名：</span>
+               <i class="red">*</i> <span>真实姓名：</span>
 				@Html.TextBoxFor(m => m.Name,new {placeholder="请输入使用者姓名",autocomplete="off"})
             </p>
             <p>
-               <i class="red">*</i> <span>性别：</span>
+               <i class="red">*</i> <span>性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：</span>
 				<input type="radio" value="True" checked="checked" name="Gender"> <label>男</label>
 				<input type="radio" value="False" name="Gender">  <label>女</label>
             </p>
             <p>
-               <i class="red">*</i> <span>手机：</span>
+               <i class="red">*</i> <span>常用手机：</span>
 				@Html.TextBoxFor(m => m.Telephone,new {placeholder="请输入手机号码",autocomplete="off"})
             </p>
             <p>
-               <i class="red">*</i> <span>部门：</span>
+               <i class="red">*</i> <span>所在部门：</span>
 				@Html.TextBoxFor(m => m.Department,new {placeholder="请输入所在部门",autocomplete="off"})
             </p>
             <footer>

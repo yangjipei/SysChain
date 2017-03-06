@@ -2,5 +2,21 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Err404</h2>
+<div id="header-crumb">
+    <p>
+        <i class="fa fa-lg fa-home"></i>
+        <a href="/Admin" title="系统管理">首页</a>
+        <i class="fa fa-angle-right"></i>
+        <span>404页面</span>
+    </p>
+</div>
 
+<main id="system-404">
+
+    <section class="system-error">
+        <img src="/Content/Admin/Images/img/404.png" alt="404"/>
+        <h1>哎呀，一不小心就迷路了...</h1>
+        <p><strong>5秒</strong>后，系统自动返回 <a href="/Admin" class="blue">首页</a></p>
+    </section>
+
+</main>

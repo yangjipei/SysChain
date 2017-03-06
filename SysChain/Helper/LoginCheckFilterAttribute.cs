@@ -32,9 +32,6 @@ namespace System.Web.Mvc
 						filterContext.Result = new RedirectResult(url);
 					}
 				}
-				//else { 
-				//	//权限控制
-				//}
 			}
 		}
 
