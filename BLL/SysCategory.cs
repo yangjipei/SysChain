@@ -1,0 +1,75 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Runtime.Remoting.Proxies;
+namespace SysChain.BLL
+{
+	public class SysCategory
+	{
+		private readonly DAL.SysCategory dal = new DAL.SysCategory();
+		public SysCategory()
+		{
+		}
+		/// <summary>
+		/// 新增模块
+		/// </summary>
+		/// <returns>返回新增模块ID</returns>
+		/// <param name="Model">品类实体</param>
+		public int Insert(Model.SysCategory Model)
+		{
+			return dal.Insert(Model);
+		}
+		/// <summary>
+		/// 根据条件获得品类数量
+		/// </summary>
+		/// <returns>The count.</returns>
+		/// <param name="strWhere">String where.</param>
+		public int GetCount(string strWhere)
+		{
+			return dal.GetCount(strWhere);
+		}
+		/// <summary>
+		/// 分页获取数据列表
+		/// </summary>
+		public List<Model.SysCategory> GetListByPage(string strWhere, string OnTable, string orderBy, int startIndex, int endIndex)
+		{
+			return dal.GetListByPage(strWhere, OnTable, orderBy, startIndex, endIndex);
+		}
+		/// <summary>
+		/// 获得模块实体
+		/// </summary>
+		/// <returns>返回模块实体</returns>
+		/// <param name="CategoryID">品类编号</param>
+		public Model.SysCategory GetEntity(int CategoryID)
+		{
+			return dal.GetEntity(CategoryID);
+		}
+		/// <summary>
+		/// 生成新的排序Code
+		/// </summary>
+		/// <returns>The new order code.</returns>
+		/// <param name="ParentID">Parent identifier.</param>
+		public string GetNewOrderCode(int ParentID)
+		{
+			return dal.GetNewOrderCode(ParentID);
+		}
+		/// <summary>
+		/// 修改模块
+		/// </summary>
+		/// <returns>返回影响行数</returns>
+		/// <param name="Model">模块实体</param>
+		public int ModifyModel(Model.SysCategory Model)
+		{
+			return dal.ModifyModel(Model);
+		}
+		/// <summary>
+		/// 获得列表
+		/// </summary>
+		/// <returns>The list.</returns>
+		/// <param name="strWhere">String where.</param>
+		/// <param name="orderBy">Order by.</param>
+		public List<Model.SysCategory> GetList(string strWhere, string orderBy)
+		{
+			return dal.GetList(strWhere, orderBy);
+		}
+	}
+}

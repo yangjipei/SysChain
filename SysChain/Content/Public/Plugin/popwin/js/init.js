@@ -8,7 +8,7 @@
 			evt.preventDefault();
 			var $a = $(this),
 			url = $a.attr('href');
-			popWin.showWin('800','600',$a.attr('title'),url);
+			popWin.showWin('800','300',$a.attr('title'),url);
 		});
 	}
 });

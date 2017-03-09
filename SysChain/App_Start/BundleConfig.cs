@@ -35,6 +35,12 @@ namespace SysChain
 			bundles.Add(new ScriptBundle("~/js/uindex").Include(
 				"~/Content/Admin/Scripts/User_Index.js"
 			));
+			bundles.Add(new ScriptBundle("~/js/cindex").Include(
+				"~/Content/Admin/Scripts/Category_Index.js"
+			));
+			bundles.Add(new ScriptBundle("~/js/cnew").Include(
+				"~/Content/Admin/Scripts/Category_New.js"
+			));
 			bundles.Add(new ScriptBundle("~/js/admin").Include(
 				"~/Content/Admin/Scripts/main.js"
 			));

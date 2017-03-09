@@ -146,7 +146,8 @@ namespace SysChain.DAL
 			StringBuilder strSql = new StringBuilder();
 			strSql.Append(" declare @Code nvarchar(50); ");
 			strSql.Append(" select Top 1 @Code=OrderCode From SysMoudle ");
-			strSql.Append(" Where ParentID="+ParentID +" ;");
+			strSql.Append(" Where ParentID="+ParentID +" ");
+			strSql.Append(" Order by OrderCode desc;");
 			strSql.Append(" if @Code is null ");
 			strSql.Append(" select  @Code=OrderCode From SysMoudle ");
 			strSql.Append(" Where MoudleID=" + ParentID + " ;");

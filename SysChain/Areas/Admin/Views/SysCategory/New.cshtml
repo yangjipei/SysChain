@@ -1,0 +1,43 @@
+﻿@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@model SysChain.Model.SysCategory
+@section Scripts
+{
+	@Scripts.Render("~/js/cnew")
+}
+<div id="header-crumb">
+    <p>
+        <i class="fa fa-lg fa-home"></i>
+        <a href="/Admin/SysConfig/Index/6" title="系统管理">商超管理</a>
+        <i class="fa fa-angle-right"></i>
+        <a href="/Admin/SysCategory/Index" title="模块管理">品类管理</a>
+        <i class="fa fa-angle-right"></i>
+        <span>新增品类</span>
+    </p>
+</div>
+<main id="panel">
+    <section class="form">
+        <header>
+            <h1>新增品类</h1>
+        </header>
+        <form id="frmNew" action="@Url.Action("New","SysCategory")" method="post">
+            <p>
+                <i class="red">*</i><span>品类名称：</span>
+				@Html.TextBoxFor(m => m.Name,new {placeholder="请输入品类名称",autocomplete="off"})
+            </p>
+            <p>
+                <i class="red">&nbsp;</i><span>展示样式：</span>
+				@Html.TextBoxFor(m => m.Style,new {placeholder="样式请参考：http://fontawesome.dashgame.com",autocomplete="off"})
+            </p>
+            <footer>
+                <button class="btn btn-primary" type="submit">确定</button>
+                <a class="btn btn-cancel btn-close" href="#" title="取消">取消</a>
+            </footer>
+			@Html.HiddenFor(m => m.CategoryID)
+			@Html.HiddenFor(m => m.ParentID)
+			@Html.HiddenFor(m => m.OrderCode)
+			@Html.HiddenFor(m => m.State)
+        </form>
+    </section>
+</main>

@@ -333,6 +333,10 @@
     <Content Include="Content\Admin\Images\img\404.png" />
     <Content Include="Content\Admin\Images\img\500.png" />
     <Content Include="Areas\Admin\Views\Public\Err500.cshtml" />
+    <Content Include="Areas\Admin\Views\SysCategory\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\SysCategory\New.cshtml" />
+    <Content Include="Content\Admin\Scripts\Category_Index.js" />
+    <Content Include="Content\Admin\Scripts\Category_New.js" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

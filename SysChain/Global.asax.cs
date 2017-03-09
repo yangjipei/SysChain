@@ -21,8 +21,6 @@ namespace SysChain
 		{
 			Exception exception = Server.GetLastError();
 			HttpException httpException = exception as HttpException;
-
-			RouteData routeData = new RouteData();
 			var routingData = Context.Request.RequestContext.RouteData;
 			var areaName = routingData.DataTokens["area"];
 			string RouteName = string.Empty;
@@ -31,7 +29,6 @@ namespace SysChain
 			{
 				RouteName = "Admin_default";
 			}
-			routeData.Values.Add("controller", "Public");
 			switch (httpException.GetHttpCode())
 			{
 				case 404:
@@ -41,7 +38,6 @@ namespace SysChain
 					RouteData = new { controller = "Public", action = "Err500" };
 				break;
 			}
-
 			Response.Clear();
 			Server.ClearError();
 			Response.TrySkipIisCustomErrors = true;
