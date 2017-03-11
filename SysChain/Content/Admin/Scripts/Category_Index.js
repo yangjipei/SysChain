@@ -40,16 +40,16 @@
 
 });
 btnInit=function(){
-	$("#btnNew").attr("href","/Admin/SysMoudle/New?pid="+$("#parentid").val());
+	$("#btnNew").attr("href","/Admin/SysCategory/New?pid="+$("#parentid").val());
 }
 getData=function(){
-	$.get("/Admin/SysCategory/List/0",function(data,status){
+	$.get("/Admin/SysCategory/List",function(data,status){
 		if(status=="success")
 		{
 			var strHtml=[],
 				currentid=$("#parentid").val();
 
-			strHtml.push('<option value="0">一级导航</option>');
+			strHtml.push('<option value="0">一级品类</option>');
 			if(data!=null)
 			{
 				$.each(data,function(i){

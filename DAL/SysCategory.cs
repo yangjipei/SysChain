@@ -21,22 +21,24 @@ namespace SysChain.DAL
 			StringBuilder strSql = new StringBuilder();
 			strSql.Append(" if not exists(select Name from SysCategory where Name =@Name ) begin ");
 			strSql.Append(" insert into SysCategory(");
-			strSql.Append(" ParentID,Name,State,Style,OrderCode)");
+			strSql.Append(" ParentID,Name,Layer,State,Style,OrderCode)");
 			strSql.Append(" values (");
-			strSql.Append(" @ParentID,@Name,@State,@Style,@OrderCode)");
+			strSql.Append(" @ParentID,@Name,@Layer,@State,@Style,@OrderCode)");
 			strSql.Append(" ; select @@IDENTITY; ");
 			strSql.Append(" end ELSE begin SELECT -1 END");
 			SqlParameter[] parameters = {
 					new SqlParameter("@ParentID", SqlDbType.Int,4),
 					new SqlParameter("@Name", SqlDbType.NVarChar,50),
+					new SqlParameter("@Layer", SqlDbType.Int,4),
 					new SqlParameter("@State", SqlDbType.Bit,1),
 					new SqlParameter("@Style", SqlDbType.NVarChar,50),
 					new SqlParameter("@OrderCode", SqlDbType.NVarChar,50)};
 			parameters[0].Value = Model.ParentID;
 			parameters[1].Value = Model.Name;
-			parameters[2].Value = Model.State;
-			parameters[3].Value = Model.Style;
-			parameters[4].Value = Model.OrderCode;
+			parameters[2].Value = Model.Layer;
+			parameters[3].Value = Model.State;
+			parameters[4].Value = Model.Style;
+			parameters[5].Value = Model.OrderCode;
 			object obj = DbHelperSQL.GetSingle(strSql.ToString(), parameters);
 			if (obj == null)
 			{
@@ -52,7 +54,7 @@ namespace SysChain.DAL
 		/// </summary>
 		/// <returns>The new order code.</returns>
 		/// <param name="ParentID">Parent identifier.</param>
-		public string GetNewOrderCode(int ParentID)
+		public string GetNewOrderCode(int ParentID, int Layer)
 		{
 			StringBuilder strSql = new StringBuilder();
 			strSql.Append(" declare @Code nvarchar(50); ");
@@ -80,11 +82,18 @@ namespace SysChain.DAL
 						case 2:
 							return Code + "01";
 						case 4:
-							TempCode = Code.Substring(Code.Length - 2, 2);
-							int.TryParse(TempCode, out TempNum);
-							TempNum = TempNum + 1;
-							Code = Code.Substring(0, 2) + TempNum.ToString("00");
-							return Code;
+							if (Layer == 3)
+							{
+								TempCode = Code.Substring(Code.Length - 2, 2);
+								int.TryParse(TempCode, out TempNum);
+								TempNum = TempNum + 1;
+								Code = Code.Substring(0, 2) + TempNum.ToString("00");
+								return Code;
+							}
+							else 
+							{
+								return Code + "01";
+							}
 						case 6:
 							TempCode = Code.Substring(Code.Length - 2, 2);
 							int.TryParse(TempCode, out TempNum);
@@ -101,6 +110,26 @@ namespace SysChain.DAL
 					Code = TempNum.ToString("00");
 					return Code;
 				}
+			}
+		}
+		/// <summary>
+		/// 获得层级
+		/// </summary>
+		/// <returns>The layer.</returns>
+		/// <param name="CategoryID">Category identifier.</param>
+		public int GetLayer(int CategoryID)
+		{
+			StringBuilder strSql = new StringBuilder();
+			strSql.Append(" select  Layer From SysCategory ");
+			strSql.Append(" Where CategoryID=" + CategoryID + "");
+			object obj = DbHelperSQL.GetSingle(strSql.ToString());
+			if (obj == null)
+			{
+				return 0;
+			}
+			else
+			{
+				return (int)obj;
 			}
 		}
 		/// <summary>
@@ -122,6 +151,10 @@ namespace SysChain.DAL
 					model.ParentID = int.Parse(dr["ParentID"].ToString());
 				}
 				model.Name = dr["Name"].ToString();
+				if (dr["Layer"].ToString() != "")
+				{
+					model.Layer = int.Parse(dr["Layer"].ToString());
+				}
 				model.Style = dr["Style"].ToString();
 				model.OrderCode = dr["OrderCode"].ToString();
 				if (dr["State"].ToString() != "")
@@ -151,7 +184,7 @@ namespace SysChain.DAL
 		public Model.SysCategory GetEntity(int CategoryID)
 		{
 			StringBuilder strSql = new StringBuilder();
-			strSql.Append("select  top 1 CategoryID,ParentID,Name,Style,OrderCode,State from SysCategory ");
+			strSql.Append("select  top 1 CategoryID,ParentID,Name,Layer,Style,OrderCode,State from SysCategory ");
 			strSql.Append(" where CategoryID=@CategoryID");
 			SqlParameter[] parameters = {
 					new SqlParameter("@CategoryID", SqlDbType.Int,4)
@@ -213,11 +246,16 @@ namespace SysChain.DAL
 		public List<Model.SysCategory> GetList(string strWhere, string orderBy)
 		{
 			StringBuilder strSql = new StringBuilder();
-			strSql.Append("SELECT CategoryID,ParentID ,Name,State,Style,OrderCode FROM SysCategory ");
+			strSql.Append("SELECT CategoryID,ParentID ,'|'+REPLICATE('-',Layer)+Name as Name,Layer,0State,Style,OrderCode FROM SysCategory ");
 			if (!string.IsNullOrEmpty(strWhere.Trim()))
 			{
 				strSql.Append(" WHERE " + strWhere);
 			}
+			if (!string.IsNullOrEmpty(orderBy.Trim()))
+			{
+				strSql.Append(" Order by  " + orderBy);
+			}
+
 			DataTable dt = DbHelperSQL.Query(strSql.ToString()).Tables[0];
 			List<Model.SysCategory> ModelList = new List<Model.SysCategory>();
 			if (dt.Rows.Count > 0)
@@ -239,7 +277,7 @@ namespace SysChain.DAL
 		public List<Model.SysCategory> GetListByPage(string strWhere, string OnTable, string orderBy, int startIndex, int endIndex)
 		{
 			StringBuilder strSql = new StringBuilder();
-			strSql.Append("SELECT CategoryID,ParentID,Name,State,Style,OrderCode FROM ( ");
+			strSql.Append("SELECT CategoryID,ParentID,Name,Layer,State,Style,OrderCode FROM ( ");
 			strSql.Append(" SELECT ROW_NUMBER() OVER (");
 			if (!string.IsNullOrEmpty(orderBy.Trim()))
 			{

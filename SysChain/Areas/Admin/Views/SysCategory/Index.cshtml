@@ -87,7 +87,7 @@
 						}
 	                    </td>
 	                    <td>
-							@if(Model[i].OrderCode.Length<4)
+							@if(Model[i].OrderCode.Length<6)
 							{
 	                        <a class="btn-icon" href='@Url.Action("New","SysCategory",new {area="Admin",pid=Model[i].CategoryID})' data-panel-init="on" title="新增品类"><i class="fa fa-fw fa-plus-circle"></i>新增</a>
 							}

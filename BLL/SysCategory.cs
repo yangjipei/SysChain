@@ -48,9 +48,18 @@ namespace SysChain.BLL
 		/// </summary>
 		/// <returns>The new order code.</returns>
 		/// <param name="ParentID">Parent identifier.</param>
-		public string GetNewOrderCode(int ParentID)
+		public string GetNewOrderCode(int ParentID, int level)
 		{
-			return dal.GetNewOrderCode(ParentID);
+			return dal.GetNewOrderCode(ParentID, level);
+		}
+		/// <summary>
+		/// 获得层级
+		/// </summary>
+		/// <returns>The layer.</returns>
+		/// <param name="CategoryID">Category identifier.</param>
+		public int GetLayer(int CategoryID)
+		{
+			return dal.GetLayer(CategoryID);
 		}
 		/// <summary>
 		/// 修改模块

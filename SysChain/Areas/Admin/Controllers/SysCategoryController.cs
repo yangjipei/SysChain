@@ -42,6 +42,13 @@ namespace SysChain.Areas.Admin.Controllers
 			}
 			else
 			{
+				if (pid == 0)
+				{
+					model.Layer = 1;
+				}
+				else {
+					model.Layer = Opr.GetLayer(pid) + 1;
+				}
 				model.CategoryID = 0;
 				model.State = true;
 				ViewBag.Title = "新增品类";
@@ -79,7 +86,7 @@ namespace SysChain.Areas.Admin.Controllers
 				else
 				{
 
-					model.OrderCode = Opr.GetNewOrderCode(model.ParentID);
+					model.OrderCode = Opr.GetNewOrderCode(model.ParentID,2);
 					rs.Data = Opr.Insert(model);
 					if (rs.Data > 0)
 					{
@@ -123,11 +130,9 @@ namespace SysChain.Areas.Admin.Controllers
 		/// 获得下拉接口
 		/// </summary>
 		/// <returns>The list.</returns>
-		/// <param name="id">父级ID，默认为0.</param>
-		public ActionResult List(int? id)
+		public ActionResult List()
 		{
-			int ParentID = id == null ? 0 : (int)id;
-			return Json(Opr.GetList("ParentID=" + ParentID, "OrderCode"), JsonRequestBehavior.AllowGet);
+			return Json(Opr.GetList("Layer<3" , "OrderCode"), JsonRequestBehavior.AllowGet);
 		}
 
 	}

@@ -12,6 +12,11 @@ namespace SysChain.Model
 		/// </summary>
 		public int ParentID { set; get;}
 		/// <summary>
+		/// 所在层级
+		/// </summary>
+		/// <value>The layer.</value>
+		public int Layer { set; get; }
+		/// <summary>
 		/// 品类名称
 		/// </summary>
 		public string Name { set; get; }
