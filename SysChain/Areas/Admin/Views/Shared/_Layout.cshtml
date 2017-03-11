@@ -23,5 +23,21 @@
 	@Html.Partial("~/Areas/Admin/Views/Shared/_Footer.cshtml")
 	@Scripts.Render("~/js/tools")
 	@RenderSection("Scripts",false)
+		 <script type="text/javascript">
+          var lasturl="@ViewBag.ActiveUrl";
+          var urlstatus=false;
+          if(lasturl){
+              $("#nav a").each(function () {
+                    if ($(this).attr('href')==lasturl) {
+                      $(this).addClass('current'); urlstatus = true;
+                    } else {
+                      $(this).removeClass('current');
+                    }
+              });
+            }else{
+                $("#nav a").eq(0).addClass('current'); 
+            }
+          if (!urlstatus) {$("#nav a").eq(0).addClass('current'); }
+        </script>
 </body>
 </html>

@@ -20,6 +20,7 @@ f7.plugin._register = (function() {
 		header: f7.plugin.header, //页头
 		footer: f7.plugin.footer,//页尾
 		systemError: f7.plugin.systemError,//页尾
+		accordion:f7.plugin.accordion,
 	};
 }); 
 // 公共模块 初始化
@@ -1047,6 +1048,74 @@ f7.plugin.systemError = function() {
 	}, 1000);
 
 };
+// accordion 部分
+f7.plugin.accordion = (function() {
+	var $accordion = $('aside[data-accordion="on"]');
+	if (!$accordion.length) {
+		return;
+	} //if
+
+	close();
+
+	function close() {
+		$accordion.find('.panel dl dd').addClass('hide').end().find('.panel dl').addClass('hide');
+		$accordion.find('.panel header a').removeClass('current');
+	} //close()
+
+	$accordion.on('click', '.panel header a', function(evt) {
+		evt.preventDefault();
+		// evt.stopPropagation();
+
+		var $a = $(evt.target).closest('a'),
+			$fa = $a.find('i[class*="fa-angle-"]'),
+			$panel = $a.parents('.panel'),
+			$dl = $panel.find('dl.child');
+
+		if ($fa.is('.fa-angle-down')) {
+			$a.addClass('current');
+
+			$fa.addClass('fa-angle-up').removeClass('fa-angle-down');
+
+			$dl.removeClass('hide');
+		} else {
+			$a.removeClass('current');
+
+			$fa.addClass('fa-angle-down').removeClass('fa-angle-up');
+
+			$dl.addClass('hide');
+		} //if
+	}).on('click', '.panel dl.child dt a', function(evt) {
+		evt.preventDefault();
+		// evt.stopPropagation();
+		var $a = $(evt.target).closest('a'),
+			$i = $a.find('i.i, i.fa'),
+			$dt = $a.parents('dt'),
+			$dd = $dt.next('dd');
+
+		if ($i.is('.i-arrow-right5') || $i.is('.fa-angle-right')) {
+			$a.addClass('current');
+
+			if ($i.is('.i-arrow-right5')) {
+				$i.addClass('i-arrow-down5').removeClass('i-arrow-right5');
+			} else {
+				$i.addClass('fa-angle-down').removeClass('fa-angle-right');
+			} //if
+
+			$dd.removeClass('hide');
+		} else {
+			$a.removeClass('current');
+
+			if ($i.is('.i-arrow-down5')) {
+				$i.addClass('i-arrow-right5').removeClass('i-arrow-down5');
+			} else {
+				$i.addClass('fa-angle-right').removeClass('fa-angle-right');
+			} //if
+
+			$dd.addClass('hide');
+		} //if
+	});
+
+}); //f7.plugin.accordion()
 //通用分页
 pagePlugin=function($html)
 {
