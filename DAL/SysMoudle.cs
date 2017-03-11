@@ -344,8 +344,9 @@ namespace SysChain.DAL
 			strSql.Append("Declare  @tCode nvarchar(50); ");
 			strSql.Append("SELECT @sCode=OrderCode From SysMoudle where  MoudleID=@sMoudleID ;");
 			strSql.Append("SELECT @tCode=OrderCode From SysMoudle where  MoudleID=@tMoudleID ;");
-			strSql.Append("Update SysMoudle Set OrderCode =@tCode Where MoudleID=@sMoudleID  ;");
-			strSql.Append("Update SysMoudle Set OrderCode =@sCode Where MoudleID=@tMoudleID  ;");
+			strSql.Append("Update SysCategory Set OrderCode =REPLACE(OrderCode,@sCode,'temp') Where OrderCode like @sCode+'%';");
+			strSql.Append("Update SysCategory Set OrderCode =REPLACE(OrderCode,@tCode,@sCode) Where OrderCode like @tCode+'%';");
+			strSql.Append("Update SysCategory Set OrderCode =REPLACE(OrderCode,'temp',@tCode) Where OrderCode like 'temp%';");
 			SqlParameter[] parameters = {
 					new SqlParameter("@sMoudleID", SqlDbType.Int,4),
 					new SqlParameter("@tMoudleID", SqlDbType.Int,4)};

@@ -28,6 +28,25 @@ namespace SysChain.BLL
 			return dal.GetCount(strWhere);
 		}
 		/// <summary>
+		/// 删除指定模块
+		/// </summary>
+		/// <returns><c>true</c>, if moudle was deled, <c>false</c> otherwise.</returns>
+		/// <param name="CategoryID">Moudle identifier.</param>
+		public bool DeleCategory(int CategoryID)
+		{
+			return dal.DeleCategory(CategoryID);
+		}
+		/// <summary>
+		/// 模块排序
+		/// </summary>
+		/// <returns><c>true</c>, if moudle was ranked, <c>false</c> otherwise.</returns>
+		/// <param name="sourceid">Sourceid.</param>
+		/// <param name="targetid">Targetid.</param>
+		public bool RankCategory(int sourceid, int targetid)
+		{
+			return dal.RankCategory(sourceid, targetid);
+		}
+		/// <summary>
 		/// 分页获取数据列表
 		/// </summary>
 		public List<Model.SysCategory> GetListByPage(string strWhere, string OnTable, string orderBy, int startIndex, int endIndex)
@@ -79,6 +98,15 @@ namespace SysChain.BLL
 		public List<Model.SysCategory> GetList(string strWhere, string orderBy)
 		{
 			return dal.GetList(strWhere, orderBy);
+		}
+		/// <summary>
+		/// 更新模块状态
+		/// </summary>
+		/// <returns>大于0表示更新成功</returns>
+		/// <param name="CategoryID">用户编号</param>
+		public int UpdateState(int CategoryID)
+		{
+			return dal.UpdateState(CategoryID);
 		}
 	}
 }

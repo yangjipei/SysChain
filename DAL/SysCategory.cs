@@ -82,7 +82,7 @@ namespace SysChain.DAL
 						case 2:
 							return Code + "01";
 						case 4:
-							if (Layer == 3)
+							if (Layer == 2)
 							{
 								TempCode = Code.Substring(Code.Length - 2, 2);
 								int.TryParse(TempCode, out TempNum);
@@ -133,6 +133,60 @@ namespace SysChain.DAL
 			}
 		}
 		/// <summary>
+		/// 模块排序
+		/// </summary>
+		/// <returns><c>true</c>, if moudle was ranked, <c>false</c> otherwise.</returns>
+		/// <param name="sourceid">Sourceid.</param>
+		/// <param name="targetid">Targetid.</param>
+		public bool RankCategory(int sourceid, int targetid)
+		{
+			StringBuilder strSql = new StringBuilder();
+			strSql.Append("Declare  @sCode nvarchar(50); ");
+			strSql.Append("Declare  @tCode nvarchar(50); ");
+			strSql.Append("SELECT @sCode=OrderCode From SysCategory where  CategoryID=@sCategoryID ;");
+			strSql.Append("SELECT @tCode=OrderCode From SysCategory where  CategoryID=@tCategoryID ;");
+			//strSql.Append("Update SysCategory Set OrderCode =@tCode Where CategoryID=@sCategoryID  ;");
+			//strSql.Append("Update SysCategory Set OrderCode =@sCode Where CategoryID=@tCategoryID  ;");
+			//更新二级
+			strSql.Append("Update SysCategory Set OrderCode =REPLACE(OrderCode,@sCode,'temp') Where OrderCode like @sCode+'%';");
+			strSql.Append("Update SysCategory Set OrderCode =REPLACE(OrderCode,@tCode,@sCode) Where OrderCode like @tCode+'%';");
+			strSql.Append("Update SysCategory Set OrderCode =REPLACE(OrderCode,'temp',@tCode) Where OrderCode like 'temp%';");
+
+			SqlParameter[] parameters = {
+					new SqlParameter("@sCategoryID", SqlDbType.Int,4),
+					new SqlParameter("@tCategoryID", SqlDbType.Int,4)};
+			parameters[0].Value = sourceid;
+			parameters[1].Value = targetid;
+			int rel = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
+			if (rel > 0)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		/// <summary>
+		/// 更新模块状态
+		/// </summary>
+		/// <returns>大于0表示更新成功</returns>
+		/// <param name="CategoryID">品类编号</param>
+		public int UpdateState(int CategoryID)
+		{
+			StringBuilder strSql = new StringBuilder();
+			strSql.Append("Declare  @State int; ");
+			strSql.Append("SELECT @State=State From SysCategory where  CategoryID=@CategoryID ;");
+			strSql.Append("IF @State = 0 begin  ");
+			strSql.Append("Update SysCategory Set State =1 Where CategoryID=@CategoryID  end;");
+			strSql.Append("else  begin  ");
+			strSql.Append("Update SysCategory Set State =0 Where CategoryID=@CategoryID  end ;");
+			SqlParameter[] parameters = {
+					new SqlParameter("@CategoryID", SqlDbType.Int,4)};
+			parameters[0].Value = CategoryID;
+			return DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
+		}
+		/// <summary>
 		/// 设置实体
 		/// </summary>
 		/// <returns>返回对象实体</returns>
@@ -174,6 +228,28 @@ namespace SysChain.DAL
 			else
 			{
 				return null;
+			}
+		}
+		/// <summary>
+		/// 删除指定模块
+		/// </summary>
+		/// <returns><c>true</c>, if moudle was deled, <c>false</c> otherwise.</returns>
+		/// <param name="CategoryID">Moudle identifier.</param>
+		public bool DeleCategory(int CategoryID)
+		{
+			StringBuilder strSql = new StringBuilder();
+			strSql.Append("Delete SysCategory  Where CategoryID=@CategoryID or ParentID=@CategoryID ;");
+			SqlParameter[] parameters = {
+					new SqlParameter("@CategoryID", SqlDbType.Int,4)};
+			parameters[0].Value = CategoryID;
+			int Rel = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
+			if (Rel > 0)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
 			}
 		}
 		/// <summary>

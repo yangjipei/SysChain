@@ -86,7 +86,7 @@ namespace SysChain.Areas.Admin.Controllers
 				else
 				{
 
-					model.OrderCode = Opr.GetNewOrderCode(model.ParentID,2);
+					model.OrderCode = Opr.GetNewOrderCode(model.ParentID, model.Layer);
 					rs.Data = Opr.Insert(model);
 					if (rs.Data > 0)
 					{
@@ -133,6 +133,96 @@ namespace SysChain.Areas.Admin.Controllers
 		public ActionResult List()
 		{
 			return Json(Opr.GetList("Layer<3" , "OrderCode"), JsonRequestBehavior.AllowGet);
+		}
+		/// <summary>
+		/// 更新模块状态
+		/// </summary>
+		/// <returns>The status.</returns>
+		/// <param name="id">Identifier.</param>
+		[HttpPost]
+		public ActionResult UpdateStatus(int id)
+		{
+			Helper.ResultInfo<int> rs = new Helper.ResultInfo<int>();
+			rs.Data = Opr.UpdateState(id);
+			if (rs.Data > 0)
+			{
+				rs.Msg = "操作成功.";
+				rs.Result = true;
+				rs.Url = "";
+			}
+			else
+			{
+				rs.Msg = "操作失败.";
+				rs.Result = false;
+				rs.Url = "";
+			}
+			JsonResult jr = new JsonResult();
+			jr.Data = rs;
+			return jr;
+		}
+		/// <summary>
+		/// 删除模块
+		/// </summary>
+		/// <returns>The delete.</returns>
+		/// <param name="id">Identifier.</param>
+		[HttpPost]
+		public ActionResult Delete(int id)
+		{
+			Helper.ResultInfo<bool> rs = new Helper.ResultInfo<bool>();
+			rs.Data = Opr.DeleCategory(id);
+			if (rs.Data)
+			{
+				rs.Msg = "删除成功.";
+				rs.Result = true;
+				rs.Url = "";
+			}
+			else
+			{
+				rs.Msg = "删除失败.";
+				rs.Result = false;
+				rs.Url = "";
+			}
+			JsonResult jr = new JsonResult();
+			jr.Data = rs;
+			return jr;
+		}
+		/// <summary>
+		/// 模块排序操作
+		/// </summary>
+		/// <returns>The rank.</returns>
+		/// <param name="id">源模块编号</param>
+		/// <param name="targetid">目标模块编号</param>
+		[HttpPost]
+		public ActionResult Rank(int id, int targetid)
+		{
+			Helper.ResultInfo<bool> rs = new Helper.ResultInfo<bool>();
+			if (id > 0 && targetid > 0)
+			{
+				if (Opr.RankCategory(id, targetid))
+				{
+					rs.Data = true;
+					rs.Msg = "操作已成功.";
+					rs.Result = true;
+					rs.Url = "";
+				}
+				else
+				{
+					rs.Data = false;
+					rs.Msg = "数据库操作失败.";
+					rs.Result = true;
+					rs.Url = "";
+				}
+			}
+			else
+			{
+				rs.Data = false;
+				rs.Msg = "参数错误.";
+				rs.Result = true;
+				rs.Url = "";
+			}
+			JsonResult jr = new JsonResult();
+			jr.Data = rs;
+			return jr;
 		}
 
 	}

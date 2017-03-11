@@ -23,7 +23,7 @@
 			    data: {targetid:target},  
 			    dataType: "json",   
 			    success: function (data) {  
-			      if (data.Result) { 
+			      if (data.Data) { 
 			      $("#frmSearch").submit();
 			      popup.info.init().show(data.Msg, true);
 			      }  
