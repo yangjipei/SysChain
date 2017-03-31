@@ -69,9 +69,6 @@
     <Reference Include="System.Web.Http.WebHost">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml.Serialization" />
     <Reference Include="System.Web.Optimization">
       <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
@@ -81,6 +78,9 @@
     </Reference>
     <Reference Include="WebGrease">
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -142,6 +142,7 @@
     <Compile Include="Areas\Admin\Controllers\SysUserController.cs" />
     <Compile Include="Areas\Admin\Controllers\PublicController.cs" />
     <Compile Include="Areas\Admin\Controllers\SysCategoryController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SysAttributeController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />
@@ -337,6 +338,9 @@
     <Content Include="Areas\Admin\Views\SysCategory\New.cshtml" />
     <Content Include="Content\Admin\Scripts\Category_Index.js" />
     <Content Include="Content\Admin\Scripts\Category_New.js" />
+    <Content Include="Areas\Admin\Views\SysAttribute\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\SysCategory\LeftMenu.cshtml" />
+    <Content Include="Areas\Admin\Views\SysAttribute\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
@@ -357,7 +361,7 @@
   <ProjectExtensions>
     <MonoDevelop>
       <Properties>
-        <XspParameters Port="0" Address="127.0.0.1" SslMode="None" SslProtocol="Default" KeyType="None" CertFile="" KeyFile="" PasswordOptions="None" Password="" Verbose="True" />
+        <XspParameters Port="0" Address="127.0.0.1" SslMode="Enable" SslProtocol="Ssl3" KeyType="None" CertFile="" KeyFile="" PasswordOptions="None" Password="" Verbose="True" />
         <Policies>
           <TextStylePolicy TabWidth="4" IndentWidth="4" RemoveTrailingWhitespace="True" NoTabsAfterNonTabs="False" EolMarker="Native" FileWidth="120" TabsToSpaces="False" inheritsSet="VisualStudio" inheritsScope="text/plain" scope="application/javascript" />
         </Policies>

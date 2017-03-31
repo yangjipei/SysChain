@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Caching;
 using System.Web.Routing;
+using SysChain.Model;
 
 namespace SysChain.Areas.Admin.Controllers
 {
@@ -186,6 +187,10 @@ namespace SysChain.Areas.Admin.Controllers
 			jr.Data = rs;
 			return jr;
 		}
+		public JsonResult test()
+		{
+			return Json(Opr.GetList("State>0"),JsonRequestBehavior.AllowGet);
+		}
 		/// <summary>
 		/// 模块排序操作
 		/// </summary>
@@ -223,6 +228,11 @@ namespace SysChain.Areas.Admin.Controllers
 			JsonResult jr = new JsonResult();
 			jr.Data = rs;
 			return jr;
+		}
+		public ActionResult LeftMenu()
+		{
+			List<VM_SysCategory> li = Opr.GetList("State>0");     
+			return View(li);
 		}
 
 	}

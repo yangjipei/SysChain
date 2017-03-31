@@ -1,0 +1,44 @@
+﻿@model List<SysChain.Model.VM_SysCategory>
+<aside class="aside" data-accordion="on">
+
+@foreach(SysChain.Model.VM_SysCategory m in Model)
+{
+<div class="panel">
+    <header>
+        <a href="javascript:void(0);" data-id="@m.CategoryID" title="@m.CategoryName">
+            <h2>@m.CategoryName</h2>
+            <span class="fa-stack fa-lg">
+                <i class="fa fa-circle-thin fa-stack-1x"></i>
+                <i class="fa fa-angle-down fa-stack-1x"></i>
+            </span>
+        </a>
+    </header>
+	@if(m.Children.Count()>0)
+	{
+        <dl class="child">
+			@foreach(SysChain.Model.VM_SysCategory sm in m.Children)
+			{
+                <dt>
+                   <a href="javascript:void(0);" data-id="@sm.CategoryID" title="@sm.CategoryName">
+                        <h3>@sm.CategoryName</h3>
+                        <i class="i i-arrow-right5"></i>
+                   </a>
+                </dt>
+			
+			    if(sm.Children.Count()>0)
+    			{
+			        <dd class="hide">
+				    @foreach(SysChain.Model.VM_SysCategory ssm in sm.Children)
+    				{
+				         <a href="/Admin/SysAttribute/Index/@ssm.CategoryID" data-id="@ssm.CategoryID" title="@ssm.CategoryName">@ssm.CategoryName</a>
+    				}
+			        </dd>
+    			}
+			}
+        </dl>
+	}
+</div>
+}
+	
+
+</aside>

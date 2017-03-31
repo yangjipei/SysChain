@@ -28,6 +28,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -36,6 +38,7 @@
     <Compile Include="SysRole.cs" />
     <Compile Include="SysRoleAndMoudle.cs" />
     <Compile Include="SysCategory.cs" />
+    <Compile Include="SysAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Model\Model.csproj">

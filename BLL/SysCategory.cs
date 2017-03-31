@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Remoting.Proxies;
+using SysChain.Model;
+using System.Data;
 namespace SysChain.BLL
 {
 	public class SysCategory
@@ -37,7 +39,7 @@ namespace SysChain.BLL
 			return dal.DeleCategory(CategoryID);
 		}
 		/// <summary>
-		/// 模块排序
+		/// 品类排序
 		/// </summary>
 		/// <returns><c>true</c>, if moudle was ranked, <c>false</c> otherwise.</returns>
 		/// <param name="sourceid">Sourceid.</param>
@@ -45,6 +47,36 @@ namespace SysChain.BLL
 		public bool RankCategory(int sourceid, int targetid)
 		{
 			return dal.RankCategory(sourceid, targetid);
+		}
+		/// <summary>
+		/// Gets the list.
+		/// </summary>
+		/// <returns>The list.</returns>
+		/// <param name="strWhere">String where.</param>
+		public List<VM_SysCategory> GetList(string strWhere)
+		{
+			System.Data.DataTable dt = dal.GetList(strWhere);
+			List<VM_SysCategory> li = CreateTree(dt, 0);
+			return li;
+		}
+		private List<VM_SysCategory> CreateTree(DataTable dt, int ParentID)
+		{
+			List<VM_SysCategory> li = new List<VM_SysCategory>();
+			DataRow[] dr = dt.Select("ParentID=" + ParentID);
+			foreach (DataRow d in dr)
+			{
+				VM_SysCategory m = new VM_SysCategory();
+				m.CategoryID = int.Parse(d["CategoryID"].ToString()) ;
+				m.CategoryName = d["Name"].ToString();
+				m.ParentID = int.Parse(d["ParentID"].ToString());
+				m.Layer = int.Parse(d["Layer"].ToString());
+				if (m.Layer < 3)
+				{
+					m.Children = CreateTree(dt, m.CategoryID);
+				}
+				li.Add(m);
+			}
+			return li;
 		}
 		/// <summary>
 		/// 分页获取数据列表

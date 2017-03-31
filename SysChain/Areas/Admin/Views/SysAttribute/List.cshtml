@@ -1,0 +1,44 @@
+﻿@model List<SysChain.Model.SysAttribute>
+<section>
+    <header>
+        <h1>户外用品<i class="i i-arrow-right5"></i>代步<i class="i i-arrow-right5"></i>自行车</h1>
+    </header>
+    <aside>
+        <form action="#" method="post">
+            <p class="input-button-group">
+                <input name="search" type="text" maxlength="32" placeholder="快来搜我〜" />
+                <button  type="submit"><i class="fa fa-search"></i></button>
+            </p>
+        </form>
+        <div class="operate">
+            <a class="btn btn-primary" href="#" title="添加属性"><i class="i i-plus2"></i>添加属性</a>
+        </div>
+    </aside>
+	
+    <table>
+        <thead>
+            <tr>
+                <th>属性名称</th>
+                <th>控件类型</th>
+                <th>是否影响定价</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>颜色</td>
+                <td>单项选择</td>
+                <td>是</td>
+                <td>
+                    <a class="btn-sort" href="#" title="排前"><i class="i i-arrow-up"></i></a>
+                    <a class="btn-sort" href="#" title="排后"><i class="i i-arrow-down"></i></a>
+                </td>
+                <td>
+                    <a class="btn-icon" href="#" title="编辑"><i class="fa fa-fw fa-edit"></i>编辑</a>
+                    <a class="btn-icon" href="delete" title="删除"><i class="fa fa-fw fa-trash-o"></i>删除</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    @Html.Action("PageInfo","Public",new{Totalcount=ViewBag.Totalcount,Url=Url.Action("List","SysAttribute",new{id=ViewBag.ID}),pageindex=ViewBag.PageIndex})
+</section>

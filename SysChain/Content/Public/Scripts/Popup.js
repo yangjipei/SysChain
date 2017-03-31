@@ -17,10 +17,10 @@ var popup = {
 
 f7.plugin._register = (function() {
 	return {
-		header: f7.plugin.header, //页头
-		footer: f7.plugin.footer,//页尾
-		systemError: f7.plugin.systemError,//页尾
 		accordion:f7.plugin.accordion,
+		header: f7.plugin.header, //页头
+		systemError: f7.plugin.systemError,//页尾
+		footer: f7.plugin.footer,//页尾
 	};
 }); 
 // 公共模块 初始化
@@ -1048,6 +1048,7 @@ f7.plugin.systemError = function() {
 	}, 1000);
 
 };
+
 // accordion 部分
 f7.plugin.accordion = (function() {
 	var $accordion = $('aside[data-accordion="on"]');
@@ -1062,6 +1063,17 @@ f7.plugin.accordion = (function() {
 		$accordion.find('.panel header a').removeClass('current');
 	} //close()
 
+	function removeCurrent() {
+		$accordion.find('.panel header a').removeClass('current').find('i[class*="fa-angle-"]').removeClass('fa-angle-up').addClass('fa-angle-down');
+		$accordion.find('.panel dl dd').addClass('hide').end().find('.panel dl').addClass('hide');
+		$accordion.find('.panel dl dt a').removeClass('current').find('i.i, i.fa').removeClass('i-arrow-down5').addClass('i-arrow-right5');
+	} //removeCurrent()
+
+	function removeSubCurrent() {
+		$accordion.find('.panel dl dd').addClass('hide');
+		$accordion.find('.panel dl dt a').removeClass('current').find('i.i, i.fa').removeClass('i-arrow-down5').addClass('i-arrow-right5');
+	} //removeSubCurrent()
+
 	$accordion.on('click', '.panel header a', function(evt) {
 		evt.preventDefault();
 		// evt.stopPropagation();
@@ -1071,13 +1083,17 @@ f7.plugin.accordion = (function() {
 			$panel = $a.parents('.panel'),
 			$dl = $panel.find('dl.child');
 
+		removeCurrent();
+
 		if ($fa.is('.fa-angle-down')) {
+			// 展开
 			$a.addClass('current');
 
 			$fa.addClass('fa-angle-up').removeClass('fa-angle-down');
 
 			$dl.removeClass('hide');
 		} else {
+			// 折叠
 			$a.removeClass('current');
 
 			$fa.addClass('fa-angle-down').removeClass('fa-angle-up');
@@ -1091,6 +1107,8 @@ f7.plugin.accordion = (function() {
 			$i = $a.find('i.i, i.fa'),
 			$dt = $a.parents('dt'),
 			$dd = $dt.next('dd');
+
+		removeSubCurrent();
 
 		if ($i.is('.i-arrow-right5') || $i.is('.fa-angle-right')) {
 			$a.addClass('current');
@@ -1115,71 +1133,54 @@ f7.plugin.accordion = (function() {
 		} //if
 	});
 
+	(function() {
+		// console.log(location);
+		var search = location.search.split('?')[1];
+		if (search) {
+			var args = search.split('&'),
+				_temp = [],
+				$target = null;
+
+			for (var index in args) {
+				_temp = args[index].toLowerCase().split('=');
+
+				// if (['pid', 'sid', 'id'].indexOf(_temp[0]) != -1) {
+				// 	$target = $accordion.find('[data-id="' + _temp[1] + '"]');
+				// 	$target.click();
+				// 	if (!$target.is('.current')) {
+				// 		$target.addClass('current');
+				// 	} //if
+				// } //if
+
+				if (_temp[0] == 'id') {
+					clickTarget(_temp[1]);
+				} //if
+			} //for in
+		} //if
+
+		var pathname = /index\/([\d]+)/i.exec(location.pathname);
+		// var pathname = /index\/([\d]+)/i.exec('Admin/SysAttribute/Index/5');
+		if (pathname && pathname.length) {
+			var id = pathname[1];
+			if (id != '') {
+				clickTarget(id);
+			} //if
+		} //if
+
+		function clickTarget(id) {
+			$target = $accordion.find('[data-id="' + id + '"]');
+			if (!$target.is('.current')) {
+				$target.addClass('current');
+			} //if
+			var $dd = $target.parents('dd'),
+				$dl = $dd.parents('dl');
+			$dl.prev('header').find('a').click();
+			$dd.prev('dt').find('a').click();
+		} //clickTarget()
+
+	}());
+
 }); //f7.plugin.accordion()
-//通用分页
-pagePlugin=function($html)
-{
-	var $pageInit = $('a[data-page-init="on"]', $html);
-	if ($pageInit.length) {
-	$html.on('click', 'a[data-page-init="on"]', function(evt) {
-		evt.stopPropagation();
-		evt.preventDefault();
-		var $a = $(this),
-		page = $a.data('size');
-		$("#index").val(page);
-		$("#frmSearch").submit();
-	});
-	};
-}
-
-//删除通用操作
-moudle_delete_init=function($html,$flag,tips){
-	$delInit=$('a[data-delete-moudle="on"]', $html)
-		if ($delInit.length) {
-		$html.on('click', 'a[data-delete-moudle="on"]', function(evt) {
-			evt.stopPropagation();
-			evt.preventDefault();
-			var url=$(this).attr("href");
-			if($flag)
-			{
-				var temp=$(this).data("flag");
-				var msg=$(this).data("msg");
-				if(temp>0)
-				{
-					popup.alert.init().show(msg,"",true,"提示");
-					return;
-				}
-			}
-			if(tips==null|| tips=="")
-			{
-				tips=$(this).data("msg");
-			}
-			popup.loading.init();
-			popup.alert.init().show(tips,{confirm:function(evt){
-				$.ajax({  
-				    type: "Post",  
-				    url: url,
-				    dataType: "json",   
-				    success: function (data) {  
-				      if (data.Result) { 
-				      popup.info.init().show(data.Msg, true);
-				      $("#frmSearch").submit();
-				      }  
-				      else {  
-				       popup.info.init().show(data.Msg, false); 
-				      }  
-				    },   
-				    error: function (XMLHttpRequest, textStatus, errorThrown) {  
-						 popup.info.init().show("系统错误.", false); 
-				    }  
-				}); 
-			},cancel:function(evt){
-				return;
-			}},true,$(this).attr("title"));
-
-		});
-	};
-};
 //通过更新状态
 moudle_update_init=function($html){
 	var	$updateInit=$('a[data-update-status="on"]', $html);

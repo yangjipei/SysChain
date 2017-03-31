@@ -41,6 +41,9 @@
     <Compile Include="ViewModel\VM_SysUser.cs" />
     <Compile Include="ViewModel\LoginModel.cs" />
     <Compile Include="ViewModel\VM_SysRole.cs" />
+    <Compile Include="ViewModel\VM_SysCategory.cs" />
+    <Compile Include="Mapping\SysAttribute.cs" />
+    <Compile Include="Mapping\SysAttributeValue.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModel\" />
