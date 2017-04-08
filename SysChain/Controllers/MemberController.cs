@@ -13,7 +13,7 @@ namespace SysChain.Controllers
 		[HttpGet]
 		public ActionResult Login()
 		{
-			ViewBag.Title = "欢迎登录电商后台管理系统";
+			ViewBag.Title = "超市供应管理系统";
 			SysChain.Model.VM_SysLogin model = new Model.VM_SysLogin();
 			model.LoginName = "admin";
 			return View(model);

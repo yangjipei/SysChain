@@ -159,7 +159,7 @@ namespace SysChain.DAL
 		public List<Model.SysAttribute> GetListByPage(string strWhere, string OnTable, string orderBy, int startIndex, int endIndex)
 		{
 			StringBuilder strSql = new StringBuilder();
-			strSql.Append("SELECT AttributeID,CategoryID,Name,Layer,Type,IsImportant FROM ( ");
+			strSql.Append("SELECT AttributeID,CategoryID,Name,Type,IsImportant FROM ( ");
 			strSql.Append(" SELECT ROW_NUMBER() OVER (");
 			if (!string.IsNullOrEmpty(orderBy.Trim()))
 			{
