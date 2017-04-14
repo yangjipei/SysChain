@@ -1,7 +1,7 @@
 ﻿
 $(function(){
 	var $html = $('html');
-	moudle_delete_init($html,false);
+	moudle_common_init($html,false);
 	moudle_common_init($html,false);
 	moudle_update_init($html);
 	pagePlugin($html);

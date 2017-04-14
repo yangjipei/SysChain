@@ -1,4 +1,4 @@
-@charset "UTF-8";
+﻿@charset "UTF-8";
 /*
 * @Author: wangyinhua
 * @Date:   2016-11-24 13:54:08
@@ -1365,12 +1365,12 @@ form .ti-blank {
   display: flex;
   width: 1200px;
 }
-#header header #logo {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  background: url(/Content/Home/Images/login/logo.jpg) no-repeat left center/150px auto;
-}
+	#header header #logo {
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+		background: url(/Content/Home/Images/login/logo.jpg) no-repeat left center/150px auto;
+	}
 #header header #logo a {
   display: -webkit-box;
   display: -ms-flexbox;

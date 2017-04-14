@@ -1,0 +1,55 @@
+﻿@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@model SysChain.Model.SysAttribute
+
+@section Scripts
+{
+    @Scripts.Render("~/js/anew")
+    <script type="text/javascript" src="~/Content/Public/Plugin/chosen/chosen.jquery.min.js"></script>
+}
+@section Styles {   <link type="text/css" rel="stylesheet" href="~/Content/Public/Plugin/chosen/chosen.css"/>   <style>     .chosen-search input {width:100% !important;}   </style> }
+
+<div id="header-crumb">
+    <p>
+        <i class="fa fa-lg fa-home"></i>
+        <a href="/Admin/SysConfig/Index/6" title="商超管理">商超管理</a>
+        <i class="fa fa-angle-right"></i>
+        <a href="/Admin/SysAttribute/Index" title="品类属性">品类属性</a>
+        <i class="fa fa-angle-right"></i>
+        <span>新增属性</span>
+    </p>
+</div>
+<main id="panel">
+    <section class="form">
+        <header>
+            <h1>新增属性</h1>
+        </header>
+        <form id="frmNew" action="@Url.Action("New","SysAttribute")" method="post">
+            <p>
+                <i class="red">*</i><span>属性名称：</span>
+                @Html.TextBoxFor(m => m.Name,new {placeholder="请输入属性名称",autocomplete="off"})
+            </p>
+            <p>
+                <i class="red">*</i><span>属性种类：</span>
+                <select name="Type" id="Type" style="padding:0px;">
+					<option value="0">请选择属性类型</option>
+					<option value="1">单项选择</option>
+					<option value="2">多项选择</option>
+                </select>
+            </p>
+            <p>
+               <i class="red">*</i> <span>影响定价：</span>
+                <input type="radio" value="True"  name="IsImportant" id="Important"> <label for="Important">是</label>
+                <input type="radio" value="False" checked="checked" id="NotImportant" name="IsImportant">  <label for="NotImportant">否</label>
+            </p>
+            <footer>
+                <button class="btn btn-primary" type="submit">确定</button>
+                <a class="btn btn-cancel btn-close" href="#" title="取消">取消</a>
+            </footer>
+            @Html.HiddenFor(m => m.AttributeID)
+            @Html.HiddenFor(m => m.CategoryID)
+        </form>
+    </section>
+</main>
+

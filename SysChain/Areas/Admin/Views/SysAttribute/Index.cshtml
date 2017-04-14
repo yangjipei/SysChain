@@ -2,6 +2,7 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
     ViewBag.ActiveUrl = "/Admin/SysConfig/Index/6";
 }
+
 <div id="header-crumb">
     <p>
         <i class="fa fa-lg fa-home"></i>
@@ -12,7 +13,6 @@
 </div>
 <main id="mall-property"> 
     <div class="aside-wrap">
-        @Html.Action("LeftMenu","SysCategory")   
         @Html.Action("List","SysAttribute")
     </div>
     

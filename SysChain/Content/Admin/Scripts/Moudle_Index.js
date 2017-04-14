@@ -7,7 +7,7 @@
 	});
 
 	var $html = $('html');
-	moudle_delete_init($html,false,'该模块及其子模块都会被删除且无法恢复，<br />是否继续操作？');
+	moudle_common_init($html,false,'该模块及其子模块都会被删除且无法恢复，<br />是否继续操作？');
 	moudle_update_init($html);
 	pagePlugin($html);
 	$(".btn-sort").on('click',function(evt){

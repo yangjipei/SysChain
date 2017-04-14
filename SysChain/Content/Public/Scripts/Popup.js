@@ -1257,5 +1257,19 @@ moudle_common_init=function($html,$flag,tips){
 		});
 	};
 };
-
+ //通用分页
+pagePlugin=function($html)
+ {
+ 	var $pageInit = $('a[data-page-init="on"]', $html);
+ 	if ($pageInit.length) {
+	 	$html.on('click', 'a[data-page-init="on"]', function(evt) {
+	 		evt.stopPropagation();
+	 		evt.preventDefault();
+	 		var $a = $(this),
+	 		page = $a.data('size');
+	 		$("#index").val(page);
+	 		$("#frmSearch").submit();
+	 	});
+ 	};
+}
 

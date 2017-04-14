@@ -1,40 +1,99 @@
-﻿@model List<SysChain.Model.SysAttribute>
-<section>
-    <header>
-        <h1>户外用品<i class="i i-arrow-right5"></i>代步<i class="i i-arrow-right5"></i>自行车</h1>
-    </header>
-    <aside>
-        <form action="#" method="post">
-            <p class="input-button-group">
-                <input name="search" type="text" maxlength="32" placeholder="快来搜我〜" />
-                <button  type="submit"><i class="fa fa-search"></i></button>
-            </p>
-        </form>
-        <div class="operate">
-            <a class="btn btn-primary" href="#" title="添加属性"><i class="i i-plus2"></i>添加属性</a>
-        </div>
-    </aside>
-	
-    <table>
-        <thead>
-            <tr>
-                <th>属性名称 @ViewBag.ID</th>
-                <th>控件类型</th>
-                <th>是否影响定价</th>
-                <th>操作</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>颜色</td>
-                <td>单项选择</td>
-                <td>是</td>
-                <td>
-                    <a class="btn-icon" href="#" title="编辑"><i class="fa fa-fw fa-edit"></i>编辑</a>
-                    <a class="btn-icon" href="delete" title="删除"><i class="fa fa-fw fa-trash-o"></i>删除</a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    @Html.Action("PageInfo","Public",new{Totalcount=ViewBag.Totalcount,Url=Url.Action("List","SysAttribute",new{id=ViewBag.ID}),pageindex=ViewBag.PageIndex})
-</section>
+﻿@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    ViewBag.ActiveUrl = "/Admin/SysConfig/Index/6";
+}
+@model List<SysChain.Model.SysAttribute>
+@section Scripts
+{
+    @Scripts.Render("~/js/plugin/popwin")
+    @Scripts.Render("~/js/aindex")
+}
+<div id="header-crumb">
+    <p>
+        <i class="fa fa-lg fa-home"></i>
+        <a href="/Admin/SysConfig/Index/6" title="商超管理">商超管理</a>
+        <i class="fa fa-angle-right"></i>
+        <span>品类属性</span>
+    </p>
+</div>
+<main id="mall-property"> 
+    <div class="aside-wrap">
+		@if(ViewBag.ID>0)
+		{
+		<section>
+		    <header>
+		        <h1>户外用品<i class="i i-arrow-right5"></i>代步<i class="i i-arrow-right5"></i>自行车</h1>
+		    </header>
+		    <aside>
+		        <form id="frmSearch" action="#" method="post">
+		            <p class="input-button-group">
+		                <input name="search" type="text" maxlength="32" placeholder="快来搜我〜" />
+		                <button  type="submit"><i class="fa fa-search"></i></button>
+		            </p>
+					<input type="hidden" name="index" id="index"/>
+		        </form>
+		            <div class="operate">
+		                <a id="btnNew"  class="btn btn-primary" href='@Url.Action("New","SysAttribute",new {area="Admin",id=ViewBag.ID})' data-panel-init="on" title="新增属性"><i class="fa fa-plus-circle"></i>新增属性</a>
+		            </div>
+		    </aside>
+		    
+		    <table>
+		        <thead>
+		            <tr>
+		                <th>属性名称 @ViewBag.ID</th>
+		                <th>控件类型</th>
+		                <th>是否影响定价</th>
+		                <th>操作</th>
+		            </tr>
+		        </thead>
+		        <tbody>
+		            @if(Model!=null&&Model.Count>0)
+		            {
+		                foreach(SysChain.Model.SysAttribute m in Model)
+		                {
+		                <tr>
+		                    <td>@m.Name</td>
+		                    <td>
+		                    @switch(m.Type)
+		                    {   
+		                        case 1:
+		                            <i>单项选择</i>
+		                        break;
+		                        case 2:
+		                            <i>多项选择</i>
+		                        break;
+		                    }
+		                    </td>
+		                    <td>
+		                        @if(!m.IsImportant)
+		                        {
+		                            <i class="green">不影响</i>
+		                        }else
+		                        {
+		                            <i class="red">影响</i>
+		                        }
+		                    </td>
+		                    <td>
+		                        <a class="btn-icon" href="#" title="编辑"><i class="fa fa-fw fa-edit"></i>编辑</a>
+		                        <a class="btn-icon" href="delete" title="删除"><i class="fa fa-fw fa-trash-o"></i>删除</a>
+		                    </td>
+		                </tr>
+		                }
+		            }else
+		            {
+		                 <tr>
+		                    <td colspan="4">暂无数据....</td>
+		                </tr>
+		            }
+
+		        </tbody>
+		    </table>
+		    @Html.Action("PageInfo","Public",new{Totalcount=ViewBag.Totalcount,Url=Url.Action("List","SysAttribute",new{id=ViewBag.ID}),pageindex=ViewBag.PageIndex})
+		</section>
+		}
+		else{
+		   <section>请点击左侧菜单操作.</section>
+		}
+    </div>
+    
+</main>

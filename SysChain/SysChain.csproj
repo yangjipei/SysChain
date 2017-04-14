@@ -341,6 +341,9 @@
     <Content Include="Areas\Admin\Views\SysAttribute\Index.cshtml" />
     <Content Include="Areas\Admin\Views\SysCategory\LeftMenu.cshtml" />
     <Content Include="Areas\Admin\Views\SysAttribute\List.cshtml" />
+    <Content Include="Areas\Admin\Views\SysAttribute\New.cshtml" />
+    <Content Include="Content\Admin\Scripts\Attribute_New.js" />
+    <Content Include="Content\Admin\Scripts\Attribute_Index.js" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
