@@ -55,9 +55,17 @@ namespace SysChain.BLL
 		/// <param name="strWhere">String where.</param>
 		public List<VM_SysCategory> GetList(string strWhere)
 		{
-			System.Data.DataTable dt = dal.GetList(strWhere);
-			List<VM_SysCategory> li = CreateTree(dt, 0);
-			return li;
+			System.Data.DataTable dt=dal.GetList(strWhere);
+			return CreateTree(dt, 0);
+		}
+		/// <summary>
+		/// 获得列表
+		/// </summary>
+		/// <returns>The model list.</returns>
+		/// <param name="strWhere">String where.</param>
+		public List<Model.SysCategory> GetModelList(string strWhere)
+		{
+			return dal.GetModelList(strWhere);
 		}
 		private List<VM_SysCategory> CreateTree(DataTable dt, int ParentID)
 		{

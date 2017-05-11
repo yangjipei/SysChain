@@ -36,7 +36,7 @@ namespace SysChain.Areas.Admin.Controllers
 			}
 			ViewBag.KeyWords = keywords;
 			ViewBag.Totalcount = Opr.GetCount(strWhere);
-			List<Model.SysRole> list = Opr.GetListByPage(strWhere, "", (PageIndex - 1) * PageSize, PageIndex * PageSize);
+			List<Model.SysRole> list = Opr.GetListByPage(strWhere, "", (PageIndex - 1) * PageSize+1, PageIndex * PageSize);
 			return View(list);
 		}
 		/// <summary>

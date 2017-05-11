@@ -355,9 +355,34 @@ namespace SysChain.DAL
 			{
 				strSql.Append(" WHERE " + strWhere);
 			}
-			strSql.Append(" Order by  OrderCode " );
+			strSql.Append(" Order by  OrderCode ");
 
 			return DbHelperSQL.Query(strSql.ToString()).Tables[0];
+		}
+
+		public List<Model.SysCategory> GetModelList(string strWhere)
+		{
+			StringBuilder strSql = new StringBuilder();
+			strSql.Append("SELECT CategoryID,ParentID , Name,Layer,Style,OrderCode,State FROM SysCategory ");
+			if (!string.IsNullOrEmpty(strWhere.Trim()))
+			{
+				strSql.Append(" WHERE " + strWhere);
+			}
+			strSql.Append(" Order by  OrderCode " );
+			DataTable dt = DbHelperSQL.Query(strSql.ToString()).Tables[0];
+			List<Model.SysCategory> ModelList = new List<Model.SysCategory>();
+			if (dt.Rows.Count > 0)
+			{
+				foreach (DataRow dr in dt.Rows)
+				{
+					ModelList.Add(SetEntity(dr));
+				}
+				return ModelList;
+			}
+			else
+			{
+				return null;
+			}
 		}
 		/// <summary>
 		/// 分页获取数据列表

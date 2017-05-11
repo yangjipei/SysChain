@@ -6,7 +6,7 @@
 @section Scripts
 {
     @Scripts.Render("~/js/plugin/popwin")
-    @Scripts.Render("~/js/aindex")
+    @Scripts.Render("~/js/alist")
 }
 <div id="header-crumb">
     <p>
@@ -27,7 +27,7 @@
 		    <aside>
 		        <form id="frmSearch" action="#" method="post">
 		            <p class="input-button-group">
-		                <input name="search" type="text" maxlength="32" placeholder="快来搜我〜" />
+		                <input id="keywords" name="keywords" type="text" maxlength="32" placeholder="快来搜我〜" value="@ViewBag.KeyWords"/>
 		                <button  type="submit"><i class="fa fa-search"></i></button>
 		            </p>
 					<input type="hidden" name="index" id="index"/>

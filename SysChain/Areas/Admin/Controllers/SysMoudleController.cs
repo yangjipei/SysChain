@@ -33,7 +33,7 @@ namespace SysChain.Areas.Admin.Controllers
 			int PageSize = 5;
 			string strWhere = "ParentID="+ParentID;
 			ViewBag.Totalcount = Opr.GetCount(strWhere);
-			List<Model.SysMoudle> list=Opr.GetListByPage(strWhere,"","OrderCode",(PageIndex-1)*PageSize,PageIndex*PageSize);
+			List<Model.SysMoudle> list=Opr.GetListByPage(strWhere,"","OrderCode",(PageIndex-1)*PageSize+1,PageIndex*PageSize);
 			return View(list);
 		}
 		/// <summary>

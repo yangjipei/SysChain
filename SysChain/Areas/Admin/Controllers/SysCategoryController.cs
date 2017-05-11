@@ -27,7 +27,7 @@ namespace SysChain.Areas.Admin.Controllers
 			int PageSize = 5;
 			string strWhere = "ParentID=" + ParentID;
 			ViewBag.Totalcount = Opr.GetCount(strWhere);
-			List<Model.SysCategory> list = Opr.GetListByPage(strWhere, "", "OrderCode", (PageIndex - 1) * PageSize, PageIndex * PageSize);
+			List<Model.SysCategory> list = Opr.GetListByPage(strWhere, "", "OrderCode", (PageIndex - 1) * PageSize+1, PageIndex * PageSize);
 			return View(list);
 		}
 		[HttpGet]
@@ -233,6 +233,10 @@ namespace SysChain.Areas.Admin.Controllers
 		{
 			List<VM_SysCategory> li = Opr.GetList("State>0");     
 			return View(li);
+		}
+		public JsonResult SelectCategory()
+		{
+			return Json(Opr.GetModelList("State>0"), JsonRequestBehavior.AllowGet);
 		}
 
 	}

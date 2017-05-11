@@ -344,6 +344,7 @@
     <Content Include="Areas\Admin\Views\SysAttribute\New.cshtml" />
     <Content Include="Content\Admin\Scripts\Attribute_New.js" />
     <Content Include="Content\Admin\Scripts\Attribute_Index.js" />
+    <Content Include="Content\Admin\Scripts\Attribute_List.js" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
@@ -366,7 +367,10 @@
       <Properties>
         <XspParameters Port="0" Address="127.0.0.1" SslMode="None" SslProtocol="Ssl3" KeyType="None" CertFile="" KeyFile="" PasswordOptions="None" Password="" Verbose="True" />
         <Policies>
-          <TextStylePolicy FileWidth="120" TabWidth="4" TabsToSpaces="False" IndentWidth="4" RemoveTrailingWhitespace="True" NoTabsAfterNonTabs="False" EolMarker="Native" scope="application/javascript" />
+          <TextStylePolicy FileWidth="120" TabWidth="4" TabsToSpaces="False" IndentWidth="4" RemoveTrailingWhitespace="True" NoTabsAfterNonTabs="False" EolMarker="Native" scope="application/javascript">
+            <inheritsSet />
+            <inheritsScope />
+          </TextStylePolicy>
         </Policies>
       </Properties>
     </MonoDevelop>

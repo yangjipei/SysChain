@@ -18,6 +18,7 @@ var popup = {
 f7.plugin._register = (function() {
 	return {
 		accordion:f7.plugin.accordion,
+		chooseTab:f7.plugin.chooseTab,
 		header: f7.plugin.header, //页头
 		systemError: f7.plugin.systemError,//页尾
 		footer: f7.plugin.footer,//页尾
@@ -1181,6 +1182,92 @@ f7.plugin.accordion = (function() {
 	}());
 
 }); //f7.plugin.accordion()
+f7.plugin.chooseTab = (function() {
+	var $tab = $('.tab-dynamic');
+	if (!$tab.length) {
+		return false;
+	} //if
+
+	var $form = $tab.parents('form'),
+		$btn = $('footer :submit, footer .btn', $form),
+		$level_1 = $('[name="level-1"]:hidden'),
+		$level_2 = $('[name="level-2"]:hidden'),
+		$level_3 = $('[name="level-3"]:hidden'),
+		$hintFull = $form.find('.hint-full'),
+		$stacks = $('.stack', $tab),
+		$ol = $('ol', $tab);
+
+	$ol.on('click', 'a', function(evt) {
+		evt.preventDefault();
+		evt.stopPropagation();
+		var $a = $(this),
+			stack = $a.data('stack'),
+			$currentStack = $('[class*="stack-' + stack + '"]', $tab);
+
+		if ($a.is('.default')) {
+			return;
+		} //if
+		// console.log('stack = ' + stack);
+
+		$a.removeClass('current').parent('li').prev('li').find('a').addClass('current');
+		$a.addClass('hide').parent('li').nextAll('li').find('a').addClass('hide').removeClass('current');
+
+		$currentStack.addClass('hide').find('a').removeClass('current').end().next('.stack').addClass('hide').find('a').removeClass('current');
+		$currentStack.prev('.stack').removeClass('hide');
+
+		$hintFull.find('[data-stack="' + stack + '"]').text('-').next('span').text('-');
+
+		// 设置按钮
+		$btn.addClass('btn-disabled');
+		if ($btn.is(':submit')) {
+			$btn.prop('disabled', true);
+		} //if
+	});
+
+	$stacks.on('click', 'a', function(evt) {
+		evt.preventDefault();
+		evt.stopPropagation();
+
+		var $a = $(this),
+			level = $a.parents('div').data('level'),
+			label = $a.text(),
+			$stack = $a.parents('.stack');
+
+		// console.log('level = ' + level, label);
+		$a.addClass('current').siblings('a').removeClass('current');
+
+		switch (parseInt(level)) {
+			case 1:
+				$level_1.val(level);
+				break;
+			case 2:
+				$level_2.val(level);
+				break;
+			case 3:
+				$level_3.val(level);
+				break;
+		} //switch
+
+		if (level + 1 <= 3) {
+			// 显示tab
+			$ol.find('a.current').removeClass('current');
+			$ol.find('a[data-stack="' + (level + 1) + '"]').removeClass('hide').addClass('current').find('span').text(label);
+
+			// 隐藏 当前stack
+			$stack.addClass('hide');
+			// 显示 下一级stack
+			$stack.next('.stack').removeClass('hide');
+		} else {
+			$btn.removeClass('btn-disabled');
+			if ($btn.is(':submit')) {
+				$btn.prop('disabled', false);
+			} //if
+		} //if
+
+		// 显示 对应级别提示文件
+		$hintFull.find('span[data-stack="' + level + '"]').text(label);
+	});
+});
 //通过更新状态
 moudle_update_init=function($html){
 	var	$updateInit=$('a[data-update-status="on"]', $html);

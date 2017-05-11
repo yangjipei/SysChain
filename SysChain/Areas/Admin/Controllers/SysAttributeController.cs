@@ -20,15 +20,21 @@ namespace SysChain.Areas.Admin.Controllers
 		{
 			return View();
 		}
-		public ActionResult List(int? id, int? index )
+		public ActionResult List(int id, int? index,string keywords )
 		{
-			int ID = id == null ? 0 : (int)id;
+			int ID =id;
 			ViewBag.ID = ID;
 			int PageIndex = index == null ? 1 : (int)index;
 			ViewBag.PageIndex = PageIndex;
 			int PageSize = 5;
-			ViewBag.Totalcount = Opr.GetCount("");
-			List<Model.SysAttribute>  list = Opr.GetListByPage("", "", "AttributeID", (PageIndex - 1) * PageSize, PageIndex * PageSize);
+			string strWhere = "CategoryID=" + ID;
+			if (!string.IsNullOrEmpty(keywords))
+			{
+				strWhere += "  And Name like '%" + keywords + "%'";
+			}
+			ViewBag.KeyWords = keywords;
+			ViewBag.Totalcount = Opr.GetCount(strWhere);
+			List<Model.SysAttribute>  list = Opr.GetListByPage(strWhere, "", "AttributeID ", (PageIndex - 1) * PageSize+1, PageIndex * PageSize);
 			return View(list);
 
 		}

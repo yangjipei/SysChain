@@ -2,7 +2,10 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
     ViewBag.ActiveUrl = "/Admin/SysConfig/Index/6";
 }
-
+@section Scripts
+{
+    @Scripts.Render("~/js/aindex")
+}
 <div id="header-crumb">
     <p>
         <i class="fa fa-lg fa-home"></i>
@@ -11,9 +14,51 @@
         <span>品类属性</span>
     </p>
 </div>
-<main id="mall-property"> 
-    <div class="aside-wrap">
-        @Html.Action("List","SysAttribute")
-    </div>
-    
+<main id="shop-product-add">
+    <section class="form">
+        <input type="hidden" id="level1" name="level-1" value=""/>
+        <input type="hidden" id="level2" name="level-2" value=""/>
+        <input type="hidden" id="level3" name="level-3" value=""/>
+        <form action="@Url.Action("List","SysAttribute")" method="get">
+            <input type="hidden" id="id" name="id">
+            <header>
+                <h1>请选择品类</h1>
+            </header>
+
+            <div class="tab-dynamic">
+                <ol>
+                    <li><a class="default current" href="#" data-stack="1" title="全部分类">全部分类</a></li>
+                    <li><a class="hide" href="#"  data-stack="2" title="关闭"><span>女装/精品</span><i class="i i-cross2"></i></a></li>
+                    <li><a class="hide" href="#"  data-stack="3" title="关闭"><span>下装</span><i class="i i-cross2"></i></a></li>
+                </ol>
+                <div class="stack stack-1">
+                    <div class="level-id" data-level="1">
+                    </div>
+                </div>
+                <div class="stack stack-2 hide">
+                    <div class="level-id" data-level="2">
+                    </div>
+                </div>
+                <div class="stack stack-3 hide">
+                    <div class="level-id" data-level="3">
+                      
+                    </div>
+                </div>
+            </div>
+
+            <div class="hint-full">您当前的选择是：
+                <span data-stack="1">-</span>
+                <i class="fa fa-angle-right"></i>
+                <span data-stack="2">-</span>
+                <i class="fa fa-angle-right"></i>
+                <span data-stack="3">-</span>
+            </div>
+
+            <footer>
+                <button class="btn btn-primary btn-disabled"  disabled="disabled" type="submit">下一步</button>
+                <!-- <a class="btn btn-primary btn-disabled" href="./shop-product-edit.html" title="下一步">下一步</a> -->
+            </footer>
+        </form>
+    </section>
+
 </main>
