@@ -93,7 +93,7 @@
 	                        <a class="btn-icon" href='@Url.Action("New","SysMoudle",new {area="Admin",pid=Model[i].MoudleID})' data-panel-init="on" title="新增模块"><i class="fa fa-fw fa-plus-circle"></i>新增</a>
 							}
 	                        <a class="btn-icon" href='@Url.Action("New","SysMoudle",new {area="Admin",id=Model[i].MoudleID,pid=Model[i].ParentID})' data-panel-init="on" title="编辑模块"><i class="fa fa-fw fa-edit"></i>编辑</a>
-	                        <a class="btn-icon" data-delete-moudle="on" href='@Url.Action("Delete","SysMoudle",new {area="Admin",id=Model[i].MoudleID})' title="删除模块"><i class="fa fa-fw fa-trash-o"></i>删除</a>
+	                        <a class="btn-icon" data-common-moudle="on" href='@Url.Action("Delete","SysMoudle",new {area="Admin",id=Model[i].MoudleID})' title="删除模块"><i class="fa fa-fw fa-trash-o"></i>删除</a>
 						@if(!Model[i].State)
 						{
 	                    	 <a class="btn-icon" data-update-status="on" href='@Url.Action("UpdateStatus","SysMoudle",new {area="Admin",id=Model[i].MoudleID})'   title="启用模块"><i class="fa fa-fw fa-bolt"></i>启用</a>

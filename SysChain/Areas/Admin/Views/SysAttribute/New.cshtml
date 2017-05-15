@@ -40,8 +40,14 @@
             </p>
             <p>
                <i class="red">*</i> <span>影响定价：</span>
-                <input type="radio" value="True"  name="IsImportant" id="Important"> <label for="Important">是</label>
-                <input type="radio" value="False" checked="checked" id="NotImportant" name="IsImportant">  <label for="NotImportant">否</label>
+		        @if(Model.IsImportant){
+	                <input type="radio" value="True" checked="checked" name="IsImportant" id="Important"> <label for="Important">是</label>
+	                <input type="radio" value="False" id="NotImportant" name="IsImportant">  <label for="NotImportant">否</label>
+		        }else{
+                    <input type="radio" value="True"  name="IsImportant" id="Important"> <label for="Important">是</label>
+                    <input type="radio" value="False" checked="checked" id="NotImportant" name="IsImportant">  <label for="NotImportant">否</label>
+				}
+
             </p>
             <footer>
                 <button class="btn btn-primary" type="submit">确定</button>
@@ -50,6 +56,9 @@
             @Html.HiddenFor(m => m.AttributeID)
             @Html.HiddenFor(m => m.CategoryID)
         </form>
+		<input type="hidden" value="@Model.Type" id="currentType" name="currentType" />
+
+
     </section>
 </main>
 

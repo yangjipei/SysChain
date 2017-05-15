@@ -32,16 +32,28 @@ namespace SysChain.Areas.Admin.Controllers
 			{
 				strWhere += "  And Name like '%" + keywords + "%'";
 			}
+			//获得Post信息
+			ViewBag.Kw1 = Request["level1"].ToString();
+			ViewBag.Kw2 = Request["level2"].ToString();
+			ViewBag.Kw3 = Request["level3"].ToString();
 			ViewBag.KeyWords = keywords;
 			ViewBag.Totalcount = Opr.GetCount(strWhere);
 			List<Model.SysAttribute>  list = Opr.GetListByPage(strWhere, "", "AttributeID ", (PageIndex - 1) * PageSize+1, PageIndex * PageSize);
 			return View(list);
 
 		}
-		public ActionResult New(int id)
+		public ActionResult New(int id,int ?aid)
 		{
 			Model.SysAttribute model = new Model.SysAttribute();
-			model.CategoryID = id;
+
+			int AttributeID = aid == null ? 0 : (int)aid;
+			if(AttributeID>0)
+			{
+				model = Opr.GetEntity(AttributeID);
+			}else{
+				model.CategoryID = id;
+				model.Type = 0;
+			}
 			return View(model);
 		}
 		[HttpPost]
@@ -107,6 +119,32 @@ namespace SysChain.Areas.Admin.Controllers
 				jr.Data = rs;
 				return jr;
 			}
+		}
+		/// <summary>
+		/// 删除模块
+		/// </summary>
+		/// <returns>The delete.</returns>
+		/// <param name="id">Identifier.</param>
+		[HttpPost]
+		public ActionResult Delete(int id)
+		{
+			Helper.ResultInfo<bool> rs = new Helper.ResultInfo<bool>();
+			rs.Data = Opr.DeleAttribute(id);
+			if (rs.Data)
+			{
+				rs.Msg = "删除成功.";
+				rs.Result = true;
+				rs.Url = "";
+			}
+			else
+			{
+				rs.Msg = "删除失败.";
+				rs.Result = false;
+				rs.Url = "";
+			}
+			JsonResult jr = new JsonResult();
+			jr.Data = rs;
+			return jr;
 		}
 	}
 }

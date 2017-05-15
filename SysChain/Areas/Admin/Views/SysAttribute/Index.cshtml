@@ -16,20 +16,20 @@
 </div>
 <main id="shop-product-add">
     <section class="form">
-        <input type="hidden" id="level1" name="level-1" value=""/>
-        <input type="hidden" id="level2" name="level-2" value=""/>
-        <input type="hidden" id="level3" name="level-3" value=""/>
-        <form action="@Url.Action("List","SysAttribute")" method="get">
+        <form action="@Url.Action("List","SysAttribute")" method="post">
             <input type="hidden" id="id" name="id">
+			<input type="hidden" name="level1">
+			<input type="hidden" name="level2">
+			<input type="hidden" name="level3">
             <header>
                 <h1>请选择品类</h1>
             </header>
 
             <div class="tab-dynamic">
                 <ol>
-                    <li><a class="default current" href="#" data-stack="1" title="全部分类">全部分类</a></li>
-                    <li><a class="hide" href="#"  data-stack="2" title="关闭"><span>女装/精品</span><i class="i i-cross2"></i></a></li>
-                    <li><a class="hide" href="#"  data-stack="3" title="关闭"><span>下装</span><i class="i i-cross2"></i></a></li>
+                    <li><a class="default current" href="#" data-stack="1" title="请选择">请选择</a></li>
+                    <li><a class="hide" href="#"  data-stack="2" title="关闭"><span></span><i class="i i-cross2"></i></a></li>
+                    <li><a class="hide" href="#"  data-stack="3" title="关闭"><span></span><i class="i i-cross2"></i></a></li>
                 </ol>
                 <div class="stack stack-1">
                     <div class="level-id" data-level="1">

@@ -86,10 +86,10 @@
                         <a class="btn-icon" href="@Url.Action("New","SysUser",new{area="Admin",id=@m.UserID})" data-panel-init="on" title="编辑用户"><i class="fa fa-fw fa-edit"></i>编辑</a>
 						@if(!m.State)
 						{
-						<a class="btn-icon" href="@Url.Action("Freeze","SysUser",new{area="Admin",id=@m.UserID})" data-delete-moudle="on"  data-msg="解冻该用户,是否继续操作？" title="解冻用户"><i class="fa fa-fw fa-user"></i>解冻</a>
+						<a class="btn-icon" href="@Url.Action("Freeze","SysUser",new{area="Admin",id=@m.UserID})" data-common-moudle="on"  data-msg="解冻该用户,是否继续操作？" title="解冻用户"><i class="fa fa-fw fa-user"></i>解冻</a>
 						}else
 						{
- 						<a class="btn-icon" href="@Url.Action("Freeze","SysUser",new{area="Admin",id=@m.UserID})" data-delete-moudle="on"  data-msg="冻结该用户,是否继续操作？" title="冻结用户"><i class="fa fa-fw fa-ban "></i>冻结</a>
+ 						<a class="btn-icon" href="@Url.Action("Freeze","SysUser",new{area="Admin",id=@m.UserID})" data-common-moudle="on"  data-msg="冻结该用户,是否继续操作？" title="冻结用户"><i class="fa fa-fw fa-ban "></i>冻结</a>
 						}
                        <a class="btn-icon" href="@Url.Action("Reset","SysUser",new{area="Admin",id=@m.UserID})" data-common-moudle="on"  data-msg="重置该用户登陆为:mm888888,是否继续操作？" title="重置密码"><i class="fa fa-fw fa-refresh"></i>重置密码</a>
                     </td>

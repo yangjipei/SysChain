@@ -22,7 +22,11 @@
 		{
 		<section>
 		    <header>
-		        <h1>户外用品<i class="i i-arrow-right5"></i>代步<i class="i i-arrow-right5"></i>自行车</h1>
+		        <h1>
+					    @ViewBag.Kw1 > @ViewBag.Kw2 > @ViewBag.Kw3
+					    <a class="blue" style="margin-left:30px; font-size:12px;" href="/Admin/SysAttribute/Index" title="重新选择">重新选择</a>
+				</h1>
+			
 		    </header>
 		    <aside>
 		        <form id="frmSearch" action="#" method="post">
@@ -31,6 +35,10 @@
 		                <button  type="submit"><i class="fa fa-search"></i></button>
 		            </p>
 					<input type="hidden" name="index" id="index"/>
+					<input type="hidden" id="id" name="id" value="@ViewBag.ID">
+		            <input type="hidden" name="level1" value="@ViewBag.Kw1">
+		            <input type="hidden" name="level2" value="@ViewBag.Kw2">
+		            <input type="hidden" name="level3" value="@ViewBag.Kw3">
 		        </form>
 		            <div class="operate">
 		                <a id="btnNew"  class="btn btn-primary" href='@Url.Action("New","SysAttribute",new {area="Admin",id=ViewBag.ID})' data-panel-init="on" title="新增属性"><i class="fa fa-plus-circle"></i>新增属性</a>
@@ -40,7 +48,7 @@
 		    <table>
 		        <thead>
 		            <tr>
-		                <th>属性名称 @ViewBag.ID</th>
+		                <th>属性名称</th>
 		                <th>控件类型</th>
 		                <th>是否影响定价</th>
 		                <th>操作</th>
@@ -74,8 +82,8 @@
 		                        }
 		                    </td>
 		                    <td>
-		                        <a class="btn-icon" href="#" title="编辑"><i class="fa fa-fw fa-edit"></i>编辑</a>
-		                        <a class="btn-icon" href="delete" title="删除"><i class="fa fa-fw fa-trash-o"></i>删除</a>
+		                        <a class="btn-icon" href='@Url.Action("New","SysAttribute",new {area="Admin",id=m.CategoryID,aid=m.AttributeID})' data-panel-init="on" title="编辑品类"><i class="fa fa-fw fa-edit"></i>编辑</a>
+		                        <a class="btn-icon" href='@Url.Action("Delete","SysAttribute",new {area="Admin",id=m.AttributeID})'  data-common-moudle="on" title="删除"><i class="fa fa-fw fa-trash-o"></i>删除</a>
 		                    </td>
 		                </tr>
 		                }

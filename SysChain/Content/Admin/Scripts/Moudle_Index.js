@@ -68,5 +68,5 @@ getData=function(){
 };
 showMessage=function(msg){
 	 popup.info.init().show(msg, true); 
-	 $("#frmSearch").submit();
+	 setTimeout(function(){$("#frmSearch").submit();}, 3000);
 };

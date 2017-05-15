@@ -38,6 +38,15 @@ namespace SysChain.BLL
 			return dal.GetCount(strWhere);
 		}
 		/// <summary>
+		/// 获得模块实体
+		/// </summary>
+		/// <returns>返回模块实体</returns>
+		/// <param name="AttributeID">属性编号</param>
+		public Model.SysAttribute GetEntity(int AttributeID)
+		{
+			return dal.GetEntity(AttributeID);
+		}
+		/// <summary>
 		/// 修改模块
 		/// </summary>
 		/// <returns>返回影响行数</returns>

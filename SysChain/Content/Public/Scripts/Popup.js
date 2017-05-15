@@ -1190,9 +1190,6 @@ f7.plugin.chooseTab = (function() {
 
 	var $form = $tab.parents('form'),
 		$btn = $('footer :submit, footer .btn', $form),
-		$level_1 = $('[name="level-1"]:hidden'),
-		$level_2 = $('[name="level-2"]:hidden'),
-		$level_3 = $('[name="level-3"]:hidden'),
 		$hintFull = $form.find('.hint-full'),
 		$stacks = $('.stack', $tab),
 		$ol = $('ol', $tab);
@@ -1236,18 +1233,6 @@ f7.plugin.chooseTab = (function() {
 		// console.log('level = ' + level, label);
 		$a.addClass('current').siblings('a').removeClass('current');
 
-		switch (parseInt(level)) {
-			case 1:
-				$level_1.val(level);
-				break;
-			case 2:
-				$level_2.val(level);
-				break;
-			case 3:
-				$level_3.val(level);
-				break;
-		} //switch
-
 		if (level + 1 <= 3) {
 			// 显示tab
 			$ol.find('a.current').removeClass('current');
@@ -1266,6 +1251,7 @@ f7.plugin.chooseTab = (function() {
 
 		// 显示 对应级别提示文件
 		$hintFull.find('span[data-stack="' + level + '"]').text(label);
+		$('[name="level'+level+'"]:hidden').val(label);
 	});
 });
 //通过更新状态
@@ -1327,10 +1313,10 @@ moudle_common_init=function($html,$flag,tips){
 				    dataType: "json",   
 				    success: function (data) {  
 				      if (data.Result) { 
-				      popup.info.init().show(data.Msg, true);
+				      showMessage(data.Msg, true);
 				      }  
 				      else {  
-				       popup.info.init().show(data.Msg, false); 
+			           showMessage(data.Msg, false);
 				      }  
 				    },   
 				    error: function (XMLHttpRequest, textStatus, errorThrown) {  
@@ -1359,4 +1345,9 @@ pagePlugin=function($html)
 	 	});
  	};
 }
+
+showMessage=function(msg,flag){
+	 popup.info.init().show(msg, flag); 
+	 setTimeout(function(){$("#frmSearch").submit();}, 3000);
+};
 

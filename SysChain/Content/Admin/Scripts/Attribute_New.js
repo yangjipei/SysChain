@@ -45,5 +45,12 @@
 			}); 
 	});
 	$("#Type").chosen({disable_search_threshold: 10} );
+
+	if($("#currentType").val()!="")
+	{
+		$("#Type").val($("#currentType").val());//设置值  
+		$('#Type').trigger('chosen:updated');//更新选项  
+	}
+
 });
 

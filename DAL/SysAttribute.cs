@@ -58,6 +58,10 @@ namespace SysChain.DAL
 				{
 					model.CategoryID = int.Parse(dr["CategoryID"].ToString());
 				}
+				if (dr["AttributeID"].ToString() != "")
+				{
+					model.AttributeID = int.Parse(dr["AttributeID"].ToString());
+				}
 				model.Name = dr["Name"].ToString();
 				if (dr["Type"].ToString() != "")
 				{
@@ -107,6 +111,24 @@ namespace SysChain.DAL
 			}
 		}
 		/// <summary>
+		/// 获得模块实体
+		/// </summary>
+		/// <returns>返回模块实体</returns>
+		/// <param name="AttributeID">属性编号</param>
+		public Model.SysAttribute GetEntity(int AttributeID)
+		{
+			StringBuilder strSql = new StringBuilder();
+			strSql.Append("select  top 1  AttributeID,CategoryID,Name,Type,IsImportant from SysAttribute ");
+			strSql.Append(" where AttributeID=@AttributeID");
+			SqlParameter[] parameters = {
+					new SqlParameter("@AttributeID", SqlDbType.Int,4)
+			};
+			parameters[0].Value = AttributeID;
+			DataTable dt = DbHelperSQL.Query(strSql.ToString(), parameters).Tables[0];
+			return SetEntity(dt.Rows[0]);
+
+		}
+		/// <summary>
 		/// 根据条件获得品类数量
 		/// </summary>
 		/// <returns>The count.</returns>
@@ -147,7 +169,7 @@ namespace SysChain.DAL
 					new SqlParameter("@Type", SqlDbType.Int,4),
 					new SqlParameter("@IsImportant", SqlDbType.Bit,4)
 			};
-			parameters[0].Value = Model.CategoryID;
+			parameters[0].Value = Model.AttributeID;
 			parameters[1].Value = Model.Name;
 			parameters[2].Value = Model.Type;
 			parameters[3].Value = Model.IsImportant;

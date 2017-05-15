@@ -24,8 +24,8 @@
 			    dataType: "json",   
 			    success: function (data) {  
 			      if (data.Data) { 
-			      $("#frmSearch").submit();
 			      popup.info.init().show(data.Msg, true);
+			      setTimeout(function(){$("#frmSearch").submit();}, 3000);
 			      }  
 			      else {  
 			       popup.info.init().show(data.Msg, false); 
@@ -68,5 +68,5 @@ getData=function(){
 };
 showMessage=function(msg){
 	 popup.info.init().show(msg, true); 
-	 $("#frmSearch").submit();
+	 setTimeout(function(){$("#frmSearch").submit();}, 3000);
 };
