@@ -8,61 +8,37 @@ using System.Web.Routing;
 
 namespace SysChain.Areas.Admin.Controllers
 {
-	public class SysAttributeController : Controller
+	public class SysAttributeValueController : Controller
 	{
-		private SysChain.BLL.SysAttribute Opr { get; set; }
+		private SysChain.BLL.SysAttributeValue Opr { get; set; }
 		protected override void Initialize(RequestContext requestContext)
 		{
-			if (Opr == null) { Opr = new BLL.SysAttribute(); }
+			if (Opr == null) { Opr = new BLL.SysAttributeValue(); }
 			base.Initialize(requestContext);
 		}
-		public ActionResult  Index()
-		{
-			return View();
-		}
-		[HttpPost]
-		public ActionResult List(int id, int? index,string keywords )
+		/// <summary>
+		/// Index the specified id and index.
+		/// </summary>
+		/// <returns>The index.</returns>
+		/// <param name="id">属性ID</param>
+		/// <param name="index">分页数.</param>
+		public ActionResult Index(int id,int? index)
 		{
 			ViewBag.ID = id;
 			int PageIndex = index == null ? 1 : (int)index;
 			ViewBag.PageIndex = PageIndex;
 			int PageSize = 5;
-			string strWhere = "CategoryID=" + id;
-			if (!string.IsNullOrEmpty(keywords))
-			{
-				strWhere += "  And Name like '%" + keywords + "%'";
-			}
-			//获得Post信息
-			ViewBag.Kw1 = Request["level1"].ToString();
-			ViewBag.Kw2 = Request["level2"].ToString();
-			ViewBag.Kw3 = Request["level3"].ToString();
-			ViewBag.KeyWords = keywords;
-			ViewBag.Totalcount = Opr.GetCount(strWhere);
-			List<Model.SysAttribute>  list = Opr.GetListByPage(strWhere, "", "AttributeID ", (PageIndex - 1) * PageSize+1, PageIndex * PageSize);
+			ViewBag.Totalcount = Opr.GetCount(" AttributeID= "+id);
+			List<Model.SysAttributeValue> list = Opr.GetListByPage(" AttributeID= " + id, "", "ValueID ", (PageIndex - 1) * PageSize + 1, PageIndex * PageSize);
 			return View(list);
-
-		}
-		public ActionResult New(int id,int ?aid)
-		{
-			Model.SysAttribute model = new Model.SysAttribute();
-
-			int AttributeID = aid == null ? 0 : (int)aid;
-			if(AttributeID>0)
-			{
-				model = Opr.GetEntity(AttributeID);
-			}else{
-				model.CategoryID = id;
-				model.Type = 0;
-			}
-			return View(model);
 		}
 		[HttpPost]
-		public ActionResult New(Model.SysAttribute model)
+		public ActionResult New(Model.SysAttributeValue model)
 		{
 			Helper.ResultInfo<int> rs = new Helper.ResultInfo<int>();
 			if (ModelState.IsValid)
 			{
-				if (model.AttributeID > 0)
+				if (model.ValueID > 0)
 				{
 					rs.Data = Opr.ModifyModel(model);
 					if (rs.Data > 0)
@@ -129,7 +105,7 @@ namespace SysChain.Areas.Admin.Controllers
 		public ActionResult Delete(int id)
 		{
 			Helper.ResultInfo<bool> rs = new Helper.ResultInfo<bool>();
-			rs.Data = Opr.DeleAttribute(id);
+			rs.Data = Opr.DeleAttributeValue(id);
 			if (rs.Data)
 			{
 				rs.Msg = "删除成功.";

@@ -6,7 +6,7 @@ namespace SysChain.Model
 		/// <summary>
 		/// 属性值ID
 		/// </summary>
-		public int ListID { set; get; }
+		public int ValueID { set; get; }
 		/// <summary>
 		/// 属性编号
 		/// </summary>

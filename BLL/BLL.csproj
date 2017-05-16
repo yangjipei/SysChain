@@ -39,6 +39,7 @@
     <Compile Include="SysRoleAndMoudle.cs" />
     <Compile Include="SysCategory.cs" />
     <Compile Include="SysAttribute.cs" />
+    <Compile Include="SysAttributeValue.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Model\Model.csproj">

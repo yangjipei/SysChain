@@ -41,6 +41,9 @@ namespace SysChain
 			bundles.Add(new ScriptBundle("~/js/cnew").Include(
 				"~/Content/Admin/Scripts/Category_New.js"
 			));
+			bundles.Add(new ScriptBundle("~/js/avindex").Include(
+				"~/Content/Admin/Scripts/AttributeValue_Index.js"
+			));
 			bundles.Add(new ScriptBundle("~/js/aindex").Include(
 				"~/Content/Admin/Scripts/Attribute_Index.js"
 			));

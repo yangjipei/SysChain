@@ -120,6 +120,7 @@
     <Folder Include="Content\Admin\Images\" />
     <Folder Include="Content\Admin\Images\avatar\" />
     <Folder Include="Content\Admin\Images\img\" />
+    <Folder Include="Areas\Admin\Views\SysAttributeValue\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\HomeController.cs" />
@@ -143,6 +144,7 @@
     <Compile Include="Areas\Admin\Controllers\PublicController.cs" />
     <Compile Include="Areas\Admin\Controllers\SysCategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\SysAttributeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SysAttributeValueController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />
@@ -345,6 +347,8 @@
     <Content Include="Content\Admin\Scripts\Attribute_New.js" />
     <Content Include="Content\Admin\Scripts\Attribute_Index.js" />
     <Content Include="Content\Admin\Scripts\Attribute_List.js" />
+    <Content Include="Areas\Admin\Views\SysAttributeValue\Index.cshtml" />
+    <Content Include="Content\Admin\Scripts\AttributeValue_Index.js" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

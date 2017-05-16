@@ -82,6 +82,7 @@
 		                        }
 		                    </td>
 		                    <td>
+							    <a class="btn-icon" href='@Url.Action("Index","SysAttributeValue",new {area="Admin",id=m.AttributeID})'  data-panel-init="on" title="查看属性值"><i class="fa fa-fw fa-search"></i>查看属性值</a>
 		                        <a class="btn-icon" href='@Url.Action("New","SysAttribute",new {area="Admin",id=m.CategoryID,aid=m.AttributeID})' data-panel-init="on" title="编辑品类"><i class="fa fa-fw fa-edit"></i>编辑</a>
 		                        <a class="btn-icon" href='@Url.Action("Delete","SysAttribute",new {area="Admin",id=m.AttributeID})'  data-common-moudle="on" title="删除"><i class="fa fa-fw fa-trash-o"></i>删除</a>
 		                    </td>
@@ -100,7 +101,7 @@
 		</section>
 		}
 		else{
-		   <section>请点击左侧菜单操作.</section>
+		   <section>请选择品类操作.</section>
 		}
     </div>
     

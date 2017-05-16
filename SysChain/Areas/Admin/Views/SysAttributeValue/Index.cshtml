@@ -1,0 +1,73 @@
+﻿@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@model List<SysChain.Model.SysAttributeValue>
+@section Scripts
+{
+    @Scripts.Render("~/js/avindex")
+}
+<div id="header-crumb">
+    <p>
+        <i class="fa fa-lg fa-home"></i>
+        <a href="/Admin/SysConfig/Index/6" title="商超管理">商超管理</a>
+        <i class="fa fa-angle-right"></i>
+        <a href="/Admin/SysAttribute/Index" title="品类属性">品类属性</a>
+        <i class="fa fa-angle-right"></i>
+        <span>新增属性值</span>
+    </p>
+</div>
+<main id="panel">
+    <div class="tab-wrap">
+        <section>
+            <header>
+                <h1>
+                       属性值设置
+                </h1>
+            
+            </header>
+            <aside>
+                <form id="frmNew" action="@Url.Action("New","SysAttributeValue")" method="post">
+                    <p class="input-button-group">
+                        <input id="Name" name="Name" type="text" maxlength="32" placeholder="输入属性值名称" value="@ViewBag.KeyWords"/>
+						 <input type="hidden" id="ValueID" name="ValueID" value="0">
+						 <input type="hidden" id="AttributeID" name="AttributeID" value="@ViewBag.ID">
+                        <button id="btnsubmit" type="submit" style="width:120px;">新增属性值</button>
+                    </p>
+                </form>
+                <form id="frmSearch" action="" method="post">
+                    <input type="hidden" name="index" id="index"/>
+                    <input type="hidden" id="id" name="id" value="@ViewBag.ID">
+                </form>
+            </aside>
+            <table>
+                <thead>
+                    <tr>
+                        <th>值名称</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if(Model!=null&&Model.Count>0)
+                    {
+                        foreach(SysChain.Model.SysAttributeValue m in Model)
+                        {
+	                    <tr>
+	                        <td>@m.Name</td>
+	                        <td>
+	                            <a class="btn-icon" id="btnEdit" data-id="@m.ValueID" data-name="@m.Name" title="编辑"><i class="fa fa-fw fa-edit"></i>编辑</a>
+	                            <a class="btn-icon" href='@Url.Action("Delete","SysAttributeValue",new {area="Admin",id=m.ValueID})'  data-common-moudle="on" title="删除属性值"><i class="fa fa-fw fa-sign-out"></i>删除</a>
+	                        </td>
+	                    </tr>
+					    }
+					}else{
+                         <tr>
+                            <td colspan="2">暂无数据....</td>
+                        </tr>
+					}
+                </tbody>
+            </table>
+			@Html.Action("PageInfo","Public",new{Totalcount=ViewBag.Totalcount,Url=Url.Action("Index","SysAttributeValue",new{id=ViewBag.ID}),pageindex=ViewBag.PageIndex})
+        </section>
+    </div>
+</main>
+
