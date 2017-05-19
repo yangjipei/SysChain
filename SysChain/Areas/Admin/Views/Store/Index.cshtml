@@ -1,0 +1,165 @@
+﻿@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    ViewBag.ActiveUrl = "/Admin/SysConfig/Index/9";
+}
+<div id="header-crumb">
+    <p>
+        <i class="fa fa-lg fa-home"></i>
+        <a href="#" title="店铺管理">店铺管理</a>
+        <i class="fa fa-angle-right"></i>
+        <span>店铺概览</span>
+    </p>
+</div>
+<main id="shop-finance">
+
+    <div class="summary">
+        <div class="box">
+            <div class="info">
+                <img src="/Content/Admin/Images/img/default_shop.png" alt="垃圾街小铺"/>
+                <ul>
+                    <li>
+                        <h2>垃圾街小铺</h2>
+                        <a href="#" title="访问店铺">访问店铺</a>
+                    </li>
+                    <li>
+                        店主：<em>张小明</em>
+                        <i class="fa fa-address-card-o"></i>
+                    </li>
+                    <li>
+                        提现帐号：<em>636********6498</em>
+                        <a href="#" title="更改"><i class="fa fa-credit-card"></i>更改</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="statistics">
+                <p>
+                    <span class="color color-1">销售<em>2,125.00</em></span>
+                    <span class="color color-2">采购<em>5,525.00</em></span>
+                </p>
+                <div id="chart"></div>
+                <p>
+                    <span class="color color-3">退款<em>1,000.00</em></span>
+                    <span class="color color-4">冷冻<em>1,125.00</em></span>
+                </p>
+            </div>
+        </div>
+
+        <ol>
+            <li>
+                <p>
+                    <span>帐户余额(元)</span>
+                    <a class="btn-icon" href="#" title="明细"><i class="fa fa-fw fa-file-text-o"></i>明细</a>
+                </p>
+                <p>
+                    <strong>6,000</strong>
+                    <a class="btn btn-primary" href="./shop-finance-recharge.html" title="充值">充值</a>
+                </p>
+            </li>
+            <li>
+                <p>
+                    <span>待结算余额(元)</span>
+                    <a class="btn-icon" href="#" title="明细"><i class="fa fa-fw fa-file-text-o"></i>明细</a>
+                </p>
+                <p>
+                    <strong>1,000</strong>
+                </p>
+            </li>
+            <li>
+                <p>
+                    <span>可提现余额(元)</span>
+                    <a class="btn-icon" href="#" title="明细"><i class="fa fa-fw fa-file-text-o"></i>明细</a>
+                </p>
+                <p>
+                    <strong>5,000</strong>
+                    <a class="btn btn-deposit" href="./shop-finance-deposit.html" title="提现">提现</a>
+                </p>
+            </li>
+        </ol>
+    </div>
+
+    <div class="tab-wrap">
+        <ul class="section-nav">
+            <li><a class="current" href="./shop-finance.html" title="资金明细(3)">资金明细<em>(3)</em></a></li>
+            <li><a href="#" title="待结算明细(5)">待结算明细<em>(5)</em></a></li>
+            <li><a href="#" title="充值记录(5)">充值记录<em>(5)</em></a></li>
+            <li><a href="#" title="提现记录(5)">提现记录<em>(5)</em></a></li>
+        </ul>
+
+        <section>
+            <aside>
+                <form action="#" method="post">
+                    <p class="select-input-button-group">
+                        <select name="field">
+                            <option value="">流水号</option>
+                            <option value="">时间</option>
+                            <option value="">金额</option>
+                            <option value="">状态</option>
+                            <option value="">内容</option>
+                            <option value="">相关单据</option>
+                        </select>
+                        <i class="i i-arrow-down5"></i>
+                        <input name="search" type="text" maxlength="32" placeholder="快来搜我〜" />
+                        <button disabled type="submit"><i class="fa fa-search"></i></button>
+                    </p>
+                </form>
+                <div class="operate">
+                    <a class="btn-icon" href="#" title="导出日志"><i class="fa fa-fw fa-file-word-o"></i>导出日志</a>
+                </div>
+            </aside>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>流水号</th>
+                        <th>时间</th>
+                        <th>金额</th>
+                        <th>状态</th>
+                        <th class="left">内容</th>
+                        <th>相关单据</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>46131646154646</td>
+                        <td>2016-09-27 16:00</td>
+                        <td class="green">¥300.00</td>
+                        <td>收入</td>
+                        <td class="left">捷安特自行车</td>
+                        <td>GTX5100</td>
+                    </tr>
+                    <tr>
+                        <td>46131646154646</td>
+                        <td>2016-09-27 16:00</td>
+                        <td class="red">-¥300.00</td>
+                        <td>支出</td>
+                        <td class="left">【退款】捷安特自行车</td>
+                        <td>GTX5100</td>
+                    </tr>
+                    <tr>
+                        <td>46131646154646</td>
+                        <td>2016-09-27 16:00</td>
+                        <td class="green">¥300.00</td>
+                        <td>收入</td>
+                        <td class="left">捷安特自行车</td>
+                        <td>GTX5100</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <footer class="page">
+                <div class="page-info">每页 20 条/共 1051 条记录 1/53 页</div>
+                <div class="page-code">
+                    <a href="#">下一页</a>
+                    <span class="current">1</span>
+                    <a href="#">2</a>
+                    <a href="#">3</a>
+                    <a href="#">4</a>
+                    <a href="#">5</a>
+                    <a href="#">下5页</a>
+                    <a href="#">最后一页</a>
+                </div>
+            </footer>
+        </section>
+    </div>
+    
+</main>

@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
 using System.Text;
+using System.Collections.Specialized;
+using System.IO;
 
 namespace SysChain.Areas.Admin.Controllers
 {
@@ -173,5 +175,76 @@ namespace SysChain.Areas.Admin.Controllers
 		{
 			return View();
 		}
+		[HttpPost]
+		public JsonResult UploadImg(string type, HttpPostedFileBase[] uploadfile)
+		{
+			Helper.ResultInfo<bool> rs = new Helper.ResultInfo<bool>();
+			if(Session["UserInfo"]!=null)
+			{
+				SysChain.Model.SysUser user = (SysChain.Model.SysUser)Session["UserInfo"];
+				const string fileTypes = "gif,jpg,jpeg,png,bmp";
+				const int maxSize = 205000;
+				string imgPath = "/Content/Public/Images/store/";
+				for (int fileId = 0; fileId < uploadfile.Count(); fileId++)
+				{
+					HttpPostedFileBase curFile = uploadfile[fileId];
+					if (curFile.ContentLength < 1) { continue; }
+					else if (curFile.ContentLength > maxSize)
+					{
+						rs.Msg = "上传文件中有图片大小超出200KB!";
+						rs.Result = false;
+						break;
+					}
+					string fileExt = Path.GetExtension(curFile.FileName);
+					if (String.IsNullOrEmpty(fileExt) || Array.IndexOf(fileTypes.Split(','), fileExt.Substring(1).ToLower()) == -1)
+					{
+						rs.Msg = "上传文件中包含不支持文件格式!!";
+						rs.Result = false;
+						break;
+					}
+					string fullFileName = type + "_" + user.UserID.ToString() + fileExt;//CreateRandomCode(8)
+					try
+					{
+						string filePhysicalPath = Server.MapPath(imgPath + fullFileName);
+						if (!System.IO.Directory.Exists(Server.MapPath(imgPath)))
+						{
+							System.IO.Directory.CreateDirectory(Server.MapPath(imgPath));
+						}
+						if(System.IO.File.Exists(filePhysicalPath))
+						{
+							System.IO.File.Delete(filePhysicalPath);
+						}
+						curFile.SaveAs(filePhysicalPath);
+						rs.Data = true;
+						rs.Result = true;
+						rs.Url = imgPath + fullFileName;
+					}
+					catch (Exception exception)
+					{
+						rs.Msg = exception.Message;
+						rs.Result = false;
+						break;
+					}
+				}
+			}
+			else{
+				rs.Msg = "上传文件中包含不支持文件格式!!";
+				rs.Result = false;
+			}
+			JsonResult jr = new JsonResult();
+			jr.Data = rs;
+			return jr;
+		}
+		private string CreateRandomCode(int length)
+		{
+			 string[] codes = new string[36] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
+             StringBuilder randomCode = new StringBuilder();
+             Random rand = new Random();
+             for (int i = 0; i<length; i++)
+             {
+                 randomCode.Append(codes[rand.Next(codes.Length)]);
+             }
+             return randomCode.ToString();
+         }
 	}
 }

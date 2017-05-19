@@ -66,11 +66,17 @@ namespace SysChain
 				"~/Content/Public/Plugin/popwin/js/popwin.js",
 				"~/Content/Public/Plugin/popwin/js/init.js"
 			));
+			bundles.Add(new ScriptBundle("~/js/plugin/upload").Include(
+				"~/Content/Public/Plugin/ajaxupload/ajaxfileupload.js"
+			));
 			bundles.Add(new StyleBundle("~/css/plugin/chosen").Include(
 				"~/Content/Public/Plugin/chosen/chosen.min.css"
 			));
 			bundles.Add(new ScriptBundle("~/js/plugin/chosen").Include(
 				"~/Content/Public/Plugin/chosen/chosen.jquery.min.js"
+			));
+			bundles.Add(new ScriptBundle("~/js/sseting").Include(
+				"~/Content/Admin/Scripts/Store_Setting.js"
 			));
 		    BundleTable.EnableOptimizations = true; 
 		}

@@ -42,6 +42,7 @@
     <Compile Include="SysCategory.cs" />
     <Compile Include="SysAttribute.cs" />
     <Compile Include="SysAttributeValue.cs" />
+    <Compile Include="SysStroe.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Model\Model.csproj">

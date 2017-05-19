@@ -1,0 +1,51 @@
+﻿@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    ViewBag.ActiveUrl = "/Admin/SysConfig/Index/9";
+}
+@section Scripts
+{
+    @Scripts.Render("~/js/plugin/upload")
+    @Scripts.Render( "~/js/sseting")
+}
+<div id="header-crumb">
+    <p>
+        <i class="fa fa-lg fa-home"></i>
+        <a href="/Admin/SysConfig/Index/9" title="店铺管理">店铺管理</a>
+        <i class="fa fa-angle-right"></i>
+        <span>店铺设置</span>
+    </p>
+</div>
+
+<main id="shop">
+    <section class="form">
+        <form action="#" method="post">
+            <header>
+                <h1>店铺设置</h1>
+            </header>
+            <p>
+                <span><em>*</em>店铺名称：</span>
+                <input type="text" name="name" maxlength="20" placeholder="请输入店铺名(公司名为佳),20个字符以内" />
+				 <mark>店铺名称无法修改,请谨慎设置.</mark>
+            </p>
+            <p>
+                <span><em>*</em>店铺标志：</span>
+                <a class="upload-file" href="#" title="点击上传" >
+                    <i class="fa fa-plus-circle"></i>
+                    <strong>点击上传</strong>
+                </a>
+				<input type="file" name="uploadfile" id="uploadfile" style="display:none;" />
+				<img id="img1"  class="upload-file" />
+                <input type="hidden" id="LogoLink" name="LogoLink"/>
+                <mark>文件格式GIF、JPEG、PNG，文件大小80K以内，建议尺寸80px * 80px</mark>
+            </p>
+            <p>
+                <span><em>*</em>店铺简介：</span>
+                <textarea class="width-2x" name="Discription" maxlength="128" placeholder="以200字以内描述店铺信息（掌柜签名、店铺动态、主营宝贝）."></textarea>
+            </p>
+            <footer>
+                <button class="btn btn-primary" type="submit">保存</button>
+            </footer>
+        </form>
+    </section>
+</main>
+

@@ -44,6 +44,7 @@
     <Compile Include="ViewModel\VM_SysCategory.cs" />
     <Compile Include="Mapping\SysAttribute.cs" />
     <Compile Include="Mapping\SysAttributeValue.cs" />
+    <Compile Include="Mapping\SysStroe.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModel\" />

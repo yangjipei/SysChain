@@ -121,6 +121,8 @@
     <Folder Include="Content\Admin\Images\avatar\" />
     <Folder Include="Content\Admin\Images\img\" />
     <Folder Include="Areas\Admin\Views\SysAttributeValue\" />
+    <Folder Include="Content\Public\Plugin\ajaxupload\" />
+    <Folder Include="Content\Public\Images\store\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\HomeController.cs" />
@@ -145,6 +147,7 @@
     <Compile Include="Areas\Admin\Controllers\SysCategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\SysAttributeController.cs" />
     <Compile Include="Areas\Admin\Controllers\SysAttributeValueController.cs" />
+    <Compile Include="Areas\Admin\Controllers\StoreController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />
@@ -349,6 +352,10 @@
     <Content Include="Content\Admin\Scripts\Attribute_List.js" />
     <Content Include="Areas\Admin\Views\SysAttributeValue\Index.cshtml" />
     <Content Include="Content\Admin\Scripts\AttributeValue_Index.js" />
+    <Content Include="Areas\Admin\Views\Store\Setting.cshtml" />
+    <Content Include="Content\Public\Plugin\ajaxupload\ajaxfileupload.js" />
+    <Content Include="Content\Admin\Scripts\Store_Setting.js" />
+    <Content Include="Areas\Admin\Views\Store\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
