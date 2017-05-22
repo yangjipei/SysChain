@@ -57,7 +57,7 @@ f7.validate.selectNull=(function($input,$errmsg){
 
 });//f7.validate.selectNull()
 
-//必须天蝎
+//必须验证值
 f7.validate.textNull=(function($input,$errmsg){
 	var value = $.trim($input.val()),
 		len = value.length;
@@ -73,7 +73,6 @@ f7.validate.textNull=(function($input,$errmsg){
 	return this.output('', true);
 
 });//f7.validate.textNull()
-
 // 验证 手机号 与 邮箱地址
 f7.validate.telAndEmail = (function($input) {
 	var value = $.trim($input.val());
@@ -564,7 +563,7 @@ f7.validate.confirmPassword = (function($input1, $input2) {
 	if (value2 === '') {
 		return this.output('确认密码 不能为空！');
 	} else if (value1 != value2) {
-		return this.output('确认密码 错误！');
+		return this.output('确认密码与新密码不匹配！');
 	}//if
 
 	return this.output('', true);

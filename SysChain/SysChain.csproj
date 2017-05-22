@@ -147,7 +147,7 @@
     <Compile Include="Areas\Admin\Controllers\SysCategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\SysAttributeController.cs" />
     <Compile Include="Areas\Admin\Controllers\SysAttributeValueController.cs" />
-    <Compile Include="Areas\Admin\Controllers\StoreController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SysStoreController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />
@@ -352,10 +352,12 @@
     <Content Include="Content\Admin\Scripts\Attribute_List.js" />
     <Content Include="Areas\Admin\Views\SysAttributeValue\Index.cshtml" />
     <Content Include="Content\Admin\Scripts\AttributeValue_Index.js" />
-    <Content Include="Areas\Admin\Views\Store\Setting.cshtml" />
+    <Content Include="Areas\Admin\Views\SysStore\Setting.cshtml" />
     <Content Include="Content\Public\Plugin\ajaxupload\ajaxfileupload.js" />
     <Content Include="Content\Admin\Scripts\Store_Setting.js" />
-    <Content Include="Areas\Admin\Views\Store\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\SysStore\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\SysUser\ModifyPassword.cshtml" />
+    <Content Include="Content\Admin\Scripts\User_ModifyPassword.js" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

@@ -11,7 +11,7 @@ namespace SysChain.BLL
 		/// 插入店铺信息
 		/// </summary>
 		/// <returns>The insert.</returns>
-		public int Insert(Model.SysStroe Model)
+		public int Insert(Model.SysStore Model)
 		{
 			return dal.Insert(Model);
 		}
@@ -23,6 +23,24 @@ namespace SysChain.BLL
 		public bool ExistsByUserID(int UserID)
 		{
 			return dal.ExistsByUserID(UserID);
+		}
+		/// <summary>
+		/// 修改模块
+		/// </summary>
+		/// <returns>返回影响行数</returns>
+		/// <param name="Model">模块实体</param>
+		public int ModifyModel(Model.SysStore Model)
+		{
+			return dal.ModifyModel(Model);
+		}
+		/// <summary>
+		/// 获得模块实体
+		/// </summary>
+		/// <returns>返回模块实体</returns>
+		/// <param name="StoreID">模块编号</param>
+		public Model.SysStore GetEntity(int StoreID)
+		{
+			return dal.GetEntity(StoreID);
 		}
 	}
 }

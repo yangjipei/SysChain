@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Text;
 using SysChain.DBUtility;
+using SysChain.Model;
 namespace SysChain.DAL
 {
 	public class SysUser
@@ -82,10 +83,7 @@ namespace SysChain.DAL
 		/// 修改密码
 		/// </summary>
 		/// <returns>返回影响行数</returns>
-		/// <param name="LoginName">登录账号</param>
-		/// <param name="LoginPassword">原登录密码</param>
-		/// <param name="NewPassword">新设置密码</param>
-		public int ModifyPassword(string LoginName,string LoginPassword,string NewPassword)
+		public int ModifyPassword(VM_SysModifyPassword model)
 		{
 			StringBuilder strSql = new StringBuilder();
 			strSql.Append("Declare  @ID int; ");
@@ -97,9 +95,9 @@ namespace SysChain.DAL
 					new SqlParameter("@LoginName", SqlDbType.NVarChar,50),
 					new SqlParameter("@LoginPassword", SqlDbType.NVarChar,50),
 				    new SqlParameter("@NewPassword", SqlDbType.NVarChar,50)};
-			parameters[0].Value = LoginName;
-			parameters[1].Value = DBUtility.DESEncrypt.Encrypt(LoginPassword);
-			parameters[2].Value = DBUtility.DESEncrypt.Encrypt(NewPassword);
+			parameters[0].Value = model.LoginName;
+			parameters[1].Value = DBUtility.DESEncrypt.Encrypt(model.LoginPassword);
+			parameters[2].Value = DBUtility.DESEncrypt.Encrypt(model.NewPassword);
 			return DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
 		}
 

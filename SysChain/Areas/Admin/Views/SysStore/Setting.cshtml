@@ -7,6 +7,7 @@
     @Scripts.Render("~/js/plugin/upload")
     @Scripts.Render( "~/js/sseting")
 }
+@model SysChain.Model.SysStore
 <div id="header-crumb">
     <p>
         <i class="fa fa-lg fa-home"></i>
@@ -18,13 +19,15 @@
 
 <main id="shop">
     <section class="form">
-        <form action="#" method="post">
+        <form  id="frmNew" action="@Url.Action("Setting","SysStore")" method="post">
+			 @Html.HiddenFor(m => m.StoreID)
+			 @Html.HiddenFor(m => m.UserID)
             <header>
                 <h1>店铺设置</h1>
             </header>
             <p>
                 <span><em>*</em>店铺名称：</span>
-                <input type="text" name="name" maxlength="20" placeholder="请输入店铺名(公司名为佳),20个字符以内" />
+				@Html.TextBoxFor(m => m.Name,new {placeholder="请输入店铺名(公司名为佳),20个字符以内",maxlength="20",autocomplete="off"})
 				 <mark>店铺名称无法修改,请谨慎设置.</mark>
             </p>
             <p>
@@ -35,12 +38,12 @@
                 </a>
 				<input type="file" name="uploadfile" id="uploadfile" style="display:none;" />
 				<img id="img1"  class="upload-file" />
-                <input type="hidden" id="LogoLink" name="LogoLink"/>
+				 @Html.HiddenFor(m => m.LogoLink)
                 <mark>文件格式GIF、JPEG、PNG，文件大小80K以内，建议尺寸80px * 80px</mark>
             </p>
             <p>
                 <span><em>*</em>店铺简介：</span>
-                <textarea class="width-2x" name="Discription" maxlength="128" placeholder="以200字以内描述店铺信息（掌柜签名、店铺动态、主营宝贝）."></textarea>
+				@Html.TextAreaFor(m => m.Description,new {@class="width-2x",maxlength="200",placeholder="以200字以内描述店铺信息（掌柜签名、店铺动态、主营宝贝）.",autocomplete="off"})
             </p>
             <footer>
                 <button class="btn btn-primary" type="submit">保存</button>

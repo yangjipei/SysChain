@@ -174,5 +174,62 @@ namespace SysChain.Areas.Admin.Controllers
 			return jr;
 		}
 
+		public ActionResult ModifyPassword()
+		{
+			SysChain.Model.SysUser user = (SysChain.Model.SysUser)Session["UserInfo"];
+			Model.VM_SysModifyPassword model = new Model.VM_SysModifyPassword();
+			model.LoginName = user.LoginName;
+			return View(model);
+		}
+		/// <summary>
+		/// 修改密码
+		/// </summary>
+		/// <returns>The password.</returns>
+		[HttpPost]
+		public ActionResult ModifyPassword(Model.VM_SysModifyPassword model)
+		{
+			Helper.ResultInfo<int> rs = new Helper.ResultInfo<int>();
+			if(ModelState.IsValid)
+			{
+				
+				rs.Data = Opr.ModifyPassword(model);
+				if (rs.Data > 0)
+				{
+					rs.Msg = "修改密码成功,<br />正在为您跳转到登陆页面.";
+					rs.Result = true;
+					Session["UserInfo"] = null;
+					Session["MoudleInfo"] = null;
+					rs.Url = Url.Action("Login", "Member", new { area = "" });
+				}
+				else
+				{
+					rs.Msg = "修改失败,原密码可能错误？";
+					rs.Result = false;
+				}
+				JsonResult jr = new JsonResult();
+				jr.Data = rs;
+				return jr;
+			}else{
+				System.Text.StringBuilder sbErrors = new System.Text.StringBuilder();
+				foreach (var item in ModelState.Values)
+				{
+					if (item.Errors.Count > 0)
+					{
+						for (int i = item.Errors.Count - 1; i >= 0; i--)
+						{
+							sbErrors.Append(item.Errors[i].ErrorMessage);
+							sbErrors.Append("<br/>");
+						}
+					}
+				}
+				rs.Data = 0;
+				rs.Msg = sbErrors.ToString();
+				rs.Result = false;
+				rs.Url = "";
+				JsonResult jr = new JsonResult();
+				jr.Data = rs;
+				return jr;
+			}
+		}
 	}
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using SysChain.Model;
 
 namespace SysChain.BLL
 {
@@ -61,12 +62,9 @@ namespace SysChain.BLL
 		/// 修改密码
 		/// </summary>
 		/// <returns>返回影响行数</returns>
-		/// <param name="LoginName">登录账号</param>
-		/// <param name="LoginPassword">原登录密码</param>
-		/// <param name="NewPassword">新设置密码</param>
-		public int ModifyPassword(string LoginName, string LoginPassword, string NewPassword)
+		public int ModifyPassword(VM_SysModifyPassword model)
 		{
-			return dal.ModifyPassword(LoginName,LoginPassword,NewPassword);
+			return dal.ModifyPassword(model);
 		}
 		public int ModifyPassword(int UserID)
 		{

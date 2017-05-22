@@ -1,12 +1,12 @@
 ﻿using System;
 namespace SysChain.Model
 {
-	public partial class SysStroe
+	public partial class SysStore
 	{
 		/// <summary>
 		/// 店铺编号
 		/// </summary>
-		public int StroeID { set; get; }
+		public int StoreID { set; get; }
 		/// <summary>
 		/// 关联账号
 		/// </summary>
@@ -22,6 +22,10 @@ namespace SysChain.Model
 		/// <summary>
 		/// 店铺描述
 		/// </summary>
-		public string Discription { set; get; }
+		public string Description { set; get; }
+		/// <summary>
+		/// 创建时间
+		/// </summary>
+		public DateTime CreateTime { set; get; }
 	}
 }
