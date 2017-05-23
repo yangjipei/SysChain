@@ -46,6 +46,8 @@
     <Compile Include="Mapping\SysAttributeValue.cs" />
     <Compile Include="Mapping\SysStroe.cs" />
     <Compile Include="ViewModel\VM_SysModifyPassword.cs" />
+    <Compile Include="Mapping\SysGroup.cs" />
+    <Compile Include="ViewModel\VM_SysGroup.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModel\" />

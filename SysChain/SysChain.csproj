@@ -123,6 +123,7 @@
     <Folder Include="Areas\Admin\Views\SysAttributeValue\" />
     <Folder Include="Content\Public\Plugin\ajaxupload\" />
     <Folder Include="Content\Public\Images\store\" />
+    <Folder Include="Areas\Admin\Views\SysGroup\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\HomeController.cs" />
@@ -148,6 +149,7 @@
     <Compile Include="Areas\Admin\Controllers\SysAttributeController.cs" />
     <Compile Include="Areas\Admin\Controllers\SysAttributeValueController.cs" />
     <Compile Include="Areas\Admin\Controllers\SysStoreController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SysGroupController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />
@@ -358,6 +360,10 @@
     <Content Include="Areas\Admin\Views\SysStore\Index.cshtml" />
     <Content Include="Areas\Admin\Views\SysUser\ModifyPassword.cshtml" />
     <Content Include="Content\Admin\Scripts\User_ModifyPassword.js" />
+    <Content Include="Areas\Admin\Views\SysGroup\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\SysGroup\New.cshtml" />
+    <Content Include="Content\Admin\Scripts\Group_Index.js" />
+    <Content Include="Content\Admin\Scripts\Group_New.js" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

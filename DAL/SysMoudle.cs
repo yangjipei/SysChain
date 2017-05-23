@@ -270,6 +270,7 @@ namespace SysChain.DAL
 			strSql.Append("SELECT sm.MoudleID,sm.ParentID,sm.Name,sm.LinkUrl,sm.Style,sm.OrderCode,sm.State,sm.MoudleDes FROM SysMoudle as sm");
 			strSql.Append(" INNER JOIN SysRoleAndMoudle srm on sm.MoudleID=srm.MoudleID ");
 			strSql.Append(" where srm.RoleID=@RoleID");
+			strSql.Append("  order by sm.OrderCode");
 			SqlParameter[] parameters = {
 					new SqlParameter("@RoleID", SqlDbType.Int,4)};
 			parameters[0].Value = RoleID;
@@ -344,9 +345,9 @@ namespace SysChain.DAL
 			strSql.Append("Declare  @tCode nvarchar(50); ");
 			strSql.Append("SELECT @sCode=OrderCode From SysMoudle where  MoudleID=@sMoudleID ;");
 			strSql.Append("SELECT @tCode=OrderCode From SysMoudle where  MoudleID=@tMoudleID ;");
-			strSql.Append("Update SysCategory Set OrderCode =REPLACE(OrderCode,@sCode,'temp') Where OrderCode like @sCode+'%';");
-			strSql.Append("Update SysCategory Set OrderCode =REPLACE(OrderCode,@tCode,@sCode) Where OrderCode like @tCode+'%';");
-			strSql.Append("Update SysCategory Set OrderCode =REPLACE(OrderCode,'temp',@tCode) Where OrderCode like 'temp%';");
+			strSql.Append("Update SysMoudle Set OrderCode =REPLACE(OrderCode,@sCode,'temp') Where OrderCode like @sCode+'%';");
+			strSql.Append("Update SysMoudle Set OrderCode =REPLACE(OrderCode,@tCode,@sCode) Where OrderCode like @tCode+'%';");
+			strSql.Append("Update SysMoudle Set OrderCode =REPLACE(OrderCode,'temp',@tCode) Where OrderCode like 'temp%';");
 			SqlParameter[] parameters = {
 					new SqlParameter("@sMoudleID", SqlDbType.Int,4),
 					new SqlParameter("@tMoudleID", SqlDbType.Int,4)};

@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,13 +9,13 @@ using SysChain.Model;
 
 namespace SysChain.Areas.Admin.Controllers
 {
-	public class SysCategoryController : Controller
+	public class SysGroupController : Controller
 	{
-		private SysChain.BLL.SysCategory Opr { get; set; }
+		private SysChain.BLL.SysGroup Opr { get; set; }
 
 		protected override void Initialize(RequestContext requestContext)
 		{
-			if (Opr == null) { Opr = new BLL.SysCategory(); }
+			if (Opr == null) { Opr = new BLL.SysGroup(); }
 			base.Initialize(requestContext);
 		}
 		public ActionResult Index(int? pid, int? index)
@@ -27,19 +27,19 @@ namespace SysChain.Areas.Admin.Controllers
 			int PageSize = 5;
 			string strWhere = "ParentID=" + ParentID;
 			ViewBag.Totalcount = Opr.GetCount(strWhere);
-			List<Model.SysCategory> list = Opr.GetListByPage(strWhere, "", "OrderCode", (PageIndex - 1) * PageSize+1, PageIndex * PageSize);
+			List<Model.SysGroup> list = Opr.GetListByPage(strWhere, "", "OrderCode", (PageIndex - 1) * PageSize+1, PageIndex * PageSize);
 			return View(list);
 		}
 		[HttpGet]
 		public ActionResult New(int? id, int pid)
 		{
-			int CategoryID = id == null ? 0 : (int)id;
-			Model.SysCategory model = new Model.SysCategory();
+			int GroupID = id == null ? 0 : (int)id;
+			Model.SysGroup model = new Model.SysGroup();
 			model.ParentID = pid;
-			if (CategoryID > 0)
+			if (GroupID > 0)
 			{
-				model = Opr.GetEntity(CategoryID);
-				ViewBag.Title = "品类管理-正在编辑品类名称： " + model.Name;
+				model = Opr.GetEntity(GroupID);
+				ViewBag.Title = "分组管理-正在编辑分组名称： " + model.Name;
 			}
 			else
 			{
@@ -50,9 +50,9 @@ namespace SysChain.Areas.Admin.Controllers
 				else {
 					model.Layer = Opr.GetLayer(pid) + 1;
 				}
-				model.CategoryID = 0;
+				model.GroupID = 0;
 				model.State = true;
-				ViewBag.Title = "新增品类";
+				ViewBag.Title = "新增分组";
 			}
 			return View(model);
 		}
@@ -62,12 +62,12 @@ namespace SysChain.Areas.Admin.Controllers
 		/// <returns>The new.</returns>
 		/// <param name="model">Model.</param>
 		[HttpPost]
-		public ActionResult New(Model.SysCategory model)
+		public ActionResult New(Model.SysGroup model)
 		{
 			Helper.ResultInfo<int> rs = new Helper.ResultInfo<int>();
 			if (ModelState.IsValid)
 			{
-				if (model.CategoryID > 0)
+				if (model.GroupID > 0)
 				{
 					rs.Data = Opr.ModifyModel(model);
 					if (rs.Data > 0)
@@ -231,7 +231,7 @@ namespace SysChain.Areas.Admin.Controllers
 		}
 		public ActionResult LeftMenu()
 		{
-			List<VM_SysCategory> li = Opr.GetList("State>0");     
+			List<VM_SysGroup> li = Opr.GetList("State>0");     
 			return View(li);
 		}
 		public JsonResult SelectCategory()

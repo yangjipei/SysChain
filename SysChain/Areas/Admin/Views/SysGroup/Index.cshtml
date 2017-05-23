@@ -1,0 +1,119 @@
+﻿@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    ViewBag.ActiveUrl = "/Admin/SysConfig/Index/12";
+}
+@model List<SysChain.Model.SysGroup>
+@section Scripts
+{
+	@Scripts.Render("~/js/plugin/popwin")
+	@Scripts.Render("~/js/gindex")
+}
+<div id="header-crumb">
+    <p>
+        <i class="fa fa-lg fa-home"></i>
+        <a href="/Admin/SysConfig/Index/12" title="系统管理">产品管理</a>
+        <i class="fa fa-angle-right"></i>
+        <span>分组管理</span>
+    </p>
+</div>
+<main id="system">
+
+    <section>
+        <header>
+            <h1>分组管理</h1>
+        </header>
+
+        <aside>
+            <form id="frmSearch" action="@Url.Action("Index","SysGroup")" method="post">
+                <p class="select-button-group">
+                    <select name="pid" id="pid" >
+                       
+                    </select>
+                    <button  type="submit"><i class="fa fa-search"></i></button>
+                </p>
+				<input type="hidden" name="index" id="index"/>
+            </form>
+            <div class="operate">
+                <a id="btnNew"  class="btn btn-primary" href='@Url.Action("New","SysGroup",new {area="Admin",pid=0})' data-panel-init="on" title="新增分组"><i class="fa fa-plus-circle"></i>新增分组</a>
+            </div>
+        </aside>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>编号</th>
+                    <th>分组名称</th>
+                    <th>图标</th>
+                    <th>状态</th>
+                    <th>排序</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+
+				@if(Model!=null&&Model.Count>0)
+				{
+					for(int i=0;i<Model.Count;i++)
+					{
+	                <tr>
+	                    <td>@(i+1)</td>
+	                    <td>@Model[i].Name</td>
+	                    <td><i class="fa fa-lg @Model[i].Style"></i></td>
+						<td>
+						@if(!Model[i].State)
+						{
+	                    	<i class="red">禁用</i>
+						}else
+						{
+							<i class="green">启用</i>
+						}
+						</td>
+	                    <td>
+						@if(1==Model.Count())
+						{
+							<i>&nbsp;</i>
+						}
+						else if(i+1==Model.Count())
+						{
+							<a class="btn-sort" href='@Url.Action("Rank","SysGroup",new {area="Admin",id=Model[i].GroupID})' data-tid="@Model[i-1].GroupID" title="上升"><i class="i i-arrow-up"></i></a>
+						}
+						else if(i==0)
+						{
+							<a class="btn-sort" href='@Url.Action("Rank","SysGroup",new {area="Admin",id=Model[i].GroupID})' data-tid="@Model[i+1].GroupID" title="下降"><i class="i i-arrow-down"></i></a>
+						}
+						else
+						{
+							<a class="btn-sort" href='@Url.Action("Rank","SysGroup",new {area="Admin",id=Model[i].GroupID})'  data-tid="@Model[i-1].GroupID" title="上升"><i class="i i-arrow-up"></i></a>
+							<a class="btn-sort" href='@Url.Action("Rank","SysGroup",new {area="Admin",id=Model[i].GroupID})'  data-tid="@Model[i+1].GroupID" title="下降"><i class="i i-arrow-down"></i></a>
+						}
+	                    </td>
+	                    <td>
+							@if(Model[i].Layer<3)
+							{
+	                        <a class="btn-icon" href='@Url.Action("New","SysGroup",new {area="Admin",pid=Model[i].GroupID})' data-panel-init="on" title="新增分组"><i class="fa fa-fw fa-plus-circle"></i>新增</a>
+							}
+	                        <a class="btn-icon" href='@Url.Action("New","SysGroup",new {area="Admin",id=Model[i].GroupID,pid=Model[i].ParentID})' data-panel-init="on" title="编辑分组"><i class="fa fa-fw fa-edit"></i>编辑</a>
+	                        <a class="btn-icon" data-common-moudle="on" href='@Url.Action("Delete","SysGroup",new {area="Admin",id=Model[i].GroupID})' title="删除分组"><i class="fa fa-fw fa-trash-o"></i>删除</a>
+						@if(!Model[i].State)
+						{
+	                    	 <a class="btn-icon" data-update-status="on" href='@Url.Action("UpdateStatus","SysGroup",new {area="Admin",id=Model[i].GroupID})'   title="启用分组"><i class="fa fa-fw fa-bolt"></i>启用</a>
+						}else
+						{
+							 <a class="btn-icon" data-update-status="on" href='@Url.Action("UpdateStatus","SysGroup",new {area="Admin",id=Model[i].GroupID})' title="禁用分组"><i class="fa fa-fw fa-bolt"></i>禁用</a>
+						}
+	                    </td>
+	                </tr>
+					}
+				}else{
+					 <tr>
+						<td colspan="7">暂无数据....</td>
+					</tr>
+				}
+            </tbody>
+        </table>
+        <input type="hidden" value="@ViewBag.ParentID" id="parentid"/>
+		@Html.Action("PageInfo","Public",new{Totalcount=ViewBag.Totalcount,Url=Url.Action("Index","SysGroup"),pageindex=ViewBag.PageIndex})
+    </section>
+    
+</main>
+
