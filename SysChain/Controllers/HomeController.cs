@@ -12,16 +12,27 @@ namespace SysChain.Controllers
 	{
 		public ActionResult Index()
 		{
-			try
-			{
-				return View();
-			}
-			catch (Exception ex)
-			{
-				ViewBag.Message = ex.Message;
-				return View();
-			}
+			return View();
 		}
-
+		public ActionResult Mall()
+		{
+			return View();
+		}
+		public ActionResult Store()
+		{
+			return View();
+		}
+		public ActionResult Service()
+		{
+			return View();
+		}
+		public ActionResult Partner()
+		{
+			return View();
+		}
+		public ActionResult About()
+		{
+			return View();
+		}
 	}
 }

@@ -133,7 +133,7 @@ namespace SysChain.Areas.Admin.Controllers
 		/// <returns>The list.</returns>
 		public ActionResult List()
 		{
-			return Json(Opr.GetList("Layer<3" , "OrderCode"), JsonRequestBehavior.AllowGet);
+			return Json(Opr.GetList("Layer=1" , "OrderCode"), JsonRequestBehavior.AllowGet);
 		}
 		/// <summary>
 		/// 更新模块状态
@@ -187,10 +187,6 @@ namespace SysChain.Areas.Admin.Controllers
 			jr.Data = rs;
 			return jr;
 		}
-		public JsonResult test()
-		{
-			return Json(Opr.GetList("State>0"),JsonRequestBehavior.AllowGet);
-		}
 		/// <summary>
 		/// 模块排序操作
 		/// </summary>
@@ -228,11 +224,6 @@ namespace SysChain.Areas.Admin.Controllers
 			JsonResult jr = new JsonResult();
 			jr.Data = rs;
 			return jr;
-		}
-		public ActionResult LeftMenu()
-		{
-			List<VM_SysGroup> li = Opr.GetList("State>0");     
-			return View(li);
 		}
 		public JsonResult SelectCategory()
 		{

@@ -44,4 +44,5 @@
 			    }  
 			}); 
 	});
+	$("#footer").addClass("white");
 });

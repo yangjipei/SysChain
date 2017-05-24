@@ -1,16 +1,108 @@
-﻿@model SysChain.Model.SysUser
-
+﻿﻿
 @{
-    Layout = null;
+   Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<main id="index">
+    <div class="box-1">
+        <h1>超市网上进货平台</h1>
+        <h2>助力全国中小型快消品牌快速发展</h2>
+    </div>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>首页</title>
-</head>
-<body>
-			<h2>@ViewBag.Code</h2>
-</body>
-</html>
+    <div class="box-2">
+        <ul>
+            <li>
+                <div>
+                    <strong>什么是宇通商城</strong>
+                    <p>社区部落以区域互联网为切入点，通过在全国发展联盟合伙人，快速聚拢本地企业、商家、网民等信息资源，打造本地化的网络媒体和购物平台。</p>
+                    <ol>
+                        <li>电脑和手机两大入口抢占移动</li>
+                        <li>互联网先机</li>
+                        <li>产品体系完善</li>
+                        <li>信息及时、准确、真实</li>
+                        <li>开辟社区电子商务蓝海</li>
+                        <li>结合国家政策给用户带来实惠</li>
+                    </ol>
+                </div>
+            </li>
+            <li>
+                <strong>宇通超市</strong>
+                <p>可通过多种方式查找商品并快捷购买，支持快捷加入进货单与收藏夹，支持下单时向供货商留言，随时查看订单动向。</p>
+                <a class="btn btn-risk-border" href="./login.html" title="超市登录">超市登录</a>
+            </li>
+            <li>
+                <strong>宇通供应商</strong>
+                <p>支持商品的添加与管理，支持商品促销与商家促销，可对订单进行全程管理，灵活查看多维统计数据。</p>
+                <a class="btn btn-risk-border" href="./login.html" title="供应商登录">供应商登录</a>
+            </li>
+            <li>
+                <div>
+                    <strong>宇通服务站</strong>
+                    <p>可为商家提供多样化广告，支持商品的添加、查看与管理，全程查看订单动向，灵活查看站内多维统计数据。</p>
+                    <a class="btn btn-risk-border" href="./login.html" title="服务站登录">服务站登录</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+    
+    <div class="box-3">
+        <h1>让零售店安安稳稳一站购齐</h1>
+        <h2>253城市合伙人专享平台</h2>
+        <a class="btn btn-risk" href="#" title="入驻城市合伙人">入驻城市合伙人</a>
+    </div>
+    
+    <div class="box box-4">
+        <header>
+            <h1>商超资讯</h1>
+        </header>
+        <ul>
+            <li>
+                <img src="/Content/Home/Images/img/index/news.jpg" alt="宇通平台在兰花小区举报开放日活动"/>
+                <section>
+                    <h3>宇通平台在兰花小区举报开放日活动</h3>
+                    <p>7月25号，社区部落家荣大师书法交流联谊会在上海社区部落总部举办。来自五湖四海的企业家争相抢夺家荣大师书法佳作！家荣大师现场与大家分享书法心得，...</p>
+                    <footer>
+                        <a href="#" title="查看详情">查看详情<i class="i i-arrow-right4"></i></a>
+                        <span>2016-05-07</span>
+                    </footer>
+                </section>
+            </li>
+            <li>
+                <img src="/Content/Home/Images/img/index/news.jpg" alt="宇通平台在兰花小区举报开放日活动"/>
+                <section>
+                    <h3>宇通平台在兰花小区举报开放日活动</h3>
+                    <p>7月25号，社区部落家荣大师书法交流联谊会在上海社区部落总部举办。来自五湖四海的企业家争相抢夺家荣大师书法佳作！家荣大师现场与大家分享书法心得，...</p>
+                    <footer>
+                        <a href="#" title="查看详情">查看详情<i class="i i-arrow-right4"></i></a>
+                        <span>2016-05-07</span>
+                    </footer>
+                </section>
+            </li>
+            <li>
+                <img src="/Content/Home/Images/img/index/news.jpg" alt="宇通平台在兰花小区举报开放日活动"/>
+                <section>
+                    <h3>宇通平台在兰花小区举报开放日活动</h3>
+                    <p>7月25号，社区部落家荣大师书法交流联谊会在上海社区部落总部举办。来自五湖四海的企业家争相抢夺家荣大师书法佳作！家荣大师现场与大家分享书法心得，...</p>
+                    <footer>
+                        <a href="#" title="查看详情">查看详情<i class="i i-arrow-right4"></i></a>
+                        <span>2016-05-07</span>
+                    </footer>
+                </section>
+            </li>
+        </ul>
+    </div>
+
+    <div class="box box-5">
+        <header>
+            <h1>加盟超市</h1>
+        </header>
+        <ul>
+            <li><a href="#" title="大润发"><img src="~/Content/Home/Images/img/index/cs1.jpg" alt="大润发"/></a></li>
+            <li><a href="#" title="物美"><img src="/Content/Home/Images/img/index/cs2.jpg" alt="物美"/></a></li>
+            <li><a href="#" title="华润万家"><img src="/Content/Home/Images/img/index/cs3.jpg" alt="华润万家"/></a></li>
+            <li><a href="#" title="惠利"><img src="/Content/Home/Images/img/index/cs4.jpg" alt="惠利"/></a></li>
+            <li><a href="#" title="乐购"><img src="/Content/Home/Images/img/index/cs5.jpg" alt="乐购"/></a></li>
+            <li><a href="#" title="多好又多"><img src="/Content/Home/Images/img/index/cs6.jpg" alt="多好又多"/></a></li>
+        </ul>
+    </div>
+</main>
 

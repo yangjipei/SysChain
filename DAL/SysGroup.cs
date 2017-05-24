@@ -322,7 +322,7 @@ namespace SysChain.DAL
 		public List<Model.SysGroup> GetList(string strWhere, string orderBy)
 		{
 			StringBuilder strSql = new StringBuilder();
-			strSql.Append("SELECT GroupID,ParentID ,'|'+REPLICATE('-',Layer)+Name as Name,Layer,State,Style,OrderCode FROM SysGroup ");
+			strSql.Append("SELECT GroupID,ParentID ,Name,Layer,State,Style,OrderCode FROM SysGroup ");
 			if (!string.IsNullOrEmpty(strWhere.Trim()))
 			{
 				strSql.Append(" WHERE " + strWhere);

@@ -88,7 +88,7 @@
 						}
 	                    </td>
 	                    <td>
-							@if(Model[i].Layer<3)
+							@if(Model[i].Layer==1)
 							{
 	                        <a class="btn-icon" href='@Url.Action("New","SysGroup",new {area="Admin",pid=Model[i].GroupID})' data-panel-init="on" title="新增分组"><i class="fa fa-fw fa-plus-circle"></i>新增</a>
 							}

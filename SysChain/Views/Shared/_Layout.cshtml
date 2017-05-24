@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8"/>
-	<title>@ViewBag.Title</title>
+	<title>欢迎来到宇通e家</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta name="renderer" content="webkit"/>
     <link rel="icon" type="image/x-icon" href="~/Content/Public/Images/ico/favicon.ico"/>
@@ -21,6 +21,8 @@
 	@Html.Partial("_Header")
 	@RenderBody()
 	@Html.Partial("_Footer")
+    <script type="text/javascript" src="~/Content/Public/Jquery/jquery-1.8.3.min.js"></script>
+	@Scripts.Render("~/js/tools") 
 	@RenderSection("Scripts",false)
 </body>
 </html>

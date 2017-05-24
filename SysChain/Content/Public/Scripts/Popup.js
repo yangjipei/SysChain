@@ -17,6 +17,7 @@ var popup = {
 
 f7.plugin._register = (function() {
 	return {
+		carousel:f7.plugin.carousel,
 		accordion:f7.plugin.accordion,
 		chooseTab:f7.plugin.chooseTab,
 		header: f7.plugin.header, //页头
@@ -1254,6 +1255,87 @@ f7.plugin.chooseTab = (function() {
 		$('[name="level'+level+'"]:hidden').val(label);
 	});
 });
+// 旋转木马
+f7.plugin.carousel = (function() {
+	var $carousel = $('.carousel');
+	if (!$carousel.length) return; //if
+
+	$carousel.each(function(index, element) {
+		new Carousel($(element));
+	});
+
+	function Carousel($carousel) {
+		// var $carousel = $('.carousel'),
+		var _config = null,
+			_dragBln = false,
+			_timer = null,
+			_isMobile = false;
+
+		// console.log($carousel.length);
+
+		if (!$carousel.length) return; //if
+
+		if (navigator.userAgent.match(/mobile/i)) {
+			_isMobile = true;
+			$carousel.find('.prev,.next').hide();
+		} //if
+
+		// 
+		_timer = setInterval(function() {
+			$('.next', $carousel).click();
+		}, 5000);
+
+		$carousel.hover(function() {
+			if (!_isMobile) {
+				$('.prev,.next', $carousel).fadeIn();
+			} //if
+
+			clearInterval(_timer);
+		}, function() {
+			if (!_isMobile) {
+				$('.prev,.next', $carousel).fadeOut();
+			} //if
+
+			_timer = setInterval(function() {
+				$('.next', $carousel).click();
+			}, 5000);
+		});
+
+		_config = {
+			flexible: true,
+			speed: 450,
+			btn_prev: $('.prev', $carousel),
+			btn_next: $('.next', $carousel),
+			paging: $('.tag a', $carousel),
+			counter: function(evt) {
+				$('.tag a', $carousel).removeClass('on').eq(evt.current - 1).addClass('on');
+			}
+		};
+
+
+		$('.main-image', $carousel).touchSlider(_config).bind('mousedown', function() {
+			_dragBln = false;
+		}).bind('dragstart', function() {
+			_dragBln = true;
+		}).find('li a').click(function() {
+			if (_dragBln) {
+				return false;
+			} //if
+		}).end().bind('touchstart', function() {
+			clearInterval(_timer);
+		}).bind('touchend', function() {
+			_timer = setInterval(function() {
+				$('.next', $carousel).click();
+			}, 5000);
+		});
+	} //Carousel()
+}); 
+
+
+
+
+
+
 //通过更新状态
 moudle_update_init=function($html){
 	var	$updateInit=$('a[data-update-status="on"]', $html);
