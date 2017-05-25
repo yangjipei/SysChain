@@ -22,6 +22,10 @@ namespace SysChain.Controllers
 		{
 			return View();
 		}
+		public ActionResult Agent()
+		{
+			return View();
+		}
 		public ActionResult Service()
 		{
 			return View();
@@ -31,6 +35,14 @@ namespace SysChain.Controllers
 			return View();
 		}
 		public ActionResult About()
+		{
+			return View();
+		}
+		public ActionResult ApplyForStore()
+		{
+			return View();
+		}
+		public ActionResult ApplyForSupplier()
 		{
 			return View();
 		}

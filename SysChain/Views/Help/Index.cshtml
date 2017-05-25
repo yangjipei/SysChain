@@ -1,0 +1,56 @@
+﻿﻿﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<main id="help">
+
+    <div class="help-search">
+        <div class="wrap">
+            <h1>帮助中心</h1>
+            <form action="@Url.Action("Search","Help")" method="post">
+                <div>
+                    <input type="text" name="search" maxlength="32" placeholder="请输入搜索关键词，如：密码"/>
+                    <input class="btn btn-risk" type="submit" value="搜索"/>
+                </div>
+                <dl>
+                    <dt>热门搜索：</dt>
+                    <dd><a href="#" title="预订及取车">预订及取车</a></dd>
+                    <dd><a href="#" title="还车及结算">还车及结算</a></dd>
+                    <dd><a href="#" title="保险服务">保险服务</a></dd>
+                    <dd><a href="#" title="紧急服务">紧急服务</a></dd>
+                    <dd><a href="#" title="会员服务">会员服务</a></dd>
+                    <dd><a href="#" title="限行政策">限行政策</a></dd>
+                </dl>
+            </form>
+        </div>
+    </div>
+    <!-- div.help-search -->
+
+    <div class="box-1">
+        <ul>
+			<li><a href="@Url.Action("List","Help")" title="帐户相关">帐户相关</a></li>
+            <li><a href="@Url.Action("List","Help")" title="订货系统">订货系统</a></li>
+            <li><a href="@Url.Action("List","Help")" title="平台服务">平台服务</a></li>
+            <li><a href="@Url.Action("List","Help")" title="在线咨询">公司动态</a></li>
+        </ul>
+    </div>
+
+    <div class="box-2">
+        <dl>
+            <dt>热门问题</dt>
+            <dd><a href="@Url.Action("Detail","Help")" title="1、什么是邀请入驻？">1、什么是邀请入驻？</a></dd>
+            <dd><a href="@Url.Action("Detail","Help")" title="2、我公司在萌店已经开有一家店铺，目前计划开第二家，萌店对此类申请有标准和要求吗？">2、我公司在萌店已经开有一家店铺，目前计划开第二家，萌店对此类申请有标准和要求吗？</a></dd>
+            <dd><a href="@Url.Action("Detail","Help")" title="3、萌店商品的审核标准是什么?">3、萌店商品的审核标准是什么?</a></dd>
+            <dd><a href="@Url.Action("Detail","Help")" title="4、已入驻商家如何申请品牌新增？">4、已入驻商家如何申请品牌新增？</a></dd>
+            <dd><a href="@Url.Action("Detail","Help")" title="5、已入驻商家如何申请变更类目？">5、已入驻商家如何申请变更类目？</a></dd>
+        </dl>
+        <dl>
+            <dt>热门提问</dt>
+            <dd><a href="@Url.Action("Detail","Help")" title="1、什么是邀请入驻？">1、什么是邀请入驻？</a></dd>
+            <dd><a href="@Url.Action("Detail","Help")" title="2、我公司在萌店已经开有一家店铺，目前计划开第二家，萌店对此类申请有标准和要求吗？">2、我公司在萌店已经开有一家店铺，目前计划开第二家，萌店对此类申请有标准和要求吗？</a></dd>
+            <dd><a href="@Url.Action("Detail","Help")" title="3、萌店商品的审核标准是什么?">3、萌店商品的审核标准是什么?</a></dd>
+            <dd><a href="@Url.Action("Detail","Help")" title="4、已入驻商家如何申请品牌新增？">4、已入驻商家如何申请品牌新增？</a></dd>
+            <dd><a href="@Url.Action("Detail","Help")" title="5、已入驻商家如何申请变更类目？">5、已入驻商家如何申请变更类目？</a></dd>
+        </dl>
+    </div>
+</main>
+

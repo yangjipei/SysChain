@@ -151,6 +151,7 @@
     <Compile Include="Areas\Admin\Controllers\SysAttributeValueController.cs" />
     <Compile Include="Areas\Admin\Controllers\SysStoreController.cs" />
     <Compile Include="Areas\Admin\Controllers\SysGroupController.cs" />
+    <Compile Include="Controllers\HelpController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />
@@ -375,6 +376,29 @@
     <Content Include="Content\Home\Scripts\main.js" />
     <Content Include="Content\Public\Scripts\query.touchSlider.js" />
     <Content Include="Content\Public\Jquery\jquery-1.8.3.min.js" />
+    <Content Include="Views\Home\ApplyForStore.cshtml" />
+    <Content Include="Views\Home\ApplyForSupplier.cshtml" />
+    <Content Include="Content\Home\Images\img\eproxy\apply.jpg" />
+    <Content Include="Content\Home\Images\img\eproxy\banner.jpg" />
+    <Content Include="Content\Home\Images\img\eproxy\icon_agent1.png" />
+    <Content Include="Content\Home\Images\img\eproxy\icon_agent2.png" />
+    <Content Include="Content\Home\Images\img\eproxy\icon_agent3.png" />
+    <Content Include="Content\Home\Images\img\eproxy\icon_agent4.png" />
+    <Content Include="Content\Home\Images\img\eproxy\project.jpg" />
+    <Content Include="Content\Home\Images\img\eproxy\step.png" />
+    <Content Include="Content\Home\Images\img\help\bg_help.jpg" />
+    <Content Include="Content\Home\Images\img\help\call.png" />
+    <Content Include="Content\Home\Images\img\help\home.png" />
+    <Content Include="Content\Home\Images\img\help\icon_help1.png" />
+    <Content Include="Content\Home\Images\img\help\icon_help2.png" />
+    <Content Include="Content\Home\Images\img\help\icon_help3.png" />
+    <Content Include="Content\Home\Images\img\help\icon_help4.png" />
+    <Content Include="Content\Home\Images\img\help\service.jpg" />
+    <Content Include="Views\Home\Agent.cshtml" />
+    <Content Include="Views\Help\Index.cshtml" />
+    <Content Include="Views\Help\List.cshtml" />
+    <Content Include="Views\Help\Detail.cshtml" />
+    <Content Include="Views\Help\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
@@ -390,7 +414,6 @@
     <None Include="Content\Public\Hack\css\PIE.htc" />
     <None Include="Content\Public\Images\ico\favicon.ico" />
     <None Include="Content\Public\Plugin\font-awesome-4.7.0\fonts\fontawesome-webfont.woff2" />
-    <None Include="Content\Home\Images\img\.DS_Store" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
