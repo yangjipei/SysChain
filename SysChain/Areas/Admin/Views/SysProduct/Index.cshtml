@@ -1,0 +1,170 @@
+﻿@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    ViewBag.ActiveUrl = "/Admin/SysConfig/Index/12";
+}
+<div id="header-crumb">
+    <p>
+        <i class="fa fa-lg fa-home"></i>
+        <a href="/Admin/SysConfig/Index/12" title="产品管理">产品管理</a>
+        <i class="fa fa-angle-right"></i>
+        <span>云产品库</span>
+    </p>
+</div>
+
+<main id="shop-product">
+    
+    <div class="tab-wrap">
+        <ul class="section-nav">
+            <li><a class="current" href="./shop-product.html" title="产品库(5)">产品库<em>(5)</em></a></li>
+            <li><a href="./shop-product-draft.html" title="草稿箱(5)">草稿箱<em>(5)</em></a></li>
+            <li><a href="./shop-product-goout.html" title="过时产品(5)">过时产品<em>(5)</em></a></li>
+            <li><a href="./shop-product-audit.html" title="审核中(5)">审核中<em>(5)</em></a></li>
+            <li><a href="./shop-product-lllegal.html" title="违规产品(0)">违规产品<em>(0)</em></a></li>
+        </ul>
+
+        <section>
+            <aside>
+                <form action="#" method="post">
+                    <p class="select-input-button-group">
+                        <select name="field">
+                            <option value="name">商品名称</option>
+                            <option value="price">采购价格</option>
+                            <option value="psu">商品编号</option>
+                            <option value="operator">录入</option>
+                            <option value="group">所属分组</option>
+                            <option value="status">状态</option>
+                            <option value="create_time">发布时间</option>
+                        </select>
+                        <i class="i i-arrow-down5"></i>
+                        <input name="search" type="text" maxlength="32" placeholder="快来搜我〜" />
+                        <button disabled type="submit"><i class="fa fa-search"></i></button>
+                    </p>
+                </form>
+                <div class="operate">
+                    <a class="btn btn-primary" href="@Url.Action("SelectCategory","SysProduct",new{area="Admin"})" title="添加产品"><i class="i i-plus2"></i>添加产品</a>
+                    <!-- <a class="btn btn-primary" href="#" title="重新上架"><i class="fa fa-cart-plus"></i>重新上架</a> -->
+                    <!-- <a class="btn btn-primary" href="#" title="添加到产品库"><i class="fa fa-cart-plus"></i>添加到产品库</a> -->
+                </div>
+            </aside>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>封面图</th>
+                        <th class="left">商品名称</th>
+                        <th>采购价格</th>
+                        <th>商品编号（SPU）</th>
+                        <th>录入</th>
+                        <th>所属分组</th>
+                        <th>状态</th>
+                        <th>发布时间</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><img src="/Content/Admin/Images/img/product/bick@2x.png" alt="捷安特自行车Z7600"/></td>
+                        <td class="left">捷安特自行车Z7600</td>
+                        <td>¥200</td>
+                        <td>JTX5100 </td>
+                        <td>张小康</td>
+                        <td>精品</td>
+                        <td>显示</td>
+                        <td>2016-09-15 16:00</td>
+                        <td>
+                            <a class="btn-icon" href="./shop-product-edit.html" title="编辑"><i class="fa fa-fw fa-edit"></i>编辑</a>
+                            <a class="btn-icon" href="#" title="查看"><i class="fa fa-fw fa-eye"></i>查看</a>
+                            <!-- <a class="btn-icon" href="delete" title="删除"><i class="fa fa-fw fa-trash-o"></i>删除</a> -->
+                            <a class="btn-icon" href="#" title="过时"><i class="fa fa-fw fa-clock-o"></i>过时</a>
+                            <!-- <a class="btn-icon" href="#" title="恢复"><i class="fa fa-fw fa-reply"></i>恢复</a> -->
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><img src="/Content/Admin/Images/img/product/bick@2x.png" alt="捷安特自行车Z7600"/></td>
+                        <td class="left">捷安特自行车Z7600</td>
+                        <td>¥200</td>
+                        <td>JTX5100 </td>
+                        <td>张小康</td>
+                        <td>精品</td>
+                        <td>显示</td>
+                        <td>2016-09-15 16:00</td>
+                        <td>
+                            <a class="btn-icon" href="./shop-product-edit.html" title="编辑"><i class="fa fa-fw fa-edit"></i>编辑</a>
+                            <a class="btn-icon" href="#" title="查看"><i class="fa fa-fw fa-eye"></i>查看</a>
+                            <!-- <a class="btn-icon" href="delete" title="删除"><i class="fa fa-fw fa-trash-o"></i>删除</a> -->
+                            <a class="btn-icon" href="#" title="过时"><i class="fa fa-fw fa-clock-o"></i>过时</a>
+                            <!-- <a class="btn-icon" href="#" title="恢复"><i class="fa fa-fw fa-reply"></i>恢复</a> -->
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><img src="/Content/Admin/Images/img/product/bick@2x.png" alt="捷安特自行车Z7600"/></td>
+                        <td class="left">捷安特自行车Z7600</td>
+                        <td>¥200</td>
+                        <td>JTX5100 </td>
+                        <td>张小康</td>
+                        <td>精品</td>
+                        <td>显示</td>
+                        <td>2016-09-15 16:00</td>
+                        <td>
+                            <a class="btn-icon" href="./shop-product-edit.html" title="编辑"><i class="fa fa-fw fa-edit"></i>编辑</a>
+                            <a class="btn-icon" href="#" title="查看"><i class="fa fa-fw fa-eye"></i>查看</a>
+                            <!-- <a class="btn-icon" href="delete" title="删除"><i class="fa fa-fw fa-trash-o"></i>删除</a> -->
+                            <a class="btn-icon" href="#" title="过时"><i class="fa fa-fw fa-clock-o"></i>过时</a>
+                            <!-- <a class="btn-icon" href="#" title="恢复"><i class="fa fa-fw fa-reply"></i>恢复</a> -->
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><img src="/Content/Admin/Images/img/product/bick@2x.png" alt="捷安特自行车Z7600"/></td>
+                        <td class="left">捷安特自行车Z7600</td>
+                        <td>¥200</td>
+                        <td>JTX5100 </td>
+                        <td>张小康</td>
+                        <td>精品</td>
+                        <td>显示</td>
+                        <td>2016-09-15 16:00</td>
+                        <td>
+                            <a class="btn-icon" href="./shop-product-edit.html" title="编辑"><i class="fa fa-fw fa-edit"></i>编辑</a>
+                            <a class="btn-icon" href="#" title="查看"><i class="fa fa-fw fa-eye"></i>查看</a>
+                            <!-- <a class="btn-icon" href="delete" title="删除"><i class="fa fa-fw fa-trash-o"></i>删除</a> -->
+                            <a class="btn-icon" href="#" title="过时"><i class="fa fa-fw fa-clock-o"></i>过时</a>
+                            <!-- <a class="btn-icon" href="#" title="恢复"><i class="fa fa-fw fa-reply"></i>恢复</a> -->
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><img src="/Content/Admin/Images/img/product/bick@2x.png" alt="捷安特自行车Z7600"/></td>
+                        <td class="left">捷安特自行车Z7600</td>
+                        <td>¥200</td>
+                        <td>JTX5100 </td>
+                        <td>张小康</td>
+                        <td>精品</td>
+                        <td>显示</td>
+                        <td>2016-09-15 16:00</td>
+                        <td>
+                            <a class="btn-icon" href="./shop-product-edit.html" title="编辑"><i class="fa fa-fw fa-edit"></i>编辑</a>
+                            <a class="btn-icon" href="#" title="查看"><i class="fa fa-fw fa-eye"></i>查看</a>
+                            <!-- <a class="btn-icon" href="delete" title="删除"><i class="fa fa-fw fa-trash-o"></i>删除</a> -->
+                            <a class="btn-icon" href="#" title="过时"><i class="fa fa-fw fa-clock-o"></i>过时</a>
+                            <!-- <a class="btn-icon" href="#" title="恢复"><i class="fa fa-fw fa-reply"></i>恢复</a> -->
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <footer class="page">
+                <div class="page-info">每页 20 条/共 1051 条记录 1/53 页</div>
+                <div class="page-code">
+                    <a href="#">下一页</a>
+                    <span class="current">1</span>
+                    <a href="#">2</a>
+                    <a href="#">3</a>
+                    <a href="#">4</a>
+                    <a href="#">5</a>
+                    <a href="#">下5页</a>
+                    <a href="#">最后一页</a>
+                </div>
+            </footer>
+        </section>
+    </div>
+
+</main>
+

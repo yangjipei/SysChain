@@ -24,8 +24,9 @@ namespace SysChain.Areas.Admin.Controllers
 			int PageIndex = index == null ? 1 : (int)index;
 			ViewBag.ParentID = ParentID;
 			ViewBag.PageIndex = PageIndex;
+			SysChain.Model.SysUser user = (SysChain.Model.SysUser)Session["UserInfo"];
 			int PageSize = 5;
-			string strWhere = "ParentID=" + ParentID;
+			string strWhere = "ParentID=" + ParentID +" and UserID="+user.UserID.ToString();
 			ViewBag.Totalcount = Opr.GetCount(strWhere);
 			List<Model.SysGroup> list = Opr.GetListByPage(strWhere, "", "OrderCode", (PageIndex - 1) * PageSize+1, PageIndex * PageSize);
 			return View(list);
@@ -88,6 +89,8 @@ namespace SysChain.Areas.Admin.Controllers
 				{
 
 					model.OrderCode = Opr.GetNewOrderCode(model.ParentID, model.Layer);
+					SysChain.Model.SysUser user = (SysChain.Model.SysUser)Session["UserInfo"];
+					model.UserID = user.UserID;
 					rs.Data = Opr.Insert(model);
 					if (rs.Data > 0)
 					{
@@ -133,7 +136,8 @@ namespace SysChain.Areas.Admin.Controllers
 		/// <returns>The list.</returns>
 		public ActionResult List()
 		{
-			return Json(Opr.GetList("Layer=1" , "OrderCode"), JsonRequestBehavior.AllowGet);
+			SysChain.Model.SysUser user = (SysChain.Model.SysUser)Session["UserInfo"];
+			return Json(Opr.GetList("Layer=1 and UserID="+user.UserID , "OrderCode"), JsonRequestBehavior.AllowGet);
 		}
 		/// <summary>
 		/// 更新模块状态
@@ -225,9 +229,10 @@ namespace SysChain.Areas.Admin.Controllers
 			jr.Data = rs;
 			return jr;
 		}
-		public JsonResult SelectCategory()
+		public JsonResult SelectGroup()
 		{
-			return Json(Opr.GetModelList("State>0"), JsonRequestBehavior.AllowGet);
+			SysChain.Model.SysUser user = (SysChain.Model.SysUser)Session["UserInfo"];
+			return Json(Opr.GetModelList("State>0 and UserID="+user.UserID.ToString()), JsonRequestBehavior.AllowGet);
 		}
 
 	}

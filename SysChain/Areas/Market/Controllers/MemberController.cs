@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
 
-namespace SysChain.Controllers
+namespace SysChain.Areas.Market.Controllers
 {
 	[LoginCheckFilterAttribute(IsCheck = false)]
 	public class MemberController : Controller
@@ -13,7 +13,6 @@ namespace SysChain.Controllers
 		[HttpGet]
 		public ActionResult Login()
 		{
-			ViewBag.Title = "超市供应管理系统";
 			SysChain.Model.VM_SysLogin model = new Model.VM_SysLogin();
 			model.LoginName = "admin";
 			return View(model);
@@ -41,7 +40,7 @@ namespace SysChain.Controllers
 						rs.Data = true;
 						rs.Msg = "登录成功,正在进入系统";
 						rs.Result = true;
-						rs.Url = Url.Action("Index", "Home", new { area = "Admin" });
+						rs.Url = Url.Action("Index", "Home", new { area = "Market" });
 					}
 
 				}

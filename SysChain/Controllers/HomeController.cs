@@ -46,5 +46,9 @@ namespace SysChain.Controllers
 		{
 			return View();
 		}
+		public ActionResult ComingSoon()
+		{
+			return View();
+		}
 	}
 }

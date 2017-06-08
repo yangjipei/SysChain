@@ -12,7 +12,7 @@ namespace SysChain
 				"~/Content/Public/Scripts/*.js"
 			));
 			bundles.Add(new ScriptBundle("~/js/login").Include(
-				"~/Content/Home/Scripts/Login.js"
+				"~/Content/Admin/Scripts/Login.js"
 			));
 			bundles.Add(new ScriptBundle("~/js/mnew").Include(
 				"~/Content/Admin/Scripts/Moudle_New.js"
@@ -50,6 +50,9 @@ namespace SysChain
 			bundles.Add(new ScriptBundle("~/js/gnew").Include(
 				"~/Content/Admin/Scripts/Group_New.js"
 			));
+			bundles.Add(new ScriptBundle("~/js/pnew").Include(
+				"~/Content/Admin/Scripts/Product_New.js"
+			));
 			bundles.Add(new ScriptBundle("~/js/avindex").Include(
 				"~/Content/Admin/Scripts/AttributeValue_Index.js"
 			));
@@ -71,6 +74,12 @@ namespace SysChain
 			bundles.Add(new StyleBundle("~/css/admin/base").Include(
 				"~/Content/Admin/Css/main.css"
 			));
+			bundles.Add(new StyleBundle("~/css/market/base").Include(
+				"~/Content/Market/Css/main.css"
+			));
+			bundles.Add(new ScriptBundle("~/js/market").Include(
+				"~/Content/Market/Scripts/main.js"
+			));
 			bundles.Add(new ScriptBundle("~/js/plugin/popwin").Include(
 				"~/Content/Public/Plugin/popwin/js/popwin.js",
 				"~/Content/Public/Plugin/popwin/js/init.js"
@@ -86,6 +95,12 @@ namespace SysChain
 			));
 			bundles.Add(new ScriptBundle("~/js/sseting").Include(
 				"~/Content/Admin/Scripts/Store_Setting.js"
+			));
+			bundles.Add(new StyleBundle("~/css/plugin/wang").Include(
+				"~/Content/Public/Plugin/wangEditor/wangEditor.min.css"
+			));
+			bundles.Add(new ScriptBundle("~/js/plugin/wang").Include(
+				"~/Content/Public/Plugin/wangEditor/wangEditor.min.js"
 			));
 		    BundleTable.EnableOptimizations = true; 
 		}

@@ -19,19 +19,20 @@ namespace System.Web.Mvc
 				if (areaName != null)
 				{
 					Name = areaName.ToString().ToLower();
-				}
-				//校验用户是否已经登录
-				if (filterContext.HttpContext.Session["UserInfo"] == null)
-				{
-					if (Name == "admin")
+					//校验用户是否已经登录
+					if (filterContext.HttpContext.Session["UserInfo"] == null)
 					{
-						//跳转到登陆页
-						//filterContext.HttpContext.Response.Redirect("/Admin/Member/Login");
-						var Url = new UrlHelper(filterContext.RequestContext);
-						var url = Url.Action("Login", "Member", new { area = "" });
-						filterContext.Result = new RedirectResult(url);
+						if (Name == "admin")
+						{
+							//跳转到登陆页
+							//filterContext.HttpContext.Response.Redirect("/Admin/Member/Login");
+							var Url = new UrlHelper(filterContext.RequestContext);
+							var url = Url.Action("Login", "SysUser", new { area = "Admin" });
+							filterContext.Result = new RedirectResult(url);
+						}
 					}
 				}
+
 			}
 		}
 

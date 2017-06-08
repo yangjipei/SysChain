@@ -1,5 +1,4 @@
-﻿﻿
-@{
+﻿@{
    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <main id="index">
@@ -7,7 +6,6 @@
         <h1>超市网上进货平台</h1>
         <h2>助力全国中小型快消品牌快速发展</h2>
     </div>
-
     <div class="box-2">
         <ul>
             <li>
@@ -27,18 +25,18 @@
             <li>
                 <strong>宇通超市</strong>
                 <p>可通过多种方式查找商品并快捷购买，支持快捷加入进货单与收藏夹，支持下单时向供货商留言，随时查看订单动向。</p>
-                <a class="btn btn-risk-border" href="./login.html" title="超市登录">超市登录</a>
+                <a class="btn btn-risk-border" href="@Url.Action("Login","Member",new{area="Market"})" title="超市登录">超市登录</a>
             </li>
             <li>
                 <strong>宇通供应商</strong>
                 <p>支持商品的添加与管理，支持商品促销与商家促销，可对订单进行全程管理，灵活查看多维统计数据。</p>
-                <a class="btn btn-risk-border" href="./login.html" title="供应商登录">供应商登录</a>
+                <a class="btn btn-risk-border" href="@Url.Action("Login","SysUser",new{area="Admin"})" title="供应商登录">供应商登录</a>
             </li>
             <li>
                 <div>
                     <strong>宇通服务站</strong>
                     <p>可为商家提供多样化广告，支持商品的添加、查看与管理，全程查看订单动向，灵活查看站内多维统计数据。</p>
-                    <a class="btn btn-risk-border" href="./login.html" title="服务站登录">服务站登录</a>
+                    <a class="btn btn-risk-border" href="@Url.Action("ComingSoon","Home")" title="服务站登录">服务站登录</a>
                 </div>
             </li>
         </ul>

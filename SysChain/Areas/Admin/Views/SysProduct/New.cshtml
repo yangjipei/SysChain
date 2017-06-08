@@ -1,0 +1,206 @@
+﻿@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    ViewBag.ActiveUrl = "/Admin/SysConfig/Index/12";
+}
+@section Scripts
+{
+     @Scripts.Render("~/js/plugin/wang")
+     @Scripts.Render("~/js/pnew")
+}
+<div id="header-crumb">
+    <p>
+        <i class="fa fa-lg fa-home"></i>
+        <a href="/Admin/SysConfig/Index/12" title="商超管理">商超管理</a>
+        <i class="fa fa-angle-right"></i>
+        <a href="@Url.Action("Index","SysProduct",new{area="Admin"})" title="商超管理">云产品库</a>
+        <i class="fa fa-angle-right"></i>
+        <span>发布产品</span>
+    </p>
+</div>
+<main id="shop-product-edit">
+    <section class="form">
+        <form action="#" method="post">
+            <header>
+                <h1>
+                    已选择：<span class="orange">@ViewBag.Kw1 > @ViewBag.Kw2 > @ViewBag.Kw3</span>
+                    <a href="@Url.Action("SelectCategory","SysProduct",new{area="Admin"})" title="重新选择">重新选择</a>
+                </h1>
+            </header>
+
+            <div class="group-title">
+                <h2><em>*</em>商品信息</h2>
+            </div>
+           
+            <p>
+                <span>产品名称：</span>
+                <input class="width-400" type="text" name="name" maxlength="16" placeholder="请输入产品标题" />
+            </p>
+            <p>
+                <span>关键词：</span>
+                <input class="width-small margin" type="text" name="keys[]" maxlength="8" placeholder="必填" />
+                <input class="width-small margin" type="text" name="keys[]" maxlength="8" placeholder="可选" />
+                <input class="width-small margin" type="text" name="keys[]" maxlength="8" placeholder="可选" />
+                <mark>关键词最多设置3个</mark>
+            </p>
+            
+            <div class="group-title">
+                <h2><em>*</em>商品属性</h2>
+                <mark>错误填写商品属性，可能会引起商品下架或搜索流量减少，影响您的正常销售，请认真准确填写！</mark>
+            </div>
+            
+            <div class="group-choose">
+                <dl>
+                    <dt>品牌(单选)：</dt>
+                    <dd>
+                        <ul>
+                            <li><label><input type="radio" name="" value="" checked /><span>优衣库</span></label></li>
+                            <li><label><input type="radio" name="" value="" /><span>only</span></label></li>
+                            <li><label><input type="radio" name="" value="" /><span>捷克屌丝</span></label></li>
+                            <li><label><input type="radio" name="" value="" /><span>HM</span></label></li>
+                            <li><label><input type="radio" name="" value="" /><span>美特斯邦威</span></label></li>
+                            <li><label><input type="radio" name="" value="" /><span>李宁</span></label></li>
+                        </ul>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>衣长(多选)：</dt>
+                    <dd>
+                        <ul>
+                            <li><label><input type="checkbox" name="" value="" /><span>中长款</span></label></li>
+                            <li><label><input type="checkbox" name="" value="" checked /><span>短款</span></label></li>
+                            <li><label><input type="checkbox" name="" value="" checked /><span>常规</span></label></li>
+                        </ul>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>颜色(多选)：</dt>
+                    <dd>
+                        <ul>
+                            <li><label><input type="checkbox" name="" value="" /><span>红色</span></label></li>
+                            <li><label><input type="checkbox" name="" value="" checked /><span>黄色</span></label></li>
+                            <li><label><input type="checkbox" name="" value="" checked /><span>蓝色</span></label></li>
+                            <li><label><input type="checkbox" name="" value="" /><span>黑色</span></label></li>
+                            <li><label><input type="checkbox" name="" value="" /><span>白色</span></label></li>
+                        </ul>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>尺码(多选)：</dt>
+                    <dd>
+                        <ul>
+                            <li><label><input type="checkbox" name="" value="" /><span>中长款</span></label></li>
+                            <li><label><input type="checkbox" name="" value="" checked /><span>31</span></label></li>
+                            <li><label><input type="checkbox" name="" value="" /><span>32</span></label></li>
+                            <li><label><input type="checkbox" name="" value="" checked /><span>33</span></label></li>
+                            <li><label><input type="checkbox" name="" value="" /><span>34</span></label></li>
+                        </ul>
+                    </dd>
+                </dl>
+            </div>
+
+            <div class="group-title">
+                <h2><em>*</em>商品图片</h2>
+                <mark class="warn">商品主图大小不能超过3MB；700*700 以上图片上传后商品详情页自动提供放大镜功能。第五张图发商品白底图可增加首页曝光机会</mark>
+            </div>
+            <div class="file-box">
+                <div class="img">
+                    <img src="/Content/Admin/Images/img/product/qun@2x.png" alt=""/>
+                    <a href="#" title="删除"><i class="fa fa-fw fa-trash-o"></i>删除</a>
+                </div>
+                <div class="img">
+                    <img src="/Content/Admin/Images/img/product/qun@2x.png" alt=""/>
+                    <a href="#" title="删除"><i class="fa fa-fw fa-trash-o"></i>删除</a>
+                </div>
+                <a class="file-btn" href="#" title="上传产品图">
+                    <input type="file" name="image" />
+                    <i class="fa fa-plus-circle"></i>
+                    <strong>上传产品图</strong>
+                    <mark>支持jpg、gif、png</mark>
+                </a>
+            </div>
+
+            <div class="group-title">
+                <h2><em>*</em>批发价格</h2>
+                <mark></mark>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>编号</th>
+                        <th>颜色</th>
+                        <th>款式</th>
+                        <th>尺码</th>
+                        <th>产品图</th>
+                        <th>价格</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>GTX5100</td>
+                        <td>红</td>
+                        <td>中长款</td>
+                        <td>31</td>
+                        <td>
+                            <a href="#" title="点击上传图片">
+                                <i class="fa fa-fw fa-upload"></i>点击上传图片
+                            </a>
+                        </td>
+                        <td>￥<input class="width-small" name="price[]" type="number" min="0" max="99999" placeholder="请输入价格"/>元</td>
+                    </tr>
+                    <tr>
+                        <td>GTX5100</td>
+                        <td>红</td>
+                        <td>中长款</td>
+                        <td>31</td>
+                        <td>
+                            <a href="#" title="点击上传图片">
+                                <i class="fa fa-fw fa-upload"></i>点击上传图片
+                            </a>
+                        </td>
+                        <td>￥<input class="width-small" name="price[]" type="number" min="0" max="99999" placeholder="请输入价格"/>元</td>
+                    </tr>
+                    <tr>
+                        <td>GTX5100</td>
+                        <td>红</td>
+                        <td>中长款</td>
+                        <td>31</td>
+                        <td>
+                            <a href="#" title="点击上传图片">
+                                <i class="fa fa-fw fa-upload"></i>点击上传图片
+                            </a>
+                        </td>
+                        <td>￥<input class="width-small" name="price[]" type="number" min="0" max="99999" placeholder="请输入价格"/>元</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="group-title">
+                <h2><em>*</em>产品分组</h2>
+                <mark></mark>
+            </div>
+            <p>
+                <select name="">
+                    <option value="">请选择...</option>
+                </select>
+                <select name="">
+                    <option value="">请选择...</option>
+                </select>
+            </p>
+
+            <div class="group-title">
+                <h2><em>*</em>商品详情</h2>
+                <mark></mark>
+            </div>
+            <div class="content-edit">
+                <div id="editor" class="width-full" data-wangeditor="on" data-showlinkimg="off" data-uploadimgshowbase64="off" data-uploadimgserver="/upload">
+                    <p>欢迎使用 <b>wangEditor</b> 富文本编辑器</p>
+                </div>
+            </div>
+            <footer>
+                <button class="btn btn-primary" type="submit" name="publish">发布</button>
+                <a class="btn btn-none" href="#" title="保存为草稿">保存为草稿</a>
+            </footer>
+        </form>
+    </section>
+    
+</main>

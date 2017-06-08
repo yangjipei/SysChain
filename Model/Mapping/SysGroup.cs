@@ -8,6 +8,10 @@ namespace SysChain.Model
 		/// </summary>
 		public int GroupID { set; get; }
 		/// <summary>
+		/// 分组归属
+		/// </summary>
+		public int UserID { set; get; }
+		/// <summary>
 		/// 分组父级编号
 		/// </summary>
 		public int ParentID { set; get; }

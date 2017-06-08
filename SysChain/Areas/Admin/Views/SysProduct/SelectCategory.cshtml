@@ -1,0 +1,64 @@
+﻿@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+     ViewBag.ActiveUrl = "/Admin/SysConfig/Index/12";
+}
+@section Scripts
+{
+    @Scripts.Render("~/js/aindex")
+}
+<div id="header-crumb">
+    <p>
+        <i class="fa fa-lg fa-home"></i>
+        <a href="/Admin/SysConfig/Index/12" title="商超管理">商超管理</a>
+        <i class="fa fa-angle-right"></i>
+        <span>发布产品</span>
+    </p>
+</div>
+<main id="shop-product-add">
+    <section class="form">
+        <form action="@Url.Action("New","SysProduct",new{area="Admin"})" method="post">
+            <input type="hidden" id="id" name="id">
+            <input type="hidden" name="level1">
+            <input type="hidden" name="level2">
+            <input type="hidden" name="level3">
+            <header>
+                <h1>请选择品类</h1>
+            </header>
+
+            <div class="tab-dynamic">
+                <ol>
+                    <li><a class="default current" href="#" data-stack="1" title="请选择">请选择</a></li>
+                    <li><a class="hide" href="#"  data-stack="2" title="关闭"><span></span><i class="i i-cross2"></i></a></li>
+                    <li><a class="hide" href="#"  data-stack="3" title="关闭"><span></span><i class="i i-cross2"></i></a></li>
+                </ol>
+                <div class="stack stack-1">
+                    <div class="level-id" data-level="1">
+                    </div>
+                </div>
+                <div class="stack stack-2 hide">
+                    <div class="level-id" data-level="2">
+                    </div>
+                </div>
+                <div class="stack stack-3 hide">
+                    <div class="level-id" data-level="3">
+                      
+                    </div>
+                </div>
+            </div>
+
+            <div class="hint-full">您当前的选择是：
+                <span data-stack="1">-</span>
+                <i class="fa fa-angle-right"></i>
+                <span data-stack="2">-</span>
+                <i class="fa fa-angle-right"></i>
+                <span data-stack="3">-</span>
+            </div>
+
+            <footer>
+                <button class="btn btn-primary btn-disabled"  disabled="disabled" type="submit">下一步</button>
+            </footer>
+        </form>
+    </section>
+
+</main>
+

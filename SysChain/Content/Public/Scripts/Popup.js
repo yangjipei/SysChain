@@ -17,6 +17,7 @@ var popup = {
 
 f7.plugin._register = (function() {
 	return {
+		wangeditor:f7.plugin.wangeditor,
 		carousel:f7.plugin.carousel,
 		accordion:f7.plugin.accordion,
 		chooseTab:f7.plugin.chooseTab,
@@ -1330,7 +1331,47 @@ f7.plugin.carousel = (function() {
 		});
 	} //Carousel()
 }); 
+//初始化UEditor
+f7.plugin.wangeditor = (function() {
+	var $form = $('section.form'),
+		$editor = $('div[data-wangeditor="on"]', $form);
 
+	if ($form.size() && $editor.length) {
+		$editor.each(function(index, element) {
+			var $element = $(element),
+				$div = $element.parent('div'),
+				id = $element.attr('id'),
+				showLinkImg = $element.data('showlinkimg'),
+				uploadImgShowBase64 = $element.data('uploadimgshowbase64'),
+				uploadImgServer = $element.data('uploadimgserver');
+
+			// $div.css({
+			// 	padding: '10px 0 10px 8px'
+			// });
+
+			var E = window.wangEditor,
+				editor = new E('#' + id);
+
+			if (showLinkImg) {
+				// 隐藏“网络图片”tab
+				// editor.customConfig.showLinkImg = false;
+				editor.customConfig.showLinkImg = showLinkImg === 'on';
+			} //if
+			// 下面两个配置，使用其中一个即可显示“上传图片”的tab。但是两者不要同时使用！！！
+			if (uploadImgShowBase64) {
+				// editor.customConfig.uploadImgShowBase64 = true;   // 使用 base64 保存图片
+				editor.customConfig.uploadImgShowBase64 = uploadImgShowBase64 === 'on'; // 使用 base64 保存图片
+			} //if
+			if (uploadImgServer) {
+				// editor.customConfig.uploadImgServer = '/upload';  // 上传图片到服务器
+				editor.customConfig.uploadImgServer = uploadImgServer; // 上传图片到服务器
+			} //if
+
+			editor.create();
+		});
+	} //if
+
+}); //f7.plugin.wangeditor()
 
 
 

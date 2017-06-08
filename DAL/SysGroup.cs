@@ -21,24 +21,26 @@ namespace SysChain.DAL
 			StringBuilder strSql = new StringBuilder();
 			strSql.Append(" if not exists(select Name from SysGroup where Name =@Name ) begin ");
 			strSql.Append(" insert into SysGroup(");
-			strSql.Append(" ParentID,Name,Layer,State,Style,OrderCode)");
+			strSql.Append(" UserID,ParentID,Name,Layer,State,Style,OrderCode)");
 			strSql.Append(" values (");
-			strSql.Append(" @ParentID,@Name,@Layer,@State,@Style,@OrderCode)");
+			strSql.Append(" @UserID,@ParentID,@Name,@Layer,@State,@Style,@OrderCode)");
 			strSql.Append(" ; select @@IDENTITY; ");
 			strSql.Append(" end ELSE begin SELECT -1 END");
 			SqlParameter[] parameters = {
+					new SqlParameter("@UserID", SqlDbType.Int,4),
 					new SqlParameter("@ParentID", SqlDbType.Int,4),
 					new SqlParameter("@Name", SqlDbType.NVarChar,50),
 					new SqlParameter("@Layer", SqlDbType.Int,4),
 					new SqlParameter("@State", SqlDbType.Bit,1),
 					new SqlParameter("@Style", SqlDbType.NVarChar,50),
 					new SqlParameter("@OrderCode", SqlDbType.NVarChar,50)};
-			parameters[0].Value = Model.ParentID;
-			parameters[1].Value = Model.Name;
-			parameters[2].Value = Model.Layer;
-			parameters[3].Value = Model.State;
-			parameters[4].Value = Model.Style;
-			parameters[5].Value = Model.OrderCode;
+			parameters[0].Value = Model.UserID;
+			parameters[1].Value = Model.ParentID;
+			parameters[2].Value = Model.Name;
+			parameters[3].Value = Model.Layer;
+			parameters[4].Value = Model.State;
+			parameters[5].Value = Model.Style;
+			parameters[6].Value = Model.OrderCode;
 			object obj = DbHelperSQL.GetSingle(strSql.ToString(), parameters);
 			if (obj == null)
 			{
@@ -200,6 +202,10 @@ namespace SysChain.DAL
 				{
 					model.GroupID = int.Parse(dr["GroupID"].ToString());
 				}
+				if (dr["UserID"].ToString() != "")
+				{
+					model.UserID = int.Parse(dr["UserID"].ToString());
+				}
 				if (dr["ParentID"].ToString() != "")
 				{
 					model.ParentID = int.Parse(dr["ParentID"].ToString());
@@ -260,7 +266,7 @@ namespace SysChain.DAL
 		public Model.SysGroup GetEntity(int GroupID)
 		{
 			StringBuilder strSql = new StringBuilder();
-			strSql.Append("select  top 1 GroupID,ParentID,Name,Layer,Style,OrderCode,State from SysGroup ");
+			strSql.Append("select  top 1 GroupID,UserID,ParentID,Name,Layer,Style,OrderCode,State from SysGroup ");
 			strSql.Append(" where GroupID=@GroupID");
 			SqlParameter[] parameters = {
 					new SqlParameter("@GroupID", SqlDbType.Int,4)
@@ -322,7 +328,7 @@ namespace SysChain.DAL
 		public List<Model.SysGroup> GetList(string strWhere, string orderBy)
 		{
 			StringBuilder strSql = new StringBuilder();
-			strSql.Append("SELECT GroupID,ParentID ,Name,Layer,State,Style,OrderCode FROM SysGroup ");
+			strSql.Append("SELECT GroupID,UserID,ParentID ,Name,Layer,State,Style,OrderCode FROM SysGroup ");
 			if (!string.IsNullOrEmpty(strWhere.Trim()))
 			{
 				strSql.Append(" WHERE " + strWhere);
@@ -350,7 +356,7 @@ namespace SysChain.DAL
 		public DataTable GetList(string strWhere)
 		{
 			StringBuilder strSql = new StringBuilder();
-			strSql.Append("SELECT GroupID,ParentID , Name,Layer FROM SysGroup ");
+			strSql.Append("SELECT GroupID,UserID,ParentID , Name,Layer FROM SysGroup ");
 			if (!string.IsNullOrEmpty(strWhere.Trim()))
 			{
 				strSql.Append(" WHERE " + strWhere);
@@ -363,7 +369,7 @@ namespace SysChain.DAL
 		public List<Model.SysGroup> GetModelList(string strWhere)
 		{
 			StringBuilder strSql = new StringBuilder();
-			strSql.Append("SELECT GroupID,ParentID , Name,Layer,Style,OrderCode,State FROM SysGroup ");
+			strSql.Append("SELECT GroupID,UserID,ParentID , Name,Layer,Style,OrderCode,State FROM SysGroup ");
 			if (!string.IsNullOrEmpty(strWhere.Trim()))
 			{
 				strSql.Append(" WHERE " + strWhere);
@@ -390,7 +396,7 @@ namespace SysChain.DAL
 		public List<Model.SysGroup> GetListByPage(string strWhere, string OnTable, string orderBy, int startIndex, int endIndex)
 		{
 			StringBuilder strSql = new StringBuilder();
-			strSql.Append("SELECT GroupID,ParentID,Name,Layer,State,Style,OrderCode FROM ( ");
+			strSql.Append("SELECT GroupID,UserID,ParentID,Name,Layer,State,Style,OrderCode FROM ( ");
 			strSql.Append(" SELECT ROW_NUMBER() OVER (");
 			if (!string.IsNullOrEmpty(orderBy.Trim()))
 			{

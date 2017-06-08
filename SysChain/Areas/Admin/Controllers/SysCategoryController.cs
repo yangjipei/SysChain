@@ -238,6 +238,15 @@ namespace SysChain.Areas.Admin.Controllers
 		{
 			return Json(Opr.GetModelList("State>0"), JsonRequestBehavior.AllowGet);
 		}
+		/// <summary>
+		/// 前端供应商申请使用
+		/// </summary>
+		/// <returns>The category.</returns>
+		[LoginCheckFilterAttribute(IsCheck = false)]
+		public JsonResult GetCategory()
+		{
+			return Json(Opr.GetModelList("Layer=1 & State>0"), JsonRequestBehavior.AllowGet);
+		}
 
 	}
 }

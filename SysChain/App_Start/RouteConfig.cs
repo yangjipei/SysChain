@@ -9,7 +9,7 @@ namespace SysChain
 		{
 			routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-			routes.MapRoute(
+			routes.MapRouteUnderline(
 				name: "Default",
 				url: "{controller}/{action}/{id}",
 				//defaults: new { controller = "Member", action = "Login", id = UrlParameter.Optional },

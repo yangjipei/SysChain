@@ -16,6 +16,7 @@ namespace SysChain
 			RouteConfig.RegisterRoutes(RouteTable.Routes);
 			FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
 			BundleConfig.RegisterBundles(BundleTable.Bundles);
+
 		}
 		protected void Application_Error(object sender, EventArgs e)
 		{
@@ -29,7 +30,8 @@ namespace SysChain
 			//{
 			//	RouteName = "Admin_default";
 			//}
-			//switch (httpException.GetHttpCode())
+			//var code = httpException.GetHttpCode();
+			//switch (code)
 			//{
 			//	case 404:
 			//		RouteData=new {controller = "Public", action = "Err404"};

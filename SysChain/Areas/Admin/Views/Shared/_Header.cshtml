@@ -31,9 +31,9 @@
         </ul>
 
         <ol id="menu-list">
-            <li><a href="#" title="基本资料"><i class="fa fa-fw fa-user"></i>基本资料</a></li>
+            <li><a href="@Url.Action("UserInfo","SysUser",new{area="Admin"})" title="基本资料"><i class="fa fa-fw fa-user"></i>基本资料</a></li>
             <li><a href="/Admin/SysUser/ModifyPassword" title="修改密码"><i class="fa fa-fw fa-unlock-alt"></i>修改密码</a></li>
-            <li><a href="/Member/Logout" title="退出登录"><i class="fa fa-fw fa-sign-out"></i>退出登录</a></li>
+            <li><a href="/Admin/SysUser/Logout" title="退出登录"><i class="fa fa-fw fa-sign-out"></i>退出登录</a></li>
         </ol>
         
     </header>
