@@ -13,8 +13,6 @@ namespace SysChain.BLL
 		/// <summary>
 		/// 新增系统用户
 		/// </summary>
-		/// <returns>新增的用户编号,返回值<0:表示是吧</returns>
-		/// <param name="Model">用户实体</param>
 		public int Insert(Model.VM_SysUser model)
 		{
 			Model.SysUser m = new Model.SysUser();

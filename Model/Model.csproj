@@ -48,6 +48,12 @@
     <Compile Include="ViewModel\VM_SysModifyPassword.cs" />
     <Compile Include="Mapping\SysGroup.cs" />
     <Compile Include="ViewModel\VM_SysGroup.cs" />
+    <Compile Include="Mapping\SysProductBase.cs" />
+    <Compile Include="Mapping\SysProductImages.cs" />
+    <Compile Include="Mapping\SysProductAttributes.cs" />
+    <Compile Include="Mapping\SysProductPrice.cs" />
+    <Compile Include="Mapping\SysProductDescription.cs" />
+    <Compile Include="Mapping\SysUnit.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModel\" />

@@ -32,8 +32,9 @@
             </div>
            
             <p>
-                <span>产品名称：</span>
+                <span>产品标题：</span>
                 <input class="width-400" type="text" name="name" maxlength="16" placeholder="请输入产品标题" />
+				<mark>产品标题最多20个字</mark>
             </p>
             <p>
                 <span>关键词：</span>
@@ -53,12 +54,12 @@
                     <dt>品牌(单选)：</dt>
                     <dd>
                         <ul>
-                            <li><label><input type="radio" name="" value="" checked /><span>优衣库</span></label></li>
-                            <li><label><input type="radio" name="" value="" /><span>only</span></label></li>
-                            <li><label><input type="radio" name="" value="" /><span>捷克屌丝</span></label></li>
-                            <li><label><input type="radio" name="" value="" /><span>HM</span></label></li>
-                            <li><label><input type="radio" name="" value="" /><span>美特斯邦威</span></label></li>
-                            <li><label><input type="radio" name="" value="" /><span>李宁</span></label></li>
+                            <li><label><input type="radio" name="pinpai" value="" checked /><span>优衣库</span></label></li>
+                            <li><label><input type="radio" name="pinpai" value="" /><span>only</span></label></li>
+                            <li><label><input type="radio" name="pinpai" value="" /><span>捷克屌丝</span></label></li>
+                            <li><label><input type="radio" name="pinpai" value="" /><span>HM</span></label></li>
+                            <li><label><input type="radio" name="pinpai" value="" /><span>美特斯邦威</span></label></li>
+                            <li><label><input type="radio" name="pinpai" value="" /><span>李宁</span></label></li>
                         </ul>
                     </dd>
                 </dl>
@@ -173,7 +174,15 @@
                     </tr>
                 </tbody>
             </table>
-
+            <div class="group-title">
+                <h2><em>*</em>销售单位</h2>
+                <mark></mark>
+            </div>
+            <p>
+                <select name="">
+                    <option value="">请选择...</option>
+                </select>
+            </p>
             <div class="group-title">
                 <h2><em>*</em>产品分组</h2>
                 <mark></mark>
@@ -197,7 +206,7 @@
                 </div>
             </div>
             <footer>
-                <button class="btn btn-primary" type="submit" name="publish">发布</button>
+                <button class="btn btn-primary" type="submit" name="publish">提交审核</button>
                 <a class="btn btn-none" href="#" title="保存为草稿">保存为草稿</a>
             </footer>
         </form>
