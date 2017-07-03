@@ -202,8 +202,9 @@
 
 .chosen-container .chosen-results li.group-result {
 	display: list-item;
-	font-weight: 700;
-	cursor: default
+	font-weight: 600;
+	cursor: default;
+	color:#999;
 }
 
 .chosen-container .chosen-results li.group-option {

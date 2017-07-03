@@ -4,8 +4,17 @@
 }
 @section Scripts
 {
-     @Scripts.Render("~/js/plugin/wang")
+    <script type="text/javascript" src="~/Content/Public/Plugin/wangEditor/wangEditor.min.js"></script>
+     @Scripts.Render("~/js/plugin/chosen")
      @Scripts.Render("~/js/pnew")
+}
+@section Styles
+{
+    <link type="text/css" rel="stylesheet" href="~/Content/Public/Plugin/wangEditor/wangEditor.min.css"/>
+    <link type="text/css" rel="stylesheet" href="~/Content/Public/Plugin/chosen/chosen.css"/>
+    <style type="text/css">
+        .chosen-search input {width:100% !important;}
+    </style>
 }
 <div id="header-crumb">
     <p>
@@ -20,32 +29,37 @@
 <main id="shop-product-edit">
     <section class="form">
         <form action="#" method="post">
+			<input type="hidden" name="ProductID" id="ProductID" />
             <header>
                 <h1>
                     已选择：<span class="orange">@ViewBag.Kw1 > @ViewBag.Kw2 > @ViewBag.Kw3</span>
                     <a href="@Url.Action("SelectCategory","SysProduct",new{area="Admin"})" title="重新选择">重新选择</a>
+					<input type="hidden" name="FirCategoryID" id="FirCategoryID" value="@ViewBag.ID1" />
+					<input type="hidden" name="SecCategoryID" id="SecCategoryID" value="@ViewBag.ID2" />
+					<input type="hidden" name="ThiCategoryID" id="ThiCategoryID" value="@ViewBag.ID3" />
                 </h1>
             </header>
 
             <div class="group-title">
-                <h2><em>*</em>商品信息</h2>
+                <h2>商品信息</h2>
             </div>
-           
             <p>
-                <span>产品标题：</span>
-                <input class="width-400" type="text" name="name" maxlength="16" placeholder="请输入产品标题" />
+				<em>*</em>
+				<span>产品标题：</span>
+                <input class="width-400" type="text" id="Title" name="Title" maxlength="20"  placeholder="请输入产品标题" autocomplete="off" />
 				<mark>产品标题最多20个字</mark>
             </p>
             <p>
+				<em>*</em>
                 <span>关键词：</span>
                 <input class="width-small margin" type="text" name="keys[]" maxlength="8" placeholder="必填" />
                 <input class="width-small margin" type="text" name="keys[]" maxlength="8" placeholder="可选" />
                 <input class="width-small margin" type="text" name="keys[]" maxlength="8" placeholder="可选" />
-                <mark>关键词最多设置3个</mark>
-            </p>
+                <mark>影响产品曝光率,关键词最多设置3个</mark>
+            </p>editor
             
             <div class="group-title">
-                <h2><em>*</em>商品属性</h2>
+                <h2>商品属性</h2>
                 <mark>错误填写商品属性，可能会引起商品下架或搜索流量减少，影响您的正常销售，请认真准确填写！</mark>
             </div>
             
@@ -62,7 +76,7 @@
                             <li><label><input type="radio" name="pinpai" value="" /><span>李宁</span></label></li>
                         </ul>
                     </dd>
-                </dl>
+                </dl>editor
                 <dl>
                     <dt>衣长(多选)：</dt>
                     <dd>
@@ -100,8 +114,8 @@
             </div>
 
             <div class="group-title">
-                <h2><em>*</em>商品图片</h2>
-                <mark class="warn">商品主图大小不能超过3MB；700*700 以上图片上传后商品详情页自动提供放大镜功能。第五张图发商品白底图可增加首页曝光机会</mark>
+                <h2>商品图片</h2>
+                <mark class="warn">第一张图默认为主图，商品主图大小不能超过3MB；700*700 以上图片上传后商品详情页自动提供放大镜功能。</mark>
             </div>
             <div class="file-box">
                 <div class="img">
@@ -121,7 +135,7 @@
             </div>
 
             <div class="group-title">
-                <h2><em>*</em>批发价格</h2>
+                <h2>销售价格</h2>
                 <mark></mark>
             </div>
             <table class="table">
@@ -175,39 +189,34 @@
                 </tbody>
             </table>
             <div class="group-title">
-                <h2><em>*</em>销售单位</h2>
+                <h2>销售单位</h2>
                 <mark></mark>
             </div>
             <p>
-                <select name="">
-                    <option value="">请选择...</option>
+                <select name="UnitID" id="UnitID" data-placeholder="请选择最小销售单位">
                 </select>
             </p>
             <div class="group-title">
-                <h2><em>*</em>产品分组</h2>
+                <h2>产品分组</h2>
                 <mark></mark>
             </div>
             <p>
-                <select name="">
-                    <option value="">请选择...</option>
-                </select>
-                <select name="">
-                    <option value="">请选择...</option>
+                <select name="GroupID" id="GroupID" data-placeholder="请选择产品分组">
                 </select>
             </p>
 
             <div class="group-title">
-                <h2><em>*</em>商品详情</h2>
+                <h2>商品详情</h2>
                 <mark></mark>
             </div>
-            <div class="content-edit">
-                <div id="editor" class="width-full" data-wangeditor="on" data-showlinkimg="off" data-uploadimgshowbase64="off" data-uploadimgserver="/upload">
+            <div class="content-edit" >
+                <div id="Description" name="Description" class="width-full" data-height="500" data-wangeditor="on" data-showlinkimg="off" data-uploadimgshowbase64="off" data-uploadimgserver="/upload">
                     <p>欢迎使用 <b>wangEditor</b> 富文本编辑器</p>
                 </div>
             </div>
             <footer>
                 <button class="btn btn-primary" type="submit" name="publish">提交审核</button>
-                <a class="btn btn-none" href="#" title="保存为草稿">保存为草稿</a>
+                <a class="btn btn-second btn-disabled" href="#" title="保存为草稿">保存为草稿</a>
             </footer>
         </form>
     </section>

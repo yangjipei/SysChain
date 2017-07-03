@@ -15,8 +15,8 @@
     
     <div class="tab-wrap">
         <ul class="section-nav">
-            <li><a class="current" href="@Url.Action("Index","SysProduct",new{area="Admin"})" title="产品库(5)">产品库<em>(5)</em></a></li>
-            <li><a href="@Url.Action("Draft","SysProduct",new{area="Admin"})" title="草稿箱">草稿箱<em>(5)</em></a></li>
+            <li><a  href="@Url.Action("Index","SysProduct",new{area="Admin"})" title="产品库">产品库<em>(5)</em></a></li>
+            <li><a class="current" href="@Url.Action("Draft","SysProduct",new{area="Admin"})" title="草稿箱">草稿箱<em>(5)</em></a></li>
             <li><a href="./shop-product-goout.html" title="过时产品(5)">过时产品<em>(5)</em></a></li>
             <li><a href="./shop-product-audit.html" title="审核中(5)">审核中<em>(5)</em></a></li>
             <li><a href="./shop-product-lllegal.html" title="违规产品(0)">违规产品<em>(0)</em></a></li>
@@ -45,11 +45,8 @@
             <table>
                 <thead>
                     <tr>
-                        <th>封面图</th>
-                        <th class="left">商品名称</th>
                         <th>商品编号</th>
-                        <th>所属分组</th>
-                        <th>状态</th>
+                        <th class="left">商品名称</th>
 						<th>录入</th>
                         <th>录入时间</th>
                         <th>操作</th>
@@ -57,17 +54,13 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td><img src="/Content/Admin/Images/img/product/bick@2x.png" alt="捷安特自行车Z7600"/></td>
+                       <td>JTX5100 </td>
                         <td class="left"><a href="#" class="blue" target="Blank">捷安特自行车Z7600捷安特自行车Z76</a></td>
-                        <td>JTX5100 </td>
-                        <td>精品</td>
-                        <td>销售中</td>
 						<td>张小康</td>
                         <td>2016-09-15 16:00</td>
                         <td>
                             <a class="btn-icon" href="./shop-product-edit.html" title="编辑"><i class="fa fa-fw fa-edit"></i>编辑</a>
-                            <a class="btn-icon" href="#" title="预览"><i class="fa fa-fw fa-eye"></i>预览</a>
-                            <a class="btn-icon" href="#" title="设为过时产品"><i class="fa fa-fw fa-clock-o"></i>过时</a>
+                            <a class="btn-icon" href="#" title="删除"><i class="fa fa-fw fa-trash-o"></i>删除</a>
                         </td>
                     </tr>
 				</tbody>	

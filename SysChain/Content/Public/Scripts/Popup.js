@@ -1343,7 +1343,8 @@ f7.plugin.wangeditor = (function() {
 				id = $element.attr('id'),
 				showLinkImg = $element.data('showlinkimg'),
 				uploadImgShowBase64 = $element.data('uploadimgshowbase64'),
-				uploadImgServer = $element.data('uploadimgserver');
+				uploadImgServer = $element.data('uploadimgserver'),
+				height = $element.data('height');
 
 			// $div.css({
 			// 	padding: '10px 0 10px 8px'
@@ -1351,6 +1352,8 @@ f7.plugin.wangeditor = (function() {
 
 			var E = window.wangEditor,
 				editor = new E('#' + id);
+
+				window[id] = editor;
 
 			if (showLinkImg) {
 				// 隐藏“网络图片”tab
@@ -1368,11 +1371,18 @@ f7.plugin.wangeditor = (function() {
 			} //if
 
 			editor.create();
+
+			// 设置高度
+			var $editor = $('#' + id),
+				$container = $('.w-e-text-container', $editor),
+				$toolbar = $('.w-e-toolbar', $editor);
+
+			$editor.height(height);
+			$container.height(height - $toolbar.height());
 		});
 	} //if
 
 }); //f7.plugin.wangeditor()
-
 
 
 

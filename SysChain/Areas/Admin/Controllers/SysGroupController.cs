@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Web.Caching;
 using System.Web.Routing;
 using SysChain.Model;
+using System.Runtime.CompilerServices;
 
 namespace SysChain.Areas.Admin.Controllers
 {
@@ -134,10 +135,17 @@ namespace SysChain.Areas.Admin.Controllers
 		/// 获得下拉接口
 		/// </summary>
 		/// <returns>The list.</returns>
-		public ActionResult List()
+		public ActionResult List(int id)
 		{
 			SysChain.Model.SysUser user = (SysChain.Model.SysUser)Session["UserInfo"];
-			return Json(Opr.GetList("Layer=1 and UserID="+user.UserID , "OrderCode"), JsonRequestBehavior.AllowGet);
+			string strWhere = string.Empty;
+			if(id>0)
+			{
+				strWhere = "Layer=" + id + " and UserID=" + user.UserID;
+			}else{
+				strWhere="UserID = " + user.UserID;
+			}
+			return Json(Opr.GetList(strWhere, "OrderCode"), JsonRequestBehavior.AllowGet);
 		}
 		/// <summary>
 		/// 更新模块状态

@@ -8,10 +8,20 @@ namespace SysChain.Model
 		/// </summary>
 		public int ProductID { set; get; }
 		/// <summary>
-		/// SPU编号
+		/// 一级品类
 		/// </summary>
-		/// <value>The SPUC ode.</value>
-		public string  SPUCode { set; get; }
+		public int FirCategoryID { set; get; }
+		public string FirCategoryName { set; get; }
+		/// <summary>
+		/// 二级品类
+		/// </summary>
+		public int SecCategoryID { set; get; }
+		public string SecCategoryName { set; get; }
+		/// <summary>
+		/// 三级品类
+		/// </summary>
+		public int ThiCategoryID { set; get; }
+		public string ThiCategoryName { set; get; }
 		/// <summary>
 		/// 归属店铺
 		/// </summary>

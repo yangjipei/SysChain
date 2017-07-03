@@ -514,6 +514,7 @@
     <Content Include="Content\Public\Plugin\wangEditor\wangEditor.min.css" />
     <Content Include="Content\Public\Plugin\wangEditor\wangEditor.min.js" />
     <Content Include="Content\Admin\Scripts\Product_New.js" />
+    <Content Include="Areas\Admin\Views\SysProduct\Draft.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

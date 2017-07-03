@@ -87,22 +87,16 @@ namespace SysChain
 			bundles.Add(new ScriptBundle("~/js/plugin/upload").Include(
 				"~/Content/Public/Plugin/ajaxupload/ajaxfileupload.js"
 			));
-			bundles.Add(new StyleBundle("~/css/plugin/chosen").Include(
-				"~/Content/Public/Plugin/chosen/chosen.min.css"
-			));
 			bundles.Add(new ScriptBundle("~/js/plugin/chosen").Include(
 				"~/Content/Public/Plugin/chosen/chosen.jquery.min.js"
 			));
 			bundles.Add(new ScriptBundle("~/js/sseting").Include(
 				"~/Content/Admin/Scripts/Store_Setting.js"
 			));
-			bundles.Add(new StyleBundle("~/css/plugin/wang").Include(
-				"~/Content/Public/Plugin/wangEditor/wangEditor.min.css"
-			));
 			bundles.Add(new ScriptBundle("~/js/plugin/wang").Include(
 				"~/Content/Public/Plugin/wangEditor/wangEditor.min.js"
 			));
-		    BundleTable.EnableOptimizations = true; 
+		    //BundleTable.EnableOptimizations = true; 
 		}
 	}
 }

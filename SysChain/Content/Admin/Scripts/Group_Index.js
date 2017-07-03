@@ -43,7 +43,7 @@ btnInit=function(){
 	$("#btnNew").attr("href","/Admin/SysGroup/New?pid="+$("#parentid").val());
 }
 getData=function(){
-	$.get("/Admin/SysGroup/List",function(data,status){
+	$.get("/Admin/SysGroup/List/1",function(data,status){
 		if(status=="success")
 		{
 			var strHtml=[],

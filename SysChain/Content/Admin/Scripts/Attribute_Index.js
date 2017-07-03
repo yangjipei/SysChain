@@ -14,8 +14,10 @@ getData=function(){
 			});
 			$('div[data-level="1"][class="level-id"]').html(strHtml).on('click', 'a', function(evt){
 				evt.preventDefault();	
+				$("#id1").val($(this).data("id"));
 				$('div[data-level="2"][class="level-id"]').html(SetHtml(data,$(this).data("id"))).on('click', 'a', function(evt){
 					evt.preventDefault();	
+					$("#id2").val($(this).data("id"));
 					$('div[data-level="3"][class="level-id"]').html(SetHtml(data,$(this).data("id"))).on('click', 'a', function(evt){
 						evt.preventDefault();	
 						//SetHtml(data,$(this).data("id"));
